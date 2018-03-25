@@ -1,0 +1,34 @@
+{
+  "name": "react-container-boilerplate",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "build": "webpack -p",
+    "start-example": "webpack-dev-server --config ./example/webpack.config.js --content-base example/",
+    "build-example": "webpack -p --config ./example/webpack.config.js"
+  },
+  "author": "Geoffrey Berard <geoffrey.berard@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "npm": "^5.8.0",
+    "prop-types": "^15.5.7",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
+    "babel": "6.5.2",
+    "babel-core": "6.10.4",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015": "6.9.0",
+    "babel-preset-react": "6.11.0",
+    "css-loader": "^0.23.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.14.0"
+  }
+}
