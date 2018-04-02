@@ -4,6 +4,7 @@ import {
     INPUT_TEXT,
     INPUT_MAIL
 } from "../definition/field-type";
+import {fieldConnect} from "../redux/fieldConnect";
 import TextField from "./fields/TextField";
 
 let injectField = (props) => {
@@ -26,4 +27,4 @@ FieldWrapper.propTypes = {
     field: PropTypes.object.isRequired,
 };
 
-export default FieldWrapper;
+export default fieldConnect(FieldWrapper);

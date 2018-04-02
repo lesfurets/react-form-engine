@@ -18,6 +18,7 @@ export default class TextField extends React.Component {
     }
 
     onBlur() {
+        this.props.setFieldValue(this.props.field.id, this.state.value.trim());
     }
 
     render() {
@@ -39,6 +40,7 @@ export default class TextField extends React.Component {
 
 TextField.propTypes = {
     tabIndex: PropTypes.number,
+    setFieldValue: PropTypes.func,
     field: PropTypes.shape({
         id: PropTypes.string.isRequired,
         placeholder: PropTypes.string,
