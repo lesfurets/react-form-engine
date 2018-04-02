@@ -4,29 +4,42 @@ import FormEngine from "../../src/component/FormEngineWrapper";
 import {INPUT_TEXT, INPUT_MAIL} from "../../src/definition/field-type";
 
 
-const fields = [
-    {
+const FIELDS = {
+    FIRST_NAME: {
         id: "FIRST_NAME",
         label: "Prénom :",
         type: INPUT_TEXT
     },
-    {
+    LAST_NAME: {
         id: "LAST_NAME",
         label: "Nom :",
         type: INPUT_TEXT
     },
-    {
-        id: "FIELD_2",
+    EMAIL: {
+        id: "EMAIL",
         label: "Email :",
         type: INPUT_MAIL
     },
-]
+    PHONE: {
+        id: "PHONE",
+        label: "Phone :",
+        type: INPUT_TEXT
+    }
+};
 
+const BLOCKS = {
+    IDENTITY: {
+        fields: [FIELDS.FIRST_NAME, FIELDS.LAST_NAME]
+    },
+    CONTACT: {
+        fields: [FIELDS.EMAIL, FIELDS.PHONE]
+    }
+}
 
 
 class App extends React.Component {
     render() {
-        return (<FormEngine fields={fields} />);
+        return (<FormEngine blocks={[BLOCKS.IDENTITY, BLOCKS.CONTACT]}/>);
     }
 }
 

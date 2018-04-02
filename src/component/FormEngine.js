@@ -1,9 +1,9 @@
 import React from "react";
-import "../styles/form-container.less"
+import "../styles/block-container.less"
 import {createStore} from "redux";
 import {Provider} from 'react-redux'
 import reducer from '../redux/reducers';
-import FieldWrapper from "./wrapper/FieldWrapper";
+import BlockWrapper from "./wrapper/BlockWrapper";
 
 export default class FormEngine extends React.Component {
     render() {
@@ -11,11 +11,10 @@ export default class FormEngine extends React.Component {
         return (
             <Provider store={store}>
                 <div className="form-container">
-                    {this.props.fields.map((field, index) =>
-                        <FieldWrapper
+                    {this.props.blocks.map((block, index) =>
+                        <BlockWrapper
                             key={index}
-                            field={field}
-                            tabIndex={index + 1}
+                            block={block}
                         />)}
                 </div>
             </Provider>
