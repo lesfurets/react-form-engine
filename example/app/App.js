@@ -6,11 +6,18 @@ import {INPUT_TEXT, INPUT_MAIL} from "../../src/definition/field-type";
 
 const fields = [
     {
-        id: "FIELD_1",
+        id: "FIRST_NAME",
+        label: "Prénom :",
+        type: INPUT_TEXT
+    },
+    {
+        id: "LAST_NAME",
+        label: "Nom :",
         type: INPUT_TEXT
     },
     {
         id: "FIELD_2",
+        label: "Email :",
         type: INPUT_MAIL
     },
 ]

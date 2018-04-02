@@ -6,6 +6,7 @@ import {
 } from "../definition/field-type";
 import {fieldConnect} from "../redux/fieldConnect";
 import TextField from "./fields/TextField";
+import FieldContainer from "./FieldContainer";
 
 let injectField = (props) => {
     switch (props.field.type) {
@@ -19,12 +20,22 @@ let injectField = (props) => {
 
 class FieldWrapper extends React.Component {
     render() {
-        return injectField(this.props);
+        let FieldContainer = this.props.container;
+        return (
+            <FieldContainer field={this.props.field}>
+                {injectField(this.props)}
+            </FieldContainer>
+        );
     }
 }
 
 FieldWrapper.propTypes = {
     field: PropTypes.object.isRequired,
+    container: PropTypes.func,
+};
+
+FieldWrapper.defaultProps = {
+    container: FieldContainer
 };
 
 export default fieldConnect(FieldWrapper);
