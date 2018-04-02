@@ -3,7 +3,7 @@ import "../styles/form-container.less"
 import {createStore} from "redux";
 import {Provider} from 'react-redux'
 import reducer from '../redux/reducers';
-import FieldWrapper from "./FieldWrapper";
+import FieldWrapper from "./wrapper/FieldWrapper";
 
 export default class FormEngine extends React.Component {
     render() {

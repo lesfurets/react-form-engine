@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/app.less";
-import FormEngine from "../../src/container/FormEngineWrapper";
+import FormEngine from "../../src/component/FormEngineWrapper";
 import {INPUT_TEXT, INPUT_MAIL} from "../../src/definition/field-type";
 
 

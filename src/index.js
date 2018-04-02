@@ -1,3 +1,3 @@
-import FormEngine from "./container/FormEngineWrapper";
+import FormEngine from "./component/FormEngineWrapper";
 
 export default FormEngine;

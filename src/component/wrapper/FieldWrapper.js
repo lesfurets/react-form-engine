@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {
     INPUT_TEXT,
     INPUT_MAIL
-} from "../definition/field-type";
-import {fieldConnect} from "../redux/fieldConnect";
-import TextField from "./fields/TextField";
-import FieldContainer from "./FieldContainer";
+} from "../../definition/field-type";
+import {fieldConnect} from "../../redux/fieldConnect";
+import TextField from "../fields/TextField";
+import FieldContainer from "../container/FieldContainer";
 
 let injectField = (props) => {
     switch (props.field.type) {
