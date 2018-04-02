@@ -6,7 +6,12 @@ export default class FormEngine extends React.Component {
     render() {
         return (
             <div className="form-container">
-                {this.props.fields.map((field, index) => <FieldWrapper key={index} field={field}/>)}
+                {this.props.fields.map((field, index) =>
+                    <FieldWrapper
+                        key={index}
+                        field={field}
+                        tabIndex={index + 1}
+                    />)}
             </div>
         );
     }
