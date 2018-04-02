@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {
     INPUT_TEXT,
+    INPUT_MAIL
 } from "../definition/field-type";
 import TextField from "./fields/TextField";
 
 let injectField = (props) => {
     switch (props.field.type) {
         case INPUT_TEXT:
-            return <TextField/>;
+        case INPUT_MAIL:
+            return <TextField {...props}/>;
         default:
             return <div className="unknown-field"/>;
     }
