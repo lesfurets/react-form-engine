@@ -17,17 +17,17 @@ export const BLOCK_EVENT = {
 
 class BlockWrapper extends React.Component {
     render() {
-        let BlockContainer = this.props.container;
+        let Container = this.props.container;
         return (
             <div className={`block-wrapper ${this.props.blockState.toLowerCase()}`}>
-                <BlockContainer {...this.props}>
+                <Container {...this.props}>
                     {this.props.block.fields.map((field, index) =>
                         <FieldWrapper
                             key={index}
                             field={field}
                             tabIndex={index + 1}
                         />)}
-                </BlockContainer>
+                </Container>
             </div>
         );
     }
