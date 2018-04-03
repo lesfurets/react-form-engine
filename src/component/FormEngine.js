@@ -3,7 +3,7 @@ import "../styles/block-container.less"
 import {createStore} from "redux";
 import {Provider} from 'react-redux'
 import reducer from '../redux/reducers';
-import BlockWrapper, {BLOCK_STATE} from "./wrapper/BlockWrapper";
+import BlockWrapper, {BLOCK_EVENT, BLOCK_STATE} from "./wrapper/BlockWrapper";
 
 export default class FormEngine extends React.Component {
     constructor() {
@@ -12,6 +12,7 @@ export default class FormEngine extends React.Component {
             currentBlockIndex: 0
         }
         this.getBlockState = this.getBlockState.bind(this);
+        this.onBlockEvent = this.onBlockEvent.bind(this);
     }
     render() {
         const store = createStore(reducer);
@@ -23,6 +24,8 @@ export default class FormEngine extends React.Component {
                             key={index}
                             block={block}
                             blockState={this.getBlockState(index)}
+                            blockIndex={index}
+                            onBlockEvent={this.onBlockEvent}
                         />)}
                 </div>
             </Provider>
@@ -37,5 +40,16 @@ export default class FormEngine extends React.Component {
             return BLOCK_STATE.DOING;
         }
         return BLOCK_STATE.DONE;
+    }
+
+    onBlockEvent(event, index) {
+        switch (event) {
+            case BLOCK_EVENT.NEXT:
+                this.setState({currentBlockIndex: index + 1});
+                break;
+            case BLOCK_EVENT.PREVIOUS:
+                this.setState({currentBlockIndex: index - 1});
+                break;
+        }
     }
 }

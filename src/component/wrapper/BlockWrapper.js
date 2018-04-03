@@ -10,12 +10,17 @@ export const BLOCK_STATE = {
     DONE: "BLOCK-DONE"
 };
 
+export const BLOCK_EVENT = {
+    NEXT: "NEXT",
+    PREVIOUS: "PREVIOUS",
+};
+
 class BlockWrapper extends React.Component {
     render() {
         let BlockContainer = this.props.container;
         return (
             <div className={`block-wrapper ${this.props.blockState.toLowerCase()}`}>
-                <BlockContainer block={this.props.block} blockState={this.props.blockState}>
+                <BlockContainer {...this.props}>
                     {this.props.block.fields.map((field, index) =>
                         <FieldWrapper
                             key={index}
@@ -29,6 +34,8 @@ class BlockWrapper extends React.Component {
 }
 
 BlockWrapper.propTypes = {
+    blockIndex: PropTypes.number,
+    onBlockEvent: PropTypes.func.isRequired,
     blockState: PropTypes.string,
     block: PropTypes.object.isRequired,
     container: PropTypes.func,
