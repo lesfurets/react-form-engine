@@ -21,6 +21,7 @@ let injectField = (props) => {
 class FieldWrapper extends React.Component {
     render() {
         let FieldContainer = this.props.container;
+        console.log("OOOPS " + this.props.field.id);
         return (
             <FieldContainer field={this.props.field}>
                 {injectField(this.props)}
