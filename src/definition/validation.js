@@ -13,7 +13,6 @@ export const isNullOrUndefined = function (value) {
 
 export const isDefined = (field, errorMessage) => {
     return (context) => {
-        console.log(context[field]);
         if (isNullOrUndefined(context[field])) {
             return new Validation(false, errorMessage);
         }

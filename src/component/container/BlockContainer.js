@@ -25,6 +25,7 @@ const BlockContainer = props => (
 );
 
 BlockContainer.propTypes = {
+    onBlockEvent: PropTypes.func,
     blockIndex: PropTypes.number,
     blockState: PropTypes.string,
     block: PropTypes.object.isRequired
