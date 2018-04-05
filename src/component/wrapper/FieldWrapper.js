@@ -7,6 +7,20 @@ import {
 import {fieldConnect} from "../../redux/fieldConnect";
 import TextField from "../fields/TextField";
 import FieldContainer from "../container/FieldContainer";
+import {VALID} from "../../definition/validation";
+
+export const FIELD_STATE = {
+    DEFAULT: "FIELD-DEFAULT",
+    VALID: "FIELD-VALID",
+    ERROR: "FIELD-ERROR"
+};
+
+let getFieldState = (validation, props) => {
+    if(!props.forceValidation && (props.fieldContext[props.field.id] == undefined)) {
+        return FIELD_STATE.DEFAULT;
+    }
+    return validation.isValid ? FIELD_STATE.VALID : FIELD_STATE.ERROR;
+}
 
 let injectField = (props) => {
     switch (props.field.type) {
@@ -21,9 +35,9 @@ let injectField = (props) => {
 class FieldWrapper extends React.Component {
     render() {
         let Container = this.props.container;
-        console.log("OOOPS " + this.props.field.id);
+        let validation = this.props.field.doValidation == undefined ? VALID : this.props.field.doValidation(this.props.fieldContext);
         return (
-            <div className="field-wrapper">
+            <div className={`field-wrapper ${getFieldState(validation, this.props).toLowerCase()}`}>
                 <Container field={this.props.field}>
                     {injectField(this.props)}
                 </Container>
@@ -35,10 +49,12 @@ class FieldWrapper extends React.Component {
 FieldWrapper.propTypes = {
     field: PropTypes.object.isRequired,
     container: PropTypes.func,
+    forceValidation: PropTypes.bool
 };
 
 FieldWrapper.defaultProps = {
-    container: FieldContainer
+    container: FieldContainer,
+    forceValidation: false
 };
 
 export default fieldConnect(FieldWrapper);

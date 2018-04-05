@@ -2,13 +2,15 @@ import React from "react";
 import "../styles/app.less";
 import FormEngine from "../../src/index";
 import {INPUT_TEXT, INPUT_MAIL} from "../../src/definition/field-type";
+import {isDefined} from "../../src/definition/validation";
 
 
 const FIELDS = {
     FIRST_NAME: {
         id: "FIRST_NAME",
         label: "Prénom",
-        type: INPUT_TEXT
+        type: INPUT_TEXT,
+        doValidation: isDefined("FIRST_NAME", "The first name is mandatory")
     },
     LAST_NAME: {
         id: "LAST_NAME",
