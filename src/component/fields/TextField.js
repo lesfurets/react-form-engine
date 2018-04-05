@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {INPUT_MAIL} from "../../definition/field-type"
 
 export default class TextField extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            value: "",
+            value: props.contextValue || "",
         };
         this.handleChange = this.handleChange.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -39,6 +39,7 @@ export default class TextField extends React.Component {
 }
 
 TextField.propTypes = {
+    contextValue: PropTypes.string,
     tabIndex: PropTypes.number,
     setFieldValue: PropTypes.func,
     field: PropTypes.shape({

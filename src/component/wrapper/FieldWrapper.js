@@ -23,10 +23,16 @@ let getFieldState = (validation, props) => {
 }
 
 let injectField = (props) => {
+    let fieldProps = {
+        field: props.field,
+        tabIndex: props.tabIndex,
+        setFieldValue: props.setFieldValue,
+        contextValue: props.fieldContext[props.field.id]
+    }
     switch (props.field.type) {
         case INPUT_TEXT:
         case INPUT_MAIL:
-            return <TextField {...props}/>;
+            return <TextField {...fieldProps}/>;
         default:
             return <div className="unknown-field"/>;
     }
@@ -50,12 +56,14 @@ class FieldWrapper extends React.Component {
 FieldWrapper.propTypes = {
     field: PropTypes.object.isRequired,
     container: PropTypes.func,
-    forceValidation: PropTypes.bool
+    forceValidation: PropTypes.bool,
+    tabIndex: PropTypes.number
 };
 
 FieldWrapper.defaultProps = {
     container: FieldContainer,
-    forceValidation: false
+    forceValidation: false,
+    tabIndex: 1
 };
 
 export default fieldConnect(FieldWrapper);
