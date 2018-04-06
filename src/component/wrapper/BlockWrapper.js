@@ -33,7 +33,7 @@ class BlockWrapper extends React.Component {
             .reduce((acc, value) => acc && value)){
             this.props.onBlockEvent(event,index);
         };
-        this.setState({forceValidation: true})
+        this.setState({forceValidation: true});
     }
 
     render() {

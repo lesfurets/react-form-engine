@@ -39,7 +39,7 @@ export default class FormWrapper extends React.Component {
         if (index == this.state.currentBlockIndex) {
             return BLOCK_STATE.DOING;
         }
-        return BLOCK_STATE.DONE;
+        return BLOCK_STATE.TODO;
     }
 
     onBlockEvent(event, index) {
