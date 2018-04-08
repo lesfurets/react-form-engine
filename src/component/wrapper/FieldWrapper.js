@@ -1,11 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {
-    INPUT_TEXT,
-    INPUT_MAIL
-} from "../../definition/field-type";
+import {injectField} from "../../definition/field-injector";
 import {fieldConnect} from "../../redux/fieldConnect";
-import TextField from "../fields/TextField";
 import FieldContainer from "../container/FieldContainer";
 import {VALID} from "../../definition/validation";
 
@@ -22,31 +18,25 @@ let getFieldState = (validation, props) => {
     return validation.isValid ? FIELD_STATE.VALID : FIELD_STATE.ERROR;
 }
 
-let injectField = (props) => {
-    let fieldProps = {
-        field: props.field,
-        tabIndex: props.tabIndex,
-        setFieldValue: props.setFieldValue,
-        contextValue: props.fieldContext[props.field.id]
-    }
-    switch (props.field.type) {
-        case INPUT_TEXT:
-        case INPUT_MAIL:
-            return <TextField {...fieldProps}/>;
-        default:
-            return <div className="unknown-field"/>;
-    }
-};
-
 class FieldWrapper extends React.Component {
     render() {
         let Container = this.props.container;
         let validation = this.props.field.doValidation == undefined ? VALID : this.props.field.doValidation(this.props.fieldContext);
         let fieldState = getFieldState(validation, this.props);
+
+        let fieldProps = {
+            field: this.props.field,
+            tabIndex: this.props.tabIndex,
+            setFieldValue: this.props.setFieldValue,
+            contextValue: this.props.fieldContext[this.props.field.id]
+        }
+
+        let Field = injectField(this.props.field.type);
+
         return (
             <div className={`field-wrapper ${fieldState.toLowerCase()}`}>
                 <Container field={this.props.field} validation={validation} fieldState={fieldState}>
-                    {injectField(this.props)}
+                    <Field {...fieldProps}/>
                 </Container>
             </div>
         );
