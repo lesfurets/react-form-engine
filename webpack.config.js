@@ -40,6 +40,10 @@ module.exports = {
                 test: /\.less$/,
                 loader: "style!css!autoprefixer!less"
             },
+            {
+                test: /\.json$/,
+                loader: "json-loader"
+            }
         ]
     },
     plugins: [
