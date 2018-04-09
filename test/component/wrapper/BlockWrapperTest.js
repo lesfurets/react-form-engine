@@ -1,15 +1,13 @@
 import React from "react";
-import {mount, configure} from "enzyme";
-import Adapter from 'enzyme-adapter-react-16';
-import {Provider} from "react-redux";
 import {createStore} from "redux";
 
 import reducer from "../../../src/redux/reducers";
+import {ERROR, initTest, mountInRedux} from "../../../test/test-utils";
 import FieldWrapper from "../../../src/component/wrapper/FieldWrapper";
-import BlockWrapper, {BLOCK_STATE, BLOCK_EVENT} from "../../../src/component/wrapper/BlockWrapper";
-import {Validation, VALID} from "../../../src/definition/validation";
+import BlockWrapper, {BLOCK_EVENT, BLOCK_STATE} from "../../../src/component/wrapper/BlockWrapper";
+import {VALID, Validation} from "../../../src/definition/validation";
 
-configure({adapter: new Adapter()});
+initTest();
 
 describe("FormEngine/Wrapper/Block", () => {
 
@@ -27,11 +25,10 @@ describe("FormEngine/Wrapper/Block", () => {
 
         it("Should render all fields by default", () => {
             // When
-            let container = mount(
-                <Provider store={store}>
-                    <BlockWrapper block={block} onBlockEvent={() => {
-                    }}/>
-                </Provider>);
+            let container = mountInRedux(BlockWrapper, {
+                block: block,
+                onBlockEvent: () => null
+            };
 
             // Then
             expect(container.find(FieldWrapper).length).toBe(2);
@@ -39,11 +36,12 @@ describe("FormEngine/Wrapper/Block", () => {
 
         it("Should render fields in state DOING", () => {
             // When
-            let container = mount(
-                <Provider store={store}>
-                    <BlockWrapper block={block} blockState={BLOCK_STATE.DOING} onBlockEvent={() => {
-                    }}/>
-                </Provider>);
+
+            let container = mountInRedux(BlockWrapper, {
+                block: block,
+                blockState: BLOCK_STATE.DOING,
+                onBlockEvent: () => null
+            });
 
             // Then
             expect(container.find(FieldWrapper).length).toBe(2);
@@ -51,11 +49,11 @@ describe("FormEngine/Wrapper/Block", () => {
 
         it("Should not render fields in state TODO", () => {
             // When
-            let container = mount(
-                <Provider store={store}>
-                    <BlockWrapper block={block} blockState={BLOCK_STATE.TODO} onBlockEvent={() => {
-                    }}/>
-                </Provider>);
+            let container = mountInRedux(BlockWrapper, {
+                block: block,
+                blockState: BLOCK_STATE.TODO,
+                onBlockEvent: () => null
+            });
 
             // Then
             expect(container.find(FieldWrapper).length).toBe(0);
@@ -72,11 +70,11 @@ describe("FormEngine/Wrapper/Block", () => {
             };
 
             // When
-            let container = mount(
-                <Provider store={store}>
-                    <BlockWrapper block={block} blockState={BLOCK_STATE.DONE} onBlockEvent={() => {
-                    }}/>
-                </Provider>);
+            let container = mountInRedux(BlockWrapper, {
+                block: block,
+                blockState: BLOCK_STATE.DONE,
+                onBlockEvent: () => null
+            });
 
             // Then
             expect(container.find(FieldWrapper).length).toBe(0);
@@ -111,8 +109,6 @@ describe("FormEngine/Wrapper/Block", () => {
                 {id: 'testChild3', type: 'type-test', doValidation: () => VALID}]);
         });
 
-        const ERROR = new Validation(false, "error-test");
-
         let checkBlockValidation = (success, fields) => {
             // Given
             let onBlockEvent = jasmine.createSpy();
@@ -125,10 +121,8 @@ describe("FormEngine/Wrapper/Block", () => {
             block.fields = block.fields.concat(fields);
 
             // When
-            let container = mount(
-                <Provider store={store}>
-                    <BlockWrapper block={block} onBlockEvent={onBlockEvent} blockIndex={0}/>
-                </Provider>);
+            let container = mountInRedux(BlockWrapper, {block: block, onBlockEvent: onBlockEvent, blockIndex: 0});
+
             container.find(".principal-cta").simulate("click");
 
             // Then
@@ -163,11 +157,11 @@ describe("FormEngine/Wrapper/Block", () => {
             };
 
             // When
-            let container = mount(
-                <Provider store={store}>
-                    <BlockWrapper block={block} blockState={state} onBlockEvent={() => {
-                    }}/>
-                </Provider>);
+            let container = mountInRedux(BlockWrapper, {
+                block: block,
+                blockState: state,
+                onBlockEvent: () => null
+            });
 
             // Then
             expect(container.find(".block-wrapper." + state.toLowerCase()).length).toBe(1);
