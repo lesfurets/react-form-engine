@@ -9,10 +9,10 @@ module.exports = function (config) {
         frameworks: [ 'jasmine' ],
         files: [
             './node_modules/babel-polyfill/dist/polyfill.js',
-            'test/**/*.js'
+            'test/**/*Test.js'
         ],
         preprocessors: {
-            'test/**/*.js': [ 'webpack', 'sourcemap' ]
+            'test/**/*Test.js': [ 'webpack', 'sourcemap' ]
         },
         reporters: [ 'junit' ],
         webpack: {

@@ -7,7 +7,7 @@ import {createStore} from "redux";
 import reducer from "../../../src/redux/reducers";
 import FieldWrapper from "../../../src/component/wrapper/FieldWrapper";
 import BlockWrapper, {BLOCK_STATE, BLOCK_EVENT} from "../../../src/component/wrapper/BlockWrapper";
-import {Validation, VALID} from "../../../src/definition/validation"
+import {Validation, VALID} from "../../../src/definition/validation";
 
 configure({adapter: new Adapter()});
 
@@ -141,7 +141,7 @@ describe("FormEngine/Wrapper/Block", () => {
 
     });
 
-    describe("State class", () => {
+    describe("State", () => {
 
         it("Should have specific class in state DOING", () => {
             checkStateAsClass(BLOCK_STATE.DOING);
@@ -170,7 +170,7 @@ describe("FormEngine/Wrapper/Block", () => {
                 </Provider>);
 
             // Then
-            expect(container.find("." + state.toLowerCase()).length).toBe(1);
+            expect(container.find(".block-wrapper." + state.toLowerCase()).length).toBe(1);
         }
 
     });
