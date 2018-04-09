@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/app.less";
 import FormEngine from "../../src/index";
 import {INPUT_TEXT, INPUT_MAIL} from "../../src/definition/field-type";
-import {isDefined} from "../../src/definition/validation";
+import {isDefined, VALID, validate} from "../../src/definition/validation";
 
 
 const FIELDS = {
@@ -10,7 +10,9 @@ const FIELDS = {
         id: "FIRST_NAME",
         label: "Prénom",
         type: INPUT_TEXT,
-        getValidation: isDefined("FIRST_NAME", "The first name is mandatory")
+        getValidation(context) {
+          return isDefined(this, context, "The first name is mandatory");
+        }
     },
     LAST_NAME: {
         id: "LAST_NAME",
@@ -28,6 +30,9 @@ const FIELDS = {
         type: INPUT_TEXT
     }
 };
+
+// console.log(FIELDS.LAST_NAME);
+// FIELDS.LAST_NAME.getValidation = FIELDS.LAST_NAME.getValidation.bind(FIELDS.LAST_NAME);
 
 const BLOCKS = {
     IDENTITY: {
