@@ -45,7 +45,7 @@ describe("FormEngine/Wrapper/Field", () => {
 
         it("Should force validation - error", () => {
             // Given
-            let field = {id: 'testChild1', type: 'type-test', doValidation: () => VALID};
+            let field = {id: 'testChild1', type: 'type-test', getValidation: () => VALID};
             // When
             let container = mountInRedux(FieldWrapper, {field: field, forceValidation:true});
 
@@ -55,7 +55,7 @@ describe("FormEngine/Wrapper/Field", () => {
 
         it("Should force validation - valid", () => {
             // Given
-            let field = {id: 'testChild1', type: 'type-test', doValidation: () => ERROR};
+            let field = {id: 'testChild1', type: 'type-test', getValidation: () => ERROR};
             // When
             let container = mountInRedux(FieldWrapper, {field: field, forceValidation:true});
 

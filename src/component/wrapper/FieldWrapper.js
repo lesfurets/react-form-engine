@@ -21,7 +21,7 @@ let getFieldState = (validation, props) => {
 class FieldWrapper extends React.Component {
     render() {
         let Container = this.props.container;
-        let validation = this.props.field.doValidation == undefined ? VALID : this.props.field.doValidation(this.props.fieldContext);
+        let validation = this.props.field.getValidation == undefined ? VALID : this.props.field.getValidation(this.props.fieldContext);
         let fieldState = getFieldState(validation, this.props);
 
         let fieldProps = {

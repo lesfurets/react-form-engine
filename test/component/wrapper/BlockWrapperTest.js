@@ -88,25 +88,25 @@ describe("FormEngine/Wrapper/Block", () => {
         });
 
         it("Should validate if Field is valid", () => {
-            checkBlockValidation(true, {id: 'testChild1', type: 'type-test', doValidation: () => VALID});
+            checkBlockValidation(true, {id: 'testChild1', type: 'type-test', getValidation: () => VALID});
         });
 
         it("Should not validate if Field is invalid", () => {
-            checkBlockValidation(false, {id: 'testChild1', type: 'type-test', doValidation: () => ERROR});
+            checkBlockValidation(false, {id: 'testChild1', type: 'type-test', getValidation: () => ERROR});
         });
 
         it("Should validate if all Fields are valid", () => {
             checkBlockValidation(true, [
-                {id: 'testChild1', type: 'type-test', doValidation: () => VALID},
-                {id: 'testChild2', type: 'type-test', doValidation: () => VALID},
-                {id: 'testChild3', type: 'type-test', doValidation: () => VALID}]);
+                {id: 'testChild1', type: 'type-test', getValidation: () => VALID},
+                {id: 'testChild2', type: 'type-test', getValidation: () => VALID},
+                {id: 'testChild3', type: 'type-test', getValidation: () => VALID}]);
         });
 
         it("Should not validate if 1 Fields is invalid", () => {
             checkBlockValidation(false, [
-                {id: 'testChild1', type: 'type-test', doValidation: () => VALID},
-                {id: 'testChild2', type: 'type-test', doValidation: () => ERROR},
-                {id: 'testChild3', type: 'type-test', doValidation: () => VALID}]);
+                {id: 'testChild1', type: 'type-test', getValidation: () => VALID},
+                {id: 'testChild2', type: 'type-test', getValidation: () => ERROR},
+                {id: 'testChild3', type: 'type-test', getValidation: () => VALID}]);
         });
 
         let checkBlockValidation = (success, fields) => {
@@ -115,7 +115,7 @@ describe("FormEngine/Wrapper/Block", () => {
             let block = {
                 id: "block-test",
                 fields: [
-                    {id: 'testChild0', type: 'type-test', doValidation: () => VALID}
+                    {id: 'testChild0', type: 'type-test', getValidation: () => VALID}
                 ]
             };
             block.fields = block.fields.concat(fields);

@@ -28,7 +28,7 @@ class BlockWrapper extends React.Component {
 
     onBlockEvent(event, index) {
         if(this.props.block.fields
-            .map(field => field.doValidation == undefined ? VALID : field.doValidation(this.props.fieldContext))
+            .map(field => field.getValidation == undefined ? VALID : field.getValidation(this.props.fieldContext))
             .map(validation => validation.isValid)
             .reduce((acc, value) => acc && value)){
             this.props.onBlockEvent(event,index);
