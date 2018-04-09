@@ -28,7 +28,7 @@ describe("FormEngine/Wrapper/Block", () => {
             let container = mountInRedux(BlockWrapper, {
                 block: block,
                 onBlockEvent: () => null
-            };
+            });
 
             // Then
             expect(container.find(FieldWrapper).length).toBe(2);

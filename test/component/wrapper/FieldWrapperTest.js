@@ -1,7 +1,7 @@
 import React from "react";
 
 import FieldWrapper, {FIELD_STATE} from "../../../src/component/wrapper/FieldWrapper";
-import {ERROR, initTest, mountInRedux} from "../../../test/test-utils";
+import {ERROR, initTest, mountInRedux, setFieldValue, createTestStore} from "../../../test/test-utils";
 import {VALID} from "../../../src/definition/validation";
 
 initTest();
@@ -18,14 +18,62 @@ describe("FormEngine/Wrapper/Field", () => {
 
     describe("States", () => {
 
-        it("Should render all fields by default", () => {
+        it("Should have default state when loaded", () => {
             // Given
             let field = {id: 'testChild1', type: 'type-test'};
+
             // When
             let container = mountInRedux(FieldWrapper, {field: field});
 
             // Then
             checkComponentState(container, FIELD_STATE.DEFAULT);
+        });
+
+        it("Should be validated if context is set - valid by default", () => {
+            // Given
+            const store = createTestStore();
+            let field = {id: 'testChild1', type: 'type-test'};
+
+            // When
+            setFieldValue(field.id, 'OK', store);
+            let container = mountInRedux(FieldWrapper, {field: field}, store);
+
+            // Then
+            checkComponentState(container, FIELD_STATE.VALID);
+        });
+
+        it("Should be validated if context is set - valid", () => {
+            // Given
+            const store = createTestStore();
+            let field = {
+                id: 'testChild1',
+                type: 'type-test',
+                getValidation: (context) => context['testChild1'] == "OK" ? VALID : ERROR
+            };
+
+            // When
+            setFieldValue(field.id, 'OK', store);
+            let container = mountInRedux(FieldWrapper, {field: field}, store);
+
+            // Then
+            checkComponentState(container, FIELD_STATE.VALID);
+        });
+
+        it("Should be validated if context is set - error", () => {
+            // Given
+            const store = createTestStore();
+            let field = {
+                id: 'testChild1',
+                type: 'type-test',
+                getValidation: (context) => context['testChild1'] == "OK" ? VALID : ERROR
+            };
+
+            // When
+            setFieldValue(field.id, 'KO', store);
+            let container = mountInRedux(FieldWrapper, {field: field}, store);
+
+            // Then
+            checkComponentState(container, FIELD_STATE.ERROR);
         });
 
     });
@@ -47,7 +95,7 @@ describe("FormEngine/Wrapper/Field", () => {
             // Given
             let field = {id: 'testChild1', type: 'type-test', getValidation: () => VALID};
             // When
-            let container = mountInRedux(FieldWrapper, {field: field, forceValidation:true});
+            let container = mountInRedux(FieldWrapper, {field: field, forceValidation: true});
 
             // Then
             checkComponentState(container, FIELD_STATE.VALID);
@@ -57,7 +105,7 @@ describe("FormEngine/Wrapper/Field", () => {
             // Given
             let field = {id: 'testChild1', type: 'type-test', getValidation: () => ERROR};
             // When
-            let container = mountInRedux(FieldWrapper, {field: field, forceValidation:true});
+            let container = mountInRedux(FieldWrapper, {field: field, forceValidation: true});
 
             // Then
             checkComponentState(container, FIELD_STATE.ERROR);

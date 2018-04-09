@@ -11,7 +11,7 @@ const FIELDS = {
         label: "Prénom",
         type: INPUT_TEXT,
         getValidation(context) {
-          return isDefined(this, context, "The first name is mandatory");
+          return isDefined(context[this.id], "The first name is mandatory");
         }
     },
     LAST_NAME: {
