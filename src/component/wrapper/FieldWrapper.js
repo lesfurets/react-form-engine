@@ -34,7 +34,7 @@ class FieldWrapper extends React.Component {
         let Field = injectField(this.props.field.type);
 
         return (
-            <div className={`field-wrapper ${fieldState.toLowerCase()}`}>
+            <div className={`field-wrapper ${fieldState.toLowerCase()} ${this.props.field.id.toLowerCase()}`}>
                 <Container field={this.props.field} validation={validation} fieldState={fieldState}>
                     <Field {...fieldProps}/>
                 </Container>

@@ -39,7 +39,7 @@ class BlockWrapper extends React.Component {
     render() {
         let Container = this.props.container;
         return (
-            <div className={`block-wrapper ${this.props.blockState.toLowerCase()}`}>
+            <div className={`block-wrapper ${this.props.blockState.toLowerCase()} ${this.props.block.id.toLowerCase()}`}>
                 <Container {...this.props} onBlockEvent={this.onBlockEvent}>
                     {this.props.block.fields.map((field, index) =>
                         <FieldWrapper
