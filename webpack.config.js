@@ -1,6 +1,4 @@
-var webpack = require('webpack');
-
-module.exports = {
+module.exports = (env, argv) => ({
     entry: "./src/index.js",
     output: {
         path: __dirname + '/dist',
@@ -27,28 +25,31 @@ module.exports = {
         },
     ],
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel',
-                query: {
-                    presets: ['es2015', 'react']
+                use: {
+                    loader: 'babel-loader'
                 }
             },
             {
                 test: /\.less$/,
-                loader: "style!css!autoprefixer!less"
+                use: ["style-loader",
+                    "css-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            config: {path: __dirname, ctx: argv},
+                            sourceMap: argv.mode !== "production",
+                        },
+                    },
+                    "less-loader"]
             },
             {
                 test: /\.json$/,
                 loader: "json-loader"
             }
         ]
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-        })
-    ]
-}
+    }
+});
