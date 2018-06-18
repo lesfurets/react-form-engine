@@ -11,7 +11,7 @@ const FIELDS = {
         label: "Prénom",
         type: INPUT_TEXT,
         getValidation(context) {
-          return isDefined(context[this.id], "The first name is mandatory");
+          return isDefined(this,context, "The first name is mandatory");
         }
     },
     LAST_NAME: {
@@ -31,15 +31,14 @@ const FIELDS = {
     }
 };
 
-// console.log(FIELDS.LAST_NAME);
-// FIELDS.LAST_NAME.getValidation = FIELDS.LAST_NAME.getValidation.bind(FIELDS.LAST_NAME);
-
 const BLOCKS = {
     IDENTITY: {
+        id:"IDENTITY",
         label: "Personal information",
         fields: [FIELDS.FIRST_NAME, FIELDS.LAST_NAME]
     },
     CONTACT: {
+        id:"CONTACT",
         label: "Contact",
         fields: [FIELDS.EMAIL, FIELDS.PHONE]
     }
