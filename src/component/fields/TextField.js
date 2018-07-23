@@ -23,8 +23,8 @@ export default class TextField extends React.Component {
 
     render() {
         return (
-            <div className="text-field">
-                <input type={this.props.field.type == INPUT_MAIL ? "email": "text"}
+            <div className="TextField">
+                <input type={this.props.field.type === INPUT_MAIL ? "email": "text"}
                        placeholder={typeof placeholder !== 'undefined' ? placeholder : ""}
                        maxLength="38"
                        name={this.props.field.id}

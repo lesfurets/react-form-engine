@@ -1,79 +1,82 @@
 import React from "react";
-
-import FieldWrapper, {FIELD_STATE} from "../../../src/component/wrapper/FieldWrapper";
-import {ERROR, initTest, mountInRedux, setFieldValue, createTestStore} from "../../../test/test-utils";
+import {FieldWrapperComponent ,FIELD_STATE} from "../../../src/component/wrapper/FieldWrapper";
+import {createTestStore, ERROR, initTest, setFieldValue, shallowRedux} from "../../../test/test-utils";
 import {VALID} from "../../../src/definition/validation";
+import {shallow} from "enzyme/build/index";
+import {EMPTY_CALLBACK} from "../../test-utils";
 
 initTest();
 
 describe("FormEngine/Wrapper/Field", () => {
 
-    function checkComponentState(container, state) {
-        Object.keys(FIELD_STATE).forEach((currentState) => {
-            let fieldState = FIELD_STATE[currentState];
-            expect(container.find(".field-wrapper." + fieldState.toLowerCase()).length)
-                .toBe(state == fieldState ? 1 : 0, "Field is expected with state " + state + " but is " + fieldState);
-        });
-    }
+    let testId = 'testChild1';
+    let props = {
+        field: {id: testId, type: 'type-test'},
+        setFieldValue: EMPTY_CALLBACK,
+        fieldContext: {},
+        View: () => <div/>
+    };
 
     describe("States", () => {
 
         it("Should have default state when loaded", () => {
-            // Given
-            let field = {id: 'testChild1', type: 'type-test'};
-
             // When
-            let container = mountInRedux(FieldWrapper, {field: field});
+            let container = shallow(<FieldWrapperComponent {...props}/>);
 
             // Then
-            checkComponentState(container, FIELD_STATE.DEFAULT);
+            let {fieldState} = container.instance().getState();
+            expect(fieldState).toBe(FIELD_STATE.DEFAULT);
         });
 
         it("Should be validated if context is set - valid by default", () => {
             // Given
-            const store = createTestStore();
-            let field = {id: 'testChild1', type: 'type-test'};
+            let fieldContext = {[testId]:"OK"};
 
             // When
-            setFieldValue(field.id, 'OK', store);
-            let container = mountInRedux(FieldWrapper, {field: field}, store);
+            let container = shallow(<FieldWrapperComponent {...props}
+                                                           fieldContext={fieldContext}/>);
 
             // Then
-            checkComponentState(container, FIELD_STATE.VALID);
+            let {fieldState} = container.instance().getState();
+            expect(fieldState).toBe(FIELD_STATE.VALID);
         });
 
         it("Should be validated if context is set - valid", () => {
             // Given
-            const store = createTestStore();
+            let fieldContext = {[testId]:"OK"};
             let field = {
-                id: 'testChild1',
+                id: testId,
                 type: 'type-test',
-                getValidation: (context) => context['testChild1'] == "OK" ? VALID : ERROR
+                getValidation: () => VALID
             };
 
             // When
-            setFieldValue(field.id, 'OK', store);
-            let container = mountInRedux(FieldWrapper, {field: field}, store);
+            let container = shallow(<FieldWrapperComponent {...props}
+                                                           field={field}
+                                                           fieldContext={fieldContext}/>);
 
             // Then
-            checkComponentState(container, FIELD_STATE.VALID);
+            let {fieldState} = container.instance().getState();
+            expect(fieldState).toBe(FIELD_STATE.VALID);
         });
 
         it("Should be validated if context is set - error", () => {
             // Given
-            const store = createTestStore();
+            let fieldContext = {[testId]:"OK"};
             let field = {
-                id: 'testChild1',
+                id: testId,
                 type: 'type-test',
-                getValidation: (context) => context['testChild1'] == "OK" ? VALID : ERROR
+                getValidation: () => ERROR
             };
 
             // When
-            setFieldValue(field.id, 'KO', store);
-            let container = mountInRedux(FieldWrapper, {field: field}, store);
+            let container = shallow(<FieldWrapperComponent {...props}
+                                                           field={field}
+                                                           fieldContext={fieldContext}/>);
 
             // Then
-            checkComponentState(container, FIELD_STATE.ERROR);
+            let {fieldState} = container.instance().getState();
+            expect(fieldState).toBe(FIELD_STATE.ERROR);
         });
 
     });
@@ -82,33 +85,49 @@ describe("FormEngine/Wrapper/Field", () => {
     describe("Forced States", () => {
 
         it("Should be valid by default when forced", () => {
-            // Given
-            let field = {id: 'testChild1', type: 'type-test'};
             // When
-            let container = mountInRedux(FieldWrapper, {field: field, forceValidation: true});
+            let container = shallow(<FieldWrapperComponent {...props}
+                                                           forceValidation={true}/>);
 
             // Then
-            checkComponentState(container, FIELD_STATE.VALID);
+            let {fieldState} = container.instance().getState();
+            expect(fieldState).toBe(FIELD_STATE.VALID);
         });
 
         it("Should force validation - error", () => {
             // Given
-            let field = {id: 'testChild1', type: 'type-test', getValidation: () => VALID};
+            let field = {
+                id: testId,
+                type: 'type-test',
+                getValidation: () => ERROR
+            };
+
             // When
-            let container = mountInRedux(FieldWrapper, {field: field, forceValidation: true});
+            let container = shallow(<FieldWrapperComponent {...props}
+                                                           field={field}
+                                                           forceValidation={true}/>);
 
             // Then
-            checkComponentState(container, FIELD_STATE.VALID);
+            let {fieldState} = container.instance().getState();
+            expect(fieldState).toBe(FIELD_STATE.ERROR);
         });
 
         it("Should force validation - valid", () => {
             // Given
-            let field = {id: 'testChild1', type: 'type-test', getValidation: () => ERROR};
+            let field = {
+                id: testId,
+                type: 'type-test',
+                getValidation: () => VALID
+            };
+
             // When
-            let container = mountInRedux(FieldWrapper, {field: field, forceValidation: true});
+            let container = shallow(<FieldWrapperComponent {...props}
+                                                           field={field}
+                                                           forceValidation={true}/>);
 
             // Then
-            checkComponentState(container, FIELD_STATE.ERROR);
+            let {fieldState} = container.instance().getState();
+            expect(fieldState).toBe(FIELD_STATE.VALID);
         });
 
     });

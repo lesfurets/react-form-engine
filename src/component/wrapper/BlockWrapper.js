@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import FieldWrapper from "./FieldWrapper";
+import {FieldWrapper} from "./FieldWrapper";
 import BlockContainer from "../container/BlockContainer";
 import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation";
+import FieldContainer from "../container/FieldContainer";
 
 export const BLOCK_STATE = {
     TODO: "BLOCK-TODO",
@@ -39,7 +40,7 @@ class BlockWrapper extends React.Component {
     render() {
         let Container = this.props.container;
         return (
-            <div className={`block-wrapper ${this.props.blockState.toLowerCase()} ${this.props.block.id.toLowerCase()}`}>
+            <div className={`block-wrapper ${this.props.blockState} ${this.props.block.id}`}>
                 <Container {...this.props} onBlockEvent={this.onBlockEvent}>
                     {this.props.block.fields.map((field, index) =>
                         <FieldWrapper
@@ -47,6 +48,7 @@ class BlockWrapper extends React.Component {
                             field={field}
                             tabIndex={index + 1}
                             forceValidation={this.state.forceValidation}
+                            View={FieldContainer}
                         />)}
                 </Container>
             </div>

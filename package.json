@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start karma.conf.js",
-    "start": "webpack-dev-server",
-    "build": "webpack -p",
-    "start-example": "webpack-dev-server --config ./example/webpack.config.js --content-base example/",
-    "build-example": "webpack -p --config ./example/webpack.config.js"
+    "start:project": "webpack-dev-server",
+    "build:project": "webpack -p",
+    "start:example": "webpack-dev-server --config ./example/webpack.config.js --content-base example/ --mode development",
+    "build:example": "webpack -p --config ./example/webpack.config.js"
   },
   "author": "Geoffrey Berard <geoffrey.berard@gmail.com>",
   "license": "MIT",
@@ -28,6 +28,7 @@
     "babel-loader": "7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.23.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

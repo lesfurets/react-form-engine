@@ -1,2 +1,2 @@
-export const INPUT_TEXT = "INPUT_TEXT";
-export const INPUT_MAIL = "INPUT_MAIL";
+export const INPUT_TEXT = "TextField";
+export const INPUT_MAIL = "EmailField";

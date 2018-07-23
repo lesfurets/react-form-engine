@@ -2,7 +2,7 @@ import React from "react";
 import {createStore} from "redux";
 
 import reducer from "../../../src/redux/reducers";
-import {ERROR, initTest, mountInRedux} from "../../../test/test-utils";
+import {ERROR, initTest, shallow} from "../../../test/test-utils";
 import FieldWrapper from "../../../src/component/wrapper/FieldWrapper";
 import BlockWrapper, {BLOCK_EVENT, BLOCK_STATE} from "../../../src/component/wrapper/BlockWrapper";
 import {VALID, Validation} from "../../../src/definition/validation";
@@ -25,7 +25,7 @@ describe("FormEngine/Wrapper/Block", () => {
 
         it("Should render all fields by default", () => {
             // When
-            let container = mountInRedux(BlockWrapper, {
+            let container = shallow(BlockWrapper, {
                 block: block,
                 onBlockEvent: () => null
             });
@@ -37,7 +37,7 @@ describe("FormEngine/Wrapper/Block", () => {
         it("Should render fields in state DOING", () => {
             // When
 
-            let container = mountInRedux(BlockWrapper, {
+            let container = shallow(BlockWrapper, {
                 block: block,
                 blockState: BLOCK_STATE.DOING,
                 onBlockEvent: () => null
@@ -49,7 +49,7 @@ describe("FormEngine/Wrapper/Block", () => {
 
         it("Should not render fields in state TODO", () => {
             // When
-            let container = mountInRedux(BlockWrapper, {
+            let container = shallow(BlockWrapper, {
                 block: block,
                 blockState: BLOCK_STATE.TODO,
                 onBlockEvent: () => null
@@ -70,7 +70,7 @@ describe("FormEngine/Wrapper/Block", () => {
             };
 
             // When
-            let container = mountInRedux(BlockWrapper, {
+            let container = shallow(BlockWrapper, {
                 block: block,
                 blockState: BLOCK_STATE.DONE,
                 onBlockEvent: () => null
@@ -121,7 +121,7 @@ describe("FormEngine/Wrapper/Block", () => {
             block.fields = block.fields.concat(fields);
 
             // When
-            let container = mountInRedux(BlockWrapper, {block: block, onBlockEvent: onBlockEvent, blockIndex: 0});
+            let container = shallow(BlockWrapper, {block: block, onBlockEvent: onBlockEvent, blockIndex: 0});
 
             container.find(".principal-cta").simulate("click");
 
@@ -157,7 +157,7 @@ describe("FormEngine/Wrapper/Block", () => {
             };
 
             // When
-            let container = mountInRedux(BlockWrapper, {
+            let container = shallow(BlockWrapper, {
                 block: block,
                 blockState: state,
                 onBlockEvent: () => null

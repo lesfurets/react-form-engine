@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var webpackConfig = require('./webpack.config');
+var webpackConfig = require('./webpack.config')("development", {mode: "development"});
 
 module.exports = function (config) {
     config.set({
@@ -16,8 +16,15 @@ module.exports = function (config) {
         },
         reporters: [ 'junit' ],
         webpack: {
+            mode: 'development',
             devtool: 'inline-source-map', //just do inline source maps instead of the default
             module: webpackConfig.module,
+            externals: {
+                'cheerio': 'window',
+                'react/addons': true,
+                'react/lib/ExecutionEnvironment': true,
+                'react/lib/ReactContext': true
+            },
             plugins: [
                 new webpack.DefinePlugin({
                     'process.env.NODE_ENV': JSON.stringify('test')

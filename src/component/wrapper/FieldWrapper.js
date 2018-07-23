@@ -1,59 +1,69 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {injectField} from "../../definition/field-injector";
+import {FieldInjector} from "../../definition/FieldInjector";
 import {fieldConnect} from "../../redux/fieldConnect";
-import FieldContainer from "../container/FieldContainer";
 import {VALID} from "../../definition/validation";
 
 export const FIELD_STATE = {
-    DEFAULT: "FIELD-DEFAULT",
-    VALID: "FIELD-VALID",
-    ERROR: "FIELD-ERROR"
+    DEFAULT: "field-default",
+    VALID: "field-valid",
+    ERROR: "field-error"
 };
 
-let getFieldState = (validation, props) => {
-    if(!props.forceValidation && (props.fieldContext[props.field.id] == undefined)) {
-        return FIELD_STATE.DEFAULT;
+export class FieldWrapperComponent extends React.Component {
+
+    constructor() {
+        super();
+        this.getState = this.getState.bind(this);
     }
-    return validation.isValid ? FIELD_STATE.VALID : FIELD_STATE.ERROR;
-}
 
-class FieldWrapper extends React.Component {
-    render() {
-        let Container = this.props.container;
-        let validation = this.props.field.getValidation == undefined ? VALID : this.props.field.getValidation(this.props.fieldContext);
-        let fieldState = getFieldState(validation, this.props);
-
-        let fieldProps = {
-            field: this.props.field,
-            tabIndex: this.props.tabIndex,
-            setFieldValue: this.props.setFieldValue,
-            contextValue: this.props.fieldContext[this.props.field.id]
+    static getFieldState(validation, contextValue, forceValidation) {
+        if(!forceValidation && contextValue === undefined) {
+            return FIELD_STATE.DEFAULT;
         }
+        return validation.isValid ? FIELD_STATE.VALID : FIELD_STATE.ERROR;
+    };
 
-        let Field = injectField(this.props.field.type);
+    getState() {
+        let {field, fieldContext, forceValidation} = this.props;
+        let contextValue = fieldContext[field.id];
+        let validation = field.getValidation === undefined ? VALID : field.getValidation(fieldContext);
+        let fieldState = FieldWrapper.getFieldState(validation, contextValue, forceValidation);
+        return {fieldState, validation};
+    }
+
+    render() {
+        let {View, field, tabIndex, setFieldValue, fieldContext} = this.props;
+        let contextValue = fieldContext[field.id];
+        let {fieldState, validation} = this.getState();
+        let Field = FieldInjector.inject(field.type);
 
         return (
-            <div className={`field-wrapper ${fieldState.toLowerCase()} ${this.props.field.id.toLowerCase()}`}>
-                <Container field={this.props.field} validation={validation} fieldState={fieldState}>
-                    <Field {...fieldProps}/>
-                </Container>
+            <div className={`FieldWrapper ${fieldState} ${field.id} ${field.type}`}>
+                <View field={field} validation={validation} fieldState={fieldState}>
+                    <Field field={field}
+                           tabIndex={tabIndex}
+                           setFieldValue={setFieldValue}
+                           contextValue={contextValue}/>
+                </View>
             </div>
         );
     }
 }
 
-FieldWrapper.propTypes = {
-    field: PropTypes.object.isRequired,
-    container: PropTypes.func,
+FieldWrapperComponent.propTypes = {
+    field: PropTypes.shape({
+        getValidation: PropTypes.func,
+        isVisible: PropTypes.func
+    }).isRequired,
+    View: PropTypes.func.isRequired,
     forceValidation: PropTypes.bool,
     tabIndex: PropTypes.number
 };
 
-FieldWrapper.defaultProps = {
-    container: FieldContainer,
+FieldWrapperComponent.defaultProps = {
     forceValidation: false,
     tabIndex: 1
 };
 
-export default fieldConnect(FieldWrapper);
+export const FieldWrapper = fieldConnect(FieldWrapperComponent);
