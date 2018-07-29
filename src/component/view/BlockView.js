@@ -1,9 +1,10 @@
 import React from "react";
-
 import PropTypes from "prop-types";
+
 import {BLOCK_EVENT, BLOCK_STATE} from "../wrapper/BlockWrapper";
 
 import "../../styles/components/view/block-view.less"
+import {Cta, CTA_TYPE} from "../utils/Cta";
 
 export const BlockView = ({children, block, blockState, onBlockEvent, validate}) => (
     <div className="BlockView app-row">
@@ -12,9 +13,16 @@ export const BlockView = ({children, block, blockState, onBlockEvent, validate})
             <div className="app-col-xs-12 app-col-sm-8">
                 <div className="BlockView-content">
                     {children}
-                    <div className="cta-layer">
-                        {block.index > 0 ? <button className="cta secondary-cta" onClick={() => onBlockEvent(BLOCK_EVENT.PREVIOUS)}>Previous</button> : null}
-                        <button className="cta principal-cta " onClick={validate}>Next</button>
+                    <div className="app-row">
+                        <div className="app-col-xs-12 app-col-sm-3">
+                            {block.index === 0 ?
+                                null : <Cta type={CTA_TYPE.SECONDARY}
+                                            fullWidth={true}
+                                            onClick={() => onBlockEvent(BLOCK_EVENT.PREVIOUS)}>Previous</Cta>}
+                        </div>
+                        <div className="app-col-xs-12 app-col-sm-3 app-col-sm-offset-6">
+                            <Cta fullWidth={true} onClick={validate}>Next</Cta>
+                        </div>
                     </div>
                 </div>
             </div>

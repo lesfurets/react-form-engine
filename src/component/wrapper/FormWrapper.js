@@ -51,7 +51,6 @@ export default class FormWrapper extends React.Component {
                 this.setState({currentBlockIndex: block.index + 1});
                 break;
             case BLOCK_EVENT.PREVIOUS:
-                console.log("Heuuuuu");
                 this.setState({currentBlockIndex: block.index - 1});
                 break;
         }
