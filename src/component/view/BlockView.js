@@ -5,18 +5,16 @@ import {BLOCK_EVENT, BLOCK_STATE} from "../wrapper/BlockWrapper";
 
 import "../../styles/components/view/block-view.less"
 
-export const BlockView = props => (
-    <div className="block-container app-row">
-        <div className="block-header app-col-xs-12">
-            <div className="block-label">{props.blockIndex + 1}. {props.block.label}</div>
-        </div>
-        {props.blockState !== BLOCK_STATE.DOING ? null : (
+export const BlockView = ({children, block, blockState, onBlockEvent, validate}) => (
+    <div className="BlockView app-row">
+        <div className="BlockView-label app-col-xs-12">{block.index + 1}. {block.label}</div>
+        {blockState !== BLOCK_STATE.DOING ? null : (
             <div className="app-col-xs-12 app-col-sm-8">
-                <div className="block-inner">
-                    {props.children}
+                <div className="BlockView-content">
+                    {children}
                     <div className="cta-layer">
-                        {props.blockIndex > 0 ? <button className="cta secondary-cta" onClick={() => props.onBlockEvent(BLOCK_EVENT.PREVIOUS, props.blockIndex)}>Previous</button> : null}
-                        <button className="cta principal-cta " onClick={() => props.onBlockEvent(BLOCK_EVENT.NEXT, props.blockIndex)}>Next</button>
+                        {block.index > 0 ? <button className="cta secondary-cta" onClick={() => onBlockEvent(BLOCK_EVENT.PREVIOUS)}>Previous</button> : null}
+                        <button className="cta principal-cta " onClick={validate}>Next</button>
                     </div>
                 </div>
             </div>
@@ -25,8 +23,8 @@ export const BlockView = props => (
 );
 
 BlockView.propTypes = {
-    onBlockEvent: PropTypes.func,
-    blockIndex: PropTypes.number,
-    blockState: PropTypes.string,
-    block: PropTypes.object.isRequired
+    block: PropTypes.object.isRequired,
+    blockState: PropTypes.string.isRequired,
+    validate: PropTypes.func,
+    onBlockEvent: PropTypes.func
 };

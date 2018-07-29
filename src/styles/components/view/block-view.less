@@ -1,17 +1,14 @@
-.block-container {
+.BlockView {
     background-color: white;
     margin: 20px 0;
     box-shadow: 0 12px 24px rgba(0, 0, 0, .22), 0 8px 8px rgba(0, 0, 0, .23);
 
-    .block-inner {
+    &-content {
         padding: 0 15px 15px 15px;
     }
 
-    .block-header{
+    &-label {
         background-color: #3F51B5;
-    }
-
-    .block-label {
         padding: 10px 15px;
         color: white;
         font-size: 20px;
@@ -41,12 +38,12 @@
 
 }
 
-.app-xs .block-container .cta-layer .cta {
+.app-xs .BlockView .cta-layer .cta {
     width: 48%;
 }
 
 .block-todo, .block-done {
-    .block-header {
+    .BlockView-header {
         background-color: #7986CB;
     }
 }

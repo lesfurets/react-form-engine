@@ -3,6 +3,8 @@ import {BLOCK_EVENT, BLOCK_STATE} from "./BlockWrapper";
 import {FormView} from "../view/FormView";
 import BlockWrapper from "./BlockWrapper";
 import PropTypes from "prop-types";
+import {BlockView} from "../view/BlockView";
+import {FieldView} from "../view/FieldView";
 
 export default class FormWrapper extends React.Component {
     constructor() {
@@ -22,10 +24,11 @@ export default class FormWrapper extends React.Component {
                     {this.props.blocks.map((block, index) =>
                         <BlockWrapper
                             key={index}
-                            block={block}
+                            block={{...block, index:index}}
                             blockState={this.getBlockState(index)}
-                            blockIndex={index}
                             onBlockEvent={this.onBlockEvent}
+                            View={BlockView}
+                            FieldView={FieldView}
                         />)}
                 </View>
             </div>
@@ -42,13 +45,14 @@ export default class FormWrapper extends React.Component {
         return BLOCK_STATE.TODO;
     }
 
-    onBlockEvent(event, index) {
+    onBlockEvent(event, block) {
         switch (event) {
-            case BLOCK_EVENT.NEXT:
-                this.setState({currentBlockIndex: index + 1});
+            case BLOCK_EVENT.VALID:
+                this.setState({currentBlockIndex: block.index + 1});
                 break;
             case BLOCK_EVENT.PREVIOUS:
-                this.setState({currentBlockIndex: index - 1});
+                console.log("Heuuuuu");
+                this.setState({currentBlockIndex: block.index - 1});
                 break;
         }
     }
