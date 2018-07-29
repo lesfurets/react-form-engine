@@ -1,6 +1,6 @@
 import React from "react";
 import {BLOCK_EVENT, BLOCK_STATE} from "./BlockWrapper";
-import FormContainer from "../container/FormContainer";
+import {FormView} from "../view/FormView";
 import BlockWrapper from "./BlockWrapper";
 import PropTypes from "prop-types";
 
@@ -9,16 +9,16 @@ export default class FormWrapper extends React.Component {
         super();
         this.state = {
             currentBlockIndex: 0
-        }
+        };
         this.getBlockState = this.getBlockState.bind(this);
         this.onBlockEvent = this.onBlockEvent.bind(this);
     }
 
     render() {
-        let Container = this.props.container;
+        let View = this.props.View;
         return (
             <div className="form-wrapper">
-                <Container>
+                <View>
                     {this.props.blocks.map((block, index) =>
                         <BlockWrapper
                             key={index}
@@ -27,7 +27,7 @@ export default class FormWrapper extends React.Component {
                             blockIndex={index}
                             onBlockEvent={this.onBlockEvent}
                         />)}
-                </Container>
+                </View>
             </div>
         );
     }
@@ -36,7 +36,7 @@ export default class FormWrapper extends React.Component {
         if (index < this.state.currentBlockIndex) {
             return BLOCK_STATE.DONE;
         }
-        if (index == this.state.currentBlockIndex) {
+        if (index === this.state.currentBlockIndex) {
             return BLOCK_STATE.DOING;
         }
         return BLOCK_STATE.TODO;
@@ -55,9 +55,9 @@ export default class FormWrapper extends React.Component {
 }
 
 FormWrapper.propTypes = {
-    container: PropTypes.func,
+    View: PropTypes.func,
 };
 
 FormWrapper.defaultProps = {
-    container: FormContainer
+    View: FormView
 };

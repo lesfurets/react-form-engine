@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import {FieldWrapper} from "./FieldWrapper";
-import BlockContainer from "../container/BlockContainer";
+import {BlockView} from "../view/BlockView";
 import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation";
-import {FieldContainer} from "../container/FieldContainer";
+import {FieldView} from "../view/FieldView";
 
 export const BLOCK_STATE = {
     TODO: "BLOCK-TODO",
@@ -38,19 +38,19 @@ class BlockWrapper extends React.Component {
     }
 
     render() {
-        let Container = this.props.container;
+        let View = this.props.View;
         return (
             <div className={`block-wrapper ${this.props.blockState} ${this.props.block.id}`}>
-                <Container {...this.props} onBlockEvent={this.onBlockEvent}>
+                <View {...this.props} onBlockEvent={this.onBlockEvent}>
                     {this.props.block.fields.map((field, index) =>
                         <FieldWrapper
                             key={index}
                             field={field}
                             tabIndex={index + 1}
                             forceValidation={this.state.forceValidation}
-                            View={FieldContainer}
+                            View={FieldView}
                         />)}
-                </Container>
+                </View>
             </div>
         );
     }
@@ -61,12 +61,12 @@ BlockWrapper.propTypes = {
     onBlockEvent: PropTypes.func.isRequired,
     blockState: PropTypes.string,
     block: PropTypes.object.isRequired,
-    container: PropTypes.func,
+    View: PropTypes.func,
 };
 
 BlockWrapper.defaultProps = {
     blockState: BLOCK_STATE.DOING,
-    container: BlockContainer
+    View: BlockView
 };
 
 export default fieldConnect(BlockWrapper);

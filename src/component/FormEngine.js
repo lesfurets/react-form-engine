@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles/block-container.less"
 import {createStore} from "redux";
 import {Provider} from 'react-redux'
 import reducer from '../redux/reducers';

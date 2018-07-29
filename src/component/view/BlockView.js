@@ -3,14 +3,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import {BLOCK_EVENT, BLOCK_STATE} from "../wrapper/BlockWrapper";
 
-import "../../styles/block-container.less"
+import "../../styles/components/view/block-view.less"
 
-const BlockContainer = props => (
+export const BlockView = props => (
     <div className="block-container app-row">
         <div className="block-header app-col-xs-12">
             <div className="block-label">{props.blockIndex + 1}. {props.block.label}</div>
         </div>
-        {props.blockState != BLOCK_STATE.DOING ? null : (
+        {props.blockState !== BLOCK_STATE.DOING ? null : (
             <div className="app-col-xs-12 app-col-sm-8">
                 <div className="block-inner">
                     {props.children}
@@ -24,12 +24,9 @@ const BlockContainer = props => (
     </div>
 );
 
-BlockContainer.propTypes = {
+BlockView.propTypes = {
     onBlockEvent: PropTypes.func,
     blockIndex: PropTypes.number,
     blockState: PropTypes.string,
     block: PropTypes.object.isRequired
 };
-
-export default BlockContainer;
-
