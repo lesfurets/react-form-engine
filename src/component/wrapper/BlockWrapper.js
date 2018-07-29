@@ -5,7 +5,7 @@ import {FieldWrapper} from "./FieldWrapper";
 import BlockContainer from "../container/BlockContainer";
 import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation";
-import FieldContainer from "../container/FieldContainer";
+import {FieldContainer} from "../container/FieldContainer";
 
 export const BLOCK_STATE = {
     TODO: "BLOCK-TODO",
