@@ -1,3 +1,5 @@
+@import "../../color";
+
 .Cta {
   color: white;
   font-weight: 500;
@@ -7,11 +9,11 @@
   border: none;
 
   &.primary {
-    background-color: #4CAF50;
+    background-color: @valid;
   }
 
   &.secondary {
-    background-color: #7986CB;
+    background-color: @primary-light;
   }
 
   &.fullWidth {

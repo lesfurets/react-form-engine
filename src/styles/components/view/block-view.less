@@ -1,3 +1,5 @@
+@import "../../color";
+
 .BlockView {
     background-color: white;
     margin: 20px 0;
@@ -8,42 +10,11 @@
     }
 
     &-label {
-        background-color: #3F51B5;
+        background-color: @primary;
         padding: 10px 15px;
         color: white;
         font-size: 20px;
         font-weight: 500;
         line-height: 140%;
-    }
-
-    .cta-layer {
-        text-align: right;
-
-        .cta {
-            color: white;
-            font-weight: 500;
-            background-color: #4CAF50;
-            padding: 10px;
-            width: 25%;
-            text-align: center;
-            cursor: pointer;
-            border: none;
-        }
-
-        .secondary-cta{
-            background-color: #7986CB;
-            float: left;
-        }
-    }
-
-}
-
-.app-xs .BlockView .cta-layer .cta {
-    width: 48%;
-}
-
-.block-todo, .block-done {
-    .BlockView-header {
-        background-color: #7986CB;
     }
 }

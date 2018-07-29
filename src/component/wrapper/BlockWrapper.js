@@ -6,9 +6,9 @@ import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation";
 
 export const BLOCK_STATE = {
-    TODO: "BLOCK-TODO",
-    DOING: "BLOCK-DOING",
-    DONE: "BLOCK-DONE"
+    TODO: "block-todo",
+    DOING: "block-doing",
+    DONE: "block-done"
 };
 
 export const BLOCK_EVENT = {
