@@ -1,7 +1,7 @@
 import React from "react";
 import {BLOCK_EVENT, BLOCK_STATE} from "./BlockWrapper";
 import {FormView} from "../view/FormView";
-import BlockWrapper from "./BlockWrapper";
+import {BlockWrapper} from "./BlockWrapper";
 import PropTypes from "prop-types";
 import {BlockView} from "../view/BlockView";
 import {FieldView} from "../view/FieldView";

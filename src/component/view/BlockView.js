@@ -6,7 +6,7 @@ import {BLOCK_EVENT, BLOCK_STATE} from "../wrapper/BlockWrapper";
 import "../../styles/components/view/block-view.less"
 import {Cta, CTA_TYPE} from "../utils/Cta";
 
-export const BlockView = ({children, block, blockState, onBlockEvent, validate}) => (
+export const BlockView = ({children, block, blockState, onBlockEvent, onValidation}) => (
     <div className="BlockView app-row">
         <div className="BlockView-label app-col-xs-12">{block.index + 1}. {block.label}</div>
         {blockState !== BLOCK_STATE.DOING ? null : (
@@ -21,7 +21,7 @@ export const BlockView = ({children, block, blockState, onBlockEvent, validate})
                                             onClick={() => onBlockEvent(BLOCK_EVENT.PREVIOUS)}>Previous</Cta>}
                         </div>
                         <div className="app-col-xs-12 app-col-sm-3 app-col-sm-offset-6">
-                            <Cta fullWidth={true} onClick={validate}>Next</Cta>
+                            <Cta fullWidth={true} onClick={onValidation}>Next</Cta>
                         </div>
                     </div>
                 </div>
@@ -33,6 +33,6 @@ export const BlockView = ({children, block, blockState, onBlockEvent, validate})
 BlockView.propTypes = {
     block: PropTypes.object.isRequired,
     blockState: PropTypes.string.isRequired,
-    validate: PropTypes.func,
+    onValidation: PropTypes.func,
     onBlockEvent: PropTypes.func
 };

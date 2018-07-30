@@ -16,15 +16,15 @@ export const BLOCK_EVENT = {
     PREVIOUS: "PREVIOUS",
 };
 
-class BlockWrapper extends React.Component {
+class BlockWrapperComponent extends React.Component {
     constructor() {
         super();
         this.state = {forceValidation: false};
         this.onBlockEvent = this.onBlockEvent.bind(this);
-        this.validate = this.validate.bind(this);
+        this.onValidation = this.onValidation.bind(this);
     }
 
-    validate(){
+    onValidation(){
         let {block, fieldContext, onBlockEvent} = this.props;
         if(block.fields
             .map(field => field.hasOwnProperty('getValidation') ? field.getValidation(fieldContext) : VALID)
@@ -45,7 +45,7 @@ class BlockWrapper extends React.Component {
             <div className={`BlockWrapper ${this.props.blockState} ${this.props.block.id}`}>
                 <View block={block}
                       blockState={blockState}
-                      validate={this.validate}
+                      onValidation={this.onValidation}
                       onBlockEvent={this.onBlockEvent}>
                     {this.props.block.fields.map((field, index) =>
                         <FieldWrapper
@@ -61,7 +61,7 @@ class BlockWrapper extends React.Component {
     }
 }
 
-BlockWrapper.propTypes = {
+BlockWrapperComponent.propTypes = {
     blockIndex: PropTypes.number,
     onBlockEvent: PropTypes.func.isRequired,
     blockState: PropTypes.string,
@@ -70,9 +70,9 @@ BlockWrapper.propTypes = {
     FieldView: PropTypes.func.isRequired,
 };
 
-BlockWrapper.defaultProps = {
+BlockWrapperComponent.defaultProps = {
     blockState: BLOCK_STATE.DOING,
     hasPrevious: false,
 };
 
-export default fieldConnect(BlockWrapper);
+export const BlockWrapper = fieldConnect(BlockWrapperComponent);

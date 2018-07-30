@@ -3,64 +3,33 @@ import {createStore} from "redux";
 
 import reducer from "../../../src/redux/reducers";
 import {ERROR, initTest, shallow} from "../../../test/test-utils";
-import FieldWrapper from "../../../src/component/wrapper/FieldWrapper";
-import BlockWrapper, {BLOCK_EVENT, BLOCK_STATE} from "../../../src/component/wrapper/BlockWrapper";
-import {VALID, Validation} from "../../../src/definition/validation";
+import {FieldWrapper} from "../../../src/component/wrapper/FieldWrapper";
+import {BlockWrapper, BLOCK_EVENT} from "../../../src/component/wrapper/BlockWrapper";
+import {VALID} from "../../../src/definition/validation";
+import {Provider} from "react-redux";
+import {mount} from "enzyme";
 
 initTest();
 
-describe("FormEngine/Wrapper/Block", () => {
+describe("FormEngine/Wrapper/BlockWrapper", () => {
+    let emptyCallback = () => {
+    };
+
+    let FieldView = ({children}) => (<div>{children}</div>);
+
+    let BlockView = ({children, onValidation}) => (
+        <div>
+            <div>{children}</div>
+            <button className="TestButton" onClick={onValidation}/>
+        </div>
+    );
+
 
     let store = createStore(reducer);
 
-    describe("Fields Management", () => {
 
-        let block = {
-            id: "block-test",
-            fields: [
-                {id: 'testChild1', type: 'type-test'},
-                {id: 'testChild2', type: 'type-test'},
-            ]
-        };
-
-        it("Should render all fields by default", () => {
-            // When
-            let container = shallow(BlockWrapper, {
-                block: block,
-                onBlockEvent: () => null
-            });
-
-            // Then
-            expect(container.find(FieldWrapper).length).toBe(2);
-        });
-
-        it("Should render fields in state DOING", () => {
-            // When
-
-            let container = shallow(BlockWrapper, {
-                block: block,
-                blockState: BLOCK_STATE.DOING,
-                onBlockEvent: () => null
-            });
-
-            // Then
-            expect(container.find(FieldWrapper).length).toBe(2);
-        });
-
-        it("Should not render fields in state TODO", () => {
-            // When
-            let container = shallow(BlockWrapper, {
-                block: block,
-                blockState: BLOCK_STATE.TODO,
-                onBlockEvent: () => null
-            });
-
-            // Then
-            expect(container.find(FieldWrapper).length).toBe(0);
-        });
-
-        it("Should not render fields in state DONE", () => {
-            // Given
+    describe("Fields", () => {
+        it("Should render Fields by default", () => {
             let block = {
                 id: "block-test",
                 fields: [
@@ -68,104 +37,87 @@ describe("FormEngine/Wrapper/Block", () => {
                     {id: 'testChild2', type: 'type-test'},
                 ]
             };
-
-            // When
-            let container = shallow(BlockWrapper, {
-                block: block,
-                blockState: BLOCK_STATE.DONE,
-                onBlockEvent: () => null
-            });
-
-            // Then
-            expect(container.find(FieldWrapper).length).toBe(0);
+            let container = mount(
+                <Provider store={store}>
+                    <BlockWrapper block={block}
+                                  onBlockEvent={emptyCallback}
+                                  View={BlockView}
+                                  FieldView={FieldView}/>
+                </Provider>);
+            expect(container.find(FieldWrapper).length).toBe(block.fields.length);
         });
     });
 
     describe("Validation", () => {
 
-        it("Should validate if Field has no doCalidation", () => {
-            checkBlockValidation(true, {id: 'testChild1', type: 'type-test'});
-        });
-
-        it("Should validate if Field is valid", () => {
-            checkBlockValidation(true, {id: 'testChild1', type: 'type-test', getValidation: () => VALID});
-        });
-
-        it("Should not validate if Field is invalid", () => {
-            checkBlockValidation(false, {id: 'testChild1', type: 'type-test', getValidation: () => ERROR});
-        });
-
-        it("Should validate if all Fields are valid", () => {
-            checkBlockValidation(true, [
-                {id: 'testChild1', type: 'type-test', getValidation: () => VALID},
-                {id: 'testChild2', type: 'type-test', getValidation: () => VALID},
-                {id: 'testChild3', type: 'type-test', getValidation: () => VALID}]);
-        });
-
-        it("Should not validate if 1 Fields is invalid", () => {
-            checkBlockValidation(false, [
-                {id: 'testChild1', type: 'type-test', getValidation: () => VALID},
-                {id: 'testChild2', type: 'type-test', getValidation: () => ERROR},
-                {id: 'testChild3', type: 'type-test', getValidation: () => VALID}]);
-        });
-
         let checkBlockValidation = (success, fields) => {
-            // Given
             let onBlockEvent = jasmine.createSpy();
             let block = {
                 id: "block-test",
                 fields: [
-                    {id: 'testChild0', type: 'type-test', getValidation: () => VALID}
+                    {id: 'testChild0', type: 'type-test', getValidate: () => VALID}
                 ]
             };
             block.fields = block.fields.concat(fields);
-
-            // When
-            let container = shallow(BlockWrapper, {block: block, onBlockEvent: onBlockEvent, blockIndex: 0});
-
-            container.find(".principal-cta").simulate("click");
-
-            // Then
+            let container = mount(
+                <Provider store={store}>
+                    <BlockWrapper block={block}
+                                  onBlockEvent={onBlockEvent}
+                                  View={BlockView}
+                                  FieldView={FieldView}/>
+                </Provider>);
+            container.find(".TestButton").simulate("click");
             if (success) {
-                expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.NEXT, 0);
+                expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.VALID, block);
             } else {
-                expect(onBlockEvent).not.toHaveBeenCalledWith(BLOCK_EVENT.NEXT, 0);
+                expect(onBlockEvent).not.toHaveBeenCalledWith(BLOCK_EVENT.BLOCK_EVENT, block);
             }
         };
 
-    });
-
-    describe("State", () => {
-
-        it("Should have specific class in state DOING", () => {
-            checkStateAsClass(BLOCK_STATE.DOING);
+        it("Should validate Field by default", () => {
+            checkBlockValidation(true, {id: 'testChild1', type: 'type-test'});
         });
 
-        it("Should have specific class in state TODO", () => {
-            checkStateAsClass(BLOCK_STATE.TODO);
+        it("Should validate if Field is valid", () => {
+            checkBlockValidation(true, {id: 'testChild1', type: 'type-test', getValidate: () => VALID});
         });
 
-        it("Should have specific class in state DONE", () => {
-            checkStateAsClass(BLOCK_STATE.DONE);
-        });
-
-        function checkStateAsClass(state) {
-            // Given
-            let block = {
-                id: "block-test",
-                fields: []
-            };
-
-            // When
-            let container = shallow(BlockWrapper, {
-                block: block,
-                blockState: state,
-                onBlockEvent: () => null
+        it("Should validate if Field is visible and valid", () => {
+            checkBlockValidation(true, {
+                id: 'testChild1',
+                type: 'type-test',
+                isVisible: () => true,
+                getValidate: () => VALID
             });
+        });
 
-            // Then
-            expect(container.find(".block-wrapper." + state.toLowerCase()).length).toBe(1);
-        }
+        it("Should validate if Field in error if not visible", () => {
+            checkBlockValidation(true, {
+                id: 'testChild1',
+                type: 'type-test',
+                isVisible: () => false,
+                getValidate: () => ERROR
+            });
+        });
+
+        it("Should not validate if Field is visible and invalid", () => {
+            let i = 0;
+            checkBlockValidation(false, {id: 'testChild1', type: 'type-test', getValidate: () => ERROR});
+        });
+
+        it("Should validate if all Fields are valid", () => {
+            checkBlockValidation(true, [
+                {id: 'testChild1', type: 'type-test', getValidate: () => VALID},
+                {id: 'testChild2', type: 'type-test', getValidate: () => VALID},
+                {id: 'testChild3', type: 'type-test', getValidate: () => VALID}]);
+        });
+
+        it("Should not validate if 1 Fields is not valid", () => {
+            checkBlockValidation(false, [
+                {id: 'testChild1', type: 'type-test', getValidate: () => VALID},
+                {id: 'testChild2', type: 'type-test', getValidate: () => ERROR},
+                {id: 'testChild3', type: 'type-test', getValidate: () => VALID}]);
+        });
 
     });
 
