@@ -17,7 +17,7 @@
   }
 }
 
-.TextField, .EmailField {
+.TextField-container {
   input {
     background-color: @highlight-light;
     border: none;
@@ -30,18 +30,18 @@
 
 .FieldWrapper.field{
   &-default {
-    &.TextField input, &.EmailField input {
+    .TextField-container input {
       border-left-color: @primary;
     }
   }
   &-valid {
-    &.TextField input, &.EmailField input {
+    .TextField-container input {
       border-left-color: @valid;
     }
   }
 
   &-error {
-    &.TextField input, &.EmailField input {
+    .TextField-container input {
       border-left-color: @error;
     }
   }

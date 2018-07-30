@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {INPUT_MAIL} from "../../definition/field-type"
 
-export default class TextField extends React.Component {
+export class TextField extends React.Component {
     constructor(props) {
         super(props);
+        this.inpuType = "text";
         this.state = {
             value: props.contextValue || "",
         };
@@ -13,8 +13,7 @@ export default class TextField extends React.Component {
     }
 
     handleChange(event) {
-        let value = event.target.value;
-        this.setState({value: value});
+        this.setState({value: event.target.value});
     }
 
     onBlur() {
@@ -22,14 +21,14 @@ export default class TextField extends React.Component {
     }
 
     render() {
+        let {field, tabIndex} = this.props;
         return (
-            <div className="TextField">
-                <input type={this.props.field.type === INPUT_MAIL ? "email": "text"}
-                       placeholder={typeof placeholder !== 'undefined' ? placeholder : ""}
-                       maxLength="38"
-                       name={this.props.field.id}
-                       id={this.props.field.id}
-                       tabIndex={this.props.tabIndex}
+            <div className="TextField-container">
+                <input type={this.inpuType}
+                       placeholder={field.placeholder || ""}
+                       name={field.id}
+                       id={field.id}
+                       tabIndex={tabIndex}
                        value={this.state.value}
                        onChange={this.handleChange}
                        onBlur={this.onBlur}/>
