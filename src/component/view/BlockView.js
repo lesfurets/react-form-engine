@@ -21,7 +21,7 @@ export const BlockView = ({children, block, blockState, onBlockEvent, onValidati
                                             onClick={() => onBlockEvent(BLOCK_EVENT.PREVIOUS)}>Previous</Cta>}
                         </div>
                         <div className="app-col-xs-12 app-col-sm-3 app-col-sm-offset-6">
-                            <Cta fullWidth={true} onClick={onValidation}>Next</Cta>
+                            <Cta fullWidth={true} onClick={onValidation}>{block.ctaLabel || "Next"}</Cta>
                         </div>
                     </div>
                 </div>

@@ -58,7 +58,8 @@ const BLOCKS = {
     PASSWORD: {
         id:"CONTACT",
         label: "Contact",
-        fields: [FIELDS.PASSWORD, FIELDS.PASSWORD_CONFIRMATION]
+        fields: [FIELDS.PASSWORD, FIELDS.PASSWORD_CONFIRMATION],
+        ctaLabel: "Submit"
     }
 }
 
