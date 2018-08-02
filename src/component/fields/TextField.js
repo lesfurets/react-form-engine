@@ -10,6 +10,7 @@ export class TextField extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.onBlur = this.onBlur.bind(this);
+        this.getSuffix = this.getSuffix.bind(this);
     }
 
     handleChange(event) {
@@ -18,6 +19,10 @@ export class TextField extends React.Component {
 
     onBlur() {
         this.props.setFieldValue(this.props.field.id, this.state.value.trim());
+    }
+
+    getSuffix(){
+        return null;
     }
 
     render() {
@@ -32,6 +37,7 @@ export class TextField extends React.Component {
                        value={this.state.value}
                        onChange={this.handleChange}
                        onBlur={this.onBlur}/>
+                {this.getSuffix()}
             </div>
         );
     }

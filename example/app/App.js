@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/app.less";
 import FormEngine from "../../src/index";
-import {INPUT_TEXT, INPUT_MAIL, INPUT_PASSWORD} from "../../src/definition/field-type";
+import {INPUT_TEXT, INPUT_MAIL, INPUT_PASSWORD, INPUT_NUMBER} from "../../src/definition/field-type";
 import {isDefined, isDefinedAndEqualTo, VALID, validate} from "../../src/definition/validation";
 
 
@@ -41,10 +41,26 @@ const FIELDS = {
         getValidation(context) {
             return isDefinedAndEqualTo(this,context, context[FIELDS.PASSWORD.id],"The passwords should be identical.");
         }
-    }
+    },
+    NUMBER: {
+        id: "NUMBER",
+        type: INPUT_NUMBER,
+        label: "Enter a number",
+    },
+    AMOUNT: {
+        id: "AMOUNT",
+        type: INPUT_NUMBER,
+        label: "Enter an amount",
+        symbol: "€"
+    },
 };
 
 const BLOCKS = {
+    ALL_FIELDS: {
+        id:"ALL_FIELDS",
+        label: "All Fields",
+        fields: Object.values(FIELDS)
+    },
     IDENTITY: {
         id:"IDENTITY",
         label: "Personal information",
@@ -61,12 +77,12 @@ const BLOCKS = {
         fields: [FIELDS.PASSWORD, FIELDS.PASSWORD_CONFIRMATION],
         ctaLabel: "Submit"
     }
-}
+};
 
 
 class App extends React.Component {
     render() {
-        return (<FormEngine blocks={[BLOCKS.IDENTITY, BLOCKS.CONTACT, BLOCKS.PASSWORD]}/>);
+        return (<FormEngine blocks={Object.values(BLOCKS)}/>);
     }
 }
 

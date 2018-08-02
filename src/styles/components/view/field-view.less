@@ -15,33 +15,51 @@
     font-weight: 500;
     background-color: @error;
   }
+
+  input {
+    outline: none;
+    border: none;
+  }
 }
 
 .TextField-container {
+  display: flex;
+  background-color: @highlight-light;
+  border-left: solid transparent 5px;
+  align-items: center;
+  padding: 10px 10px 10px 5px;
+
   input {
+    flex: 1;
+    font-size: 18px;
     background-color: @highlight-light;
-    border: none;
-    width: 100%;
-    padding: 10px 10px 10px 5px;
-    font-size: 16px;
-    border-left: solid transparent 5px;
   }
+
+  .TextField-symbol {
+    padding: 0 5px;
+    font-size: 22px;
+    color: @primary;
+  }
+}
+
+.NumberField input {
+  text-align: right;
 }
 
 .FieldWrapper.field{
   &-default {
-    .TextField-container input {
+    .TextField-container {
       border-left-color: @primary;
     }
   }
   &-valid {
-    .TextField-container input {
+    .TextField-container {
       border-left-color: @valid;
     }
   }
 
   &-error {
-    .TextField-container input {
+    .TextField-container {
       border-left-color: @error;
     }
   }
