@@ -3,6 +3,10 @@ import "../styles/app.less";
 import FormEngine from "../../src/index";
 import {INPUT_TEXT, INPUT_MAIL, INPUT_PASSWORD, INPUT_NUMBER} from "../../src/definition/field-type";
 import {isDefined, isDefinedAndEqualTo, VALID, validate} from "../../src/definition/validation";
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import JsonEditor from "./JsonEditor";
 
 
 const FIELDS = {
@@ -79,10 +83,47 @@ const BLOCKS = {
     }
 };
 
+const EDITOR_STATE = {
+    OVERVIEW: {id: "OVERVIEW", label: "Overview"},
+    EDIT_JSON: {id: "EDIT_JSON", label: "As Json"},
+};
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            view: EDITOR_STATE.EDIT_JSON,
+            model: Object.values(BLOCKS)
+        };
+        this.handleTabChange = this.handleTabChange.bind(this);
+        this.handleJsonChange = this.handleJsonChange.bind(this);
+    }
+
+    handleTabChange = (event, value) => {
+        this.setState({ view: Object.values(EDITOR_STATE)[value] });
+    };
+
+    handleJsonChange = (value) => {
+        console.log(value);
+        this.setState({ model: value });
+    };
+
     render() {
-        return (<FormEngine blocks={Object.values(BLOCKS)}/>);
+        let {view, model} = this.state;
+        return (
+            <div className="FormExemple">
+                <AppBar position="sticky" color="default">
+                    <Tabs value={Object.values(EDITOR_STATE).indexOf(view)}
+                          onChange={this.handleTabChange}
+                          indicatorColor="primary"
+                          textColor="primary" centered>
+                        {Object.values(EDITOR_STATE).map(value => <Tab key={value.id} label={value.label} />)}
+                    </Tabs>
+                </AppBar>
+                {view === EDITOR_STATE.OVERVIEW ? <FormEngine blocks={model}/> : null}
+                {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor model={model} onChange={this.handleJsonChange}/> : null}
+            </div>
+        );
     }
 }
 
