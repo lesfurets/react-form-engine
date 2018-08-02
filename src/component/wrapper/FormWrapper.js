@@ -1,10 +1,7 @@
 import React from "react";
 import {BLOCK_EVENT, BLOCK_STATE} from "./BlockWrapper";
-import {FormView} from "../view/FormView";
 import {BlockWrapper} from "./BlockWrapper";
 import PropTypes from "prop-types";
-import {BlockView} from "../view/BlockView";
-import {FieldView} from "../view/FieldView";
 
 export default class FormWrapper extends React.Component {
     constructor() {
@@ -17,9 +14,9 @@ export default class FormWrapper extends React.Component {
     }
 
     render() {
-        let View = this.props.View;
+        let {View, BlockView, FieldView} = this.props;
         return (
-            <div className="form-wrapper">
+            <div className="FormWrapper">
                 <View>
                     {this.props.blocks.map((block, index) =>
                         <BlockWrapper
@@ -58,9 +55,7 @@ export default class FormWrapper extends React.Component {
 }
 
 FormWrapper.propTypes = {
-    View: PropTypes.func,
-};
-
-FormWrapper.defaultProps = {
-    View: FormView
+    View: PropTypes.func.isRequired,
+    BlockView: PropTypes.func.isRequired,
+    FieldView: PropTypes.func.isRequired,
 };
