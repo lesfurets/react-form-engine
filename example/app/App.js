@@ -7,6 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import JsonEditor from "./JsonEditor";
+import FormEditor from "./FormEditor";
 
 
 const FIELDS = {
@@ -85,6 +86,7 @@ const BLOCKS = {
 
 const EDITOR_STATE = {
     OVERVIEW: {id: "OVERVIEW", label: "Overview"},
+    EDIT_FORM: {id: "EDIT_FORM", label: "Edit"},
     EDIT_JSON: {id: "EDIT_JSON", label: "As Json"},
 };
 
@@ -92,18 +94,18 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            view: EDITOR_STATE.EDIT_JSON,
+            view: EDITOR_STATE.EDIT_FORM,
             model: Object.values(BLOCKS)
         };
         this.handleTabChange = this.handleTabChange.bind(this);
-        this.handleJsonChange = this.handleJsonChange.bind(this);
+        this.handleModelChange = this.handleModelChange.bind(this);
     }
 
     handleTabChange = (event, value) => {
         this.setState({ view: Object.values(EDITOR_STATE)[value] });
     };
 
-    handleJsonChange = (value) => {
+    handleModelChange = (value) => {
         console.log(value);
         this.setState({ model: value });
     };
@@ -121,7 +123,8 @@ class App extends React.Component {
                     </Tabs>
                 </AppBar>
                 {view === EDITOR_STATE.OVERVIEW ? <FormEngine blocks={model}/> : null}
-                {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor model={model} onChange={this.handleJsonChange}/> : null}
+                {view === EDITOR_STATE.EDIT_FORM ? <FormEditor model={model} onChange={this.handleModelChange}/> : null}
+                {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor model={model} onChange={this.handleModelChange}/> : null}
             </div>
         );
     }
