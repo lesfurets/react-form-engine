@@ -21,6 +21,7 @@ export class FieldWrapperComponent extends React.Component {
         super();
         this.getState = this.getState.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
+        this.onEvent = this.onEvent.bind(this);
     }
 
     static getFieldState(validation, contextValue, forceValidation) {
@@ -44,6 +45,10 @@ export class FieldWrapperComponent extends React.Component {
         onEvent(FIELD_EVENT.SET_VALUE, field, value);
     }
 
+    onEvent(event, details) {
+        this.props.onEvent(event, this.props.field, details);
+    }
+
     render() {
         let {View, field, tabIndex, fieldContext} = this.props;
         let contextValue = fieldContext[field.id];
@@ -52,7 +57,10 @@ export class FieldWrapperComponent extends React.Component {
 
         return (
             <div className={`FieldWrapper ${fieldState} ${field.id} ${field.type}`}>
-                <View field={field} validation={validation} fieldState={fieldState}>
+                <View field={field}
+                      onEvent={this.props.onEvent}
+                      validation={validation}
+                      fieldState={fieldState}>
                     <Field field={field}
                            tabIndex={tabIndex}
                            onValueChange={this.onValueChange}
