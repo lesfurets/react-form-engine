@@ -99,6 +99,7 @@ class App extends React.Component {
         };
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleModelChange = this.handleModelChange.bind(this);
+        this.onEvent = this.onEvent.bind(this);
     }
 
     handleTabChange = (event, value) => {
@@ -109,6 +110,10 @@ class App extends React.Component {
         console.log(value);
         this.setState({ model: value });
     };
+
+    onEvent(event, element, details) {
+        console.log(event, element, details);
+    }
 
     render() {
         let {view, model} = this.state;
@@ -122,7 +127,7 @@ class App extends React.Component {
                         {Object.values(EDITOR_STATE).map(value => <Tab key={value.id} label={value.label} />)}
                     </Tabs>
                 </AppBar>
-                {view === EDITOR_STATE.OVERVIEW ? <FormEngine blocks={model}/> : null}
+                {view === EDITOR_STATE.OVERVIEW ? <FormEngine blocks={model} onEvent={this.onEvent}/> : null}
                 {view === EDITOR_STATE.EDIT_FORM ? <FormEditor model={model} onChange={this.handleModelChange}/> : null}
                 {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor model={model} onChange={this.handleModelChange}/> : null}
             </div>

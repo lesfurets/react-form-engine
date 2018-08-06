@@ -37,8 +37,8 @@ class BlockWrapperComponent extends React.Component {
         this.setState({forceValidation: true});
     }
 
-    onFieldEvent(event, element, value) {
-        this.props.onEvent(event, element, value);
+    onFieldEvent(event, element, details) {
+        this.props.onEvent(event, element, details);
     }
 
     onEvent(event) {

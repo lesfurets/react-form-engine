@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import {FormView} from "./view/FormView";
 import {BlockView} from "./view/BlockView";
 import {FieldView} from "./view/FieldView";
+import {EMPTY_CALLBACK} from "./utils/props-utils";
 
 export default class FormEngine extends React.Component {
     render() {
@@ -25,12 +26,14 @@ export default class FormEngine extends React.Component {
 }
 
 FormEngine.propTypes = {
+    onEvent: PropTypes.func,
     FormView: PropTypes.func.isRequired,
     BlockView: PropTypes.func.isRequired,
     FieldView: PropTypes.func.isRequired,
 };
 
 FormEngine.defaultProps = {
+    onEvent: EMPTY_CALLBACK,
     FormView: FormView,
     BlockView: BlockView,
     FieldView: FieldView,

@@ -7,6 +7,7 @@ import "../styles/json-editor.less";
 import {BlockEditorView} from "./view/BlockEditorView";
 import {FormEditorView} from "./view/FormEditorView";
 import {FieldEditorView} from "./view/FieldEditorView";
+import {EMPTY_CALLBACK} from "../../src/component/utils/props-utils";
 
 class FormEditor extends React.Component {
     constructor(props) {
@@ -26,9 +27,14 @@ class FormEditor extends React.Component {
         this.props.onChange(this.state.model);
     }
 
+    onEvent(event, element, details) {
+        console.log(event, element, details);
+    }
+
     render() {
         return (
             <FormEngine blocks={this.state.model}
+                        onEvent={this.props.onEvent}
                         FormView={FormEditorView}
                         BlockView={BlockEditorView}
                         FieldView={FieldEditorView}/>
@@ -37,7 +43,12 @@ class FormEditor extends React.Component {
 }
 
 FormEditor.propTypes = {
-    model: PropTypes.array.isRequired
+    model: PropTypes.array.isRequired,
+    onEvent: PropTypes.func
+};
+
+FormEditor.defaultProps = {
+    onEvent: EMPTY_CALLBACK
 };
 
 export default FormEditor;

@@ -2,13 +2,12 @@ import React from "react";
 import {BLOCK_EVENT, BLOCK_STATE} from "./BlockWrapper";
 import {BlockWrapper} from "./BlockWrapper";
 import PropTypes from "prop-types";
+import {EMPTY_CALLBACK} from "../utils/props-utils";
 
 export default class FormWrapper extends React.Component {
     constructor() {
         super();
-        this.state = {
-            currentBlockIndex: 0
-        };
+        this.state = {currentBlockIndex: 0};
         this.getBlockState = this.getBlockState.bind(this);
         this.onBlockEvent = this.onBlockEvent.bind(this);
     }
@@ -42,8 +41,7 @@ export default class FormWrapper extends React.Component {
         return BLOCK_STATE.TODO;
     }
 
-    onBlockEvent(event, block) {
-        console.log(event, block);
+    onBlockEvent(event, block, details) {
         switch (event) {
             case BLOCK_EVENT.VALID:
                 this.setState({currentBlockIndex: block.index + 1});
@@ -52,11 +50,17 @@ export default class FormWrapper extends React.Component {
                 this.setState({currentBlockIndex: block.index - 1});
                 break;
         }
+        this.props.onEvent(event, block, details);
     }
 }
 
 FormWrapper.propTypes = {
+    onEvent: PropTypes.func,
     View: PropTypes.func.isRequired,
     BlockView: PropTypes.func.isRequired,
     FieldView: PropTypes.func.isRequired,
+};
+
+FormWrapper.defaultProps = {
+    onEvent: EMPTY_CALLBACK
 };
