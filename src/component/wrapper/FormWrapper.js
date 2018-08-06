@@ -2,7 +2,7 @@ import React from "react";
 import {BLOCK_EVENT, BLOCK_STATE} from "./BlockWrapper";
 import {BlockWrapper} from "./BlockWrapper";
 import PropTypes from "prop-types";
-import {EMPTY_CALLBACK} from "../utils/props-utils";
+import {EMPTY_CALLBACK} from "../../definition/props-utils";
 
 export default class FormWrapper extends React.Component {
     constructor() {

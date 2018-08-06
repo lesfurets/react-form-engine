@@ -7,7 +7,7 @@ import "../styles/json-editor.less";
 import {BlockEditorView} from "./view/BlockEditorView";
 import {FormEditorView} from "./view/FormEditorView";
 import {FieldEditorView} from "./view/FieldEditorView";
-import {EMPTY_CALLBACK} from "../../src/component/utils/props-utils";
+import {EMPTY_CALLBACK} from "../../src/definition/props-utils";
 
 class FormEditor extends React.Component {
     constructor(props) {

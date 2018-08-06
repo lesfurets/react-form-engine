@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {FieldWrapper} from "./FieldWrapper";
 import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation";
-import {EMPTY_CALLBACK} from "../utils/props-utils";
+import {EMPTY_CALLBACK} from "../../definition/props-utils";
 
 export const BLOCK_STATE = {
     TODO: "block-todo",

@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import {FormView} from "./view/FormView";
 import {BlockView} from "./view/BlockView";
 import {FieldView} from "./view/FieldView";
-import {EMPTY_CALLBACK} from "./utils/props-utils";
+import {EMPTY_CALLBACK} from "../definition/props-utils";
 
 export default class FormEngine extends React.Component {
     render() {

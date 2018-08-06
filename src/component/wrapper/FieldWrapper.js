@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {FieldInjector} from "../../definition/FieldInjector";
 import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation";
-import {EMPTY_CALLBACK} from "../utils/props-utils";
+import {EMPTY_CALLBACK} from "../../definition/props-utils";
 
 export const FIELD_EVENT = {
     SET_VALUE: "set-value",
