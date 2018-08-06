@@ -4,7 +4,7 @@ import "../styles/app.less";
 import FormEngine from "../../src/component/FormEngine";
 
 import "../styles/json-editor.less";
-import {BlockEditorView} from "./view/BlockEditorView";
+import {BLOCK_EDITOR_EVENT, BlockEditorView} from "./view/BlockEditorView";
 import {FormEditorView} from "./view/FormEditorView";
 import {FieldEditorView} from "./view/FieldEditorView";
 import {EMPTY_CALLBACK} from "../../src/definition/props-utils";
@@ -12,29 +12,22 @@ import {EMPTY_CALLBACK} from "../../src/definition/props-utils";
 class FormEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            model: props.model
-        };
-        this.onChange = this.onChange.bind(this);
-        this.sendModel = this.sendModel.bind(this);
-    }
-
-    onChange(event) {
-        this.setState({model: event.target.value});
-    }
-
-    sendModel() {
-        this.props.onChange(this.state.model);
+        this.onEvent = this.onEvent.bind(this);
     }
 
     onEvent(event, element, details) {
         console.log(event, element, details);
+        switch (event){
+            case BLOCK_EDITOR_EVENT.REMOVE:
+                this.props.onChange(this.props.model.filter(block => block.id !== element.id));
+                break;
+        }
     }
 
     render() {
         return (
-            <FormEngine blocks={this.state.model}
-                        onEvent={this.props.onEvent}
+            <FormEngine blocks={this.props.model}
+                        onEvent={this.onEvent}
                         FormView={FormEditorView}
                         BlockView={BlockEditorView}
                         FieldView={FieldEditorView}/>

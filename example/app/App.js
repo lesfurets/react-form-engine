@@ -77,8 +77,8 @@ const BLOCKS = {
         fields: [FIELDS.EMAIL, FIELDS.PHONE]
     },
     PASSWORD: {
-        id:"CONTACT",
-        label: "Contact",
+        id:"PASSWORD",
+        label: "Password",
         fields: [FIELDS.PASSWORD, FIELDS.PASSWORD_CONFIRMATION],
         ctaLabel: "Submit"
     }
