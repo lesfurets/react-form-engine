@@ -5,9 +5,25 @@ import FormEngine from "../../src/component/FormEngine";
 
 import "../styles/json-editor.less";
 import {BLOCK_EDITOR_EVENT, BlockEditorView} from "./view/BlockEditorView";
-import {FormEditorView} from "./view/FormEditorView";
+import {FORM_EDITOR_EVENT, FormEditorView} from "./view/FormEditorView";
 import {FieldEditorView} from "./view/FieldEditorView";
 import {EMPTY_CALLBACK} from "../../src/definition/props-utils";
+
+const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+function generateHash() {
+    return Array
+        .apply(null, {length: 10})
+        .map(Function.call, Math.random)
+        .map(rand => values.charAt(Math.floor(rand * values.length)))
+        .reduce((acc, value) => acc + value, "");
+}
+
+const generateNewBlock = () => ({
+    id: generateHash(),
+    label: "Enter the block name",
+    fields: []
+});
 
 class FormEditor extends React.Component {
     constructor(props) {
@@ -26,6 +42,10 @@ class FormEditor extends React.Component {
                 model
                     .filter(block => block.id === element.id)
                     .forEach(block => block.label = details);
+                this.props.onChange(model);
+                break;
+            case FORM_EDITOR_EVENT.NEW_BLOCK:
+                model.push(generateNewBlock());
                 this.props.onChange(model);
                 break;
         }

@@ -12,25 +12,6 @@ export default class FormWrapper extends React.Component {
         this.onBlockEvent = this.onBlockEvent.bind(this);
     }
 
-    render() {
-        let {View, BlockView, FieldView} = this.props;
-        return (
-            <div className="FormWrapper">
-                <View>
-                    {this.props.blocks.map((block, index) =>
-                        <BlockWrapper
-                            key={index}
-                            block={{...block, index:index}}
-                            blockState={this.getBlockState(index)}
-                            onEvent={this.onBlockEvent}
-                            View={BlockView}
-                            FieldView={FieldView}
-                        />)}
-                </View>
-            </div>
-        );
-    }
-
     getBlockState(index) {
         if (index < this.state.currentBlockIndex) {
             return BLOCK_STATE.DONE;
@@ -51,6 +32,25 @@ export default class FormWrapper extends React.Component {
                 break;
         }
         this.props.onEvent(event, block, details);
+    }
+
+    render() {
+        let {View, BlockView, FieldView, onEvent} = this.props;
+        return (
+            <div className="FormWrapper">
+                <View onEvent={onEvent}>
+                    {this.props.blocks.map((block, index) =>
+                        <BlockWrapper
+                            key={index}
+                            block={{...block, index:index}}
+                            blockState={this.getBlockState(index)}
+                            onEvent={this.onBlockEvent}
+                            View={BlockView}
+                            FieldView={FieldView}
+                        />)}
+                </View>
+            </div>
+        );
     }
 }
 
