@@ -6,7 +6,7 @@ import {Cta, CTA_TYPE} from "../../../src/component/utils/Cta";
 import {BLOCK_EVENT} from "../../../src/component/wrapper/BlockWrapper";
 
 
-export const BlockEditorView = ({children, block, blockState, onBlockEvent, onValidation}) => (
+export const BlockEditorView = ({children, block, blockState, onEvent, onValidation}) => (
     <div className="BlockView app-row">
         <div className="BlockView-label app-col-xs-12">{block.index + 1}. {block.label}</div>
         <div className="app-col-xs-12 app-col-sm-8">
@@ -17,7 +17,7 @@ export const BlockEditorView = ({children, block, blockState, onBlockEvent, onVa
                         {block.index === 0 ?
                             null : <Cta type={CTA_TYPE.SECONDARY}
                                         fullWidth={true}
-                                        onClick={() => onBlockEvent(BLOCK_EVENT.PREVIOUS)}>Previous</Cta>}
+                                        onClick={() => onEvent(BLOCK_EVENT.PREVIOUS)}>Previous</Cta>}
                     </div>
                     <div className="app-col-xs-6 app-col-sm-3 app-col-sm-offset-6">
                         <Cta fullWidth={true} onClick={onValidation}>{block.ctaLabel || "Next"}</Cta>
@@ -32,5 +32,5 @@ BlockEditorView.propTypes = {
     block: PropTypes.object.isRequired,
     blockState: PropTypes.string.isRequired,
     onValidation: PropTypes.func,
-    onBlockEvent: PropTypes.func
+    onEvent: PropTypes.func
 };

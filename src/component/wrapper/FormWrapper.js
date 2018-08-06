@@ -23,7 +23,7 @@ export default class FormWrapper extends React.Component {
                             key={index}
                             block={{...block, index:index}}
                             blockState={this.getBlockState(index)}
-                            onBlockEvent={this.onBlockEvent}
+                            onEvent={this.onBlockEvent}
                             View={BlockView}
                             FieldView={FieldView}
                         />)}
@@ -43,6 +43,7 @@ export default class FormWrapper extends React.Component {
     }
 
     onBlockEvent(event, block) {
+        console.log(event, block);
         switch (event) {
             case BLOCK_EVENT.VALID:
                 this.setState({currentBlockIndex: block.index + 1});

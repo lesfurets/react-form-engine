@@ -45,7 +45,7 @@ export class FieldWrapperComponent extends React.Component {
     }
 
     render() {
-        let {View, field, tabIndex, setFieldValue, fieldContext} = this.props;
+        let {View, field, tabIndex, fieldContext} = this.props;
         let contextValue = fieldContext[field.id];
         let {fieldState, validation} = this.getState();
         let Field = FieldInjector.inject(field.type);

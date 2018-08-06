@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {FieldWrapper} from "./FieldWrapper";
 import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation";
+import {EMPTY_CALLBACK} from "../utils/props-utils";
 
 export const BLOCK_STATE = {
     TODO: "block-todo",
@@ -20,23 +21,28 @@ class BlockWrapperComponent extends React.Component {
     constructor() {
         super();
         this.state = {forceValidation: false};
-        this.onBlockEvent = this.onBlockEvent.bind(this);
+        this.onEvent = this.onEvent.bind(this);
+        this.onFieldEvent = this.onFieldEvent.bind(this);
         this.onValidation = this.onValidation.bind(this);
     }
 
     onValidation(){
-        let {block, fieldContext, onBlockEvent} = this.props;
+        let {block, fieldContext, onEvent} = this.props;
         if(block.fields
             .map(field => field.hasOwnProperty('getValidation') ? field.getValidation(fieldContext) : VALID)
             .map(validation => validation.isValid)
             .reduce((acc, value) => acc && value)){
-            onBlockEvent(BLOCK_EVENT.VALID,block);
+            onEvent(BLOCK_EVENT.VALID,block);
         }
         this.setState({forceValidation: true});
     }
 
-    onBlockEvent(event) {
-        this.props.onBlockEvent(event,this.props.block);
+    onFieldEvent(event, element, value) {
+        this.props.onEvent(event, element, value);
+    }
+
+    onEvent(event) {
+        this.props.onEvent(event, this.props.block);
     }
 
     render() {
@@ -46,12 +52,13 @@ class BlockWrapperComponent extends React.Component {
                 <View block={block}
                       blockState={blockState}
                       onValidation={this.onValidation}
-                      onBlockEvent={this.onBlockEvent}>
+                      onEvent={this.onEvent}>
                     {this.props.block.fields.map((field, index) =>
                         <FieldWrapper
                             key={index}
                             field={field}
                             tabIndex={index + 1}
+                            onEvent={this.onFieldEvent}
                             forceValidation={this.state.forceValidation}
                             View={FieldView}
                         />)}
@@ -63,7 +70,7 @@ class BlockWrapperComponent extends React.Component {
 
 BlockWrapperComponent.propTypes = {
     blockIndex: PropTypes.number,
-    onBlockEvent: PropTypes.func.isRequired,
+    onEvent: PropTypes.func,
     blockState: PropTypes.string,
     block: PropTypes.object.isRequired,
     View: PropTypes.func.isRequired,
@@ -72,6 +79,7 @@ BlockWrapperComponent.propTypes = {
 
 BlockWrapperComponent.defaultProps = {
     blockState: BLOCK_STATE.DOING,
+    onEvent: EMPTY_CALLBACK,
     hasPrevious: false,
 };
 
