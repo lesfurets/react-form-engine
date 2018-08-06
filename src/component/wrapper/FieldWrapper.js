@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import {FieldInjector} from "../../definition/FieldInjector";
 import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation";
+import {EMPTY_CALLBACK} from "../utils/props-utils";
+
+export const FIELD_EVENT = {
+    SET_VALUE: "set-value",
+};
 
 export const FIELD_STATE = {
     DEFAULT: "field-default",
@@ -15,6 +20,7 @@ export class FieldWrapperComponent extends React.Component {
     constructor() {
         super();
         this.getState = this.getState.bind(this);
+        this.onValueChange = this.onValueChange.bind(this);
     }
 
     static getFieldState(validation, contextValue, forceValidation) {
@@ -32,6 +38,12 @@ export class FieldWrapperComponent extends React.Component {
         return {fieldState, validation};
     }
 
+    onValueChange(value) {
+        let {setFieldValue, onEvent, field} = this.props;
+        setFieldValue(field.id, value);
+        onEvent(FIELD_EVENT.SET_VALUE, field, value);
+    }
+
     render() {
         let {View, field, tabIndex, setFieldValue, fieldContext} = this.props;
         let contextValue = fieldContext[field.id];
@@ -43,7 +55,7 @@ export class FieldWrapperComponent extends React.Component {
                 <View field={field} validation={validation} fieldState={fieldState}>
                     <Field field={field}
                            tabIndex={tabIndex}
-                           setFieldValue={setFieldValue}
+                           onValueChange={this.onValueChange}
                            contextValue={contextValue}/>
                 </View>
             </div>
@@ -57,12 +69,14 @@ FieldWrapperComponent.propTypes = {
         isVisible: PropTypes.func
     }).isRequired,
     View: PropTypes.func.isRequired,
+    onEvent: PropTypes.func,
     forceValidation: PropTypes.bool,
     tabIndex: PropTypes.number
 };
 
 FieldWrapperComponent.defaultProps = {
     forceValidation: false,
+    onEvent: EMPTY_CALLBACK,
     tabIndex: 1
 };
 

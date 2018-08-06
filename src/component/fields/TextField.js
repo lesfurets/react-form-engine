@@ -18,7 +18,7 @@ export class TextField extends React.Component {
     }
 
     onBlur() {
-        this.props.setFieldValue(this.props.field.id, this.state.value.trim());
+        this.props.onValueChange(this.state.value.trim());
     }
 
     getSuffix(){
@@ -46,7 +46,7 @@ export class TextField extends React.Component {
 TextField.propTypes = {
     contextValue: PropTypes.string,
     tabIndex: PropTypes.number,
-    setFieldValue: PropTypes.func,
+    onValueChange: PropTypes.func,
     field: PropTypes.shape({
         id: PropTypes.string.isRequired,
         placeholder: PropTypes.string,
