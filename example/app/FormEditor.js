@@ -17,9 +17,16 @@ class FormEditor extends React.Component {
 
     onEvent(event, element, details) {
         console.log(event, element, details);
+        let {model} = this.props;
         switch (event){
             case BLOCK_EDITOR_EVENT.REMOVE:
-                this.props.onChange(this.props.model.filter(block => block.id !== element.id));
+                this.props.onChange(model.filter(block => block.id !== element.id));
+                break;
+            case BLOCK_EDITOR_EVENT.EDIT_LABEL:
+                model
+                    .filter(block => block.id === element.id)
+                    .forEach(block => block.label = details);
+                this.props.onChange(model);
                 break;
         }
     }

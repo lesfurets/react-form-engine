@@ -41,8 +41,8 @@ class BlockWrapperComponent extends React.Component {
         this.props.onEvent(event, element, details);
     }
 
-    onEvent(event) {
-        this.props.onEvent(event, this.props.block);
+    onEvent(event, details) {
+        this.props.onEvent(event, this.props.block, details);
     }
 
     render() {
