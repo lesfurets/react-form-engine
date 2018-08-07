@@ -24,22 +24,23 @@ export class LabelEditor extends React.Component {
     }
 
     render() {
-        let {label} = this.props;
+        let {label, className} = this.props;
         let {focus} = this.state;
         return focus ?
             <TextField
                 id="name"
                 value={label}
-                className={"LabelEditor"}
+                className={`LabelEditor ${className}`}
                 onChange={this.onChange}
                 onBlur={this.onBlur}
                 margin="normal"
                 autoFocus/> :
-            <span onClick={this.onClick}>{label}</span>;
+            <span className={className} onClick={this.onClick}>{label}</span>;
     }
 }
 
 LabelEditor.propTypes = {
     label: PropTypes.string,
+    className: PropTypes.string,
     onChange: PropTypes.func
 };

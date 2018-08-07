@@ -3,17 +3,26 @@ import PropTypes from "prop-types";
 
 import {LabelEditor} from "../elements/LabelEditor";
 
-import "../../../src/styles/components/view/field-view.less"
+import CardContent from "@material-ui/core/CardContent";
+import IconButton from "@material-ui/core/IconButton";
+import Clear from "@material-ui/icons/Clear";
+
+import "../../styles/view/field-editor-view.less"
 
 export const FIELD_EDITOR_EVENT = {
     EDIT_LABEL: "EDIT_FIELD_LABEL",
+    DELETE: "DELETE_FIELD",
 };
 
 export const FieldEditorView = ({field, onEvent}) => (
-    <div className="FieldView">
+    <CardContent className={"FieldEditorView"}>
         <LabelEditor label={field.label}
+                     className="FieldEditorView-label"
                      onChange={(value => onEvent(FIELD_EDITOR_EVENT.EDIT_LABEL, value))}/>
-    </div>
+        <IconButton className="FieldEditorView-delete" onClick={() => onEvent(FIELD_EDITOR_EVENT.DELETE)}>
+            <Clear color="primary"/>
+        </IconButton>
+    </CardContent>
 );
 
 FieldEditorView.propTypes = {

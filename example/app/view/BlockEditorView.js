@@ -9,12 +9,11 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import {LabelEditor} from "../elements/LabelEditor";
 
 import Collapse from "@material-ui/core/es/Collapse/Collapse";
-import CardContent from "@material-ui/core/es/CardContent/CardContent";
 
 import "../../styles/view/block-editor-view.less"
 
 export const BLOCK_EDITOR_EVENT = {
-    REMOVE: "REMOVE",
+    DELETE: "DELETE",
     EDIT_LABEL: "EDIT_LABEL"
 };
 
@@ -45,15 +44,13 @@ export class BlockEditorView extends React.Component {
                                             aria-label="Show more">
                                     <ExpandMore color="primary"/>
                                 </IconButton>,
-                                <IconButton key="2" onClick={() => onEvent(BLOCK_EDITOR_EVENT.REMOVE)}>
+                                <IconButton key="2" onClick={() => onEvent(BLOCK_EDITOR_EVENT.DELETE)}>
                                     <Clear color="primary"/>
                                 </IconButton>
                             ]}
                             className={"BlockEditorView-header"}/>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                        {children}
-                    </CardContent>
+                    {children}
                 </Collapse>
             </Card>
         );
