@@ -48,10 +48,17 @@ class FormEditor extends React.Component {
                 model.push(generateNewBlock());
                 this.props.onChange(model);
                 break;
+            case FORM_EDITOR_EVENT.MOVE_BLOCK:
+                let block = model.find(block => block.id === details.id);
+                let newModel = model.filter(block => block.id !== details.id);
+                newModel.splice(details.index, 0, block);
+                this.props.onChange(newModel);
+                break;
         }
     }
 
     render() {
+        console.log(this.props.model);
         return (
             <FormEngine blocks={this.props.model}
                         onEvent={this.onEvent}

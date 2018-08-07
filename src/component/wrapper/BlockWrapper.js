@@ -55,7 +55,7 @@ class BlockWrapperComponent extends React.Component {
                       onEvent={this.onEvent}>
                     {this.props.block.fields.map((field, index) =>
                         <FieldWrapper
-                            key={index}
+                            key={field.id}
                             field={field}
                             tabIndex={index + 1}
                             onEvent={this.onFieldEvent}

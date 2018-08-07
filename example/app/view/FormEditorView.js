@@ -1,25 +1,52 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as ReactDOM from "react-dom";
 import Create from "@material-ui/icons/Create";
 import Button from "@material-ui/core/Button";
+import $ from "jquery";
+import 'jquery-ui-bundle';
 
 import "../../styles/view/form-editor-view.less"
 
 export const FORM_EDITOR_EVENT = {
-    NEW_BLOCK: "NEW_BLOCK"
+    NEW_BLOCK: "NEW_BLOCK",
+    MOVE_BLOCK: "MOVE_BLOCK"
 };
+export class FormEditorView extends React.Component {
+    constructor(){
+        super();
+        this.onDrop = this.onDrop.bind(this);
+    }
 
-export const FormEditorView = ({children, onEvent}) => (
-    <div className="FormEditorView">
-        {children}
-        <Button className="FormEditorView-add"
-                variant="extendedFab"
-                onClick={() => onEvent(FORM_EDITOR_EVENT.NEW_BLOCK)}
-                color="primary">
-            <Create/> New block
-        </Button>
-    </div>
-);
+    componentDidMount() {
+        $(ReactDOM.findDOMNode(this)).sortable({
+            handle: ".BlockEditorView",
+            stop: this.onDrop,
+        });
+    }
+
+    onDrop(details, ui) {
+        this.props.onEvent(FORM_EDITOR_EVENT.MOVE_BLOCK, {
+            id: ui.item.find(".BlockEditorView").attr('id'),
+            index: ui.item.index()
+        });
+    }
+
+    render() {
+        let {children, onEvent} = this.props;
+        return (
+            <div className="FormEditorView">
+                {children}
+                <Button className="FormEditorView-add"
+                        variant="contained"
+                        onClick={() => onEvent(FORM_EDITOR_EVENT.NEW_BLOCK)}
+                        color="primary">
+                    <Create/> New block
+                </Button>
+            </div>
+        );
+    }
+}
 
 FormEditorView.propTypes = {
     onEvent: PropTypes.func
