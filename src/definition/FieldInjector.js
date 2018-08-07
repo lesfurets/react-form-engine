@@ -1,5 +1,5 @@
 import React from "react";
-import {INPUT_MAIL, INPUT_TEXT, INPUT_PASSWORD, INPUT_NUMBER} from "./field-type";
+import {FieldTypes} from "./FieldTypes";
 import {TextField} from "../component/fields/TextField";
 import {EmailField} from "../component/fields/EmailField";
 import {PasswordField} from "../component/fields/PasswordField";
@@ -8,13 +8,13 @@ import {NumberField} from "../component/fields/NumberField";
 export class FieldInjector {
     static inject (type) {
         switch (type) {
-            case INPUT_TEXT:
+            case FieldTypes.INPUT_TEXT:
                 return TextField;
-            case INPUT_MAIL:
+            case FieldTypes.INPUT_MAIL:
                 return EmailField;
-            case INPUT_PASSWORD:
+            case FieldTypes.INPUT_PASSWORD:
                 return PasswordField;
-            case INPUT_NUMBER:
+            case FieldTypes.INPUT_NUMBER:
                 return NumberField;
             default:
                 return UNKNOWN_FIELD;

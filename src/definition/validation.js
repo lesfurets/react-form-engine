@@ -25,5 +25,3 @@ export const isDefinedAndEqualTo = (field, context, value, errorMessage) => {
     }
     return VALID;
 };
-
-export const validate = () => console.log(this);

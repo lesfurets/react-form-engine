@@ -1,8 +1,8 @@
 import React from "react";
 import "../styles/app.less";
 import FormEngine from "../../src/index";
-import {INPUT_TEXT, INPUT_MAIL, INPUT_PASSWORD, INPUT_NUMBER} from "../../src/definition/field-type";
-import {isDefined, isDefinedAndEqualTo, VALID, validate} from "../../src/definition/validation";
+import {FieldTypes} from "../../src/definition/FieldTypes";
+import {isDefined, isDefinedAndEqualTo, VALID} from "../../src/definition/validation";
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -13,7 +13,7 @@ import FormEditor from "./editor/FormEditor";
 const FIELDS = {
     FIRST_NAME: {
         id: "FIRST_NAME",
-        type: INPUT_TEXT,
+        type: FieldTypes.INPUT_TEXT,
         label: "First Name",
         getValidation(context) {
           return isDefined(this,context, "The first name is mandatory");
@@ -21,27 +21,27 @@ const FIELDS = {
     },
     LAST_NAME: {
         id: "LAST_NAME",
-        type: INPUT_TEXT,
+        type: FieldTypes.INPUT_TEXT,
         label: "Last Name",
     },
     EMAIL: {
         id: "EMAIL",
-        type: INPUT_MAIL,
+        type: FieldTypes.INPUT_MAIL,
         label: "Email",
     },
     PHONE: {
         id: "PHONE",
-        type: INPUT_TEXT,
+        type: FieldTypes.INPUT_TEXT,
         label: "Phone",
     },
     PASSWORD: {
         id: "PASSWORD",
-        type: INPUT_PASSWORD,
+        type: FieldTypes.INPUT_PASSWORD,
         label: "Enter your password",
     },
     PASSWORD_CONFIRMATION: {
         id: "PASSWORD_CONFIRMATION",
-        type: INPUT_PASSWORD,
+        type: FieldTypes.INPUT_PASSWORD,
         label: "Confirm your password",
         getValidation(context) {
             return isDefinedAndEqualTo(this,context, context[FIELDS.PASSWORD.id],"The passwords should be identical.");
@@ -49,12 +49,12 @@ const FIELDS = {
     },
     NUMBER: {
         id: "NUMBER",
-        type: INPUT_NUMBER,
+        type: FieldTypes.INPUT_NUMBER,
         label: "Enter a number",
     },
     AMOUNT: {
         id: "AMOUNT",
-        type: INPUT_NUMBER,
+        type: FieldTypes.INPUT_NUMBER,
         label: "Enter an amount",
         symbol: "€"
     },

@@ -49,12 +49,7 @@ export class FieldWrapperComponent extends React.Component {
         this.props.onEvent(event, this.props.field, details);
     }
 
-    componentWillReceiveProps(nextprops) {
-        console.log('componentWillReceiveProps', nextprops);
-    }
-
     render() {
-        console.log('render');
         let {View, field, tabIndex, fieldContext} = this.props;
         let contextValue = fieldContext[field.id];
         let {fieldState, validation} = this.getState();
