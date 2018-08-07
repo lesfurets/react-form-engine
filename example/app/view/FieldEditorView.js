@@ -1,13 +1,22 @@
 import React from "react";
+import PropTypes from "prop-types";
+
+import {LabelEditor} from "../elements/LabelEditor";
 
 import "../../../src/styles/components/view/field-view.less"
-import {FIELD_STATE} from "../../../src/component/wrapper/FieldWrapper";
 
-export const FieldEditorView = (props) => (
+export const FIELD_EDITOR_EVENT = {
+    EDIT_LABEL: "EDIT_FIELD_LABEL",
+};
+
+export const FieldEditorView = ({field, onEvent}) => (
     <div className="FieldView">
-        <div className="FieldView-label">{props.field.label}</div>
-        {props.children}
-        {props.fieldState != FIELD_STATE.ERROR ? null :
-            <div className="FieldView-error-message">{props.validation.message}</div>}
+        <LabelEditor label={field.label}
+                     onChange={(value => onEvent(FIELD_EDITOR_EVENT.EDIT_LABEL, value))}/>
     </div>
 );
+
+FieldEditorView.propTypes = {
+    field: PropTypes.object.isRequired,
+    onEvent: PropTypes.func
+};

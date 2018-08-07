@@ -56,7 +56,7 @@ class BlockWrapperComponent extends React.Component {
                     {this.props.block.fields.map((field, index) =>
                         <FieldWrapper
                             key={field.id}
-                            field={field}
+                            field={{...field}}
                             tabIndex={index + 1}
                             onEvent={this.onFieldEvent}
                             forceValidation={this.state.forceValidation}

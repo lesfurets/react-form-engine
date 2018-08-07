@@ -107,12 +107,10 @@ class App extends React.Component {
     };
 
     handleModelChange = (value) => {
-        console.log(value);
         this.setState({ model: value });
     };
 
     onEvent(event, element, details) {
-        console.log(event, element, details);
     }
 
     render() {

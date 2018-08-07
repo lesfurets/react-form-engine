@@ -4,7 +4,7 @@ import FormEngine from "../../../src/component/FormEngine";
 
 import {BLOCK_EDITOR_EVENT, BlockEditorView} from "../view/BlockEditorView";
 import {FORM_EDITOR_EVENT, FormEditorView} from "../view/FormEditorView";
-import {FieldEditorView} from "../view/FieldEditorView";
+import {FIELD_EDITOR_EVENT, FieldEditorView} from "../view/FieldEditorView";
 import {EMPTY_CALLBACK} from "../../../src/definition/props-utils";
 
 import "../../styles/json-editor.less";
@@ -54,11 +54,17 @@ class FormEditor extends React.Component {
                 newModel.splice(details.index, 0, block);
                 this.props.onChange(newModel);
                 break;
+            case FIELD_EDITOR_EVENT.EDIT_LABEL:
+                model
+                    .reduce((flat, block) => flat.concat(block.fields), [])
+                    .filter(field => field.id === element.id)
+                    .forEach(field => field.label = details);
+                this.props.onChange(model);
+                break;
         }
     }
 
     render() {
-        console.log(this.props.model);
         return (
             <FormEngine blocks={this.props.model}
                         onEvent={this.onEvent}
