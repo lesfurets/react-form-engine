@@ -3,6 +3,14 @@
 .BlockEditorView {
     margin: 20px auto;
 
+    &-expand {
+        transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+        &.expanded {
+            transform: rotate(180deg);
+        }
+    }
+
     .LabelEditor {
         margin-top: 0;
         width: 100%;
