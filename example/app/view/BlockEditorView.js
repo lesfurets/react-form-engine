@@ -5,7 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import Clear from "@material-ui/icons/Clear";
-import {LabelEditor} from "./LabelEditor";
+import {LabelEditor} from "../elements/LabelEditor";
 
 import "../../styles/view/block-editor-view.less"
 

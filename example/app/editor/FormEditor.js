@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../styles/app.less";
-import FormEngine from "../../src/component/FormEngine";
+import FormEngine from "../../../src/component/FormEngine";
 
-import "../styles/json-editor.less";
-import {BLOCK_EDITOR_EVENT, BlockEditorView} from "./view/BlockEditorView";
-import {FORM_EDITOR_EVENT, FormEditorView} from "./view/FormEditorView";
-import {FieldEditorView} from "./view/FieldEditorView";
-import {EMPTY_CALLBACK} from "../../src/definition/props-utils";
+import {BLOCK_EDITOR_EVENT, BlockEditorView} from "../view/BlockEditorView";
+import {FORM_EDITOR_EVENT, FormEditorView} from "../view/FormEditorView";
+import {FieldEditorView} from "../view/FieldEditorView";
+import {EMPTY_CALLBACK} from "../../../src/definition/props-utils";
+
+import "../../styles/json-editor.less";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
