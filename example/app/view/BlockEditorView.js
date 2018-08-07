@@ -18,11 +18,6 @@ export const BLOCK_EDITOR_EVENT = {
     EDIT_LABEL: "EDIT_LABEL"
 };
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", "Yataaaaaaa");
-    console.log("drag",ev.target.id);
-}
-
 export class BlockEditorView extends React.Component {
     constructor(){
         super();
@@ -35,13 +30,11 @@ export class BlockEditorView extends React.Component {
     };
 
     render() {
-        let {block, onEvent} = this.props;
+        let {children, block, onEvent} = this.props;
         return (
             <Card raised
                   id={block.id}
-                  className="BlockEditorView"
-                  draggable="true"
-                  onDragStart={drag}>
+                  className="BlockEditorView">
                 <CardHeader title={<LabelEditor label={block.label}
                                                 onChange={(value => onEvent(BLOCK_EDITOR_EVENT.EDIT_LABEL, value))}/>}
                             action={[
@@ -55,10 +48,11 @@ export class BlockEditorView extends React.Component {
                                 <IconButton key="2" onClick={() => onEvent(BLOCK_EDITOR_EVENT.REMOVE)}>
                                     <Clear color="primary"/>
                                 </IconButton>
-                            ]}/>
+                            ]}
+                            className={"BlockEditorView-header"}/>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        Content
+                        {children}
                     </CardContent>
                 </Collapse>
             </Card>
