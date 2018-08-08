@@ -35,22 +35,28 @@ class FormEditor extends React.Component {
     onEvent(event, element, details) {
         console.log(event, element, details);
         let {model} = this.props;
-        switch (event){
+        switch (event) {
+            case FORM_EDITOR_EVENT.NEW_BLOCK:
+                model.push(generateNewBlock());
+                this.props.onChange(model);
+                break;
+            case FORM_EDITOR_EVENT.MOVE_BLOCK:
+                let blocks = remove(model, block => block.id === details.id);
+                model.splice(details.index, 0, blocks[0]);
+                this.props.onChange(model);
+                break;
             case BLOCK_EDITOR_EVENT.DELETE:
-                remove(model,block => block.id !== element.id);
+                remove(model, block => block.id !== element.id);
                 break;
             case BLOCK_EDITOR_EVENT.EDIT_LABEL:
                 model.filter(block => block.id === element.id)
                     .forEach(block => block.label = details);
                 this.props.onChange(model);
                 break;
-            case FORM_EDITOR_EVENT.NEW_BLOCK:
-                model.push(generateNewBlock());
-                this.props.onChange(model);
-                break;
-            case FORM_EDITOR_EVENT.MOVE_BLOCK:
-                let block = remove(model, block => block.id === details.id);
-                model.splice(details.index, 0, block[0]);
+            case BLOCK_EDITOR_EVENT.MOVE_FIELD:
+                let blockSrc = model.find(block => block.id === details.blockSrc);
+                let fields = remove(blockSrc.fields, field => field.id === details.id);
+                model.find(block => block.id === details.blockDst).fields.splice(details.index, 0, fields[0]);
                 this.props.onChange(model);
                 break;
             case FIELD_EDITOR_EVENT.EDIT_LABEL:
@@ -60,7 +66,7 @@ class FormEditor extends React.Component {
                 this.props.onChange(model);
                 break;
             case FIELD_EDITOR_EVENT.DELETE:
-                model.forEach(block => remove(block.fields,field => field.id === element.id));
+                model.forEach(block => remove(block.fields, field => field.id === element.id));
                 this.props.onChange(model);
                 break;
         }

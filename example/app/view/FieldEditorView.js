@@ -15,7 +15,7 @@ export const FIELD_EDITOR_EVENT = {
 };
 
 export const FieldEditorView = ({field, onEvent}) => (
-    <CardContent className={"FieldEditorView"}>
+    <CardContent className={"FieldEditorView"} sortable-id={field.id}>
         <LabelEditor label={field.label}
                      className="FieldEditorView-label"
                      onChange={(value => onEvent(FIELD_EDITOR_EVENT.EDIT_LABEL, value))}/>
