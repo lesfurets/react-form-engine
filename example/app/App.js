@@ -61,11 +61,11 @@ const FIELDS = {
 };
 
 const BLOCKS = {
-    ALL_FIELDS: {
-        id:"ALL_FIELDS",
-        label: "All Fields",
-        fields: Object.values(FIELDS)
-    },
+    // ALL_FIELDS: {
+    //     id:"ALL_FIELDS",
+    //     label: "All Fields",
+    //     fields: Object.values(FIELDS)
+    // },
     IDENTITY: {
         id:"IDENTITY",
         label: "Personal information",
