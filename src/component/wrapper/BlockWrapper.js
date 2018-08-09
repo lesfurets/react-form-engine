@@ -31,7 +31,7 @@ class BlockWrapperComponent extends React.Component {
         if(block.fields
             .map(field => field.hasOwnProperty('getValidation') ? field.getValidation(fieldContext) : VALID)
             .map(validation => validation.isValid)
-            .reduce((acc, value) => acc && value)){
+            .reduce((acc, value) => acc && value, true)){
             onEvent(BLOCK_EVENT.VALID,block);
         }
         this.setState({forceValidation: true});

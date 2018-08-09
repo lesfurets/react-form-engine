@@ -26,7 +26,7 @@ const FIELDS = {
     },
     EMAIL: {
         id: "EMAIL",
-        type: FieldTypes.INPUT_MAIL,
+        type: FieldTypes.INPUT_EMAIL,
         label: "Email",
     },
     PHONE: {

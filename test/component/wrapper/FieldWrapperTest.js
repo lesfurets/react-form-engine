@@ -1,13 +1,13 @@
 import React from "react";
-import {FieldWrapperComponent ,FIELD_STATE} from "../../../src/component/wrapper/FieldWrapper";
-import {createTestStore, ERROR, initTest, setFieldValue, shallowRedux} from "../../../test/test-utils";
+import {FIELD_STATE, FieldWrapperComponent} from "../../../src/component/wrapper/FieldWrapper";
+import {ERROR, initTest, setFieldValue} from "../../../test/test-utils";
 import {VALID} from "../../../src/definition/validation";
 import {shallow} from "enzyme/build/index";
 import {EMPTY_CALLBACK} from "../../test-utils";
 
 initTest();
 
-describe("FormEngine/Wrapper/Field", () => {
+describe("FormEngine/Wrapper/FieldWrapper", () => {
 
     let testId = 'testChild1';
     let props = {

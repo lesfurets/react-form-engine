@@ -10,7 +10,7 @@ export class FieldInjector {
         switch (type) {
             case FieldTypes.INPUT_TEXT:
                 return TextField;
-            case FieldTypes.INPUT_MAIL:
+            case FieldTypes.INPUT_EMAIL:
                 return EmailField;
             case FieldTypes.INPUT_PASSWORD:
                 return PasswordField;
