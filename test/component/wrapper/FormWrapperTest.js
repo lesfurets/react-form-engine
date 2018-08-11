@@ -1,13 +1,8 @@
 import React from "react";
-import {createStore} from "redux";
 
-import {shallow, mount} from "enzyme";
-import reducer from "../../../src/redux/reducers";
-import {ERROR, initTest} from "../../../test/test-utils";
-import {FIELD_EVENT, FieldWrapper} from "../../../src/component/wrapper/FieldWrapper";
-import {BlockWrapper, BLOCK_EVENT, BlockWrapperComponent} from "../../../src/component/wrapper/BlockWrapper";
-import {VALID} from "../../../src/definition/validation";
-import {Provider} from "react-redux";
+import {shallow} from "enzyme";
+import {initTest} from "../../../test/test-utils";
+import {BlockWrapper} from "../../../src/component/wrapper/BlockWrapper";
 import FormWrapper from "../../../src/component/wrapper/FormWrapper";
 
 initTest();

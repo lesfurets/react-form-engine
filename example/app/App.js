@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/app.less";
 import FormEngine from "../../src/index";
 import {FieldTypes} from "../../src/definition/FieldTypes";
-import {isDefined, isDefinedAndEqualTo, VALID} from "../../src/definition/validation";
+import {ValidationUtils} from "../../src/definition/ValidationUtils";
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -16,7 +16,7 @@ const FIELDS = {
         type: FieldTypes.INPUT_TEXT,
         label: "First Name",
         getValidation(context) {
-          return isDefined(this,context, "The first name is mandatory");
+          return ValidationUtils.isDefined(this,context, "The first name is mandatory");
         }
     },
     LAST_NAME: {
@@ -44,7 +44,7 @@ const FIELDS = {
         type: FieldTypes.INPUT_PASSWORD,
         label: "Confirm your password",
         getValidation(context) {
-            return isDefinedAndEqualTo(this,context, context[FIELDS.PASSWORD.id],"The passwords should be identical.");
+            return ValidationUtils.isDefinedAndEqualTo(this, context, context[FIELDS.PASSWORD.id], "The passwords should be identical.");
         }
     },
     NUMBER: {

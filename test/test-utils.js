@@ -4,7 +4,7 @@ import {createStore} from "redux";
 import reducer from "../src/redux/reducers";
 import {configure} from "enzyme/build/index";
 import Adapter from "enzyme-adapter-react-16/build/index";
-import {Validation} from "../src/definition/validation";
+import {Validation} from "../src/definition/Validation";
 
 export const createTestStore = () => new createStore(reducer);
 

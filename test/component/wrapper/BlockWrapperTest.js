@@ -6,7 +6,7 @@ import reducer from "../../../src/redux/reducers";
 import {ERROR, initTest} from "../../../test/test-utils";
 import {FieldWrapper} from "../../../src/component/wrapper/FieldWrapper";
 import {BlockWrapper, BLOCK_EVENT, BlockWrapperComponent} from "../../../src/component/wrapper/BlockWrapper";
-import {VALID} from "../../../src/definition/validation";
+import {VALID} from "../../../src/definition/Validation";
 import {Provider} from "react-redux";
 
 initTest();

@@ -1,7 +1,7 @@
 import React from "react";
 import {FIELD_EVENT, FIELD_STATE, FieldWrapperComponent} from "../../../src/component/wrapper/FieldWrapper";
 import {ERROR, initTest, setFieldValue} from "../../../test/test-utils";
-import {VALID} from "../../../src/definition/validation";
+import {VALID} from "../../../src/definition/Validation";
 import {shallow} from "enzyme/build/index";
 import {EMPTY_CALLBACK} from "../../test-utils";
 import {BLOCK_EVENT} from "../../../src/component/wrapper/BlockWrapper";
