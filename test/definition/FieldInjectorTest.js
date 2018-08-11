@@ -4,10 +4,10 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import {FieldTypes} from "../../src/definition/FieldTypes";
 import {FieldInjector, UNKNOWN_FIELD} from "../../src/definition/FieldInjector";
-import {TextField} from "../../src/component/fields/TextField";
-import {EmailField} from "../../src/component/fields/EmailField";
-import {NumberField} from "../../src/component/fields/NumberField";
-import {PasswordField} from "../../src/component/fields/PasswordField";
+import {TextField} from "../../src/component/field/TextField";
+import {EmailField} from "../../src/component/field/EmailField";
+import {NumberField} from "../../src/component/field/NumberField";
+import {PasswordField} from "../../src/component/field/PasswordField";
 
 configure({adapter: new Adapter()});
 

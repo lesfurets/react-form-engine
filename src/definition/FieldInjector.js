@@ -1,9 +1,9 @@
 import React from "react";
 import {FieldTypes} from "./FieldTypes";
-import {TextField} from "../component/fields/TextField";
-import {EmailField} from "../component/fields/EmailField";
-import {PasswordField} from "../component/fields/PasswordField";
-import {NumberField} from "../component/fields/NumberField";
+import {TextField} from "../component/field/TextField";
+import {EmailField} from "../component/field/EmailField";
+import {PasswordField} from "../component/field/PasswordField";
+import {NumberField} from "../component/field/NumberField";
 
 export class FieldInjector {
     static inject (type) {

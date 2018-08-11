@@ -1,11 +1,11 @@
 import React from "react";
 import {shallow} from "enzyme";
-import {TextField} from "../../../src/component/fields/TextField";
+import {TextField} from "../../../src/component/field/TextField";
 import {initTest} from "../../test-utils";
 
 initTest();
 
-describe("FormEngine/Fields/TextField", () => {
+describe("FormEngine/Field/TextField", () => {
     let testId = "testId";
     let testValue = "testValue";
     let emptyCallback = () => {
