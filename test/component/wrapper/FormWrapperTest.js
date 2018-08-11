@@ -25,12 +25,8 @@ describe("FormEngine/Wrapper/FormWrapper", () => {
         {id: "block2", fields: [{id: 'testChild2', type: 'type-test'}]}
     ];
 
-    let mountBlock = (props) => {
-        return shallow(<BlockWrapperComponent {...props} fieldContext={{}}/>)
-    };
-
     describe("Blocks", () => {
-        it("Should render blocks", () => {
+        it("Should render Blocks", () => {
             let container = shallow(<FormWrapper
                 form={formModel}
                 onEvent={emptyCallback}

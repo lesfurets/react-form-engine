@@ -24,7 +24,6 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
         </div>
     );
 
-
     let store = createStore(reducer);
 
     let blockTest = {
