@@ -1,9 +1,7 @@
 import React from "react";
-import {createStore} from "redux";
 import ResponsiveContainer from "react-responsive-widget";
 
 import {shallow} from "enzyme";
-import reducer from "../../src/redux/reducers";
 import {initTest} from "../../test/test-utils";
 import {Provider} from "react-redux";
 import FormEngine from "../../src/component/FormEngine";
@@ -16,8 +14,6 @@ describe("FormEngine/Entry", () => {
     };
 
     let TestView = ({children}) => (<div>{children}</div>);
-
-    let store = createStore(reducer);
 
     let formModel = [
         {id: "block1", fields: [{id: 'testChild1', type: 'type-test'}]},

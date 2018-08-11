@@ -43,4 +43,15 @@ describe("FormEngine/Utils/Cta", () => {
         });
     });
 
+    describe("ClassName", () => {
+        it("Should have className", () => {
+            // Given
+            let className = "className";
+            let container = shallow(<Cta className={className}/>);
+
+            // Then
+            expect(container.find(`.${className}`).length).toBe(1);
+        });
+    });
+
 });

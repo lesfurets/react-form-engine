@@ -8,17 +8,19 @@ export const CTA_TYPE = {
   SECONDARY: "secondary"
 };
 
-export const Cta = ({children, type, onClick, fullWidth}) => (
-    <button className={`Cta ${type} ${fullWidth ? "fullWidth" : ""}`} onClick={onClick}>{children}</button>
+export const Cta = ({children, type, onClick, fullWidth, className}) => (
+    <button className={`Cta ${className} ${type} ${fullWidth ? "fullWidth" : ""}`} onClick={onClick}>{children}</button>
 );
 
 Cta.propTypes = {
     type: PropTypes.oneOf([CTA_TYPE.PRIMARY,CTA_TYPE.SECONDARY]),
     fullWidth: PropTypes.bool,
+    className: PropTypes.string,
     onClick: PropTypes.func
 };
 
 Cta.defaultProps = {
     type: CTA_TYPE.PRIMARY,
+    className: "",
     fullWidth: false
 };

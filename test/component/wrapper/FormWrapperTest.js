@@ -18,8 +18,6 @@ describe("FormEngine/Wrapper/FormWrapper", () => {
 
     let TestView = ({children}) => (<div>{children}</div>);
 
-    let store = createStore(reducer);
-
     let formModel = [
         {id: "block1", fields: [{id: 'testChild1', type: 'type-test'}]},
         {id: "block2", fields: [{id: 'testChild2', type: 'type-test'}]}
