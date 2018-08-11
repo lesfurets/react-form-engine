@@ -74,7 +74,7 @@ class FormEditor extends React.Component {
 
     render() {
         return (
-            <FormEngine blocks={this.props.model}
+            <FormEngine form={this.props.model}
                         onEvent={this.onEvent}
                         FormView={FormEditorView}
                         BlockView={BlockEditorView}

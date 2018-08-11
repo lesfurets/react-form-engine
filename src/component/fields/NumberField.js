@@ -5,6 +5,7 @@ import {TextField} from "./TextField";
 export class NumberField extends TextField {
     constructor(props) {
         super(props);
+        this.inputMode = "decimal";
     }
 
     getSuffix(){

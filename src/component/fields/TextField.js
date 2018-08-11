@@ -5,6 +5,7 @@ export class TextField extends React.Component {
     constructor(props) {
         super(props);
         this.inpuType = "text";
+        this.inputMode = "text";
         this.state = {
             value: props.contextValue || "",
         };
@@ -30,6 +31,7 @@ export class TextField extends React.Component {
         return (
             <div className="TextField-container">
                 <input type={this.inpuType}
+                       inputMode={this.inputMode}
                        placeholder={field.placeholder || ""}
                        name={field.id}
                        id={field.id}

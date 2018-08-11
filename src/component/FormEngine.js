@@ -14,6 +14,7 @@ export default class FormEngine extends React.Component {
     render() {
         let {FormView, BlockView, FieldView} = this.props;
         const store = createStore(reducer);
+        console.log(this.props)
         return (
             <Provider store={store}>
                 <ResponsiveContainer lg={1200} md={992} sm={700} >
