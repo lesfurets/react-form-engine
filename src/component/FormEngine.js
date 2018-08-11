@@ -25,12 +25,7 @@ export default class FormEngine extends React.Component {
 
 }
 
-FormEngine.propTypes = {
-    onEvent: PropTypes.func,
-    FormView: PropTypes.func.isRequired,
-    BlockView: PropTypes.func.isRequired,
-    FieldView: PropTypes.func.isRequired,
-};
+FormEngine.propTypes = FormWrapper.propTypes;
 
 FormEngine.defaultProps = {
     onEvent: EMPTY_CALLBACK,

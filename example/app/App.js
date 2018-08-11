@@ -125,7 +125,7 @@ class App extends React.Component {
                         {Object.values(EDITOR_STATE).map(value => <Tab key={value.id} label={value.label} />)}
                     </Tabs>
                 </AppBar>
-                {view === EDITOR_STATE.OVERVIEW ? <FormEngine blocks={model} onEvent={this.onEvent}/> : null}
+                {view === EDITOR_STATE.OVERVIEW ? <FormEngine form={model} onEvent={this.onEvent}/> : null}
                 {view === EDITOR_STATE.EDIT_FORM ? <FormEditor model={model} onChange={this.handleModelChange}/> : null}
                 {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor model={model} onChange={this.handleModelChange}/> : null}
             </div>

@@ -4,7 +4,7 @@ import {createStore} from "redux";
 import {shallow, mount} from "enzyme";
 import reducer from "../../../src/redux/reducers";
 import {ERROR, initTest} from "../../../test/test-utils";
-import {FIELD_EVENT, FieldWrapper} from "../../../src/component/wrapper/FieldWrapper";
+import {FieldWrapper} from "../../../src/component/wrapper/FieldWrapper";
 import {BlockWrapper, BLOCK_EVENT, BlockWrapperComponent} from "../../../src/component/wrapper/BlockWrapper";
 import {VALID} from "../../../src/definition/validation";
 import {Provider} from "react-redux";
@@ -35,18 +35,14 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
         ]
     };
 
-    let mountBlock = (props) => {
-        return shallow(<BlockWrapperComponent {...props} fieldContext={{}}/>)
-    };
-
     describe("Fields", () => {
         it("Should render Fields by default", () => {
-            let container = mountBlock({
-                block: blockTest,
-                onBlockEvent: emptyCallback,
-                View: TestBlockView,
-                FieldView: FieldView,
-            });
+            let container = shallow(<BlockWrapperComponent
+                block={blockTest}
+                onEvent={emptyCallback}
+                View={TestBlockView}
+                FieldView={FieldView}
+                fieldContext={{}}/>);
             expect(container.find(FieldWrapper).length).toBe(blockTest.fields.length);
         });
     });
@@ -132,12 +128,13 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
             let onEvent = jasmine.createSpy();
 
             // When
-            let container = mountBlock({
-                block: blockTest,
-                onEvent: onEvent,
-                View: TestBlockView,
-                FieldView: FieldView,
-            });
+            let container = shallow(<BlockWrapperComponent
+                block={blockTest}
+                onEvent={onEvent}
+                View={TestBlockView}
+                FieldView={FieldView}
+                fieldContext={{}}/>);
+
             container.instance().onEvent(event,details);
 
             // Then
@@ -152,12 +149,12 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
             let onEvent = jasmine.createSpy();
 
             // When
-            let container = mountBlock({
-                block: blockTest,
-                onEvent: onEvent,
-                View: TestBlockView,
-                FieldView: FieldView,
-            });
+            let container = shallow(<BlockWrapperComponent
+                block={blockTest}
+                onEvent={onEvent}
+                View={TestBlockView}
+                FieldView={FieldView}
+                fieldContext={{}}/>);
             container.instance().onFieldEvent(event, field, details);
 
             // Then

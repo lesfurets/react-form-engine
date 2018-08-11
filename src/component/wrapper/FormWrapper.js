@@ -36,15 +36,15 @@ export default class FormWrapper extends React.Component {
     }
 
     onEvent(event, details) {
-        this.props.onEvent(event, "form-id", details);
+        this.props.onEvent(event, this.props.form, details);
     }
 
     render() {
-        let {View, BlockView, FieldView} = this.props;
+        let {form, View, BlockView, FieldView} = this.props;
         return (
             <div className="FormWrapper">
                 <View onEvent={this.onEvent}>
-                    {this.props.blocks.map((block, index) =>
+                    {form.map((block, index) =>
                         <BlockWrapper
                             key={block.id}
                             block={{...block, index:index}}
@@ -60,6 +60,7 @@ export default class FormWrapper extends React.Component {
 }
 
 FormWrapper.propTypes = {
+    form: PropTypes.array.isRequired,
     onEvent: PropTypes.func,
     View: PropTypes.func.isRequired,
     BlockView: PropTypes.func.isRequired,
