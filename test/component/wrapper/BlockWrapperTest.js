@@ -1,13 +1,13 @@
 import React from "react";
 import {createStore} from "redux";
 
+import {shallow, mount} from "enzyme";
 import reducer from "../../../src/redux/reducers";
-import {ERROR, initTest, shallow} from "../../../test/test-utils";
-import {FieldWrapper} from "../../../src/component/wrapper/FieldWrapper";
-import {BlockWrapper, BLOCK_EVENT} from "../../../src/component/wrapper/BlockWrapper";
+import {ERROR, initTest} from "../../../test/test-utils";
+import {FIELD_EVENT, FieldWrapper} from "../../../src/component/wrapper/FieldWrapper";
+import {BlockWrapper, BLOCK_EVENT, BlockWrapperComponent} from "../../../src/component/wrapper/BlockWrapper";
 import {VALID} from "../../../src/definition/validation";
 import {Provider} from "react-redux";
-import {mount} from "enzyme";
 
 initTest();
 
@@ -27,24 +27,27 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
     let store = createStore(reducer);
 
+    let blockTest = {
+        id: "block-test",
+        fields: [
+            {id: 'testChild1', type: 'type-test'},
+            {id: 'testChild2', type: 'type-test'},
+        ]
+    };
+
+    let mountBlock = (props) => {
+        return shallow(<BlockWrapperComponent {...props} fieldContext={{}}/>)
+    };
 
     describe("Fields", () => {
         it("Should render Fields by default", () => {
-            let block = {
-                id: "block-test",
-                fields: [
-                    {id: 'testChild1', type: 'type-test'},
-                    {id: 'testChild2', type: 'type-test'},
-                ]
-            };
-            let container = mount(
-                <Provider store={store}>
-                    <BlockWrapper block={block}
-                                  onBlockEvent={emptyCallback}
-                                  View={TestBlockView}
-                                  FieldView={FieldView}/>
-                </Provider>);
-            expect(container.find(FieldWrapper).length).toBe(block.fields.length);
+            let container = mountBlock({
+                block: blockTest,
+                onBlockEvent: emptyCallback,
+                View: TestBlockView,
+                FieldView: FieldView,
+            });
+            expect(container.find(FieldWrapper).length).toBe(blockTest.fields.length);
         });
     });
 
@@ -117,6 +120,49 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
         //         getValidation: () => ERROR
         //     });
         // });
+
+    });
+
+    describe("Event", () => {
+
+        it("Should send events", () => {
+            // Given
+            let event = "event";
+            let details = "details";
+            let onEvent = jasmine.createSpy();
+
+            // When
+            let container = mountBlock({
+                block: blockTest,
+                onEvent: onEvent,
+                View: TestBlockView,
+                FieldView: FieldView,
+            });
+            container.instance().onEvent(event,details);
+
+            // Then
+            expect(onEvent).toHaveBeenCalledWith(event, blockTest, details);
+        });
+
+        it("Should forward field events", () => {
+            // Given
+            let event = "event";
+            let field = "field";
+            let details = "details";
+            let onEvent = jasmine.createSpy();
+
+            // When
+            let container = mountBlock({
+                block: blockTest,
+                onEvent: onEvent,
+                View: TestBlockView,
+                FieldView: FieldView,
+            });
+            container.instance().onFieldEvent(event, field, details);
+
+            // Then
+            expect(onEvent).toHaveBeenCalledWith(event, field, details);
+        });
 
     });
 

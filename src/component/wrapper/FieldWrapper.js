@@ -78,6 +78,7 @@ FieldWrapperComponent.propTypes = {
     }).isRequired,
     View: PropTypes.func.isRequired,
     onEvent: PropTypes.func,
+    setFieldValue: PropTypes.func,
     forceValidation: PropTypes.bool,
     tabIndex: PropTypes.number
 };

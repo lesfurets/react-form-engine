@@ -17,7 +17,7 @@ export const BLOCK_EVENT = {
     PREVIOUS: "PREVIOUS",
 };
 
-class BlockWrapperComponent extends React.Component {
+export class BlockWrapperComponent extends React.Component {
     constructor() {
         super();
         this.state = {forceValidation: false};
@@ -73,6 +73,7 @@ BlockWrapperComponent.propTypes = {
     onEvent: PropTypes.func,
     blockState: PropTypes.string,
     block: PropTypes.object.isRequired,
+    fieldContext: PropTypes.object.isRequired,
     View: PropTypes.func.isRequired,
     FieldView: PropTypes.func.isRequired,
 };
