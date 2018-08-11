@@ -10,7 +10,7 @@ initTest();
 describe("FormEngine/Utils/Cta", () => {
 
     describe("Type", () => {
-        it("should have type PRIMARY by default", () => {
+        it("Should have type PRIMARY by default", () => {
             // Given
             let container = shallow(<Cta/>);
 
@@ -19,7 +19,7 @@ describe("FormEngine/Utils/Cta", () => {
             expect(container.find(`.${CTA_TYPE.SECONDARY}`).length).toBe(0);
         });
 
-        it("should have specified type", () => {
+        it("Should have specified type", () => {
             // Given
             let container = shallow(<Cta type={CTA_TYPE.SECONDARY}/>);
 
@@ -30,7 +30,7 @@ describe("FormEngine/Utils/Cta", () => {
     });
 
     describe("Click", () => {
-        it("should trigger onClick call", () => {
+        it("Should trigger onClick call", () => {
             // Given
             let onClick = jasmine.createSpy();
             let container = shallow(<Cta onClick={onClick}/>);

@@ -11,7 +11,7 @@ describe("FormEngine/Fields/NumericField", () => {
     };
 
     describe("Construction", () => {
-        it("input should have type decimal", () => {
+        it("Input should have type decimal", () => {
             let container = shallow(<NumberField field={{id: testId}}
                                                helperContext={{}}
                                                onValueChange={emptyCallback}
@@ -21,7 +21,7 @@ describe("FormEngine/Fields/NumericField", () => {
     });
 
     describe("Symbol", () => {
-        it("input should have no symbol by default", () => {
+        it("Input should have no symbol by default", () => {
             let container = shallow(<NumberField field={{id: testId}}
                                                helperContext={{}}
                                                onValueChange={emptyCallback}
@@ -29,7 +29,7 @@ describe("FormEngine/Fields/NumericField", () => {
             expect(container.find("TextField-symbol").length).toBe(0);
         });
 
-        it("input should symbol if specified", () => {
+        it("Input should symbol if specified", () => {
             let symbol = "%";
             let container = shallow(<NumberField field={{id: testId, symbol: symbol}}
                                                                 helperContext={{}}

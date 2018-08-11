@@ -12,7 +12,7 @@ describe("FormEngine/Fields/TextField", () => {
     };
 
     describe("Construction", () => {
-        it("input should have type text", () => {
+        it("Input should have type text", () => {
             let container = shallow(<TextField field={{id: testId}}
                                                helperContext={{}}
                                                onValueChange={emptyCallback}
@@ -23,7 +23,7 @@ describe("FormEngine/Fields/TextField", () => {
     });
 
     describe("placeholder", () => {
-        it("should have a placeholder", () => {
+        it("Should have a placeholder", () => {
             let placeholderValue = "placeholder";
             let container = shallow(<TextField field={{id: "test", placeholder: placeholderValue}}
                                                fieldContext={{}}
@@ -33,7 +33,7 @@ describe("FormEngine/Fields/TextField", () => {
         });
 
 
-        it("should have empty placeholder", () => {
+        it("Should have empty placeholder", () => {
             let container = shallow(<TextField field={{id: "test"}}
                                                fieldContext={{}}
                                                helperContext={{}}
@@ -43,7 +43,7 @@ describe("FormEngine/Fields/TextField", () => {
     });
 
     describe("props", () => {
-        it("should pass props id, name, tabindex to input", () => {
+        it("Should pass props id, name, tabindex to input", () => {
             let tabIndex = 8;
             let container = shallow(<TextField field={{id: testId}}
                                                tabIndex={tabIndex}
@@ -57,7 +57,7 @@ describe("FormEngine/Fields/TextField", () => {
     });
 
     describe("onChange", () => {
-        it("should update only state", () => {
+        it("Should update only state", () => {
             let onValueChange = jasmine.createSpy();
             let container = shallow(<TextField field={{id: testId}}
                                                fieldContext={{}}
@@ -71,7 +71,7 @@ describe("FormEngine/Fields/TextField", () => {
     });
 
     describe("onBlur", () => {
-        it("should update state and onValueChange", () => {
+        it("Should update state and onValueChange", () => {
             let onValueChange = jasmine.createSpy();
             let container = shallow(<TextField field={{id: testId}}
                                                fieldContext={{}}

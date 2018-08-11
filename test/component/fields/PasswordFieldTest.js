@@ -11,7 +11,7 @@ describe("FormEngine/Fields/PasswordField", () => {
     };
 
     describe("Construction", () => {
-        it("input should have type decimal", () => {
+        it("Input should have type decimal", () => {
             let container = shallow(<PasswordField field={{id: testId}}
                                                helperContext={{}}
                                                onValueChange={emptyCallback}
