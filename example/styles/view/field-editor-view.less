@@ -1,8 +1,7 @@
 @import "../../../src/styles/color";
 
 .FieldEditorView {
-    border: solid #e0e0e0;
-    border-width: 1px 0;
+    border-bottom: 1px solid #e0e0e0;
 
     &-content {
         display: flex;
@@ -20,4 +19,10 @@
     &-delete {
         margin-left: auto !important;
     }
+}
+
+.dragged .FieldEditorView {
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.24);
 }

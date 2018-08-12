@@ -27,6 +27,7 @@ export class BlockEditorView extends React.Component {
         this.handleExpandClick = this.handleExpandClick.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.onDrag = this.onDrag.bind(this);
+        this.onStop = this.onStop.bind(this);
     }
 
     componentDidMount() {
@@ -35,12 +36,18 @@ export class BlockEditorView extends React.Component {
             handle: ".FieldEditorView",
             start: this.onDrag,
             update: this.onDrop,
+            stop: this.onStop,
             dropOnEmpty: true,
         });
     }
 
     onDrag(details, ui) {
         ui.item.attr("block-source", details.target.getAttribute("sortable-id"));
+        ui.item.addClass("dragged");
+    }
+
+    onStop(details, ui) {
+        ui.item.removeClass("dragged");
     }
 
     onDrop(details, ui) {

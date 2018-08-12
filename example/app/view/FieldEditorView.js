@@ -3,11 +3,10 @@ import PropTypes from "prop-types";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
-import Clear from "@material-ui/icons/Clear";
+import Delete from "@material-ui/icons/Delete";
 
 import {LabelEditor} from "../elements/LabelEditor";
 import {TypeEditor} from "../elements/TypeEditor";
-
 
 import "../../styles/view/field-editor-view.less"
 
@@ -18,8 +17,8 @@ export const FIELD_EDITOR_EVENT = {
 };
 
 export const FieldEditorView = ({field, onEvent}) => (
-    <div className={"FieldEditorView"}>
-        <CardContent className={"FieldEditorView-content"} sortable-id={field.id}>
+    <div className={"FieldEditorView"} sortable-id={field.id}>
+        <CardContent className={"FieldEditorView-content"}>
             <LabelEditor label={field.label}
                          className="FieldEditorView-label"
                          onChange={(value => onEvent(FIELD_EDITOR_EVENT.EDIT_LABEL, value))}/>
@@ -29,7 +28,7 @@ export const FieldEditorView = ({field, onEvent}) => (
         </CardContent>
         <CardActions className={"FieldEditorView-actions"} disableActionSpacing>
             <IconButton className="FieldEditorView-delete" onClick={() => onEvent(FIELD_EDITOR_EVENT.DELETE)}>
-                <Clear color="primary"/>
+                <Delete/>
             </IconButton>
         </CardActions>
     </div>
