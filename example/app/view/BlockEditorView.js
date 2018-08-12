@@ -1,28 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import $ from "jquery";
-
+import 'jquery-ui-bundle';
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import Clear from "@material-ui/icons/Clear";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import {LabelEditor} from "../elements/LabelEditor";
-import 'jquery-ui-bundle';
+import Button from "@material-ui/core/Button";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import Add from "@material-ui/icons/Add";
 
-import Collapse from "@material-ui/core/es/Collapse/Collapse";
+import {LabelEditor} from "../elements/LabelEditor";
 
 import "../../styles/view/block-editor-view.less"
 
 export const BLOCK_EDITOR_EVENT = {
     DELETE: "DELETE",
     EDIT_LABEL: "EDIT_LABEL",
-    MOVE_FIELD: "MOVE_FIELD"
+    MOVE_FIELD: "MOVE_FIELD",
+    NEW_FIELD: "NEW_FIELD"
 };
 
 export class BlockEditorView extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {expanded: true};
         this.handleExpandClick = this.handleExpandClick.bind(this);
         this.onDrop = this.onDrop.bind(this);
@@ -101,6 +104,13 @@ export class BlockEditorView extends React.Component {
                     <div className={"BlockEditorView-content"} sortable-id={block.id}>
                         {children}
                     </div>
+                    <CardActions className={"BlockEditorView-actions"} disableActionSpacing>
+                        <Button className="BlockEditorView-add"
+                                variant="contained"
+                                onClick={() => onEvent(BLOCK_EDITOR_EVENT.NEW_FIELD)}>
+                            <Add/> Add field
+                        </Button>
+                    </CardActions>
                 </Collapse>
             </Card>
         );

@@ -13,8 +13,8 @@ export const FORM_EDITOR_EVENT = {
     MOVE_BLOCK: "MOVE_BLOCK"
 };
 export class FormEditorView extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.onDrop = this.onDrop.bind(this);
     }
 

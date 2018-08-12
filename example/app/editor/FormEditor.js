@@ -9,6 +9,7 @@ import {FIELD_EDITOR_EVENT, FieldEditorView} from "../view/FieldEditorView";
 import {EMPTY_CALLBACK} from "../../../src/definition/props-utils";
 
 import "../../styles/json-editor.less";
+import {FieldTypes} from "../../../src/definition/FieldTypes";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -22,8 +23,14 @@ function generateHash() {
 
 const generateNewBlock = () => ({
     id: generateHash(),
-    label: "Enter the block name",
+    label: "Enter block name",
     fields: []
+});
+
+const generateNewField = () => ({
+    id: generateHash(),
+    label: "Enter field name",
+    type: FieldTypes.INPUT_TEXT
 });
 
 class FormEditor extends React.Component {
@@ -57,6 +64,10 @@ class FormEditor extends React.Component {
                 let blockSrc = model.find(block => block.id === details.blockSrc);
                 let fields = remove(blockSrc.fields, field => field.id === details.id);
                 model.find(block => block.id === details.blockDst).fields.splice(details.index, 0, fields[0]);
+                this.props.onChange(model);
+                break;
+            case BLOCK_EDITOR_EVENT.NEW_FIELD:
+                model.find(block => block.id === element.id).fields.push(generateNewField());
                 this.props.onChange(model);
                 break;
             case FIELD_EDITOR_EVENT.EDIT_LABEL:
