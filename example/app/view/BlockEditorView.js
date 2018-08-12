@@ -38,6 +38,7 @@ export class BlockEditorView extends React.Component {
             update: this.onDrop,
             stop: this.onStop,
             dropOnEmpty: true,
+            placeholder: "BlockEditorView-placeholder"
         });
     }
 
