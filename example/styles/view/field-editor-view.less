@@ -1,13 +1,23 @@
 @import "../../../src/styles/color";
 
 .FieldEditorView {
-    display: flex;
-    align-items: center;
+    border: solid #e0e0e0;
+    border-width: 1px 0;
+
+    &-content {
+        display: flex;
+        align-items: center;
+    }
 
     &-label {
+        flex: 3;
+    }
+
+    &-type {
         flex: 1;
     }
 
     &-delete {
+        margin-left: auto !important;
     }
 }

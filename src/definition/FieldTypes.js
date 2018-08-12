@@ -5,3 +5,5 @@ export const FieldTypes = {
     INPUT_NUMBER: {id: "NumberField", label:"Number"},
 };
 
+export const AllTypes = Object.values(FieldTypes);
+

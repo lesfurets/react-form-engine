@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 
 export class LabelEditor extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {focus:false}
         this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -28,7 +28,6 @@ export class LabelEditor extends React.Component {
         let {focus} = this.state;
         return focus ?
             <TextField
-                id="name"
                 value={label}
                 className={`LabelEditor ${className}`}
                 onChange={this.onChange}

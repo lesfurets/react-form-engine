@@ -65,6 +65,13 @@ class FormEditor extends React.Component {
                     .forEach(field => field.label = details);
                 this.props.onChange(model);
                 break;
+            case FIELD_EDITOR_EVENT.EDIT_TYPE:
+                model.reduce((flat, block) => flat.concat(block.fields), [])
+                    .filter(field => field.id === element.id)
+                    .forEach(field => field.type = details);
+                console.log(model);
+                this.props.onChange(model);
+                break;
             case FIELD_EDITOR_EVENT.DELETE:
                 model.forEach(block => remove(block.fields, field => field.id === element.id));
                 this.props.onChange(model);
