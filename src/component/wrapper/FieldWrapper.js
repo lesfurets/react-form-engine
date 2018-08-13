@@ -59,7 +59,7 @@ export class FieldWrapperComponent extends React.Component {
             <div className={`FieldWrapper ${fieldState} ${field.id} ${field.type}`}>
                 <View field={field}
                       onEvent={this.onEvent}
-                      validation={validation.message}
+                      errorMessage={validation.message}
                       fieldState={fieldState}>
                     <Field field={field}
                            tabIndex={tabIndex}
