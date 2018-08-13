@@ -1,8 +1,15 @@
 export const FieldTypes = {
-    INPUT_TEXT: {id: "TextField", label:"Text"},
-    INPUT_EMAIL: {id: "EmailField", label:"Email"},
-    INPUT_PASSWORD: {id: "PasswordField", label:"Password"},
-    INPUT_NUMBER: {id: "NumberField", label:"Number"},
+    INPUT_TEXT: "TextField",
+    INPUT_EMAIL: "EmailField",
+    INPUT_PASSWORD: "PasswordField",
+    INPUT_NUMBER: "NumberField",
+};
+
+export const FieldTypesDetails = {
+    [FieldTypes.INPUT_TEXT]: {label:"Text"},
+    [FieldTypes.INPUT_EMAIL]: {label:"Email"},
+    [FieldTypes.INPUT_PASSWORD]: {label:"Password"},
+    [FieldTypes.INPUT_NUMBER]: {label:"Number"},
 };
 
 export const AllTypes = Object.values(FieldTypes);

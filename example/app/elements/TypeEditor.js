@@ -2,35 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import {AllTypes} from "../../../src/definition/FieldTypes";
+import {AllTypes, FieldTypesDetails} from "../../../src/definition/FieldTypes";
 
-export class TypeEditor extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onChange = this.onChange.bind(this);
-    }
-
-    onChange(event) {
-        this.props.onChange(AllTypes.find(type => type.id === event.target.value));
-    }
-
-    render() {
-        let {type, className} = this.props;
-        return (
-            <TextField select
-                       value={type.id}
-                       label={"Field Type"}
-                       className={className}
-                       onChange={this.onChange}
-                       margin="normal">
-                {AllTypes.map(type => (<MenuItem key={type.id} value={type.id}>{type.label}</MenuItem>))}
-            </TextField>
-        );
-    }
-}
+export const TypeEditor = ({type, className, onChange}) => (
+    <TextField select
+               value={type}
+               label={"Field Type"}
+               className={className}
+               onChange={(event) => onChange(event.target.value)}
+               margin="normal">
+        {AllTypes.map(type => (<MenuItem key={type} value={type}>{FieldTypesDetails[type].label}</MenuItem>))}
+    </TextField>
+);
 
 TypeEditor.propTypes = {
-    type: PropTypes.object,
+    type: PropTypes.string,
     className: PropTypes.string,
     onChange: PropTypes.func
 };
