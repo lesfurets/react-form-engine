@@ -20,31 +20,33 @@
     outline: none;
     border: none;
   }
-}
 
-.TextField-container {
-  display: flex;
-  background-color: @highlight-light;
-  border-left: solid transparent 5px;
-  align-items: center;
-  padding: 10px 10px 10px 5px;
-
-  input {
-    flex: 1;
-    font-size: 18px;
+  .TextField-container {
+    display: flex;
     background-color: @highlight-light;
+    border-left: solid transparent 5px;
+    align-items: center;
+    padding: 10px 10px 10px 5px;
+
+    input {
+      flex: 1;
+      font-size: 18px;
+      background-color: @highlight-light;
+    }
+
+    .TextField-symbol {
+      padding: 0 5px;
+      font-size: 22px;
+      color: @primary;
+    }
   }
 
-  .TextField-symbol {
-    padding: 0 5px;
-    font-size: 22px;
-    color: @primary;
+  .NumberField input {
+    text-align: right;
   }
 }
 
-.NumberField input {
-  text-align: right;
-}
+
 
 .FieldWrapper.field{
   &-default {

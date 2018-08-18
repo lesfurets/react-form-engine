@@ -5,11 +5,30 @@ export const FieldTypes = {
     INPUT_NUMBER: "NumberField",
 };
 
+const properties = [
+    {key: "placeholder", label:"Placeholder"}
+];
+
 export const FieldTypesDetails = {
-    [FieldTypes.INPUT_TEXT]: {label:"Text"},
-    [FieldTypes.INPUT_EMAIL]: {label:"Email"},
-    [FieldTypes.INPUT_PASSWORD]: {label:"Password"},
-    [FieldTypes.INPUT_NUMBER]: {label:"Number"},
+    [FieldTypes.INPUT_TEXT]: {
+        label: "Text",
+        properties: properties
+    },
+    [FieldTypes.INPUT_EMAIL]: {
+        label: "Email",
+        properties: properties
+    },
+    [FieldTypes.INPUT_PASSWORD]: {
+        label: "Password",
+        properties: properties
+    },
+    [FieldTypes.INPUT_NUMBER]: {
+        label: "Number",
+        properties: [
+            ...properties,
+            {key: "symbol", label: "Symbol"}
+        ]
+    },
 };
 
 export const AllTypes = Object.values(FieldTypes);
