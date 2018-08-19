@@ -5,16 +5,16 @@ import {FIELD_STATE} from "../wrapper/FieldWrapper";
 
 import "../../styles/components/view/field-view.less";
 
-export const FieldView = ({field, fieldState, errorMessage ,children}) => {
+export const FieldView = ({field, fieldState, errorMessage ,children, isVisible}) => {
     let hasLabel = field.label != null;
-    return (
+    return isVisible ? (
         <div className={`FieldView  ${field.type}`}>
             {hasLabel ? <div className="FieldView-label">{field.label}</div> : null}
             {children}
             {fieldState === FIELD_STATE.ERROR ?
                 <div className="FieldView-error">{errorMessage}</div> : null}
         </div>
-    );
+    ): null;
 };
 
 FieldView.propTypes = {
@@ -23,4 +23,9 @@ FieldView.propTypes = {
     }).isRequired,
     fieldState: PropTypes.string.isRequired,
     errorMessage: PropTypes.string.isRequired,
+    isVisible: PropTypes.bool,
+};
+
+FieldView.defaultProps = {
+    isVisible: true
 };

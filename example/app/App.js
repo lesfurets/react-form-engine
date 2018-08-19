@@ -8,56 +8,63 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import JsonEditor from "./editor/JsonEditor";
 import FormEditor from "./editor/FormEditor";
+import {VisibilityBuilder} from "../../src/definition/VisibilityUtils";
+import {FieldPredicate} from "../../src/definition/FieldPredicate";
 
+const FIRST_NAME = {
+    id: "FIRST_NAME",
+    type: FieldTypes.INPUT_TEXT,
+    label: "First Name",
+    getValidation(context) {
+        return ValidationUtils.isDefined(this, context, "The first name is mandatory");
+    }
+};
 
-const FIELDS = {
-    FIRST_NAME: {
-        id: "FIRST_NAME",
-        type: FieldTypes.INPUT_TEXT,
-        label: "First Name",
-        getValidation(context) {
-          return ValidationUtils.isDefined(this,context, "The first name is mandatory");
-        }
-    },
-    LAST_NAME: {
-        id: "LAST_NAME",
-        type: FieldTypes.INPUT_TEXT,
-        label: "Last Name",
-    },
-    EMAIL: {
-        id: "EMAIL",
-        type: FieldTypes.INPUT_EMAIL,
-        label: "Email",
-    },
-    PHONE: {
-        id: "PHONE",
-        type: FieldTypes.INPUT_TEXT,
-        label: "Phone",
-    },
-    PASSWORD: {
-        id: "PASSWORD",
-        type: FieldTypes.INPUT_PASSWORD,
-        label: "Enter your password",
-    },
-    PASSWORD_CONFIRMATION: {
-        id: "PASSWORD_CONFIRMATION",
-        type: FieldTypes.INPUT_PASSWORD,
-        label: "Confirm your password",
-        getValidation(context) {
-            return ValidationUtils.isDefinedAndEqualTo(this, context, context[FIELDS.PASSWORD.id], "The passwords should be identical.");
-        }
-    },
-    NUMBER: {
-        id: "NUMBER",
-        type: FieldTypes.INPUT_NUMBER,
-        label: "Enter a number",
-    },
-    AMOUNT: {
-        id: "AMOUNT",
-        type: FieldTypes.INPUT_NUMBER,
-        label: "Enter an amount",
-        symbol: "€"
-    },
+const LAST_NAME = {
+    id: "LAST_NAME",
+    type: FieldTypes.INPUT_TEXT,
+    label: "Last Name",
+    visibility: VisibilityBuilder.isNotVisible().when(FieldPredicate.field(FIRST_NAME).isUndefined()),
+};
+
+const EMAIL = {
+    id: "EMAIL",
+    type: FieldTypes.INPUT_EMAIL,
+    label: "Email",
+};
+
+const PHONE = {
+    id: "PHONE",
+    type: FieldTypes.INPUT_TEXT,
+    label: "Phone",
+};
+
+const PASSWORD = {
+    id: "PASSWORD",
+    type: FieldTypes.INPUT_PASSWORD,
+    label: "Enter your password",
+};
+
+const PASSWORD_CONFIRMATION = {
+    id: "PASSWORD_CONFIRMATION",
+    type: FieldTypes.INPUT_PASSWORD,
+    label: "Confirm your password",
+    getValidation(context) {
+        return ValidationUtils.isDefinedAndEqualTo(this, context, context[PASSWORD.id], "The passwords should be identical.");
+    }
+};
+
+const NUMBER = {
+    id: "NUMBER",
+    type: FieldTypes.INPUT_NUMBER,
+    label: "Enter a number",
+};
+
+const AMOUNT = {
+    id: "AMOUNT",
+    type: FieldTypes.INPUT_NUMBER,
+    label: "Enter an amount",
+    symbol: "€"
 };
 
 const BLOCKS = {
@@ -69,17 +76,17 @@ const BLOCKS = {
     IDENTITY: {
         id:"IDENTITY",
         label: "Personal information",
-        fields: [FIELDS.FIRST_NAME, FIELDS.LAST_NAME]
+        fields: [FIRST_NAME, LAST_NAME]
     },
     CONTACT: {
         id:"CONTACT",
         label: "Contact",
-        fields: [FIELDS.EMAIL, FIELDS.PHONE]
+        fields: [EMAIL, PHONE]
     },
     PASSWORD: {
         id:"PASSWORD",
         label: "Password",
-        fields: [FIELDS.PASSWORD, FIELDS.PASSWORD_CONFIRMATION],
+        fields: [PASSWORD, PASSWORD_CONFIRMATION],
         ctaLabel: "Submit"
     }
 };

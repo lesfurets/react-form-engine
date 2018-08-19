@@ -57,4 +57,32 @@ describe("FormEngine/View/FieldView", () => {
         });
     });
 
+    describe("Visibility", () => {
+        it("Should display field by default", () => {
+            let container = shallow(<FieldView field={field}
+                                               fieldState={FIELD_STATE.DEFAULT}
+                                               errorMessage={""}/>);
+
+            expect(container.find(".FieldView").length).toBe(1);
+        });
+
+        it("Should display field if specified", () => {
+            let container = shallow(<FieldView field={field}
+                                               fieldState={FIELD_STATE.DEFAULT}
+                                               isVisible={true}
+                                               errorMessage={""}/>);
+
+            expect(container.find(".FieldView").length).toBe(1);
+        });
+
+        it("Should not display field if specified", () => {
+            let container = shallow(<FieldView field={field}
+                                               fieldState={FIELD_STATE.DEFAULT}
+                                               isVisible={false}
+                                               errorMessage={""}/>);
+
+            expect(container.find(".FieldView").length).toBe(0);
+        });
+    });
+
 });

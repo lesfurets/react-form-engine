@@ -1,22 +1,23 @@
 import React from "react";
 import {FIELD_EVENT, FIELD_STATE, FieldWrapperComponent} from "../../../src/component/wrapper/FieldWrapper";
-import {ERROR, initTest, setFieldValue} from "../../../test/test-utils";
+import {ERROR, initTest, IS_NOT_VISIBLE, IS_VISIBLE, setFieldValue} from "../../../test/test-utils";
 import {VALID} from "../../../src/definition/Validation";
-import {shallow} from "enzyme/build/index";
+import {shallow, mount} from "enzyme/build/index";
 import {EMPTY_CALLBACK} from "../../test-utils";
-import {BLOCK_EVENT} from "../../../src/component/wrapper/BlockWrapper";
+import {Visibility} from "../../../src/definition/Visibility";
 
 initTest();
 
 describe("FormEngine/Wrapper/FieldWrapper", () => {
 
+    let DefaultView = () => <div/>;
     let testId = 'testChild1';
     let model = {id: testId, type: 'type-test'};
     let props = {
         field: model,
         setFieldValue: EMPTY_CALLBACK,
         fieldContext: {},
-        View: () => <div/>
+        View: DefaultView
     };
 
     describe("States", () => {
@@ -79,6 +80,24 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             // Then
             let {fieldState} = container.instance().getState();
             expect(fieldState).toBe(FIELD_STATE.ERROR);
+        });
+
+        it("Should pass state to children", () => {
+            // Given
+            let fieldContext = {[testId]:"OK"};
+            let field = {
+                id: testId,
+                type: 'type-test',
+                getValidation: () => VALID
+            };
+
+            // When
+            let container = shallow(<FieldWrapperComponent {...props}
+                                                           field={field}
+                                                           fieldContext={fieldContext}/>);
+
+            // Then
+            expect(container.find(DefaultView).props().fieldState).toBe(FIELD_STATE.VALID);
         });
 
     });
@@ -148,6 +167,49 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
 
             // Then
             expect(setFieldValue).toHaveBeenCalledWith(model.id, testValue);
+        });
+
+    });
+
+    describe("Visibility", () => {
+
+        it("Should call visibility method", () => {
+            let predicate = jasmine.createSpy();
+            let fieldContext = {test:"test"};
+            // When
+            mount(<FieldWrapperComponent {...props}
+                                         fieldContext={fieldContext}
+                                         field={{
+                                             ...props.field,
+                                             visibility: new Visibility(true, predicate)
+                                         }}/>);
+
+            // Then
+            expect(predicate).toHaveBeenCalledWith(fieldContext);
+        });
+
+        it("Should pass visibility true to children", () => {
+            // When
+            let container = mount(<FieldWrapperComponent {...props}
+                                                         field={{
+                                                             ...props.field,
+                                                             visibility: new Visibility(true, () => true)
+                                                         }}/>);
+
+            // Then
+            expect(container.find(DefaultView).props().isVisible).toBe(true);
+        });
+
+        it("Should pass visibility false to children", () => {
+            // When
+            let container = mount(<FieldWrapperComponent {...props}
+                                                         field={{
+                                                             ...props.field,
+                                                             visibility: new Visibility(false, () => true)
+                                                         }}/>);
+
+            // Then
+            expect(container.find(DefaultView).props().isVisible).toBe(false);
         });
 
     });

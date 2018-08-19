@@ -1,15 +1,9 @@
 import React from "react";
-import {configure} from "enzyme";
-import Adapter from 'enzyme-adapter-react-16';
 
 import {FieldTypes, FieldTypesDetails} from "../../src/definition/FieldTypes";
-import {FieldInjector, UNKNOWN_FIELD} from "../../src/definition/FieldInjector";
-import {TextField} from "../../src/component/field/TextField";
-import {EmailField} from "../../src/component/field/EmailField";
-import {NumberField} from "../../src/component/field/NumberField";
-import {PasswordField} from "../../src/component/field/PasswordField";
+import {initTest} from "../test-utils";
 
-configure({adapter: new Adapter()});
+initTest();
 
 describe("FormEngine/Definition/FieldTypes", () => {
 

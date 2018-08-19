@@ -1,9 +1,7 @@
 import React from "react";
 import {shallow} from "enzyme";
-import {EmailField} from "../../../src/component/field/EmailField";
 import {initTest} from "../../test-utils";
 import {Cta, CTA_TYPE} from "../../../src/component/utils/Cta";
-import {BLOCK_EVENT} from "../../../src/component/wrapper/BlockWrapper";
 
 initTest();
 

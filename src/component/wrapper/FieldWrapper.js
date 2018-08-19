@@ -51,6 +51,7 @@ export class FieldWrapperComponent extends React.Component {
 
     render() {
         let {View, field, tabIndex, fieldContext} = this.props;
+        let isVisible = field.hasOwnProperty('visibility') ? field.visibility.evaluate(fieldContext): true;
         let contextValue = fieldContext[field.id];
         let {fieldState, validation} = this.getState();
         let Field = FieldInjector.inject(field.type);
@@ -58,6 +59,7 @@ export class FieldWrapperComponent extends React.Component {
         return (
             <div className={`FieldWrapper ${fieldState} ${field.id} ${field.type}`}>
                 <View field={field}
+                      isVisible={isVisible}
                       onEvent={this.onEvent}
                       errorMessage={validation.message}
                       fieldState={fieldState}>
@@ -74,7 +76,7 @@ export class FieldWrapperComponent extends React.Component {
 FieldWrapperComponent.propTypes = {
     field: PropTypes.shape({
         getValidation: PropTypes.func,
-        isVisible: PropTypes.func
+        visibility: PropTypes.object
     }).isRequired,
     View: PropTypes.func.isRequired,
     onEvent: PropTypes.func,

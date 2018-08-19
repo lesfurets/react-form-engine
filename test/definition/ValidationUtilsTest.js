@@ -1,10 +1,9 @@
 import React from "react";
-import {configure} from "enzyme";
-import Adapter from 'enzyme-adapter-react-16';
-import {Validation, VALID} from "../../src/definition/Validation";
+import {VALID} from "../../src/definition/Validation";
 import {ValidationUtils} from "../../src/definition/ValidationUtils";
+import {initTest} from "../test-utils";
 
-configure({adapter: new Adapter()});
+initTest();
 
 describe("FormEngine/Definition/ValidationUtils", () => {
 
