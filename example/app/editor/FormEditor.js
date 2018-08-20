@@ -10,6 +10,8 @@ import {EMPTY_CALLBACK} from "../../../src/definition/props-utils";
 
 import "../../styles/json-editor.less";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {VisibilityBuilder} from "../../../src/definition/VisibilityUtils";
+import {Predicates} from "../../../src/definition/Predicates";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -32,6 +34,8 @@ const generateNewField = () => ({
     label: "Enter field name",
     type: FieldTypes.INPUT_TEXT
 });
+
+const generateVisibilityRules = () => VisibilityBuilder.isNotVisible().when(Predicates.field("").isDefined());
 
 class FormEditor extends React.Component {
     constructor(props) {
@@ -80,14 +84,24 @@ class FormEditor extends React.Component {
                 model.reduce((flat, block) => flat.concat(block.fields), [])
                     .filter(field => field.id === element.id)
                     .forEach(field => field.type = details);
-                console.log(model);
                 this.props.onChange(model);
                 break;
             case FIELD_EDITOR_EVENT.EDIT_PROPERTY:
                 model.reduce((flat, block) => flat.concat(block.fields), [])
                     .filter(field => field.id === element.id)
                     .forEach(field => field[details.key] = details.value);
-                console.log(model);
+                this.props.onChange(model);
+                break;
+            case FIELD_EDITOR_EVENT.ADD_VISIBILITY:
+                model.reduce((flat, block) => flat.concat(block.fields), [])
+                    .filter(field => field.id === element.id)
+                    .forEach(field => field.visibility = generateVisibilityRules());
+                this.props.onChange(model);
+                break;
+            case FIELD_EDITOR_EVENT.CHANGE_VISIBILITY:
+                model.reduce((flat, block) => flat.concat(block.fields), [])
+                    .filter(field => field.id === element.id)
+                    .forEach(field => field.visibility = details);
                 this.props.onChange(model);
                 break;
             case FIELD_EDITOR_EVENT.DELETE:

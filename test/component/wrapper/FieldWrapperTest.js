@@ -3,7 +3,7 @@ import {FIELD_EVENT, FIELD_STATE, FieldWrapperComponent} from "../../../src/comp
 import {ERROR, initTest, IS_NOT_VISIBLE, IS_VISIBLE, setFieldValue} from "../../../test/test-utils";
 import {VALID} from "../../../src/definition/Validation";
 import {shallow, mount} from "enzyme/build/index";
-import {EMPTY_CALLBACK} from "../../test-utils";
+import {EMPTY_CALLBACK, mockPredicate} from "../../test-utils";
 import {Visibility} from "../../../src/definition/Visibility";
 
 initTest();
@@ -181,19 +181,21 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                                          fieldContext={fieldContext}
                                          field={{
                                              ...props.field,
-                                             visibility: new Visibility(true, predicate)
+                                             visibility: new Visibility(true, mockPredicate(predicate))
                                          }}/>);
 
             // Then
             expect(predicate).toHaveBeenCalledWith(fieldContext);
         });
 
+        let simplePredicate = mockPredicate(() => true)
+
         it("Should pass visibility true to children", () => {
             // When
             let container = mount(<FieldWrapperComponent {...props}
                                                          field={{
                                                              ...props.field,
-                                                             visibility: new Visibility(true, () => true)
+                                                             visibility: new Visibility(true, simplePredicate)
                                                          }}/>);
 
             // Then
@@ -205,7 +207,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let container = mount(<FieldWrapperComponent {...props}
                                                          field={{
                                                              ...props.field,
-                                                             visibility: new Visibility(false, () => true)
+                                                             visibility: new Visibility(false, simplePredicate)
                                                          }}/>);
 
             // Then

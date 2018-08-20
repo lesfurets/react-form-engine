@@ -10,6 +10,8 @@ export const createTestStore = () => new createStore(reducer);
 
 export const initTest = () => configure({adapter: new Adapter()});
 
+export const mockPredicate = (predicate) => ({evaluate:predicate});
+
 export const EMPTY_CALLBACK = () => {};
 
 export const shallowRedux = (Component, props) => {

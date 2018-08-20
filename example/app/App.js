@@ -10,6 +10,7 @@ import JsonEditor from "./editor/JsonEditor";
 import FormEditor from "./editor/FormEditor";
 import {VisibilityBuilder} from "../../src/definition/VisibilityUtils";
 import {FieldPredicate} from "../../src/definition/FieldPredicate";
+import {Predicates} from "../../src/definition/Predicates";
 
 const FIRST_NAME = {
     id: "FIRST_NAME",
@@ -24,7 +25,7 @@ const LAST_NAME = {
     id: "LAST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "Last Name",
-    visibility: VisibilityBuilder.isNotVisible().when(FieldPredicate.field(FIRST_NAME).isUndefined()),
+    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isUndefined()),
 };
 
 const EMAIL = {

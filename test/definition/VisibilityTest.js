@@ -1,5 +1,5 @@
 import React from "react";
-import {initTest} from "../test-utils";
+import {initTest, mockPredicate} from "../test-utils";
 import {Visibility} from "../../src/definition/Visibility";
 
 initTest();
@@ -12,7 +12,7 @@ describe("FormEngine/Definition/Visibility", () => {
             // Given
             let isVisible = false;
             let predicate = jasmine.createSpy();
-            let visibility = new Visibility(isVisible, predicate);
+            let visibility = new Visibility(isVisible, mockPredicate(predicate));
             let context = {test: "test"};
 
             // When
@@ -24,7 +24,7 @@ describe("FormEngine/Definition/Visibility", () => {
 
         let checkEvaluation = (rule, predicate, isVisible) => {
             // Given
-            let visibility = new Visibility(rule, () => predicate);
+            let visibility = new Visibility(rule, {evaluate: () => predicate});
 
             // Then
             expect(visibility.evaluate()).toBe(isVisible);

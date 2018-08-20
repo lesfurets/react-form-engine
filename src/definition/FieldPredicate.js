@@ -1,25 +1,35 @@
+import {ValueUtils} from "./ValueUtils";
+
+export const FIELD_PREDICATE_TYPE = {
+    IS_DEFINED: "IS_DEFINED",
+    IS_UNDEFINED: "IS_UNDEFINED",
+};
+
 export class FieldPredicate {
-    constructor(fieldId) {
+    constructor(fieldId, type) {
         this.fieldId = fieldId;
+        if(type !== undefined){
+            this.type = type;
+        }
     }
 
     isDefined(){
-        return (context) => {
-            return context[this.fieldId] !== undefined &&
-                context[this.fieldId] !== null &&
-                context[this.fieldId] !== "";
-        }
+        this.type = FIELD_PREDICATE_TYPE.IS_DEFINED;
+        return this;
     }
 
     isUndefined(){
-        return (context) => {
-            return context[this.fieldId] === undefined ||
-                context[this.fieldId] === null ||
-                context[this.fieldId] === "";
+        this.type = FIELD_PREDICATE_TYPE.IS_UNDEFINED;
+        return this;
+    }
+
+    evaluate(context){
+        switch (this.type){
+            case FIELD_PREDICATE_TYPE.IS_DEFINED:
+                return ValueUtils.isDefined(context[this.fieldId]);
+            case FIELD_PREDICATE_TYPE.IS_UNDEFINED:
+                return !ValueUtils.isDefined(context[this.fieldId]);
         }
     }
 
-    static field(field) {
-        return new FieldPredicate(field.id);
-    }
 }
