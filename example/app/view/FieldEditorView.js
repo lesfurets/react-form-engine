@@ -20,6 +20,7 @@ export const FIELD_EDITOR_EVENT = {
     EDIT_TYPE: "EDIT_FIELD_TYPE",
     ADD_VISIBILITY: "ADD_VISIBILITY",
     CHANGE_VISIBILITY: "CHANGE_VISIBILITY",
+    DELETE_VISIBILITY: "DELETE_VISIBILITY",
     DELETE: "DELETE_FIELD",
 };
 
@@ -56,7 +57,8 @@ export class FieldEditorView extends React.Component {
                         </div>
                     ))}
                     {hasVisibility ? <VisibilityEditor visibility={field.visibility}
-                                                       onChange={(visibility) => onEvent(FIELD_EDITOR_EVENT.CHANGE_VISIBILITY, visibility)}/> : null}
+                                                       onChange={(visibility) => onEvent(FIELD_EDITOR_EVENT.CHANGE_VISIBILITY, visibility)}
+                                                       onDelete={() => onEvent(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}
                 </CardContent>
                 <CardActions className="FieldEditorView-actions" disableActionSpacing>
                     <Button className="FieldEditorView-visibility"

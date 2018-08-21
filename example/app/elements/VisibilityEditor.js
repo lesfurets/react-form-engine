@@ -2,15 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import {AllTypes, FieldTypesDetails} from "../../../src/definition/FieldTypes";
-import {FIELD_PREDICATE_TYPE, FieldPredicate} from "../../../src/definition/FieldPredicate";
-import {VisibilityBuilder} from "../../../src/definition/VisibilityUtils";
 import {Visibility} from "../../../src/definition/Visibility";
-import {Predicates} from "../../../src/definition/Predicates";
 import {PredicateEditor} from "./PredicateEditor";
+import Clear from "@material-ui/icons/Clear";
+import IconButton from "@material-ui/core/IconButton";
 
-export const VisibilityEditor = ({visibility, onChange}) => (
+import "../../styles/elements/visibility-editor.less";
+
+export const VisibilityEditor = ({visibility, onChange, onDelete}) => (
     <div className="VisibilityEditor">
+        <div className="VisibilityEditor-header">
+            <div className="VisibilityEditor-label">Visibility rule:</div>
+            <IconButton onClick={onDelete}>
+                <Clear/>
+            </IconButton>
+        </div>
+        <div className="VisibilityEditor-rule">
         This field&nbsp;
         <TextField select
                    value={visibility.isVisible.toString()}
@@ -21,6 +28,7 @@ export const VisibilityEditor = ({visibility, onChange}) => (
         </TextField>
         <PredicateEditor predicate={visibility.predicate}
                          onChange={(predicate) => onChange(updateVisibility(visibility.isVisible, predicate))}/>
+        </div>
     </div>
 );
 
@@ -30,5 +38,6 @@ let updateVisibility = (isVisible,predicate) => {
 
 VisibilityEditor.propTypes = {
     visibility: PropTypes.object,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onDelete: PropTypes.func
 };
