@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
-import TextField from "@material-ui/core/TextField";
 import IconButton from '@material-ui/core/IconButton';
 import Send from '@material-ui/icons/Send';
+import {Controlled as CodeMirror} from 'react-codemirror2'
+import "codemirror/mode/javascript/javascript";
 
 import "../../styles/json-editor.less";
 
@@ -19,8 +19,8 @@ class JsonEditor extends React.Component {
         this.sendModel = this.sendModel.bind(this);
     }
 
-    onChange(event) {
-        this.setState({model: event.target.value});
+    onChange(editor, data, value) {
+        this.setState({model: value});
     }
 
     sendModel() {
@@ -36,18 +36,20 @@ class JsonEditor extends React.Component {
                                     <Send color="primary"/>
                                 </IconButton>
                             }/>
-                <CardContent className={"JsonEditor-container"}>
-                    <TextField
-                        id="multiline-flexible"
-                        label="You can edit your model here"
-                        multiline
-                        rowsMax="20"
-                        value={this.state.model}
-                        onChange={this.onChange}
-                        className={"JsonEditor-input"}
-                        margin="normal"
-                    />
-                </CardContent>
+                {/*<CodeMirror value={this.state.model} onChange={this.onChange} options={{*/}
+                    {/*lineNumbers: true,*/}
+                    {/*mode: 'javascript'*/}
+                {/*}} />*/}
+                <CodeMirror
+                    value={this.state.model}
+                    className={"JsonEditor-mirror"}
+                    options={{
+                        mode: 'xml',
+                        theme: 'material',
+                        lineNumbers: true
+                    }}
+                    onBeforeChange={this.onChange}
+                />
             </Card>
         );
     }

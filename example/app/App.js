@@ -25,7 +25,6 @@ const LAST_NAME = {
     id: "LAST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "Last Name",
-    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isUndefined()),
 };
 
 const EMAIL = {
@@ -50,6 +49,7 @@ const PASSWORD_CONFIRMATION = {
     id: "PASSWORD_CONFIRMATION",
     type: FieldTypes.INPUT_PASSWORD,
     label: "Confirm your password",
+    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isUndefined()),
     getValidation(context) {
         return ValidationUtils.isDefinedAndEqualTo(this, context, context[PASSWORD.id], "The passwords should be identical.");
     }
@@ -94,7 +94,7 @@ const BLOCKS = {
 
 const EDITOR_STATE = {
     OVERVIEW: {id: "OVERVIEW", label: "Overview"},
-    EDIT_FORM: {id: "EDIT_FORM", label: "Edit"},
+    // EDIT_FORM: {id: "EDIT_FORM", label: "Edit"},
     EDIT_JSON: {id: "EDIT_JSON", label: "As Json"},
 };
 
@@ -102,7 +102,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            view: EDITOR_STATE.EDIT_FORM,
+            view: EDITOR_STATE.EDIT_JSON,
             model: Object.values(BLOCKS)
         };
         this.handleTabChange = this.handleTabChange.bind(this);
@@ -119,6 +119,7 @@ class App extends React.Component {
     };
 
     onEvent(event, element, details) {
+        console.log(event, element, details);
     }
 
     render() {
