@@ -94,7 +94,7 @@ const BLOCKS = {
 
 const EDITOR_STATE = {
     OVERVIEW: {id: "OVERVIEW", label: "Overview"},
-    // EDIT_FORM: {id: "EDIT_FORM", label: "Edit"},
+    EDIT_FORM: {id: "EDIT_FORM", label: "Edit"},
     EDIT_JSON: {id: "EDIT_JSON", label: "As Json"},
 };
 
@@ -102,7 +102,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            view: EDITOR_STATE.EDIT_JSON,
+            view: EDITOR_STATE.EDIT_FORM,
             model: Object.values(BLOCKS)
         };
         this.handleTabChange = this.handleTabChange.bind(this);

@@ -45,9 +45,8 @@ export class FieldEditorView extends React.Component {
                                     onChange={(type => onEvent(FIELD_EDITOR_EVENT.EDIT_TYPE, type))}/>
                     </div>
                     {FieldTypesDetails[field.type].properties.map(property => (
-                        <div>
-                            <PropertyEditor key={property.key}
-                                            label={property.label}
+                        <div key={property.key}>
+                            <PropertyEditor label={property.label}
                                             value={field[property.key]}
                                             onChange={(value => onEvent(FIELD_EDITOR_EVENT.EDIT_PROPERTY, {
                                                 key: property.key,
