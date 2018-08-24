@@ -4,10 +4,7 @@ import {FieldInjector} from "../../definition/FieldInjector";
 import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/Validation";
 import {EMPTY_CALLBACK} from "../../definition/props-utils";
-
-export const FIELD_EVENT = {
-    SET_VALUE: "set-value",
-};
+import {FIELD_EVENT} from "../../definition/event/events";
 
 export const FIELD_STATE = {
     DEFAULT: "field-default",

@@ -1,8 +1,9 @@
 import React from "react";
-import {BLOCK_EVENT, BLOCK_STATE} from "./BlockWrapper";
+import {BLOCK_STATE} from "./BlockWrapper";
 import {BlockWrapper} from "./BlockWrapper";
 import PropTypes from "prop-types";
 import {EMPTY_CALLBACK} from "../../definition/props-utils";
+import {BLOCK_EVENT} from "../../definition/event/events";
 
 export default class FormWrapper extends React.Component {
     constructor() {
@@ -25,7 +26,7 @@ export default class FormWrapper extends React.Component {
 
     onBlockEvent(event, block, details) {
         switch (event) {
-            case BLOCK_EVENT.VALID:
+            case BLOCK_EVENT.NEXT:
                 this.setState({currentBlockIndex: block.index + 1});
                 break;
             case BLOCK_EVENT.PREVIOUS:

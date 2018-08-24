@@ -2,7 +2,8 @@ import React from "react";
 import {shallow, mount} from "enzyme";
 import {initTest} from "../../test-utils";
 import {BlockView} from "../../../src/component/view/BlockView";
-import {BLOCK_EVENT, BLOCK_STATE} from "../../../src/component/wrapper/BlockWrapper";
+import {BLOCK_STATE} from "../../../src/component/wrapper/BlockWrapper";
+import {BLOCK_EVENT} from "../../../src/definition/event/events";
 
 initTest();
 
@@ -52,12 +53,12 @@ describe("FormEngine/View/BlockView", () => {
         });
 
         it("Should call validation when clicking next", () => {
-            let onValidation = jasmine.createSpy();
-            let container = shallow(<BlockView block={{...blockTest, index: 1}} onValidation={onValidation}/>);
+            let onEvent = jasmine.createSpy();
+            let container = shallow(<BlockView block={{...blockTest, index: 1}} onEvent={onEvent}/>);
 
             container.find(".BlockView-next").simulate("click");
 
-            expect(onValidation).toHaveBeenCalled();
+            expect(onEvent).toHaveBeenCalledWith(BLOCK_EVENT.NEXT);
         });
 
         it("Should call event when clicking previous", () => {

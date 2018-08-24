@@ -5,9 +5,10 @@ import {shallow, mount} from "enzyme";
 import reducer from "../../../src/redux/reducers";
 import {ERROR, initTest} from "../../../test/test-utils";
 import {FieldWrapper} from "../../../src/component/wrapper/FieldWrapper";
-import {BlockWrapper, BLOCK_EVENT, BlockWrapperComponent} from "../../../src/component/wrapper/BlockWrapper";
+import {BlockWrapper, BlockWrapperComponent} from "../../../src/component/wrapper/BlockWrapper";
 import {VALID} from "../../../src/definition/Validation";
 import {Provider} from "react-redux";
+import {BLOCK_EVENT} from "../../../src/definition/event/events";
 
 initTest();
 
@@ -17,10 +18,10 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
     let FieldView = ({children}) => (<div>{children}</div>);
 
-    let TestBlockView = ({children, onValidation}) => (
+    let TestBlockView = ({children, onEvent}) => (
         <div>
             <div>{children}</div>
-            <button className="TestButton" onClick={onValidation}/>
+            <button className="TestButton" onClick={() => onEvent(BLOCK_EVENT.NEXT)}/>
         </div>
     );
 
@@ -66,7 +67,7 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
                 </Provider>);
             container.find(".TestButton").simulate("click");
             if (success) {
-                expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.VALID, block);
+                expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.NEXT, block);
             } else {
                 expect(onBlockEvent).not.toHaveBeenCalled();
             }

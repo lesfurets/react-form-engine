@@ -1,8 +1,6 @@
 import React from "react";
-import {shallow, mount} from "enzyme";
+import {shallow} from "enzyme";
 import {initTest} from "../../test-utils";
-import {BlockView} from "../../../src/component/view/BlockView";
-import {BLOCK_EVENT, BLOCK_STATE} from "../../../src/component/wrapper/BlockWrapper";
 import {FormView} from "../../../src/component/view/FormView";
 
 initTest();
