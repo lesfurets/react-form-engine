@@ -6,6 +6,7 @@ import {shallow, mount} from "enzyme/build/index";
 import {EMPTY_CALLBACK, mockPredicate} from "../../test-utils";
 import {Visibility} from "../../../src/definition/Visibility";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
+import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 
 initTest();
 
@@ -162,7 +163,8 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let setFieldValue = jasmine.createSpy();
 
             // When
-            let container = shallow(<FieldWrapperComponent {...props} setFieldValue={setFieldValue}
+            let container = shallow(<FieldWrapperComponent {...props}
+                                                           setFieldValue={setFieldValue}
                                                            forceValidation={true}/>);
             container.instance().onValueChange(testValue);
 
@@ -225,7 +227,8 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let onEvent = jasmine.createSpy();
 
             // When
-            let container = shallow(<FieldWrapperComponent {...props} onEvent={onEvent}
+            EVENT_MULTICASTER.subscribe(onEvent);
+            let container = shallow(<FieldWrapperComponent {...props}
                                                            forceValidation={true}/>);
             container.instance().onValueChange(testValue);
 

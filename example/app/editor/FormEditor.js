@@ -44,7 +44,6 @@ class FormEditor extends React.Component {
     }
 
     onEvent(event, element, details) {
-        console.log(event, element, details);
         let {model} = this.props;
         switch (event) {
             case FORM_EDITOR_EVENT.NEW_BLOCK:

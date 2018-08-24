@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import {FieldWrapper} from "./FieldWrapper";
 import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/Validation";
-import {EMPTY_CALLBACK} from "../../definition/props-utils";
 import {BLOCK_EVENT} from "../../definition/event/events";
+import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 
 export const BLOCK_STATE = {
     TODO: "block-todo",
@@ -18,30 +18,24 @@ export class BlockWrapperComponent extends React.Component {
         super(props);
         this.state = {forceValidation: false};
         this.onEvent = this.onEvent.bind(this);
-        this.onFieldEvent = this.onFieldEvent.bind(this);
         this.validate = this.validate.bind(this);
     }
 
-    validate(){
-        let {block, fieldContext, onEvent} = this.props;
-        if(block.fields
+    validate() {
+        let {block, fieldContext} = this.props;
+        if (block.fields
             .map(field => field.hasOwnProperty('getValidation') ? field.getValidation(fieldContext) : VALID)
             .map(validation => validation.isValid)
-            .reduce((acc, value) => acc && value, true)){
-            onEvent(BLOCK_EVENT.NEXT,block);
+            .reduce((acc, value) => acc && value, true)) {
+            EVENT_MULTICASTER.event(BLOCK_EVENT.VALIDATED, block);
         }
         this.setState({forceValidation: true});
     }
 
-    onFieldEvent(event, element, details) {
-        this.props.onEvent(event, element, details);
-    }
-
     onEvent(event, details) {
-        if(event === BLOCK_EVENT.NEXT) {
+        EVENT_MULTICASTER.event(event, this.props.block, details);
+        if (event === BLOCK_EVENT.NEXT) {
             this.validate();
-        } else {
-            this.props.onEvent(event, this.props.block, details);
         }
     }
 
@@ -53,14 +47,11 @@ export class BlockWrapperComponent extends React.Component {
                       blockState={blockState}
                       onEvent={this.onEvent}>
                     {this.props.block.fields.map((field, index) =>
-                        <FieldWrapper
-                            key={field.id}
-                            field={{...field}}
-                            tabIndex={index + 1}
-                            onEvent={this.onFieldEvent}
-                            forceValidation={this.state.forceValidation}
-                            View={FieldView}
-                        />)}
+                        <FieldWrapper key={field.id}
+                                      field={{...field}}
+                                      tabIndex={index + 1}
+                                      forceValidation={this.state.forceValidation}
+                                      View={FieldView}/>)}
                 </View>
             </div>
         );
@@ -69,7 +60,6 @@ export class BlockWrapperComponent extends React.Component {
 
 BlockWrapperComponent.propTypes = {
     blockIndex: PropTypes.number,
-    onEvent: PropTypes.func,
     blockState: PropTypes.string,
     block: PropTypes.object.isRequired,
     fieldContext: PropTypes.object.isRequired,
@@ -79,7 +69,6 @@ BlockWrapperComponent.propTypes = {
 
 BlockWrapperComponent.defaultProps = {
     blockState: BLOCK_STATE.DOING,
-    onEvent: EMPTY_CALLBACK,
     hasPrevious: false,
 };
 

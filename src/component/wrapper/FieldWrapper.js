@@ -5,6 +5,7 @@ import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/Validation";
 import {EMPTY_CALLBACK} from "../../definition/props-utils";
 import {FIELD_EVENT} from "../../definition/event/events";
+import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 
 export const FIELD_STATE = {
     DEFAULT: "field-default",
@@ -14,8 +15,8 @@ export const FIELD_STATE = {
 
 export class FieldWrapperComponent extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.getState = this.getState.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
         this.onEvent = this.onEvent.bind(this);
@@ -37,13 +38,12 @@ export class FieldWrapperComponent extends React.Component {
     }
 
     onValueChange(value) {
-        let {setFieldValue, onEvent, field} = this.props;
-        setFieldValue(field.id, value);
-        onEvent(FIELD_EVENT.SET_VALUE, field, value);
+        this.props.setFieldValue(this.props.field.id, value);
+        this.onEvent(FIELD_EVENT.SET_VALUE, value);
     }
 
     onEvent(event, details) {
-        this.props.onEvent(event, this.props.field, details);
+        EVENT_MULTICASTER.event(event, this.props.field, details);
     }
 
     render() {
@@ -76,7 +76,6 @@ FieldWrapperComponent.propTypes = {
         visibility: PropTypes.object
     }).isRequired,
     View: PropTypes.func.isRequired,
-    onEvent: PropTypes.func,
     setFieldValue: PropTypes.func,
     forceValidation: PropTypes.bool,
     tabIndex: PropTypes.number
@@ -84,7 +83,6 @@ FieldWrapperComponent.propTypes = {
 
 FieldWrapperComponent.defaultProps = {
     forceValidation: false,
-    onEvent: EMPTY_CALLBACK,
     tabIndex: 1
 };
 

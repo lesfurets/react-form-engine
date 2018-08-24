@@ -9,6 +9,7 @@ import {BlockWrapper, BlockWrapperComponent} from "../../../src/component/wrappe
 import {VALID} from "../../../src/definition/Validation";
 import {Provider} from "react-redux";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
+import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 
 initTest();
 
@@ -58,18 +59,19 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
                 ]
             };
             block.fields = block.fields.concat(fields);
+            EVENT_MULTICASTER.subscribe(onBlockEvent);
             let container = mount(
                 <Provider store={store}>
                     <BlockWrapper block={block}
-                                  onEvent={onBlockEvent}
                                   View={TestBlockView}
                                   FieldView={FieldView}/>
                 </Provider>);
             container.find(".TestButton").simulate("click");
+            expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.NEXT, block, undefined);
             if (success) {
-                expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.NEXT, block);
+                expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.VALIDATED, block, undefined);
             } else {
-                expect(onBlockEvent).not.toHaveBeenCalled();
+                expect(onBlockEvent).not.toHaveBeenCalledWith(BLOCK_EVENT.VALIDATED, block, undefined);
             }
         };
 
@@ -128,9 +130,9 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
             let onEvent = jasmine.createSpy();
 
             // When
+            EVENT_MULTICASTER.subscribe(onEvent);
             let container = shallow(<BlockWrapperComponent
                 block={blockTest}
-                onEvent={onEvent}
                 View={TestBlockView}
                 FieldView={FieldView}
                 fieldContext={{}}/>);
@@ -139,26 +141,6 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
             // Then
             expect(onEvent).toHaveBeenCalledWith(event, blockTest, details);
-        });
-
-        it("Should forward field events", () => {
-            // Given
-            let event = "event";
-            let field = "field";
-            let details = "details";
-            let onEvent = jasmine.createSpy();
-
-            // When
-            let container = shallow(<BlockWrapperComponent
-                block={blockTest}
-                onEvent={onEvent}
-                View={TestBlockView}
-                FieldView={FieldView}
-                fieldContext={{}}/>);
-            container.instance().onFieldEvent(event, field, details);
-
-            // Then
-            expect(onEvent).toHaveBeenCalledWith(event, field, details);
         });
 
     });

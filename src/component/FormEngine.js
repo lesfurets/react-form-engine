@@ -8,8 +8,17 @@ import {FormView} from "./view/FormView";
 import {BlockView} from "./view/BlockView";
 import {FieldView} from "./view/FieldView";
 import {EMPTY_CALLBACK} from "../definition/props-utils";
+import {EVENT_MULTICASTER} from "../definition/event/EventMulticaster";
 
 export default class FormEngine extends React.Component {
+    componentWillMount() {
+        EVENT_MULTICASTER.subscribe(this.props.onEvent);
+    }
+
+    componentWillUnmount() {
+        EVENT_MULTICASTER.unsubscribe(this.props.onEvent);
+    }
+
     render() {
         let {FormView, BlockView, FieldView} = this.props;
         const store = createStore(reducer);

@@ -4,13 +4,11 @@ import {shallow} from "enzyme";
 import {initTest} from "../../../test/test-utils";
 import {BlockWrapper} from "../../../src/component/wrapper/BlockWrapper";
 import FormWrapper from "../../../src/component/wrapper/FormWrapper";
+import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 
 initTest();
 
 describe("FormEngine/Wrapper/FormWrapper", () => {
-    let emptyCallback = () => {
-    };
-
     let TestView = ({children}) => (<div>{children}</div>);
 
     let formModel = [
@@ -22,7 +20,6 @@ describe("FormEngine/Wrapper/FormWrapper", () => {
         it("Should render Blocks", () => {
             let container = shallow(<FormWrapper
                 form={formModel}
-                onEvent={emptyCallback}
                 View={TestView}
                 BlockView={TestView}
                 FieldView={TestView}/>);
@@ -39,9 +36,9 @@ describe("FormEngine/Wrapper/FormWrapper", () => {
             let onEvent = jasmine.createSpy();
 
             // When
+            EVENT_MULTICASTER.subscribe(onEvent);
             let container = shallow(<FormWrapper
                 form={formModel}
-                onEvent={onEvent}
                 View={TestView}
                 BlockView={TestView}
                 FieldView={TestView}/>);
@@ -49,26 +46,6 @@ describe("FormEngine/Wrapper/FormWrapper", () => {
 
             // Then
             expect(onEvent).toHaveBeenCalledWith(event, formModel, details);
-        });
-
-        it("Should forward block events", () => {
-            // Given
-            let event = "event";
-            let block = "block";
-            let details = "details";
-            let onEvent = jasmine.createSpy();
-
-            // When
-            let container = shallow(<FormWrapper
-                form={formModel}
-                onEvent={onEvent}
-                View={TestView}
-                BlockView={TestView}
-                FieldView={TestView}/>);
-            container.instance().onBlockEvent(event, block, details);
-
-            // Then
-            expect(onEvent).toHaveBeenCalledWith(event, block, details);
         });
 
     });

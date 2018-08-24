@@ -36,10 +36,6 @@ class JsonEditor extends React.Component {
                                     <Send color="primary"/>
                                 </IconButton>
                             }/>
-                {/*<CodeMirror value={this.state.model} onChange={this.onChange} options={{*/}
-                    {/*lineNumbers: true,*/}
-                    {/*mode: 'javascript'*/}
-                {/*}} />*/}
                 <CodeMirror
                     value={this.state.model}
                     className={"JsonEditor-mirror"}
