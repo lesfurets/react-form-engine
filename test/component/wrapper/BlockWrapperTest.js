@@ -10,6 +10,8 @@ import {VALID} from "../../../src/definition/Validation";
 import {Provider} from "react-redux";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
+import {VisibilityBuilder} from "../../../src/definition/VisibilityUtils";
+import {mockPredicate} from "../../test-utils";
 
 initTest();
 
@@ -106,18 +108,18 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
                 {id: 'testChild3', type: 'type-test', getValidation: () => VALID}]);
         });
 
-        // it("Should not validate if Field is visible and invalid", () => {
-        //     checkBlockValidation(false, {id: 'testChild1', type: 'type-test', getValidation: () => ERROR});
-        // });
+        it("Should not validate if Field is visible and invalid", () => {
+            checkBlockValidation(false, {id: 'testChild1', type: 'type-test', getValidation: () => ERROR});
+        });
 
-        // it("Should validate if Field in error if not visible", () => {
-        //     checkBlockValidation(true, {
-        //         id: 'testChild1',
-        //         type: 'type-test',
-        //         isVisible: () => false,
-        //         getValidation: () => ERROR
-        //     });
-        // });
+        it("Should validate if Field in error if not visible", () => {
+            checkBlockValidation(true, {
+                id: 'testChild1',
+                type: 'type-test',
+                visibility: VisibilityBuilder.isNotVisible().when(mockPredicate(() => true)),
+                getValidation: () => ERROR
+            });
+        });
 
     });
 

@@ -23,8 +23,12 @@ export class BlockWrapperComponent extends React.Component {
 
     validate() {
         let {block, fieldContext} = this.props;
+        block.fields
+            .filter(field => field.hasOwnProperty("visibility"))
+            .forEach(field => console.log(field.visibility.evaluate));
         if (block.fields
-            .map(field => field.hasOwnProperty('getValidation') ? field.getValidation(fieldContext) : VALID)
+            .filter(field => field.visibility === undefined || field.visibility.evaluate(fieldContext))
+            .map(field => field.getValidation === undefined ? VALID : field.getValidation(fieldContext))
             .map(validation => validation.isValid)
             .reduce((acc, value) => acc && value, true)) {
             EVENT_MULTICASTER.event(BLOCK_EVENT.VALIDATED, block);

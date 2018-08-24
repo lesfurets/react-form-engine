@@ -16,16 +16,22 @@ const FIRST_NAME = {
     id: "FIRST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "First Name",
-    getValidation(context) {
-        return ValidationUtils.isDefined(this, context, "The first name is mandatory");
-    }
+    // getValidation(context) {
+    //     return ValidationUtils.isDefined(this, context, "The first name is mandatory");
+    // }
 };
 
 const LAST_NAME = {
     id: "LAST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "Last Name",
+    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isUndefined()),
+    getValidation(context) {
+        return ValidationUtils.isDefinedAndEqualTo(this, context, "1", "The passwords should be identical.");
+    }
 };
+
+console.log(LAST_NAME.visibility.evaluate);
 
 const EMAIL = {
     id: "EMAIL",
@@ -102,7 +108,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            view: EDITOR_STATE.EDIT_FORM,
+            view: EDITOR_STATE.OVERVIEW,
             model: Object.values(BLOCKS)
         };
         this.handleTabChange = this.handleTabChange.bind(this);
