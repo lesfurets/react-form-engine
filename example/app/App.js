@@ -9,8 +9,8 @@ import Tab from '@material-ui/core/Tab';
 import JsonEditor from "./editor/JsonEditor";
 import FormEditor from "./editor/FormEditor";
 import {VisibilityBuilder} from "../../src/definition/VisibilityUtils";
-import {FieldPredicate} from "../../src/definition/FieldPredicate";
-import {Predicates} from "../../src/definition/Predicates";
+import {FieldPredicate} from "../../src/definition/predicate/FieldPredicate";
+import {Predicates} from "../../src/definition/predicate/Predicates";
 
 const FIRST_NAME = {
     id: "FIRST_NAME",

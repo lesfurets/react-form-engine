@@ -11,7 +11,7 @@ import {EMPTY_CALLBACK} from "../../../src/definition/props-utils";
 import "../../styles/json-editor.less";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {VisibilityBuilder} from "../../../src/definition/VisibilityUtils";
-import {Predicates} from "../../../src/definition/Predicates";
+import {Predicates} from "../../../src/definition/predicate/Predicates";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

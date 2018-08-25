@@ -19,7 +19,6 @@ export class EventMulticaster {
     }
 
     subscribeForElements(callback, elements) {
-        console.log(elements.map(element => element.id));
         this.subscribers.push(new Subscriber(callback, elements.map(element => element.id)));
     }
 

@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import {AllTypes, FieldTypesDetails} from "../../../src/definition/FieldTypes";
-import {FIELD_PREDICATE_TYPE, FieldPredicate} from "../../../src/definition/FieldPredicate";
+import {FIELD_PREDICATE_TYPE, FieldPredicate} from "../../../src/definition/predicate/FieldPredicate";
 import {VisibilityBuilder} from "../../../src/definition/VisibilityUtils";
 import {Visibility} from "../../../src/definition/Visibility";
-import {Predicates} from "../../../src/definition/Predicates";
+import {Predicates} from "../../../src/definition/predicate/Predicates";
 
 export const PredicateEditor = ({predicate, onChange}) => (
     <span className="PredicateEditor">

@@ -1,7 +1,7 @@
 import React from "react";
 import {initTest} from "../test-utils";
 import {VisibilityBuilder} from "../../src/definition/VisibilityUtils";
-import {FieldPredicate} from "../../src/definition/FieldPredicate";
+import {FieldPredicate} from "../../src/definition/predicate/FieldPredicate";
 import {ValueUtils} from "../../src/definition/ValueUtils";
 
 initTest();

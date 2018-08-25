@@ -5,6 +5,6 @@ export class Visibility {
     }
 
     evaluate(context) {
-        return this.predicate.evaluate(context) === this.isVisible;
+        return this.predicate.test(context) === this.isVisible;
     }
 }
