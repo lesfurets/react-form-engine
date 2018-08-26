@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import {Visibility} from "../../../src/definition/Visibility";
+import {Visibility} from "../../../src/definition/visibility/Visibility";
 import {PredicateEditor} from "./predicate/PredicateEditor";
 import Clear from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";

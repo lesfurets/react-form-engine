@@ -1,6 +1,6 @@
 import React from "react";
-import {initTest, mockPredicate} from "../test-utils";
-import {Visibility} from "../../src/definition/Visibility";
+import {initTest, mockPredicate} from "../../test-utils";
+import {Visibility} from "../../../src/definition/visibility/Visibility";
 
 initTest();
 
@@ -24,9 +24,10 @@ describe("FormEngine/Definition/Visibility", () => {
 
         let checkEvaluation = (rule, predicate, isVisible) => {
             // Given
-            let visibility = new Visibility(rule, {evaluate: () => predicate});
+            let visibility = new Visibility(rule, {test: () => predicate});
 
             // Then
+            console.log(visibility.evaluate())
             expect(visibility.evaluate()).toBe(isVisible);
         };
 

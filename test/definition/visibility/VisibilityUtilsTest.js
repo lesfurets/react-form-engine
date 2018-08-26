@@ -1,6 +1,6 @@
 import React from "react";
-import {initTest} from "../test-utils";
-import {VisibilityBuilder} from "../../src/definition/VisibilityUtils";
+import {initTest} from "../../test-utils";
+import {VisibilityBuilder} from "../../../src/definition/visibility/VisibilityUtils";
 
 initTest();
 

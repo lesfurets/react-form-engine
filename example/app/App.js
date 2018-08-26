@@ -2,13 +2,13 @@ import React from "react";
 import "../styles/app.less";
 import FormEngine from "../../src/index";
 import {FieldTypes} from "../../src/definition/FieldTypes";
-import {ValidationUtils} from "../../src/definition/ValidationUtils";
+import {ValidationUtils} from "../../src/definition/validation/ValidationUtils";
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import JsonEditor from "./editor/JsonEditor";
 import FormEditor from "./editor/FormEditor";
-import {VisibilityBuilder} from "../../src/definition/VisibilityUtils";
+import {VisibilityBuilder} from "../../src/definition/visibility/VisibilityUtils";
 import {FieldPredicate} from "../../src/definition/predicate/FieldPredicate";
 import {Predicates} from "../../src/definition/predicate/Predicates";
 

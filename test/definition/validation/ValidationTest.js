@@ -1,6 +1,6 @@
 import React from "react";
-import {VALID, Validation} from "../../src/definition/Validation";
-import {initTest} from "../test-utils";
+import {VALID, Validation} from "../../../src/definition/validation/Validation";
+import {initTest} from "../../test-utils";
 
 initTest();
 

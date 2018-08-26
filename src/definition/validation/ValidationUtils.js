@@ -1,4 +1,6 @@
 import {VALID, Validation} from "./Validation";
+import {Visibility} from "../visibility/Visibility";
+import {ValidationRule} from "./ValidationRule";
 
 export class ValidationUtils {
 
@@ -22,4 +24,23 @@ export class ValidationUtils {
         }
         return VALID;
     };
+}
+
+export class ValidationBuilder {
+    constructor(validation) {
+        this.validation = validation;
+    }
+
+    when(predicate) {
+        return new ValidationRule(this.validation, predicate);
+    }
+
+    static hasVisibility(validation) {
+        return new ValidationBuilder(validation)
+    }
+
+    static error(message) {
+        return ValidationBuilder.hasVisibility(new Validation(false, message));
+    }
+
 }

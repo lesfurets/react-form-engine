@@ -10,7 +10,7 @@ describe("FormEngine/Definition/Predicate/FieldPredicate", () => {
 
     let getContext = (contextValue) => ({[fieldId]: contextValue});
     let getPredicate = () => new FieldPredicate(fieldId);
-    let expectPredicate = (predicate, value) => expect(predicate.testAzer(getContext(value)));
+    let expectPredicate = (predicate, value) => expect(predicate.test(getContext(value)));
 
     describe("Not", () => {
 

@@ -6,11 +6,11 @@ import reducer from "../../../src/redux/reducers";
 import {ERROR, initTest} from "../../../test/test-utils";
 import {FieldWrapper} from "../../../src/component/wrapper/FieldWrapper";
 import {BlockWrapper, BlockWrapperComponent} from "../../../src/component/wrapper/BlockWrapper";
-import {VALID} from "../../../src/definition/Validation";
+import {VALID} from "../../../src/definition/validation/Validation";
 import {Provider} from "react-redux";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
-import {VisibilityBuilder} from "../../../src/definition/VisibilityUtils";
+import {VisibilityBuilder} from "../../../src/definition/visibility/VisibilityUtils";
 import {mockPredicate} from "../../test-utils";
 
 initTest();

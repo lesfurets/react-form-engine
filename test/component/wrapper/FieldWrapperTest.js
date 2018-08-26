@@ -1,10 +1,10 @@
 import React from "react";
 import {FIELD_STATE, FieldWrapperComponent} from "../../../src/component/wrapper/FieldWrapper";
 import {ERROR, initTest, IS_NOT_VISIBLE, IS_VISIBLE, setFieldValue} from "../../../test/test-utils";
-import {VALID} from "../../../src/definition/Validation";
+import {VALID} from "../../../src/definition/validation/Validation";
 import {shallow, mount} from "enzyme/build/index";
 import {EMPTY_CALLBACK, mockPredicate} from "../../test-utils";
-import {Visibility} from "../../../src/definition/Visibility";
+import {Visibility} from "../../../src/definition/visibility/Visibility";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 

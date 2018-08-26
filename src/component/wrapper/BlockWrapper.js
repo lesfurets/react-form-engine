@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import {FieldWrapper} from "./FieldWrapper";
 import {fieldConnect} from "../../redux/fieldConnect";
-import {VALID} from "../../definition/Validation";
+import {VALID} from "../../definition/validation/Validation";
 import {BLOCK_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 
