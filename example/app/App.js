@@ -25,7 +25,7 @@ const LAST_NAME = {
     id: "LAST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "Last Name",
-    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isUndefined()),
+    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined()),
     getValidation(context) {
         return ValidationUtils.isDefinedAndEqualTo(this, context, "1", "The passwords should be identical.");
     }
@@ -55,7 +55,7 @@ const PASSWORD_CONFIRMATION = {
     id: "PASSWORD_CONFIRMATION",
     type: FieldTypes.INPUT_PASSWORD,
     label: "Confirm your password",
-    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isUndefined()),
+    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined()),
     getValidation(context) {
         return ValidationUtils.isDefinedAndEqualTo(this, context, context[PASSWORD.id], "The passwords should be identical.");
     }

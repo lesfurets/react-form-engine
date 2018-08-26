@@ -1,17 +1,14 @@
 import {ValueUtils} from "../ValueUtils";
 
-export const FIELD_PREDICATE_TYPE = {
-    DEFINED: "DEFINED",
-    EQUAL_TO_VALUE: "EQUAL_TO_VALUE",
-    EQUAL_TO_FIELD: "EQUAL_TO_FIELD",
+export const FieldPredicateTypes = {
+    defined: "defined",
+    equalToValue: "equalToValue",
+    equalToField: "equalToField",
 };
 
 export class FieldPredicate {
-    constructor(fieldId, type) {
+    constructor(fieldId) {
         this.fieldId = fieldId;
-        if (type !== undefined) {
-            this.type = type;
-        }
     }
 
     is() {
@@ -25,18 +22,18 @@ export class FieldPredicate {
     }
 
     defined() {
-        this.type = FIELD_PREDICATE_TYPE.DEFINED;
+        this.type = FieldPredicateTypes.defined;
         return this;
     }
 
     equalTo(value) {
-        this.type = FIELD_PREDICATE_TYPE.EQUAL_TO_VALUE;
+        this.type = FieldPredicateTypes.equalToValue;
         this.details = {value};
         return this;
     }
 
     equalToField(otherId) {
-        this.type = FIELD_PREDICATE_TYPE.EQUAL_TO_FIELD;
+        this.type = FieldPredicateTypes.equalToField;
         this.details = {otherId};
         return this;
     }
@@ -47,14 +44,21 @@ export class FieldPredicate {
 
     _testByType (context) {
         switch (this.type) {
-            case FIELD_PREDICATE_TYPE.DEFINED:
+            case FieldPredicateTypes.defined:
                 return ValueUtils.isDefined(context[this.fieldId]);
-            case FIELD_PREDICATE_TYPE.EQUAL_TO_VALUE:
+            case FieldPredicateTypes.equalToValue:
                 return context[this.fieldId] === this.details.value;
-            case FIELD_PREDICATE_TYPE.EQUAL_TO_FIELD:
+            case FieldPredicateTypes.equalToField:
                 return context[this.fieldId] === context[this.details.otherId];
         }
         return true;
+    }
+
+    static load(model) {
+        let predicate = new FieldPredicate();
+        Object.keys(model)
+            .forEach(key => predicate[key] = model[key]);
+        return predicate;
     }
 
 }
