@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import {Visibility} from "../../../src/definition/visibility/Visibility";
+import {VisibilityRule} from "../../../src/definition/visibility/VisibilityRule";
 import {PredicateEditor} from "./predicate/PredicateEditor";
 import Clear from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
@@ -33,7 +33,7 @@ export const VisibilityEditor = ({visibility, onChange, onDelete}) => (
 );
 
 let updateVisibility = (isVisible,predicate) => {
-  return new Visibility(isVisible, predicate);
+  return new VisibilityRule(isVisible, predicate);
 };
 
 VisibilityEditor.propTypes = {

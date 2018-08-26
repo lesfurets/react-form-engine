@@ -4,7 +4,7 @@ import {ERROR, initTest, IS_NOT_VISIBLE, IS_VISIBLE, setFieldValue} from "../../
 import {VALID} from "../../../src/definition/validation/Validation";
 import {shallow, mount} from "enzyme/build/index";
 import {EMPTY_CALLBACK, mockPredicate} from "../../test-utils";
-import {Visibility} from "../../../src/definition/visibility/Visibility";
+import {VisibilityRule} from "../../../src/definition/visibility/VisibilityRule";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 
@@ -174,7 +174,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
 
     });
 
-    describe("Visibility", () => {
+    describe("VisibilityRule", () => {
 
         it("Should call visibility method", () => {
             let predicate = jasmine.createSpy();
@@ -184,7 +184,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                                          fieldContext={fieldContext}
                                          field={{
                                              ...props.field,
-                                             visibility: new Visibility(true, mockPredicate(predicate))
+                                             visibility: new VisibilityRule(true, mockPredicate(predicate))
                                          }}/>);
 
             // Then
@@ -198,7 +198,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let container = mount(<FieldWrapperComponent {...props}
                                                          field={{
                                                              ...props.field,
-                                                             visibility: new Visibility(true, simplePredicate)
+                                                             visibility: new VisibilityRule(true, simplePredicate)
                                                          }}/>);
 
             // Then
@@ -210,7 +210,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let container = mount(<FieldWrapperComponent {...props}
                                                          field={{
                                                              ...props.field,
-                                                             visibility: new Visibility(false, simplePredicate)
+                                                             visibility: new VisibilityRule(false, simplePredicate)
                                                          }}/>);
 
             // Then

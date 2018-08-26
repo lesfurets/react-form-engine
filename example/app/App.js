@@ -9,7 +9,6 @@ import Tab from '@material-ui/core/Tab';
 import JsonEditor from "./editor/JsonEditor";
 import FormEditor from "./editor/FormEditor";
 import {VisibilityBuilder} from "../../src/definition/visibility/VisibilityUtils";
-import {FieldPredicate} from "../../src/definition/predicate/FieldPredicate";
 import {Predicates} from "../../src/definition/predicate/Predicates";
 
 const FIRST_NAME = {
@@ -25,10 +24,7 @@ const LAST_NAME = {
     id: "LAST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "Last Name",
-    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined()),
-    getValidation(context) {
-        return ValidationUtils.isDefinedAndEqualTo(this, context, "1", "The passwords should be identical.");
-    }
+    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined())
 };
 
 console.log(LAST_NAME.visibility.evaluate);

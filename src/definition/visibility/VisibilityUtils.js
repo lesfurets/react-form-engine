@@ -1,4 +1,4 @@
-import {Visibility} from "./Visibility";
+import {VisibilityRule} from "./VisibilityRule";
 
 export class VisibilityBuilder {
     constructor(isVisible) {
@@ -6,7 +6,7 @@ export class VisibilityBuilder {
     }
 
     when(predicate) {
-        return new Visibility(this.isVisible, predicate);
+        return new VisibilityRule(this.isVisible, predicate);
     }
 
     static hasVisibility(isVisible) {

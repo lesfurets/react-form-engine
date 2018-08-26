@@ -57,7 +57,7 @@ describe("FormEngine/View/FieldView", () => {
         });
     });
 
-    describe("Visibility", () => {
+    describe("VisibilityRule", () => {
         it("Should display field by default", () => {
             let container = shallow(<FieldView field={field}
                                                fieldState={FIELD_STATE.DEFAULT}

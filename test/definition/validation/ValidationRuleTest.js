@@ -1,6 +1,5 @@
 import React from "react";
 import {initTest, mockPredicate} from "../../test-utils";
-import {Visibility} from "../../../src/definition/visibility/Visibility";
 import {VALID, Validation} from "../../../src/definition/validation/Validation";
 import {ValidationRule} from "../../../src/definition/validation/ValidationRule";
 

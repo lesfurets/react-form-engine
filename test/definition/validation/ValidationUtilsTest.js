@@ -2,7 +2,6 @@ import React from "react";
 import {VALID} from "../../../src/definition/validation/Validation";
 import {ValidationBuilder, ValidationUtils} from "../../../src/definition/validation/ValidationUtils";
 import {initTest} from "../../test-utils";
-import {VisibilityBuilder} from "../../../src/definition/visibility/VisibilityUtils";
 
 initTest();
 

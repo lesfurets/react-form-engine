@@ -1,5 +1,4 @@
 import {VALID, Validation} from "./Validation";
-import {Visibility} from "../visibility/Visibility";
 import {ValidationRule} from "./ValidationRule";
 
 export class ValidationUtils {
