@@ -44,6 +44,7 @@ export class FieldEditorView extends React.Component {
                                     type={field.type}
                                     onChange={(type => onEvent(FIELD_EDITOR_EVENT.EDIT_TYPE, type))}/>
                     </div>
+                    <div className={"FieldEditorView-details"}>
                     {FieldTypesDetails[field.type].properties.map(property => (
                         <div key={property.key}>
                             <PropertyEditor label={property.label}
@@ -58,6 +59,7 @@ export class FieldEditorView extends React.Component {
                     {hasVisibility ? <VisibilityEditor visibility={field.visibility}
                                                        onChange={(visibility) => onEvent(FIELD_EDITOR_EVENT.CHANGE_VISIBILITY, visibility)}
                                                        onDelete={() => onEvent(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}
+                    </div>
                 </CardContent>
                 <CardActions className="FieldEditorView-actions" disableActionSpacing>
                     <Button className="FieldEditorView-visibility"

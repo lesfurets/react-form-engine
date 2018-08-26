@@ -16,12 +16,17 @@ export class FormEditorView extends React.Component {
     constructor(props){
         super(props);
         this.onDrop = this.onDrop.bind(this);
+        this.onDrag = this.onDrag.bind(this);
+        this.onStop = this.onStop.bind(this);
     }
 
     componentDidMount() {
         $(ReactDOM.findDOMNode(this)).sortable({
             handle: ".BlockEditorView",
-            stop: this.onDrop,
+            start: this.onDrag,
+            update: this.onDrop,
+            stop: this.onStop,
+            placeholder: "FormEditorView-placeholder"
         });
     }
 
@@ -30,6 +35,14 @@ export class FormEditorView extends React.Component {
             id: ui.item.find(".BlockEditorView").attr('id'),
             index: ui.item.index()
         });
+    }
+
+    onDrag(details, ui) {
+        ui.item.addClass("dragged");
+    }
+
+    onStop(details, ui) {
+        ui.item.removeClass("dragged");
     }
 
     render() {
