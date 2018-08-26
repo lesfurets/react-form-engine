@@ -35,7 +35,7 @@ const generateNewField = () => ({
     type: FieldTypes.INPUT_TEXT
 });
 
-const generateVisibilityRules = () => VisibilityBuilder.isNotVisible().when(Predicates.field("").isDefined());
+const generateVisibilityRules = () => VisibilityBuilder.isNotVisible().when(Predicates.field("").is().defined());
 
 class FormEditor extends React.Component {
     constructor(props) {
@@ -45,6 +45,7 @@ class FormEditor extends React.Component {
 
     onEvent(event, element, details) {
         let {model} = this.props;
+        console.log(event, element, details);
         switch (event) {
             case FORM_EDITOR_EVENT.NEW_BLOCK:
                 model.push(generateNewBlock());
@@ -56,7 +57,8 @@ class FormEditor extends React.Component {
                 this.props.onChange(model);
                 break;
             case BLOCK_EDITOR_EVENT.DELETE:
-                remove(model, block => block.id !== element.id);
+                remove(model, block => block.id === element.id);
+                this.props.onChange(model);
                 break;
             case BLOCK_EDITOR_EVENT.EDIT_LABEL:
                 model.filter(block => block.id === element.id)
