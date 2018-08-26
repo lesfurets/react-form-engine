@@ -31,7 +31,7 @@ export class FieldEditorView extends React.Component {
 
     render() {
         let {field, onEvent} = this.props;
-        let hasVisibility = field.hasOwnProperty('visibility');
+        let hasVisibility = field.hasOwnProperty('visibilityRule');
 
         return (
             <div className={"FieldEditorView"} sortable-id={field.id}>
@@ -56,7 +56,7 @@ export class FieldEditorView extends React.Component {
                                             className={`PropertyEditor-${property.key}`}/>
                         </div>
                     ))}
-                    {hasVisibility ? <VisibilityEditor visibility={field.visibility}
+                    {hasVisibility ? <VisibilityEditor visibility={field.visibilityRule}
                                                        onChange={(visibility) => onEvent(FIELD_EDITOR_EVENT.CHANGE_VISIBILITY, visibility)}
                                                        onDelete={() => onEvent(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}
                     </div>

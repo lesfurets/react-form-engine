@@ -1,34 +1,20 @@
 import React from "react";
 import {initTest, mockPredicate} from "../../test-utils";
 import {VisibilityRule} from "../../../src/definition/visibility/VisibilityRule";
+import {VisibilityEvaluator} from "../../../src/definition/visibility/VisibilityEvaluator";
 
 initTest();
 
-describe("FormEngine/Definition/VisibilityRule", () => {
+describe("FormEngine/Definition/Visibility/VisibilityRule", () => {
 
     describe("Evaluate", () => {
 
-        it("Should call predicate", () => {
-            // Given
-            let isVisible = false;
-            let predicate = jasmine.createSpy();
-            let visibility = new VisibilityRule(isVisible, mockPredicate(predicate));
-            let context = {test: "test"};
-
-            // When
-            visibility.evaluate(context)
-
-            // Then
-            expect(predicate).toHaveBeenCalledWith(context);
-        });
-
         let checkEvaluation = (rule, predicate, isVisible) => {
             // Given
-            let visibility = new VisibilityRule(rule, {test: () => predicate});
+            let visibility = new VisibilityRule(rule, mockPredicate(predicate));
 
             // Then
-            console.log(visibility.evaluate())
-            expect(visibility.evaluate()).toBe(isVisible);
+            expect(VisibilityEvaluator.evaluate({visibilityRule: visibility})()).toBe(isVisible);
         };
 
         it("Should be visible if rule implies visible and predicate is verified", () => {

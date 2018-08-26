@@ -174,7 +174,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
 
     });
 
-    describe("VisibilityRule", () => {
+    describe("Visibility", () => {
 
         it("Should call visibility method", () => {
             let predicate = jasmine.createSpy();
@@ -184,7 +184,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                                          fieldContext={fieldContext}
                                          field={{
                                              ...props.field,
-                                             visibility: new VisibilityRule(true, mockPredicate(predicate))
+                                             isVisible: predicate
                                          }}/>);
 
             // Then
@@ -198,7 +198,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let container = mount(<FieldWrapperComponent {...props}
                                                          field={{
                                                              ...props.field,
-                                                             visibility: new VisibilityRule(true, simplePredicate)
+                                                             isVisible: () => true
                                                          }}/>);
 
             // Then
@@ -210,7 +210,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let container = mount(<FieldWrapperComponent {...props}
                                                          field={{
                                                              ...props.field,
-                                                             visibility: new VisibilityRule(false, simplePredicate)
+                                                             isVisible: () => false
                                                          }}/>);
 
             // Then

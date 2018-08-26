@@ -11,7 +11,7 @@ export const initTest = () => {
     configure({adapter: new Adapter()});
 };
 
-export const mockPredicate = (predicate) => ({test: predicate});
+export const mockPredicate = (ifOk) => ({not: !ifOk});
 
 export const EMPTY_CALLBACK = () => {};
 

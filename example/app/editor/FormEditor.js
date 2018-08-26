@@ -96,19 +96,22 @@ class FormEditor extends React.Component {
             case FIELD_EDITOR_EVENT.ADD_VISIBILITY:
                 model.reduce((flat, block) => flat.concat(block.fields), [])
                     .filter(field => field.id === element.id)
-                    .forEach(field => field.visibility = generateVisibilityRules());
+                    .forEach(field => field.visibilityRule = generateVisibilityRules());
                 this.props.onChange(model);
                 break;
             case FIELD_EDITOR_EVENT.CHANGE_VISIBILITY:
                 model.reduce((flat, block) => flat.concat(block.fields), [])
                     .filter(field => field.id === element.id)
-                    .forEach(field => field.visibility = details);
+                    .forEach(field => field.visibilityRule = details);
                 this.props.onChange(model);
                 break;
             case FIELD_EDITOR_EVENT.DELETE_VISIBILITY:
                 model.reduce((flat, block) => flat.concat(block.fields), [])
                     .filter(field => field.id === element.id)
-                    .forEach(field => delete field.visibility);
+                    .forEach(field => {
+                        delete field.visibilityRule;
+                        delete field.isVisible;
+                    });
                 this.props.onChange(model);
                 break;
             case FIELD_EDITOR_EVENT.DELETE:

@@ -5,7 +5,7 @@ import {initTest} from "../../test-utils";
 
 initTest();
 
-describe("FormEngine/Definition/ValidationUtils", () => {
+describe("FormEngine/Definition/Validation/ValidationUtils", () => {
 
     let field = {id: "fieldId"};
     let errorMessage = "errorMessage";

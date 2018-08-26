@@ -2,34 +2,24 @@ import React from "react";
 import {initTest, mockPredicate} from "../../test-utils";
 import {VALID, Validation} from "../../../src/definition/validation/Validation";
 import {ValidationRule} from "../../../src/definition/validation/ValidationRule";
+import {ValidationEvaluator} from "../../../src/definition/validation/ValidationEvaluator";
 
 initTest();
 
-describe("FormEngine/Definition/ValidationRule", () => {
+describe("FormEngine/Definition/Validation/ValidationRule", () => {
 
     let validation = new Validation(false, "Error");
 
+    let expectValidation= (validation) => expect(ValidationEvaluator.evaluate({validationRule: validation})());
+
     describe("Evaluate", () => {
 
-        it("Should call predicate", () => {
-            // Given
-            let predicate = jasmine.createSpy();
-            let validationRule = new ValidationRule(validation, mockPredicate(predicate));
-            let context = {test: "test"};
-
-            // When
-            validationRule.evaluate(context)
-
-            // Then
-            expect(predicate).toHaveBeenCalledWith(context);
-        });
-
         it("Should return validation if predicate is verified", () => {
-            expect(new ValidationRule(validation, {test: () => true}).evaluate()).toBe(validation);
+            expectValidation(new ValidationRule(validation, mockPredicate(true))).toBe(validation);
         });
 
         it("Should return VALID if predicate is not verified", () => {
-            expect(new ValidationRule(validation, {test: () => false}).evaluate()).toBe(VALID);
+            expectValidation(new ValidationRule(validation, mockPredicate(false))).toBe(VALID);
         });
 
     });

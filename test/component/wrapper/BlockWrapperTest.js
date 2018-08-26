@@ -10,8 +10,6 @@ import {VALID} from "../../../src/definition/validation/Validation";
 import {Provider} from "react-redux";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
-import {VisibilityBuilder} from "../../../src/definition/visibility/VisibilityUtils";
-import {mockPredicate} from "../../test-utils";
 
 initTest();
 
@@ -116,7 +114,7 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
             checkBlockValidation(true, {
                 id: 'testChild1',
                 type: 'type-test',
-                visibility: VisibilityBuilder.isNotVisible().when(mockPredicate(() => true)),
+                isVisible: () => false,
                 getValidation: () => ERROR
             });
         });

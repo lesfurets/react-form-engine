@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/app.less";
 import FormEngine from "../../src/index";
 import {FieldTypes} from "../../src/definition/FieldTypes";
-import {ValidationUtils} from "../../src/definition/validation/ValidationUtils";
+import {ValidationBuilder, ValidationUtils} from "../../src/definition/validation/ValidationUtils";
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -10,24 +10,21 @@ import JsonEditor from "./editor/JsonEditor";
 import FormEditor from "./editor/FormEditor";
 import {VisibilityBuilder} from "../../src/definition/visibility/VisibilityUtils";
 import {Predicates} from "../../src/definition/predicate/Predicates";
+import {ModelExtender} from "../../src/definition/ModelExtender";
 
 const FIRST_NAME = {
     id: "FIRST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "First Name",
-    // getValidation(context) {
-    //     return ValidationUtils.isDefined(this, context, "The first name is mandatory");
-    // }
+    validationRule: ValidationBuilder.error("The first name is mandatory2").when(Predicates.self().isNot().defined())
 };
 
 const LAST_NAME = {
     id: "LAST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "Last Name",
-    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined())
+    visibilityRule: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined())
 };
-
-console.log(LAST_NAME.visibility.evaluate);
 
 const EMAIL = {
     id: "EMAIL",
@@ -51,7 +48,7 @@ const PASSWORD_CONFIRMATION = {
     id: "PASSWORD_CONFIRMATION",
     type: FieldTypes.INPUT_PASSWORD,
     label: "Confirm your password",
-    visibility: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined()),
+    visibilityRule: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined()),
     getValidation(context) {
         return ValidationUtils.isDefinedAndEqualTo(this, context, context[PASSWORD.id], "The passwords should be identical.");
     }
@@ -105,7 +102,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             view: EDITOR_STATE.OVERVIEW,
-            model: Object.values(BLOCKS)
+            model: ModelExtender.extendModel(Object.values(BLOCKS))
         };
         this.handleTabChange = this.handleTabChange.bind(this);
         this.handleModelChange = this.handleModelChange.bind(this);
@@ -117,7 +114,8 @@ class App extends React.Component {
     };
 
     handleModelChange = (value) => {
-        this.setState({ model: value });
+        console.log(value);
+        this.setState({ model: ModelExtender.extendModel(value) });
     };
 
     onEvent(event, element, details) {

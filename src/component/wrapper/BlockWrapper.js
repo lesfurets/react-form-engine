@@ -24,7 +24,7 @@ export class BlockWrapperComponent extends React.Component {
     validate() {
         let {block, fieldContext} = this.props;
         if (block.fields
-            .filter(field => field.visibility === undefined || field.visibility.evaluate(fieldContext))
+            .filter(field => field.isVisible === undefined || field.isVisible(fieldContext))
             .map(field => field.getValidation === undefined ? VALID : field.getValidation(fieldContext))
             .map(validation => validation.isValid)
             .reduce((acc, value) => acc && value, true)) {

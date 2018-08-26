@@ -4,7 +4,7 @@ import {initTest} from "../../test-utils";
 
 initTest();
 
-describe("FormEngine/Definition/Validation", () => {
+describe("FormEngine/Definition/Validation/Validation", () => {
 
     describe("Structure", () => {
         let valid = false;

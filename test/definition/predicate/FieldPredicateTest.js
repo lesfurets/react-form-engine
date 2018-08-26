@@ -1,29 +1,23 @@
 import React from "react";
 import {initTest} from "../../test-utils";
 import {FieldPredicate} from "../../../src/definition/predicate/FieldPredicate";
+import {PredicateEvaluator} from "../../../src/definition/predicate/PredicatesEvaluator";
 
 initTest();
 
 describe("FormEngine/Definition/Predicate/FieldPredicate", () => {
 
     let fieldId = "fieldId";
+    let field = {id: fieldId};
 
     let getContext = (contextValue) => ({[fieldId]: contextValue});
     let getPredicate = () => new FieldPredicate(fieldId);
-    let expectPredicate = (predicate, value) => expect(predicate.test(getContext(value)));
+    let expectPredicate = (predicate, value) => expect(PredicateEvaluator.evaluate(field, predicate)(getContext(value)));
 
     describe("Not", () => {
 
         it("Should invert test ok", () => {
-            let predicate = getPredicate().isNot();
-            predicate._testByType = () => true;
-            expect(predicate.test()).toBe(false);
-        });
-
-        it("Should invert test ko", () => {
-            let predicate = getPredicate().isNot();
-            predicate._testByType = () => false;
-            expect(predicate.test()).toBe(true);
+            expectPredicate(getPredicate().isNot()).toBe(false);
         });
 
     });
@@ -31,7 +25,7 @@ describe("FormEngine/Definition/Predicate/FieldPredicate", () => {
     describe("Default", () => {
 
         it("Should be valid by default", () => {
-            expect(getPredicate().test()).toBe(true);
+            expectPredicate(getPredicate()).toBe(true);
         });
 
     });

@@ -4,7 +4,7 @@ import {VisibilityBuilder} from "../../../src/definition/visibility/VisibilityUt
 
 initTest();
 
-describe("FormEngine/Definition/VisibilityUtils", () => {
+describe("FormEngine/Definition/Visibility/VisibilityUtils", () => {
 
     describe("Builder", () => {
 
