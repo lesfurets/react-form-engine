@@ -12,6 +12,7 @@ import "../../styles/json-editor.less";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {VisibilityBuilder} from "../../../src/definition/visibility/VisibilityUtils";
 import {Predicates} from "../../../src/definition/predicate/Predicates";
+import {ValidationBuilder} from "../../../src/definition/validation/ValidationUtils";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -36,6 +37,8 @@ const generateNewField = () => ({
 });
 
 const generateVisibilityRules = () => VisibilityBuilder.isNotVisible().when(Predicates.field("").is().defined());
+
+const generateValidationRules = () => ValidationBuilder.error("Error message").when(Predicates.field("").is().defined());
 
 class FormEditor extends React.Component {
     constructor(props) {
@@ -111,6 +114,27 @@ class FormEditor extends React.Component {
                     .forEach(field => {
                         delete field.visibilityRule;
                         delete field.isVisible;
+                    });
+                this.props.onChange(model);
+                break;
+            case FIELD_EDITOR_EVENT.ADD_VALIDATION:
+                model.reduce((flat, block) => flat.concat(block.fields), [])
+                    .filter(field => field.id === element.id)
+                    .forEach(field => field.validationRule = generateValidationRules());
+                this.props.onChange(model);
+                break;
+            case FIELD_EDITOR_EVENT.CHANGE_VALIDATION:
+                model.reduce((flat, block) => flat.concat(block.fields), [])
+                    .filter(field => field.id === element.id)
+                    .forEach(field => field.validationRule = details);
+                this.props.onChange(model);
+                break;
+            case FIELD_EDITOR_EVENT.DELETE_VALIDATION:
+                model.reduce((flat, block) => flat.concat(block.fields), [])
+                    .filter(field => field.id === element.id)
+                    .forEach(field => {
+                        delete field.validationRule;
+                        delete field.getValidation;
                     });
                 this.props.onChange(model);
                 break;

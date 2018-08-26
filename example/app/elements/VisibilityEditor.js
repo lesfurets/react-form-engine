@@ -9,7 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 import "../../styles/elements/visibility-editor.less";
 
-export const VisibilityEditor = ({visibility, onChange, onDelete}) => (
+export const VisibilityEditor = ({visibilityRule, onChange, onDelete}) => (
     <div className="VisibilityEditor">
         <div className="VisibilityEditor-header">
             <div className="VisibilityEditor-label">Visibility rule:</div>
@@ -20,24 +20,20 @@ export const VisibilityEditor = ({visibility, onChange, onDelete}) => (
         <div className="VisibilityEditor-rule">
         This field&nbsp;
         <TextField select
-                   value={visibility.isVisible.toString()}
-                   onChange={(event) => onChange(updateVisibility(event.target.value === 'true', visibility.predicate))}
+                   value={visibilityRule.isVisible.toString()}
+                   onChange={(event) => onChange(new VisibilityRule(event.target.value === 'true', visibilityRule.predicate))}
                    margin="normal">
             <MenuItem value={"true"}>is visible</MenuItem>
             <MenuItem value={"false"}>is not visible</MenuItem>
         </TextField>
-        <PredicateEditor predicate={visibility.predicate}
-                         onChange={(predicate) => onChange(updateVisibility(visibility.isVisible, predicate))}/>
+        <PredicateEditor predicate={visibilityRule.predicate}
+                         onChange={(predicate) => onChange(new VisibilityRule(visibilityRule.isVisible, predicate))}/>
         </div>
     </div>
 );
 
-let updateVisibility = (isVisible,predicate) => {
-  return new VisibilityRule(isVisible, predicate);
-};
-
 VisibilityEditor.propTypes = {
-    visibility: PropTypes.object,
+    visibilityRule: PropTypes.object,
     onChange: PropTypes.func,
     onDelete: PropTypes.func
 };

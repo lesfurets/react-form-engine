@@ -16,7 +16,7 @@ const FIRST_NAME = {
     id: "FIRST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "First Name",
-    validationRule: ValidationBuilder.error("The first name is mandatory2").when(Predicates.self().isNot().defined())
+    validationRule: ValidationBuilder.error("The first name is mandatory").when(Predicates.self().isNot().defined())
 };
 
 const LAST_NAME = {

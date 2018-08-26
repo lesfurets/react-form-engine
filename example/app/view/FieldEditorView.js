@@ -13,6 +13,7 @@ import {PropertyEditor} from "../elements/PropertyEditor";
 
 import "../../styles/view/field-editor-view.less"
 import {VisibilityEditor} from "../elements/VisibilityEditor";
+import {ValidationEditor} from "../elements/ValidationEditor";
 
 export const FIELD_EDITOR_EVENT = {
     EDIT_LABEL: "EDIT_FIELD_LABEL",
@@ -21,6 +22,9 @@ export const FIELD_EDITOR_EVENT = {
     ADD_VISIBILITY: "ADD_VISIBILITY",
     CHANGE_VISIBILITY: "CHANGE_VISIBILITY",
     DELETE_VISIBILITY: "DELETE_VISIBILITY",
+    ADD_VALIDATION: "ADD_VALIDATION",
+    CHANGE_VALIDATION: "CHANGE_VALIDATION",
+    DELETE_VALIDATION: "DELETE_VALIDATION",
     DELETE: "DELETE_FIELD",
 };
 
@@ -32,6 +36,7 @@ export class FieldEditorView extends React.Component {
     render() {
         let {field, onEvent} = this.props;
         let hasVisibility = field.hasOwnProperty('visibilityRule');
+        let hasValidation = field.hasOwnProperty('validationRule');
 
         return (
             <div className={"FieldEditorView"} sortable-id={field.id}>
@@ -56,15 +61,21 @@ export class FieldEditorView extends React.Component {
                                             className={`PropertyEditor-${property.key}`}/>
                         </div>
                     ))}
-                    {hasVisibility ? <VisibilityEditor visibility={field.visibilityRule}
+                    {hasVisibility ? <VisibilityEditor visibilityRule={field.visibilityRule}
                                                        onChange={(visibility) => onEvent(FIELD_EDITOR_EVENT.CHANGE_VISIBILITY, visibility)}
                                                        onDelete={() => onEvent(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}
+                    {hasValidation ? <ValidationEditor validationRule={field.validationRule}
+                                                       onChange={(validation) => onEvent(FIELD_EDITOR_EVENT.CHANGE_VALIDATION, validation)}
+                                                       onDelete={() => onEvent(FIELD_EDITOR_EVENT.DELETE_VALIDATION)}/> : null}
                     </div>
                 </CardContent>
                 <CardActions className="FieldEditorView-actions" disableActionSpacing>
                     <Button className="FieldEditorView-visibility"
                             disabled={hasVisibility}
                             onClick={() => onEvent(FIELD_EDITOR_EVENT.ADD_VISIBILITY)}>Edit Visibility</Button>
+                    <Button className="FieldEditorView-validation"
+                            disabled={hasValidation}
+                            onClick={() => onEvent(FIELD_EDITOR_EVENT.ADD_VALIDATION)}>Edit Visibility</Button>
                     <IconButton className="FieldEditorView-delete" onClick={() => onEvent(FIELD_EDITOR_EVENT.DELETE)}>
                         <Delete/>
                     </IconButton>
