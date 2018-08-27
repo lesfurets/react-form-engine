@@ -1,10 +1,10 @@
 import {VisibilityEvaluator} from "./visibility/VisibilityEvaluator";
 import {ValidationEvaluator} from "./validation/ValidationEvaluator";
+import {ModelUtils} from "./ModelUtils";
 
 export class ModelExtender {
     static extendModel(model) {
-        model.reduce((flat, block) => flat.concat(block.fields), [])
-            .forEach(field => ModelExtender.extendField(field));
+        ModelUtils.getFieldList(model).forEach(field => ModelExtender.extendField(field));
         return model;
     }
 
@@ -15,6 +15,5 @@ export class ModelExtender {
         if(field.hasOwnProperty("validationRule")) {
             field.getValidation = ValidationEvaluator.evaluate(field);
         }
-        field;
     }
 }

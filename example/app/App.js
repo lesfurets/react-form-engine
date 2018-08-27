@@ -7,7 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import JsonEditor from "./editor/JsonEditor";
-import FormEditor from "./editor/FormEditor";
+import {FormEditor} from "./editor/FormEditor";
 import {VisibilityBuilder} from "../../src/definition/visibility/VisibilityUtils";
 import {Predicates} from "../../src/definition/predicate/Predicates";
 import {ModelExtender} from "../../src/definition/ModelExtender";
@@ -101,7 +101,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            view: EDITOR_STATE.OVERVIEW,
+            view: EDITOR_STATE.EDIT_FORM,
             model: ModelExtender.extendModel(Object.values(BLOCKS))
         };
         this.handleTabChange = this.handleTabChange.bind(this);
@@ -135,8 +135,8 @@ class App extends React.Component {
                     </Tabs>
                 </AppBar>
                 {view === EDITOR_STATE.OVERVIEW ? <FormEngine form={model} onEvent={this.onEvent}/> : null}
-                {view === EDITOR_STATE.EDIT_FORM ? <FormEditor model={model} onChange={this.handleModelChange}/> : null}
-                {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor model={model} onChange={this.handleModelChange}/> : null}
+                {view === EDITOR_STATE.EDIT_FORM ? <FormEditor form={model} onChange={this.handleModelChange}/> : null}
+                {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor form={model} onChange={this.handleModelChange}/> : null}
             </div>
         );
     }

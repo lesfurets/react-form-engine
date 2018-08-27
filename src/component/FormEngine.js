@@ -9,6 +9,7 @@ import {BlockView} from "./view/BlockView";
 import {FieldView} from "./view/FieldView";
 import {EMPTY_CALLBACK} from "../definition/props-utils";
 import {EVENT_MULTICASTER} from "../definition/event/EventMulticaster";
+import PropTypes from "prop-types";
 
 export default class FormEngine extends React.Component {
     componentWillMount() {
@@ -33,7 +34,12 @@ export default class FormEngine extends React.Component {
 
 }
 
-FormEngine.propTypes = FormWrapper.propTypes;
+FormEngine.propTypes = {
+    form: PropTypes.array.isRequired,
+    FormView: PropTypes.func.isRequired,
+    BlockView: PropTypes.func.isRequired,
+    FieldView: PropTypes.func.isRequired,
+};
 
 FormEngine.defaultProps = {
     onEvent: EMPTY_CALLBACK,

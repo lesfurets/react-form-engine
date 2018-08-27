@@ -13,14 +13,14 @@ class JsonEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            model: JSON.stringify(props.model, null, 4)
+            model: JSON.stringify(props.form, null, 4)
         };
         this.onChange = this.onChange.bind(this);
         this.sendModel = this.sendModel.bind(this);
     }
 
     onChange(editor, data, value) {
-        this.setState({model: value});
+        this.setState({form: value});
     }
 
     sendModel() {
@@ -52,7 +52,7 @@ class JsonEditor extends React.Component {
 }
 
 JsonEditor.propTypes = {
-    model: PropTypes.array.isRequired
+    form: PropTypes.array.isRequired
 };
 
 export default JsonEditor;
