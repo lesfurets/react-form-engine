@@ -8,7 +8,7 @@ import {Cta, CTA_TYPE} from "../utils/Cta";
 import "../../styles/components/view/block-view.less"
 
 export const BlockView = ({children, block, blockState, onEvent}) => (
-    <div className="BlockView app-row">
+    <div className={`BlockView app-row ${blockState} ${block.id}`}>
         <div className="BlockView-label app-col-xs-12">{block.index + 1}. {block.label}</div>
         {blockState !== BLOCK_STATE.DOING ? null : (
             <div className="app-col-xs-12 app-col-sm-8">

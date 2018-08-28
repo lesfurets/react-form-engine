@@ -36,7 +36,7 @@ export class BlockEditorView extends React.Component {
     componentDidMount() {
         $(".BlockEditorView-content").sortable({
             connectWith: $(".BlockEditorView-content"),
-            handle: ".FieldEditorView",
+            // handle: " .FieldEditorView",
             start: this.onDrag,
             update: this.onDrop,
             stop: this.onStop,
@@ -48,6 +48,9 @@ export class BlockEditorView extends React.Component {
     onDrag(details, ui) {
         ui.item.attr("block-source", details.target.getAttribute("sortable-id"));
         ui.item.addClass("dragged");
+        let height = ui.item.find(".FieldEditorView-content").outerHeight();
+        ui.item.height(height);
+        ui.placeholder.height(height + 40);
     }
 
     onStop(details, ui) {
@@ -58,7 +61,7 @@ export class BlockEditorView extends React.Component {
         if (details.target === ui.item.parent()[0]) {
 
             let value = {
-                id: ui.item.find(".FieldEditorView").attr("sortable-id"),
+                id: ui.item.attr("sortable-id"),
                 blockSrc: ui.item.attr("block-source"),
                 blockDst: details.target.getAttribute("sortable-id"),
                 index: ui.item.index()

@@ -21,7 +21,6 @@
 
     &-placeholder {
         background-color: @background;
-        height: 200px;
     }
 
     &-add {
@@ -32,8 +31,12 @@
         margin-top: 0;
         width: 100%;
     }
+
+    &.dragged  {
+        .BlockEditorView-actions,
+        .BlockEditorView-content {
+            display: none;
+        }
+    }
 }
 
-.dragged .BlockEditorView-content {
-    display: none;
-}

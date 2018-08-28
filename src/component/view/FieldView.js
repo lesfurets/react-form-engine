@@ -8,7 +8,7 @@ import "../../styles/components/view/field-view.less";
 export const FieldView = ({field, fieldState, errorMessage ,children, isVisible}) => {
     let hasLabel = field.label != null;
     return isVisible ? (
-        <div className={`FieldView  ${field.type}`}>
+        <div className={`FieldView ${fieldState} ${field.id} ${field.type}`}>
             {hasLabel ? <div className="FieldView-label">{field.label}</div> : null}
             {children}
             {fieldState === FIELD_STATE.ERROR ?

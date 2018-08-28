@@ -22,7 +22,7 @@ export class FormEditorView extends React.Component {
 
     componentDidMount() {
         $(ReactDOM.findDOMNode(this)).sortable({
-            handle: ".BlockEditorView",
+            // handle: ".BlockEditorView",
             start: this.onDrag,
             update: this.onDrop,
             stop: this.onStop,
@@ -32,13 +32,16 @@ export class FormEditorView extends React.Component {
 
     onDrop(details, ui) {
         this.props.onEvent(FORM_EDITOR_EVENT.MOVE_BLOCK, {
-            id: ui.item.find(".BlockEditorView").attr('id'),
+            id: ui.item.attr('id'),
             index: ui.item.index()
         });
     }
 
     onDrag(details, ui) {
         ui.item.addClass("dragged");
+        let height = ui.item.find(".BlockEditorView-header").outerHeight();
+        ui.item.height(height);
+        ui.placeholder.height(height + 40);
     }
 
     onStop(details, ui) {

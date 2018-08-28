@@ -54,18 +54,16 @@ export class FieldWrapperComponent extends React.Component {
         let Field = FieldInjector.inject(field.type);
 
         return (
-            <div className={`FieldWrapper ${fieldState} ${field.id} ${field.type}`}>
-                <View field={field}
-                      isVisible={isVisible}
-                      onEvent={this.onEvent}
-                      errorMessage={validation.message}
-                      fieldState={fieldState}>
-                    <Field field={field}
-                           tabIndex={tabIndex}
-                           onValueChange={this.onValueChange}
-                           contextValue={contextValue}/>
-                </View>
-            </div>
+            <View field={field}
+                  isVisible={isVisible}
+                  onEvent={this.onEvent}
+                  errorMessage={validation.message}
+                  fieldState={fieldState}>
+                <Field field={field}
+                       tabIndex={tabIndex}
+                       onValueChange={this.onValueChange}
+                       contextValue={contextValue}/>
+            </View>
         );
     }
 }

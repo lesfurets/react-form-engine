@@ -43,18 +43,16 @@ export class BlockWrapperComponent extends React.Component {
     render() {
         let {block, blockState, View, FieldView} = this.props;
         return (
-            <div className={`BlockWrapper ${this.props.blockState} ${this.props.block.id}`}>
-                <View block={block}
-                      blockState={blockState}
-                      onEvent={this.onEvent}>
-                    {this.props.block.fields.map((field, index) =>
-                        <FieldWrapper key={field.id}
-                                      field={{...field}}
-                                      tabIndex={index + 1}
-                                      forceValidation={this.state.forceValidation}
-                                      View={FieldView}/>)}
-                </View>
-            </div>
+            <View block={block}
+                  blockState={blockState}
+                  onEvent={this.onEvent}>
+                {this.props.block.fields.map((field, index) =>
+                    <FieldWrapper key={field.id}
+                                  field={{...field}}
+                                  tabIndex={index + 1}
+                                  forceValidation={this.state.forceValidation}
+                                  View={FieldView}/>)}
+            </View>
         );
     }
 }
