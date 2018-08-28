@@ -49,7 +49,7 @@ const generateVisibilityRules = (model) =>
     VisibilityBuilder.isNotVisible().when(Predicates.field(ModelUtils.getFieldList(model)[0].id).is().defined());
 
 const generateValidationRules = (model) =>
-    ValidationBuilder.error("Error message").when(Predicates.field(ModelUtils.getFieldList(model)[0].id).is().defined());
+    ValidationBuilder.error("Error message").when(Predicates.self().is().defined());
 
 export class FormEditor extends React.Component {
     constructor(props) {
@@ -143,7 +143,7 @@ export class FormEditor extends React.Component {
             case FIELD_EDITOR_EVENT.ADD_VALIDATION:
                 form.reduce((flat, block) => flat.concat(block.fields), [])
                     .filter(field => field.id === element.id)
-                    .forEach(field => field.validationRule = generateValidationRules());
+                    .forEach(field => field.validationRule = generateValidationRules(form));
                 this.props.onChange(form);
                 break;
             case FIELD_EDITOR_EVENT.CHANGE_VALIDATION:

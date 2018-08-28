@@ -75,7 +75,7 @@ export class FieldEditorView extends React.Component {
                             onClick={() => onEvent(FIELD_EDITOR_EVENT.ADD_VISIBILITY)}>Edit Visibility</Button>
                     <Button className="FieldEditorView-validation"
                             disabled={hasValidation}
-                            onClick={() => onEvent(FIELD_EDITOR_EVENT.ADD_VALIDATION)}>Edit Visibility</Button>
+                            onClick={() => onEvent(FIELD_EDITOR_EVENT.ADD_VALIDATION)}>Edit Validation</Button>
                     <IconButton className="FieldEditorView-delete" onClick={() => onEvent(FIELD_EDITOR_EVENT.DELETE)}>
                         <Delete/>
                     </IconButton>
