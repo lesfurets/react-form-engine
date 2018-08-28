@@ -14,16 +14,13 @@ import {PropertyEditor} from "../elements/PropertyEditor";
 import "../../styles/view/field-editor-view.less"
 import {VisibilityEditor} from "../elements/VisibilityEditor";
 import {ValidationEditor} from "../elements/ValidationEditor";
+import {PropertyUpdate} from "../editor/ModelUpdater";
 
 export const FIELD_EDITOR_EVENT = {
-    EDIT_LABEL: "EDIT_FIELD_LABEL",
     EDIT_PROPERTY: "EDIT_FIELD_PROPERTY",
-    EDIT_TYPE: "EDIT_FIELD_TYPE",
     ADD_VISIBILITY: "ADD_VISIBILITY",
-    CHANGE_VISIBILITY: "CHANGE_VISIBILITY",
     DELETE_VISIBILITY: "DELETE_VISIBILITY",
     ADD_VALIDATION: "ADD_VALIDATION",
-    CHANGE_VALIDATION: "CHANGE_VALIDATION",
     DELETE_VALIDATION: "DELETE_VALIDATION",
     DELETE: "DELETE_FIELD",
 };
@@ -31,6 +28,11 @@ export const FIELD_EDITOR_EVENT = {
 export class FieldEditorView extends React.Component {
     constructor(props) {
         super(props);
+        this.updateProperty = this.updateProperty.bind(this);
+    }
+
+    updateProperty(key) {
+        return (value) => this.props.onEvent(FIELD_EDITOR_EVENT.EDIT_PROPERTY, new PropertyUpdate(key, value))
     }
 
     render() {
@@ -44,29 +46,26 @@ export class FieldEditorView extends React.Component {
                     <div className={"FieldEditorView-header"}>
                         <LabelEditor label={field.label}
                                      className="FieldEditorView-label"
-                                     onChange={(value => onEvent(FIELD_EDITOR_EVENT.EDIT_LABEL, value))}/>
+                                     onChange={this.updateProperty("label")}/>
                         <TypeEditor className={"FieldEditorView-type"}
                                     type={field.type}
-                                    onChange={(type => onEvent(FIELD_EDITOR_EVENT.EDIT_TYPE, type))}/>
+                                    onChange={this.updateProperty("type")}/>
                     </div>
                     <div className={"FieldEditorView-details"}>
-                    {FieldTypesDetails[field.type].properties.map(property => (
-                        <div key={property.key}>
-                            <PropertyEditor label={property.label}
-                                            value={field[property.key]}
-                                            onChange={(value => onEvent(FIELD_EDITOR_EVENT.EDIT_PROPERTY, {
-                                                key: property.key,
-                                                value: value
-                                            }))}
-                                            className={`PropertyEditor-${property.key}`}/>
-                        </div>
-                    ))}
-                    {hasVisibility ? <VisibilityEditor visibilityRule={field.visibilityRule}
-                                                       onChange={(visibility) => onEvent(FIELD_EDITOR_EVENT.CHANGE_VISIBILITY, visibility)}
-                                                       onDelete={() => onEvent(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}
-                    {hasValidation ? <ValidationEditor validationRule={field.validationRule}
-                                                       onChange={(validation) => onEvent(FIELD_EDITOR_EVENT.CHANGE_VALIDATION, validation)}
-                                                       onDelete={() => onEvent(FIELD_EDITOR_EVENT.DELETE_VALIDATION)}/> : null}
+                        {FieldTypesDetails[field.type].properties.map(property => (
+                            <div key={property.key}>
+                                <PropertyEditor label={property.label}
+                                                value={field[property.key]}
+                                                onChange={this.updateProperty(property.key)}
+                                                className={`PropertyEditor-${property.key}`}/>
+                            </div>
+                        ))}
+                        {hasVisibility ? <VisibilityEditor visibilityRule={field.visibilityRule}
+                                                           onChange={this.updateProperty("visibilityRule")}
+                                                           onDelete={() => onEvent(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}
+                        {hasValidation ? <ValidationEditor validationRule={field.validationRule}
+                                                           onChange={this.updateProperty("visibilityRule")}
+                                                           onDelete={() => onEvent(FIELD_EDITOR_EVENT.DELETE_VALIDATION)}/> : null}
                     </div>
                 </CardContent>
                 <CardActions className="FieldEditorView-actions" disableActionSpacing>
