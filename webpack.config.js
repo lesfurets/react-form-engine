@@ -1,5 +1,5 @@
 module.exports = (env, argv) => ({
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
   output: {
     path: __dirname + '/dist',
     filename: 'index.js',
@@ -28,6 +28,7 @@ module.exports = (env, argv) => ({
     rules: [
       {
         test: /\.(t|j)sx?$/,
+        exclude: /node_modules/,
         use: {
           loader: 'awesome-typescript-loader'
         }
@@ -39,7 +40,8 @@ module.exports = (env, argv) => ({
           loader: 'babel-loader'
         }
       },
-      { enforce: "pre",
+      {
+        enforce: "pre",
         test: /\.js$/,
         loader: "source-map-loader"
       },

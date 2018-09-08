@@ -13,6 +13,7 @@
   "author": "Geoffrey Berard <geoffrey.berard@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/codemirror": "^0.0.60",
     "@types/react": "^16.4.13",
     "@types/react-dom": "^16.0.7",
     "codemirror": "^5.39.2",
