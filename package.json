@@ -58,7 +58,6 @@
     "npm": "^6.3.0",
     "postcss-loader": "^2.1.5",
     "postcss-safe-parser": "^3.0.1",
-    "prop-types": "^15.6.1",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.13.1",
     "typescript": "^3.0.3",

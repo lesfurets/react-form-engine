@@ -34,13 +34,6 @@ module.exports = (env, argv) => ({
         }
       },
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      },
-      {
         enforce: "pre",
         test: /\.js$/,
         loader: "source-map-loader"
