@@ -1,8 +1,9 @@
 import {setFieldValueAction} from "./actions";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {FieldContextState, FieldValueAction} from "./constants";
+import {FieldValueAction} from "./constants";
 import {ComponentType} from "react";
+import {FieldContextState} from "../definition/FormModel";
 
 export const mapDispatchToProps = (dispatch: Dispatch<FieldValueAction>) => {
     return {

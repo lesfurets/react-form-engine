@@ -3,12 +3,15 @@ import {ValidationEvaluator} from "./validation/ValidationEvaluator";
 import {ModelUtils} from "./ModelUtils";
 
 export class ModelExtender {
-    static extendModel(model) {
-        ModelUtils.getFieldList(model).forEach(field => ModelExtender.extendField(field));
+    // TODO replace model :any by FormModel
+    static extendModel(model : any) {
+        // TODO replace field :any by Field
+        ModelUtils.getFieldList(model).forEach((field : any) => ModelExtender.extendField(field));
         return model;
     }
 
-    static extendField(field) {
+    // TODO replace field : any to Field
+    static extendField(field : any) {
         if(field.hasOwnProperty("visibilityRule")) {
             field.isVisible = VisibilityEvaluator.evaluate(field);
         }

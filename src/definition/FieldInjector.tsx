@@ -1,12 +1,12 @@
-import React from "react";
 import {FieldTypes} from "./FieldTypes";
 import {TextField} from "../component/field/TextField";
 import {EmailField} from "../component/field/EmailField";
 import {PasswordField} from "../component/field/PasswordField";
 import {NumberField} from "../component/field/NumberField";
+import * as React from "react";
 
 export class FieldInjector {
-    static inject (type) {
+    static inject(type: string) {
         switch (type) {
             case FieldTypes.INPUT_TEXT:
                 return TextField;

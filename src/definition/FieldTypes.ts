@@ -1,8 +1,8 @@
-export const FieldTypes = {
-    INPUT_TEXT: "TextField",
-    INPUT_EMAIL: "EmailField",
-    INPUT_PASSWORD: "PasswordField",
-    INPUT_NUMBER: "NumberField",
+export enum FieldTypes {
+    INPUT_TEXT = "TextField",
+    INPUT_EMAIL = "EmailField",
+    INPUT_PASSWORD = "PasswordField",
+    INPUT_NUMBER = "NumberField",
 };
 
 const properties = [
@@ -31,5 +31,5 @@ export const FieldTypesDetails = {
     },
 };
 
-export const AllTypes = Object.values(FieldTypes);
+export const AllTypes = Object.keys(FieldTypes).map(key => FieldTypes[key]);
 

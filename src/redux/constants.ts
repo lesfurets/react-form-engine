@@ -8,6 +8,3 @@ export interface FieldValueAction extends Action {
     fieldValue: string
 }
 
-export type FieldContextState = {
-    [fieldId: string] : string
-}
