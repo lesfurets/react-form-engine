@@ -2,23 +2,18 @@ import React from "react";
 import "../styles/app.less";
 import FormEngine from "../../src/index";
 import {FieldTypes} from "../../src/definition/FieldTypes";
-import {ValidationBuilder, ValidationUtils} from "../../src/definition/validation/ValidationUtils";
-import {VisibilityBuilder} from "../../src/definition/visibility/VisibilityUtils";
-import {Predicates} from "../../src/definition/predicate/Predicates";
-import {ModelExtender} from "../../src/definition/ModelExtender";
+import {ValidationUtils} from "../../src/definition/validation/ValidationUtils";
 
 const FIRST_NAME = {
     id: "FIRST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "First Name",
-    validationRule: ValidationBuilder.error("The first name is mandatory").when(Predicates.self().isNot().defined())
 };
 
 const LAST_NAME = {
     id: "LAST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "Last Name",
-    visibilityRule: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined())
 };
 
 const EMAIL = {
@@ -43,7 +38,6 @@ const PASSWORD_CONFIRMATION = {
     id: "PASSWORD_CONFIRMATION",
     type: FieldTypes.INPUT_PASSWORD,
     label: "Confirm your password",
-    visibilityRule: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME.id).isNot().defined()),
     getValidation(context) {
         return ValidationUtils.isDefinedAndEqualTo(this, context, context[PASSWORD.id], "The passwords should be identical.");
     }
@@ -86,11 +80,16 @@ const BLOCKS = {
     }
 };
 
+const FORM = {
+    id: "FORM",
+    blocks: Object.values(BLOCKS)
+};
+
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            model: ModelExtender.extendModel(Object.values(BLOCKS))
+            model: FORM
         };
         this.onEvent = this.onEvent.bind(this);
     }

@@ -31,5 +31,5 @@ export const FieldTypesDetails = {
     },
 };
 
-export const AllTypes = Object.keys(FieldTypes).map(key => FieldTypes[key]);
+export const AllTypes = Object.keys(FieldTypes).map(key => FieldTypes[key as any]);
 
