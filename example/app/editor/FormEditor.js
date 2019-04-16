@@ -10,9 +10,9 @@ import {FIELD_EDITOR_EVENT, FieldEditorView} from "../view/FieldEditorView";
 import {EMPTY_CALLBACK} from "../../../src/definition/props-utils";
 
 import {FieldTypes} from "../../../src/definition/FieldTypes";
-import {VisibilityBuilder} from "../../../src/definition/visibility/VisibilityUtils";
-import {Predicates} from "../../../src/definition/predicate/Predicates";
-import {ValidationBuilder} from "../../../src/definition/validation/ValidationUtils";
+import {VisibilityBuilder} from "../../../src/dsl/visibility/VisibilityBuilder";
+import {Predicates} from "../../../src/dsl/predicate/Predicates";
+import {ValidationBuilder} from "../../../src/dsl/validation/ValidationUtils";
 import reducer from "../../../src/redux/reducers";
 import FormWrapper from "../../../src/component/wrapper/FormWrapper";
 

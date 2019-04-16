@@ -48,7 +48,6 @@ export default class FormWrapper extends React.Component {
     render() {
         let {form, View, BlockView, FieldView} = this.props;
         let {currentIndex} = this.state;
-        console.log(form);
         return (
             <View onEvent={this.onEvent}>
                 {form.blocks.map((block, index) =>

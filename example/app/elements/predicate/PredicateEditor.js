@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import {FieldPredicateTypes, FieldPredicate} from "../../../../src/definition/predicate/FieldPredicate";
+import {FieldPredicateTypes, FieldPredicate} from "../../../../src/dsl/predicate/FieldPredicate";
 import {ValueDetailEditor} from "./ValueDetailEditor";
 import {FieldDetailEditor} from "./FieldDetailEditor";
 import {FieldSelector} from "./FieldSelector";

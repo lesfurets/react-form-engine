@@ -4,7 +4,7 @@ import {ERROR, initTest, IS_NOT_VISIBLE, IS_VISIBLE, setFieldValue} from "../../
 import {VALID} from "../../../src/definition/validation/Validation";
 import {shallow, mount} from "enzyme/build/index";
 import {EMPTY_CALLBACK, mockPredicate} from "../../test-utils";
-import {VisibilityRule} from "../../../src/definition/visibility/VisibilityRule";
+import {VisibilityRule} from "../../../src/dsl/visibility/VisibilityRule";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 
