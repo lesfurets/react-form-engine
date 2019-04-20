@@ -1,12 +1,12 @@
 import {Validation} from "../../definition/validation/Validation";
-import {FieldPredicate} from "../predicate/FieldPredicate";
+import {FieldPredicate2} from "../predicate/FieldPredicate";
 
 export class ValidationRule {
 
     validation: Validation;
-    predicate: FieldPredicate;
+    predicate: FieldPredicate2;
 
-    constructor(validation: Validation, predicate: FieldPredicate) {
+    constructor(validation: Validation, predicate: FieldPredicate2) {
         this.validation = validation;
         this.predicate = predicate;
     }

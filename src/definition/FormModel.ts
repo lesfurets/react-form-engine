@@ -10,12 +10,12 @@ export interface FormElement {
 export class Field implements FormElement {
     id: string;
     type: FieldTypes;
-    label: string;
+    label?: string;
     validationRule? : ValidationRule;
     visibilityRule? : VisibilityRule;
     // TODO rename 'isValid' ?
-    getValidation : (state: FieldContextState) => Validation;
-    isVisible : (state: FieldContextState) => boolean
+    getValidation?: (state: FieldContextState) => Validation;
+    isVisible?: (state: FieldContextState) => boolean
 }
 
 export class Block implements FormElement{
@@ -31,5 +31,5 @@ export class Form implements FormElement{
 }
 
 export type FieldContextState = {
-    [fieldId: string]: string
+    [fieldId: string]: string | null
 }

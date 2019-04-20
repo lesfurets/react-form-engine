@@ -1,5 +1,5 @@
 import {VisibilityRule} from "./VisibilityRule";
-import {FieldPredicate} from "../predicate/FieldPredicate";
+import {FieldPredicate2} from "../predicate/FieldPredicate";
 
 export class VisibilityBuilder {
 
@@ -9,7 +9,7 @@ export class VisibilityBuilder {
         this.isVisible = isVisible;
     }
 
-    when(predicate: FieldPredicate) {
+    when(predicate: FieldPredicate2) {
         return new VisibilityRule(this.isVisible, predicate);
     }
 

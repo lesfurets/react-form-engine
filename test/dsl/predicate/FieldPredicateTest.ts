@@ -1,17 +1,22 @@
-import React from "react";
-import {initTest} from "../../test-utils";
-import {PredicateEvaluator} from "../../../src/dsl/predicate/PredicatesEvaluator";
+// import {initTest} from "../../test-utils";
+import {PredicateEvaluator3} from "../../../src/dsl/predicate/PredicatesEvaluator3";
+import {FieldPredicate2} from "../../../src/dsl/predicate/FieldPredicate";
+import {Field, FieldContextState} from "../../../src/definition/FormModel";
+import {FieldTypes} from "../../../src/definition/FieldTypes";
 
-initTest();
+// initTest();
 
-describe("FormEngine/Definition/Predicate/FieldPredicate", () => {
+describe("FormEngine/Definition/Predicate/FieldPredicate2", () => {
 
-    let fieldId = "fieldId";
-    let field = {id: fieldId};
+    let fieldId: string = "fieldId";
+    let field: Field = {
+        id: fieldId,
+        type: FieldTypes.INPUT_TEXT,
+    };
 
-    let getContext = (contextValue) => ({[fieldId]: contextValue});
-    let getPredicate = () => new FieldPredicate(fieldId);
-    let expectPredicate = (predicate, value) => expect(PredicateEvaluator.evaluate(field, predicate)(getContext(value)));
+    let getContext: (contextValue:string | undefined) => FieldContextState = (contextValue: string) => ({[fieldId]: contextValue});
+    let getPredicate: () => FieldPredicate2 = () => new FieldPredicate2(fieldId);
+    let expectPredicate = (predicate: FieldPredicate2, value?:string | undefined) => expect(PredicateEvaluator3.evaluate(field, predicate)(getContext(value)));
 
     describe("Not", () => {
 
@@ -36,7 +41,7 @@ describe("FormEngine/Definition/Predicate/FieldPredicate", () => {
         });
 
         it("Should not match if null", () => {
-            expectPredicate(getPredicate().is().defined(),null).toBe(false);
+            expectPredicate(getPredicate().is().defined(),undefined).toBe(false);
         });
 
     });

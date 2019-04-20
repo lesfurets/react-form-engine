@@ -1,4 +1,4 @@
-import {PredicateEvaluator} from "../predicate/PredicatesEvaluator";
+import {PredicateEvaluator3} from "../predicate/PredicatesEvaluator3";
 import {Field, FieldContextState} from "../../definition/FormModel";
 
 export class VisibilityEvaluator {
@@ -6,7 +6,7 @@ export class VisibilityEvaluator {
         return (context: FieldContextState) => {
             let rule = field.visibilityRule;
             if(rule) {
-                return PredicateEvaluator.evaluate(field, rule.predicate)(context) === rule.isVisible;
+                return PredicateEvaluator3.evaluate(field, rule.predicate)(context) === rule.isVisible;
             }
         }
     }

@@ -1,14 +1,14 @@
-import {FieldPredicate, FieldPredicateTypes} from "./FieldPredicate";
+import {FieldPredicate2, FieldPredicateTypes} from "./FieldPredicate";
 import {ValueUtils} from "../../definition/ValueUtils";
 import {Field, FieldContextState} from "../../definition/FormModel";
 
-export class PredicateEvaluator {
+export class PredicateEvaluator3 {
 
-    static evaluate(field: Field, predicate: FieldPredicate) {
-        return (context: FieldContextState) => predicate.not !== PredicateEvaluator.evaluateType(field, predicate)(context);
+    static evaluate(field: Field, predicate: FieldPredicate2) {
+        return (context: FieldContextState) => predicate.not !== PredicateEvaluator3.evaluateType(field, predicate)(context);
     }
 
-    static evaluateType(field: Field, predicate: FieldPredicate) {
+    static evaluateType(field: Field, predicate: FieldPredicate2) {
         let fieldId = (predicate.fieldId === "") ? field.id : predicate.fieldId;
         switch (predicate.type) {
             case FieldPredicateTypes.defined:

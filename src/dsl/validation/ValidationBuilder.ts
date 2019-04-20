@@ -1,5 +1,5 @@
 import {ValidationRule} from "./ValidationRule";
-import {FieldPredicate} from "../predicate/FieldPredicate";
+import {FieldPredicate2} from "../predicate/FieldPredicate";
 import {Validation} from "../../definition/validation/Validation";
 
 export class ValidationBuilder {
@@ -10,7 +10,7 @@ export class ValidationBuilder {
         this.validation = validation;
     }
 
-    when(predicate: FieldPredicate) {
+    when(predicate: FieldPredicate2) {
         return new ValidationRule(this.validation, predicate);
     }
 

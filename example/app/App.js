@@ -7,6 +7,8 @@ import {VisibilityBuilder} from "../../src/dsl/visibility/VisibilityBuilder";
 import {Predicates} from "../../src/dsl/predicate/Predicates";
 import {ModelExtender} from "../../src/dsl/ModelExtender";
 import {ValidationBuilder} from "../../src/dsl/validation/ValidationBuilder";
+import {Predicates2} from "../../src/dsl/predicate/builder/Predicates";
+import {PredicateEvaluator} from "../../src/dsl/predicate/PredicateEvaluator";
 
 const FIRST_NAME = {
     id: "FIRST_NAME",
@@ -49,6 +51,11 @@ const PASSWORD_CONFIRMATION = {
         return ValidationUtils.isDefinedAndEqualTo(this, context, context[PASSWORD.id], "The passwords should be identical.");
     }
 };
+
+console.log(Predicates.field(FIRST_NAME.id).isNot().equalTo("Test"));
+console.log(Predicates2.field(FIRST_NAME).isNot().equalTo("Test"));
+console.log(PredicateEvaluator.build(FIRST_NAME, Predicates2.field(FIRST_NAME).isNot().equalTo("Test")));
+
 
 const NUMBER = {
     id: "NUMBER",

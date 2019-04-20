@@ -1,5 +1,5 @@
 import {ValueUtils} from "../../definition/ValueUtils";
-import {FieldContextState, Form} from "../../definition/FormModel";
+import {Field, FieldContextState, Form} from "../../definition/FormModel";
 
 export enum FieldPredicateTypes {
     defined="defined",
@@ -7,7 +7,7 @@ export enum FieldPredicateTypes {
     equalToField="equalToField",
 };
 
-export class FieldPredicate {
+export class FieldPredicate2 {
 
     fieldId: string;
     not: boolean;
