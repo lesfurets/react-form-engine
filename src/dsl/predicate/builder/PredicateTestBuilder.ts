@@ -3,8 +3,10 @@ import {Predicate} from "../data/Predicate";
 import {PredicateTargetBuilder} from "./PredicateTargetBuilder";
 import {PredicateBuilder} from "./PredicateBuilder";
 import {buildParent} from "./BuilderEvaluator";
-import {DefinedPredicate, EqualToFieldPredicate, EqualToPredicate} from "../data/ValuePredicate";
 import {Field} from "../../../definition/FormModel";
+import {DefinedPredicate} from "../data/leaf/DefinedPredicate";
+import {EqualToPredicate} from "../data/leaf/EqualToPredicate";
+import {EqualToFieldPredicate} from "../data/leaf/EqualToFieldPredicate";
 
 export class PredicateTestBuilder implements PredicateBuilder{
     parent: PredicateDefinitionBuilder

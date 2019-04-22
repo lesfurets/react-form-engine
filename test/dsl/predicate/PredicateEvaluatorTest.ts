@@ -1,13 +1,12 @@
 import {Field, FieldContextState} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
-import {
-    DefinedPredicate,
-    EqualToFieldPredicate,
-    EqualToPredicate
-} from "../../../src/dsl/predicate/data/ValuePredicate";
-import {FieldPredicate, SelfPredicate} from "../../../src/dsl/predicate/data/PredicateTarget";
 import {PredicateEvaluator} from "../../../src/dsl/predicate/PredicateEvaluator";
-import {ReversedPredicate} from "../../../src/dsl/predicate/data/ReversedPredicate";
+import {ReversedPredicate} from "../../../src/dsl/predicate/data/oparation/ReversedPredicate";
+import {SelfPredicate} from "../../../src/dsl/predicate/data/root/SelfPredicate";
+import {FieldPredicate} from "../../../src/dsl/predicate/data/root/FieldPredicate";
+import {DefinedPredicate} from "../../../src/dsl/predicate/data/leaf/DefinedPredicate";
+import {EqualToPredicate} from "../../../src/dsl/predicate/data/leaf/EqualToPredicate";
+import {EqualToFieldPredicate} from "../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
 
 describe("DSL/Predicate/PredicateEvaluator", () => {
 

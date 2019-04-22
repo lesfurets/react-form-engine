@@ -1,9 +1,12 @@
 import {Field, FieldContextState} from "../../definition/FormModel";
 import {Predicate} from "./data/Predicate";
-import {ReversedPredicate} from "./data/ReversedPredicate";
-import {FieldPredicate, SelfPredicate} from "./data/PredicateTarget";
-import {DefinedPredicate, EqualToFieldPredicate, EqualToPredicate} from "./data/ValuePredicate";
+import {ReversedPredicate} from "./data/oparation/ReversedPredicate";
 import {ValueUtils} from "../../definition/ValueUtils";
+import {SelfPredicate} from "./data/root/SelfPredicate";
+import {FieldPredicate} from "./data/root/FieldPredicate";
+import {DefinedPredicate} from "./data/leaf/DefinedPredicate";
+import {EqualToPredicate} from "./data/leaf/EqualToPredicate";
+import {EqualToFieldPredicate} from "./data/leaf/EqualToFieldPredicate";
 
 export class PredicateEvaluator {
 
