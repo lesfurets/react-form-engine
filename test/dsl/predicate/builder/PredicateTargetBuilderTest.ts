@@ -1,9 +1,6 @@
-import {Predicates} from "../../../../src/dsl/predicate/builder/Predicates";
-import {
-    ReversedPredicatedBuilder,
-    ValuePredicateBuilder
-} from "../../../../src/dsl/predicate/builder/PredicateTestBuilder";
-import {SelfPredicateBuilder} from "../../../../src/dsl/predicate/builder/PredicateTargetBuilder";
+import {SelfPredicateBuilder} from "../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
+import {ReversedPredicatedBuilder} from "../../../../src/dsl/predicate/builder/definition/ReversedPredicatedBuilder";
+import {ValuePredicateBuilder} from "../../../../src/dsl/predicate/builder/ValuePredicateBuilder";
 
 describe("DSL/Predicate/Builder/PredicateTargetBuilder", () => {
 

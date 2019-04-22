@@ -1,6 +1,6 @@
 import {Field, FieldContextState} from "../../definition/FormModel";
 import {Predicate} from "./data/Predicate";
-import {ReversedPredicate} from "./data/oparation/ReversedPredicate";
+import {ReversedPredicate} from "./data/operation/ReversedPredicate";
 import {ValueUtils} from "../../definition/ValueUtils";
 import {SelfPredicate} from "./data/root/SelfPredicate";
 import {FieldPredicate} from "./data/root/FieldPredicate";

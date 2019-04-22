@@ -1,7 +1,7 @@
 import {Field, FieldContextState} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {PredicateEvaluator} from "../../../src/dsl/predicate/PredicateEvaluator";
-import {ReversedPredicate} from "../../../src/dsl/predicate/data/oparation/ReversedPredicate";
+import {ReversedPredicate} from "../../../src/dsl/predicate/data/operation/ReversedPredicate";
 import {SelfPredicate} from "../../../src/dsl/predicate/data/root/SelfPredicate";
 import {FieldPredicate} from "../../../src/dsl/predicate/data/root/FieldPredicate";
 import {DefinedPredicate} from "../../../src/dsl/predicate/data/leaf/DefinedPredicate";
