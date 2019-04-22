@@ -1,11 +1,11 @@
-import {FieldPredicate2} from "../predicate/FieldPredicate";
+import {Predicate} from "../predicate/data/Predicate";
 
 export class VisibilityRule {
 
     isVisible: boolean;
-    predicate: FieldPredicate2;
+    predicate: Predicate;
 
-    constructor(isVisible: boolean, predicate: FieldPredicate2) {
+    constructor(isVisible: boolean, predicate: Predicate) {
         this.isVisible = isVisible;
         this.predicate = predicate;
     }
