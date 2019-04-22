@@ -1,9 +1,9 @@
-import {ReversedPredicatedBuilder} from "./PredicateTestBuilder";
 import {PredicateBuilder} from "./PredicateBuilder";
 import {Predicate} from "../data/Predicate";
-import {FieldPredicateBuilder, SelfPredicateBuilder} from "./PredicateTargetBuilder";
 import {FieldPredicate, SelfPredicate} from "../data/PredicateTarget";
 import {ReversedPredicate} from "../data/ReversedPredicate";
+import {ReversedPredicatedBuilder} from "./PredicateTestBuilder";
+import {FieldPredicateBuilder, SelfPredicateBuilder} from "./PredicateTargetBuilder";
 
 export const buildParent: (predicate: PredicateBuilder, child: Predicate) => Predicate = (predicate: PredicateBuilder, child: Predicate) => {
     if (predicate instanceof ReversedPredicatedBuilder) {

@@ -189,7 +189,6 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be true if fields have expected value", () => {
             // Given
-            // Given
             const context: FieldContextState = {
                 [field.id]: "value",
                 [otherField.id]: "value",

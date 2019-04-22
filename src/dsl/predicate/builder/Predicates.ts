@@ -1,5 +1,6 @@
-import {FieldPredicateBuilder, SelfPredicateBuilder} from "./PredicateTargetBuilder";
 import {Field} from "../../../definition/FormModel";
+import {FieldPredicateBuilder, SelfPredicateBuilder} from "./PredicateTargetBuilder";
+
 
 export class Predicates {
     static field(field: Field) {
