@@ -1,11 +1,11 @@
-import {Field} from "../../../../src/definition/FormModel";
-import {FieldTypes} from "../../../../src/definition/FieldTypes";
-import {SelfPredicate} from "../../../../src/dsl/predicate/data/root/SelfPredicate";
-import {DefinedPredicate} from "../../../../src/dsl/predicate/data/leaf/DefinedPredicate";
-import {EqualToPredicate} from "../../../../src/dsl/predicate/data/leaf/EqualToPredicate";
-import {EqualToFieldPredicate} from "../../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
-import {SelfPredicateBuilder} from "../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
-import {ValuePredicateBuilder} from "../../../../src/dsl/predicate/builder/finalizer/ValuePredicateBuilder";
+import {Field} from "../../../../../src/definition/FormModel";
+import {FieldTypes} from "../../../../../src/definition/FieldTypes";
+import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPredicate";
+import {DefinedPredicate} from "../../../../../src/dsl/predicate/data/leaf/DefinedPredicate";
+import {EqualToPredicate} from "../../../../../src/dsl/predicate/data/leaf/EqualToPredicate";
+import {EqualToFieldPredicate} from "../../../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
+import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
+import {ValuePredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/ValuePredicateBuilder";
 
 describe("DSL/Predicate/Builder/PredicateTestBuilder", () => {
 

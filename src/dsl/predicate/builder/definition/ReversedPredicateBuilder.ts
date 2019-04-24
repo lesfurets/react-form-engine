@@ -2,7 +2,7 @@ import {PredicateDefinitionBuilder} from "./PredicateDefinitionBuilder";
 import {Predicate} from "../../data/Predicate";
 import {ReversedPredicate} from "../../data/operation/ReversedPredicate";
 
-export class ReversedPredicatedBuilder extends PredicateDefinitionBuilder {
+export class ReversedPredicateBuilder extends PredicateDefinitionBuilder {
     parent: PredicateDefinitionBuilder;
 
     constructor(parent: PredicateDefinitionBuilder) {
