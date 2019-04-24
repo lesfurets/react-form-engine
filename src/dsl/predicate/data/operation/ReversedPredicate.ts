@@ -1,4 +1,4 @@
-import {PredicateOperation} from "../PredicateOperation";
+import {PredicateOperation} from "./PredicateOperation";
 import {Predicate} from "../Predicate";
 
 export class ReversedPredicate extends PredicateOperation {

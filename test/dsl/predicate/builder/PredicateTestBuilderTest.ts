@@ -5,7 +5,7 @@ import {DefinedPredicate} from "../../../../src/dsl/predicate/data/leaf/DefinedP
 import {EqualToPredicate} from "../../../../src/dsl/predicate/data/leaf/EqualToPredicate";
 import {EqualToFieldPredicate} from "../../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
 import {SelfPredicateBuilder} from "../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
-import {ValuePredicateBuilder} from "../../../../src/dsl/predicate/builder/ValuePredicateBuilder";
+import {ValuePredicateBuilder} from "../../../../src/dsl/predicate/builder/finalizer/ValuePredicateBuilder";
 
 describe("DSL/Predicate/Builder/PredicateTestBuilder", () => {
 

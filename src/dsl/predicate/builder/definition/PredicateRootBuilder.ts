@@ -1,6 +1,6 @@
-import {PredicateDefinitionBuilder} from "../PredicateDefinitionBuilder";
+import {PredicateDefinitionBuilder} from "./PredicateDefinitionBuilder";
 import {ReversedPredicatedBuilder} from "./ReversedPredicatedBuilder";
-import {ValuePredicateBuilder} from "../ValuePredicateBuilder";
+import {ValuePredicateBuilder} from "../finalizer/ValuePredicateBuilder";
 
 export abstract class PredicateRootBuilder extends PredicateDefinitionBuilder {
     is: () => ValuePredicateBuilder = () => new ValuePredicateBuilder(this);

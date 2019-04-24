@@ -1,4 +1,4 @@
-import {PredicateLeaf} from "../PredicateLeaf";
+import {PredicateLeaf} from "./PredicateLeaf";
 import {Field} from "../../../../definition/FormModel";
 
 export class EqualToFieldPredicate extends PredicateLeaf {

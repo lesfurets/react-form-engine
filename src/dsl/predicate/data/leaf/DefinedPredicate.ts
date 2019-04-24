@@ -1,4 +1,4 @@
-import {PredicateLeaf} from "../PredicateLeaf";
+import {PredicateLeaf} from "./PredicateLeaf";
 
 export class DefinedPredicate extends PredicateLeaf {
 }

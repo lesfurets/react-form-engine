@@ -1,4 +1,4 @@
-import {PredicateLeaf} from "../PredicateLeaf";
+import {PredicateLeaf} from "./PredicateLeaf";
 
 export class EqualToPredicate extends PredicateLeaf {
     value: String;

@@ -1,4 +1,4 @@
-import {Predicate} from "./Predicate";
+import {Predicate} from "../Predicate";
 
 export class PredicateRoot extends Predicate{
 }
