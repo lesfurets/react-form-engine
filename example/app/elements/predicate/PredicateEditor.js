@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import {FieldPredicateTypes, FieldPredicate2} from "../../../../src/dsl/predicate/FieldPredicate";
 import {ValueDetailEditor} from "./ValueDetailEditor";
 import {FieldDetailEditor} from "./FieldDetailEditor";
 import {FieldSelector} from "./FieldSelector";
@@ -20,6 +19,12 @@ let TARGET = {
     OTHER: "other",
 };
 
+export const FieldPredicateTypes = {
+    defined: "defined",
+    equalToValue: "equalToValue",
+    equalToField: "equalToField",
+};
+
 export class PredicateEditorComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -32,7 +37,7 @@ export class PredicateEditorComponent extends React.Component {
         if (key === "type") {
             model.details = TypeDetails[value].defaultDetails(this.props.fieldContext[FormEditor.MODEL]);
         }
-        this.props.onChange(FieldPredicate2.load(model));
+        this.props.onChange(/*FieldPredicate2.load(model)*/);
     };
 
     render() {

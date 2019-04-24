@@ -11,7 +11,6 @@ import {EMPTY_CALLBACK} from "../../../src/definition/props-utils";
 
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {VisibilityBuilder} from "../../../src/dsl/visibility/VisibilityBuilder";
-import {Predicates} from "../../../src/dsl/predicate/Predicates";
 import {ValidationBuilder} from "../../../src/dsl/validation/ValidationUtils";
 import reducer from "../../../src/redux/reducers";
 import FormWrapper from "../../../src/component/wrapper/FormWrapper";
@@ -21,6 +20,7 @@ import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster"
 import {setFieldValueAction} from "../../../src/redux/actions";
 import {ModelUtils} from "../../../src/definition/ModelUtils";
 import {ModelUpdater} from "./ModelUpdater";
+import {Predicates} from "../../../src/dsl/predicate/builder/Predicates";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

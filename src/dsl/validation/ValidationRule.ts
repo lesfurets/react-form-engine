@@ -1,5 +1,4 @@
 import {Validation} from "../../definition/validation/Validation";
-import {FieldPredicate2} from "../predicate/FieldPredicate";
 import {Predicate} from "../predicate/data/Predicate";
 
 export class ValidationRule {
