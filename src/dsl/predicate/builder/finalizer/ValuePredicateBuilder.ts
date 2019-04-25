@@ -2,8 +2,9 @@ import {PredicateDefinitionBuilder} from "../definition/PredicateDefinitionBuild
 import {Predicate} from "../../data/Predicate";
 import {DefinedPredicate} from "../../data/leaf/DefinedPredicate";
 import {EqualToPredicate} from "../../data/leaf/EqualToPredicate";
-import {Field} from "../../../../definition/FormModel";
+import {Field, FieldContextState} from "../../../../definition/FormModel";
 import {EqualToFieldPredicate} from "../../data/leaf/EqualToFieldPredicate";
+import {MatchPredicate} from "../../data/leaf/MatchPredicate";
 
 export class ValuePredicateBuilder {
     parent: PredicateDefinitionBuilder;
@@ -23,5 +24,9 @@ export class ValuePredicateBuilder {
 
     equalToField(otherField: Field): Predicate {
         return this.parent.build(new EqualToFieldPredicate(otherField));
+    }
+
+    matches(matcher: (context: FieldContextState) => boolean): Predicate {
+        return this.parent.build(new MatchPredicate(matcher));
     }
 }

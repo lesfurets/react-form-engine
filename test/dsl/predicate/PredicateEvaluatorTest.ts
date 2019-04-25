@@ -9,6 +9,7 @@ import {EqualToPredicate} from "../../../src/dsl/predicate/data/leaf/EqualToPred
 import {EqualToFieldPredicate} from "../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
 import {TruePredicate} from "../../../src/dsl/predicate/data/root/TruePredicate";
 import {FalsePredicate} from "../../../src/dsl/predicate/data/root/FalsePredicate";
+import {MatchPredicate} from "../../../src/dsl/predicate/data/leaf/MatchPredicate";
 
 describe("DSL/Predicate/PredicateEvaluator", () => {
 
@@ -197,6 +198,21 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
             // Then
             expect(predicateFunction(context)).toBe(true);
+        });
+
+    });
+
+    describe("MatchPredicate", () => {
+
+        it("Should be false", () => {
+            // Given
+            // const matcher = jasmine.createSpy("matcher", () => false);
+            const matcher = jasmine.createSpy().and.returnValue(false);
+            const predicate = new MatchPredicate(matcher);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({})).toBe(false);
+            expect(matcher).toHaveBeenCalled()
         });
 
     });

@@ -6,6 +6,8 @@ import {EqualToPredicate} from "../../../../../src/dsl/predicate/data/leaf/Equal
 import {EqualToFieldPredicate} from "../../../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
 import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
 import {ValuePredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/ValuePredicateBuilder";
+import Matchers = jest.Matchers;
+import {MatchPredicate} from "../../../../../src/dsl/predicate/data/leaf/MatchPredicate";
 
 describe("DSL/Predicate/Builder/ValuePredicateBuilder", () => {
 
@@ -41,6 +43,18 @@ describe("DSL/Predicate/Builder/ValuePredicateBuilder", () => {
 
     it("Should handle Defined ", () => {
         expect((<SelfPredicate>predicateTest.defined()).predicate).toBeInstanceOf(DefinedPredicate);
+    });
+
+    it("Should handle Match ", () => {
+        //Given
+        const matcher= () => true;
+
+        // When
+        let predicate = (<SelfPredicate>predicateTest.matches(matcher)).predicate;
+
+        // Then
+        expect(predicate).toBeInstanceOf(MatchPredicate);
+        expect((<MatchPredicate>predicate).matcher).toBe(matcher);
     });
 
 

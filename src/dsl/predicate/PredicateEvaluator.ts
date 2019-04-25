@@ -9,6 +9,7 @@ import {EqualToPredicate} from "./data/leaf/EqualToPredicate";
 import {EqualToFieldPredicate} from "./data/leaf/EqualToFieldPredicate";
 import {TruePredicate} from "./data/root/TruePredicate";
 import {FalsePredicate} from "./data/root/FalsePredicate";
+import {MatchPredicate} from "./data/leaf/MatchPredicate";
 
 export class PredicateEvaluator {
 
@@ -50,6 +51,10 @@ export class PredicateEvaluator {
 
         if(predicate instanceof EqualToFieldPredicate) {
             return (context: FieldContextState) => context[field.id] === context[predicate.field.id];
+        }
+
+        if(predicate instanceof MatchPredicate) {
+            return (context: FieldContextState) => predicate.matcher(context);
         }
 
         if(predicate instanceof TruePredicate) {
