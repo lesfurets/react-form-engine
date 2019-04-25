@@ -1,4 +1,7 @@
-import {PredicateRoot} from "./PredicateRoot";
+import {PredicateLeaf} from "../leaf/PredicateLeaf";
 
-export class TruePredicate extends PredicateRoot{
+export class TruePredicate extends PredicateLeaf{
+    constructor() {
+        super();
+    }
 }

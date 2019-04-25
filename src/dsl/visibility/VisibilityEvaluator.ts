@@ -5,7 +5,7 @@ export class VisibilityEvaluator {
     static evaluate(field: Field):(context: FieldContextState)=> boolean {
         return (context: FieldContextState) => {
             let rule = field.visibilityRule;
-            return !!(rule && PredicateEvaluator.build(field, rule.predicate)(context) === rule.isVisible);
+            return (rule !== undefined) && (PredicateEvaluator.build(field, rule.predicate)(context) === rule.isVisible);
         }
     }
 }

@@ -8,6 +8,7 @@ import {DefinedPredicate} from "../../../src/dsl/predicate/data/leaf/DefinedPred
 import {EqualToPredicate} from "../../../src/dsl/predicate/data/leaf/EqualToPredicate";
 import {EqualToFieldPredicate} from "../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
 import {TruePredicate} from "../../../src/dsl/predicate/data/root/TruePredicate";
+import {FalsePredicate} from "../../../src/dsl/predicate/data/root/FalsePredicate";
 
 describe("DSL/Predicate/PredicateEvaluator", () => {
 
@@ -216,7 +217,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be false", () => {
             // Given
-            const predicate = new TruePredicate();
+            const predicate = new FalsePredicate();
 
             // Then
             expect(PredicateEvaluator.build(field, predicate)({})).toBe(false);
