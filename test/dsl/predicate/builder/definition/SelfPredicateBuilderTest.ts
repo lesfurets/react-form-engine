@@ -5,7 +5,7 @@ import {Predicate} from "../../../../../src/dsl/predicate/data/Predicate";
 import {FieldPredicate} from "../../../../../src/dsl/predicate/data/root/FieldPredicate";
 import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPredicate";
 
-describe("DSL/Predicate/Builder/PredicateTargetBuilder", () => {
+describe("DSL/Predicate/Builder/SelfPredicateBuilder", () => {
 
     const predicateTarget = new SelfPredicateBuilder();
 

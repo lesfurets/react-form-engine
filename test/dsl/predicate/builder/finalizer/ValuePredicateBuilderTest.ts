@@ -7,7 +7,7 @@ import {EqualToFieldPredicate} from "../../../../../src/dsl/predicate/data/leaf/
 import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
 import {ValuePredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/ValuePredicateBuilder";
 
-describe("DSL/Predicate/Builder/PredicateTestBuilder", () => {
+describe("DSL/Predicate/Builder/ValuePredicateBuilder", () => {
 
     const parentPredicate = new SelfPredicateBuilder();
     const predicateTest = new ValuePredicateBuilder(parentPredicate);

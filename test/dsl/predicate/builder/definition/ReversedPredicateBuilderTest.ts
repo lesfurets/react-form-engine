@@ -3,7 +3,7 @@ import {PredicateDefinitionBuilder} from "../../../../../src/dsl/predicate/build
 import {Predicate} from "../../../../../src/dsl/predicate/data/Predicate";
 import {ReversedPredicate} from "../../../../../src/dsl/predicate/data/operation/ReversedPredicate";
 
-describe("DSL/Predicate/Builder/PredicateTargetBuilder", () => {
+describe("DSL/Predicate/Builder/ReversedPredicateBuilder", () => {
 
     class TestPredicate extends Predicate{
         child: Predicate;

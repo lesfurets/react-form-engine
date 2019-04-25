@@ -1,10 +1,6 @@
-import React from "react";
-import {ValidationBuilder, ValidationUtils} from "../../../src/definition/validation/ValidationUtils";
-import {initTest} from "../../test-utils";
+import {ValidationBuilder} from "../../../src/dsl/validation/ValidationBuilder";
 
-initTest();
-
-describe("FormEngine/Definition/Validation/ValidationBuilder", () => {
+describe("DSL/Validation/ValidationBuilder", () => {
 
         it("Should create ValidationRule", () => {
             // Given

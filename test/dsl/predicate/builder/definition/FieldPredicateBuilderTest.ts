@@ -6,7 +6,7 @@ import {FieldPredicateBuilder} from "../../../../../src/dsl/predicate/builder/de
 import {Predicate} from "../../../../../src/dsl/predicate/data/Predicate";
 import {FieldPredicate} from "../../../../../src/dsl/predicate/data/root/FieldPredicate";
 
-describe("DSL/Predicate/Builder/PredicateTargetBuilder", () => {
+describe("DSL/Predicate/Builder/FieldPredicateBuilder", () => {
 
     const field: Field = {
         id: "fieldId",
