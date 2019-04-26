@@ -1,4 +1,4 @@
-import {Field, FieldContextState} from "../../definition/FormModel";
+import {Field, FieldContext} from "../../definition/FormModel";
 import {Predicate} from "./data/Predicate";
 import {ReversedPredicate} from "./data/operation/ReversedPredicate";
 import {ValueUtils} from "../../definition/ValueUtils";
@@ -13,7 +13,7 @@ import {MatchPredicate} from "./data/leaf/MatchPredicate";
 
 export class PredicateEvaluator {
 
-    static build(field: Field, predicate: Predicate):(context: FieldContextState) => boolean {
+    static build(field: Field, predicate: Predicate):(context: FieldContext) => boolean {
         // console.log(predicate);
         // console.log("SelfPredicate", predicate instanceof SelfPredicate);
         // console.log("FieldPredicate", predicate instanceof FieldPredicate);
@@ -35,26 +35,26 @@ export class PredicateEvaluator {
 
         // Middle Predicates
         if(predicate instanceof ReversedPredicate) {
-            return (context: FieldContextState) => !PredicateEvaluator.build(field, predicate.child)(context);
+            return (context: FieldContext) => !PredicateEvaluator.build(field, predicate.child)(context);
         }
 
         // Values Predicates
         if(predicate instanceof DefinedPredicate) {
-            return (context: FieldContextState) => ValueUtils.isDefined(context[field.id]);
+            return (context: FieldContext) => ValueUtils.isDefined(context[field.id]);
         }
 
         if(predicate instanceof EqualToPredicate) {
-            return (context: FieldContextState) => {
+            return (context: FieldContext) => {
                 return context[field.id] === predicate.value;
             }
         }
 
         if(predicate instanceof EqualToFieldPredicate) {
-            return (context: FieldContextState) => context[field.id] === context[predicate.field.id];
+            return (context: FieldContext) => context[field.id] === context[predicate.field.id];
         }
 
         if(predicate instanceof MatchPredicate) {
-            return (context: FieldContextState) => predicate.matcher(context);
+            return (context: FieldContext) => predicate.matcher(context);
         }
 
         if(predicate instanceof TruePredicate) {

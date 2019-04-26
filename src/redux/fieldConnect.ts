@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {FieldValueAction} from "./constants";
 import {ComponentType} from "react";
-import {FieldContextState} from "../definition/FormModel";
+import {FieldContext} from "../definition/FormModel";
 
 export const mapDispatchToProps = (dispatch: Dispatch<FieldValueAction>) => {
     return {
@@ -11,7 +11,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<FieldValueAction>) => {
     }
 };
 
-export const mapStateToProps = (state: FieldContextState) => {
+export const mapStateToProps = (state: FieldContext) => {
     return {
         fieldContext: state.fieldContext,
     }

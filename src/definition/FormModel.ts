@@ -14,8 +14,8 @@ export class Field implements FormElement {
     validationRule? : ValidationRule;
     visibilityRule? : VisibilityRule;
     // TODO rename 'isValid' ?
-    getValidation?: (state: FieldContextState) => Validation;
-    isVisible?: (state: FieldContextState) => boolean
+    getValidation?: (state: FieldContext) => Validation;
+    isVisible?: (state: FieldContext) => boolean
 }
 
 export class Block implements FormElement{
@@ -30,6 +30,6 @@ export class Form implements FormElement{
     fields: Block[]
 }
 
-export type FieldContextState = {
+export type FieldContext = {
     [fieldId: string]: string | null
 }

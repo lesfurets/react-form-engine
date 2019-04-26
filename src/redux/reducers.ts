@@ -1,8 +1,8 @@
 import {combineReducers, Reducer} from "redux";
 import {FieldValueAction, SET_FIELD_VALUE} from "./constants";
-import {FieldContextState} from "../definition/FormModel";
+import {FieldContext} from "../definition/FormModel";
 
-const fieldContext : Reducer<FieldContextState> = (state: FieldContextState = {}, action: FieldValueAction) => {
+const fieldContext : Reducer<FieldContext> = (state: FieldContext = {}, action: FieldValueAction) => {
     switch (action.type) {
         case SET_FIELD_VALUE:
             return {...state, [action.fieldId]: action.fieldValue};

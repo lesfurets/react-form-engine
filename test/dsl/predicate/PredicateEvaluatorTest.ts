@@ -1,4 +1,4 @@
-import {Field, FieldContextState} from "../../../src/definition/FormModel";
+import {Field, FieldContext} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {PredicateEvaluator} from "../../../src/dsl/predicate/PredicateEvaluator";
 import {ReversedPredicate} from "../../../src/dsl/predicate/data/operation/ReversedPredicate";
@@ -34,7 +34,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
                 type: FieldTypes.INPUT_TEXT,
             };
 
-            let context: FieldContextState = {
+            let context: FieldContext = {
                 [field.id]: value,
                 [secondField.id]: value,
                 [thirdField.id]: "otherValue",
@@ -67,7 +67,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
                 type: FieldTypes.INPUT_TEXT,
             };
 
-            let context: FieldContextState = {
+            let context: FieldContext = {
                 [field.id]: value,
                 [secondField.id]: value,
                 [thirdField.id]: "otherValue",
@@ -91,7 +91,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should return false if inner predicate is true", () => {
             // Given
-            let context: FieldContextState = {[field.id]: value};
+            let context: FieldContext = {[field.id]: value};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -99,7 +99,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should return true if inner predicate is false", () => {
             // Given
-            let context: FieldContextState = {[field.id]: "value2"};
+            let context: FieldContext = {[field.id]: "value2"};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -113,7 +113,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be false if undefined", () => {
             // Given
-            let context: FieldContextState = {};
+            let context: FieldContext = {};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -121,7 +121,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be false if null", () => {
             // Given
-            const context: FieldContextState = {[field.id]: null};
+            const context: FieldContext = {[field.id]: null};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -129,7 +129,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be false if empty", () => {
             // Given
-            const context: FieldContextState = {[field.id]: ""};
+            const context: FieldContext = {[field.id]: ""};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -137,7 +137,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be true if defined", () => {
             // Given
-            const context: FieldContextState = {[field.id]: "value"};
+            const context: FieldContext = {[field.id]: "value"};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -152,7 +152,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be false if field has different value", () => {
             // Given
-            const context: FieldContextState = {[field.id]: "value2"};
+            const context: FieldContext = {[field.id]: "value2"};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -160,7 +160,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be true if field has expected value", () => {
             // Given
-            const context: FieldContextState = {[field.id]: value};
+            const context: FieldContext = {[field.id]: value};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -180,7 +180,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be false if fields have different value", () => {
             // Given
-            const context: FieldContextState = {
+            const context: FieldContext = {
                 [field.id]: "value",
                 [otherField.id]: "value2",
             };
@@ -191,7 +191,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should be true if fields have expected value", () => {
             // Given
-            const context: FieldContextState = {
+            const context: FieldContext = {
                 [field.id]: "value",
                 [otherField.id]: "value",
             };
