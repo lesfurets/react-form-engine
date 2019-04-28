@@ -12,14 +12,14 @@ const FIRST_NAME = {
     id: "FIRST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "First Name",
-    validationRule: ValidationBuilder.error("The first name is mandatory").when(Predicates.self().isNot().defined())
+    validationRule: ValidationBuilder.error("The first name is mandatory").when(Predicates.self.isNot.defined())
 };
 
 const LAST_NAME = {
     id: "LAST_NAME",
     type: FieldTypes.INPUT_TEXT,
     label: "Last Name",
-    visibilityRule: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME).isNot().defined())
+    visibilityRule: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME).isNot.defined())
 };
 
 const EMAIL = {
@@ -44,7 +44,7 @@ const PASSWORD_CONFIRMATION = {
     id: "PASSWORD_CONFIRMATION",
     type: FieldTypes.INPUT_PASSWORD,
     label: "Confirm your password",
-    visibilityRule: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME).isNot().defined()),
+    visibilityRule: VisibilityBuilder.isNotVisible().when(Predicates.field(FIRST_NAME).isNot.defined()),
     getValidation(context) {
         return ValidationUtils.isDefinedAndEqualTo(this, context, context[PASSWORD.id], "The passwords should be identical.");
     }

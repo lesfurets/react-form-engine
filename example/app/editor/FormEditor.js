@@ -45,10 +45,10 @@ const generateNewField = () => ({
 });
 
 const generateVisibilityRules = (model) =>
-    VisibilityBuilder.isNotVisible().when(Predicates.field(ModelUtils.getFieldList(model)[0].id).is().defined());
+    VisibilityBuilder.isNotVisible().when(Predicates.field(ModelUtils.getFieldList(model)[0].id).is.defined());
 
 const generateValidationRules = () =>
-    ValidationBuilder.error("Error message").when(Predicates.self().is().defined());
+    ValidationBuilder.error("Error message").when(Predicates.self.is.defined());
 
 export class FormEditor extends React.Component {
     constructor(props) {

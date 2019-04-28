@@ -10,16 +10,10 @@ export class Predicates {
         return new FieldPredicateBuilder(field);
     }
 
-    static self() {
-        return new SelfPredicateBuilder();
-    }
+    static self = new SelfPredicateBuilder();
 
-    static true() {
-        return new TruePredicate();
-    }
+    static true =new TruePredicate();
 
-    static false() {
-        return new FalsePredicate();
-    }
+    static false =new FalsePredicate();
 
 }

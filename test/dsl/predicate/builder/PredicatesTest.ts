@@ -14,7 +14,7 @@ describe("DSL/Predicate/Builder/Predicates", () => {
     };
 
     it("Should handle self", () => {
-        expect(Predicates.self()).toBeInstanceOf(SelfPredicateBuilder);
+        expect(Predicates.self).toBeInstanceOf(SelfPredicateBuilder);
     });
 
     it("Should handle fields", () => {
@@ -24,11 +24,11 @@ describe("DSL/Predicate/Builder/Predicates", () => {
     });
 
     it("Should handle true", () => {
-        expect(Predicates.true()).toBeInstanceOf(TruePredicate);
+        expect(Predicates.true).toBeInstanceOf(TruePredicate);
     });
 
     it("Should handle false", () => {
-        expect(Predicates.false()).toBeInstanceOf(FalsePredicate);
+        expect(Predicates.false).toBeInstanceOf(FalsePredicate);
     });
 
 });

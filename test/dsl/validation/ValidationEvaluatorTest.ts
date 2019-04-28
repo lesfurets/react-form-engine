@@ -17,11 +17,11 @@ describe("DSL/Validation/ValidationRule", () => {
     describe("Evaluate", () => {
 
         it("Should return validation if predicate is verified", () => {
-            expectValidation(new ValidationRule(validation, Predicates.true())).toBe(validation);
+            expectValidation(new ValidationRule(validation, Predicates.true)).toBe(validation);
         });
 
         it("Should return VALID if predicate is not verified", () => {
-            expectValidation(new ValidationRule(validation, Predicates.false())).toBe(VALID);
+            expectValidation(new ValidationRule(validation, Predicates.false)).toBe(VALID);
         });
 
     });
