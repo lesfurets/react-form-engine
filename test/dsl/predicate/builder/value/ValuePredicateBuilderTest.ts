@@ -4,13 +4,13 @@ import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPred
 import {DefinedPredicate} from "../../../../../src/dsl/predicate/data/leaf/DefinedPredicate";
 import {EqualToFieldPredicate} from "../../../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
 import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
-import {ValueTypePredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/ValueTypePredicateBuilder";
-import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/StringPredicateBuilder";
+import {ValuePredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/ValuePredicateBuilder";
+import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/StringPredicateBuilder";
 
-describe("DSL/Predicate/Builder/ValueTypePredicateBuilder", () => {
+describe("DSL/Predicate/Builder/ValuePredicateBuilder", () => {
 
     const parentPredicate = new SelfPredicateBuilder();
-    const predicateTest = new ValueTypePredicateBuilder(parentPredicate);
+    const predicateTest = new ValuePredicateBuilder(parentPredicate);
 
     it("Should handle EqualToField ", () => {
         //Given

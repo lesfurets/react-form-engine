@@ -1,5 +1,5 @@
 import {Field, FieldContext} from "../../definition/FormModel";
-import {PredicateEvaluator} from "../predicate/PredicateEvaluator";
+import {PredicateEvaluator} from "../predicate/evaluator/PredicateEvaluator";
 
 export class VisibilityEvaluator {
     static evaluate(field: Field):(context: FieldContext)=> boolean {

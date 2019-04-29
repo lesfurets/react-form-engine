@@ -5,7 +5,7 @@ import {Field} from "../../../../definition/FormModel";
 import {EqualToFieldPredicate} from "../../data/leaf/EqualToFieldPredicate";
 import {StringPredicateBuilder} from "./StringPredicateBuilder";
 
-export class ValueTypePredicateBuilder {
+export class ValuePredicateBuilder {
     parent: PredicateDefinitionBuilder;
     aString: StringPredicateBuilder;
 

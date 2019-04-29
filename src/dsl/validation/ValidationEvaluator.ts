@@ -1,6 +1,6 @@
 import {VALID} from "../../definition/validation/Validation";
 import {Field, FieldContext} from "../../definition/FormModel";
-import {PredicateEvaluator} from "../predicate/PredicateEvaluator";
+import {PredicateEvaluator} from "../predicate/evaluator/PredicateEvaluator";
 
 export class ValidationEvaluator {
     static evaluate(field: Field) {

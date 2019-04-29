@@ -1,16 +1,16 @@
 import {PredicateDefinitionBuilder} from "./PredicateDefinitionBuilder";
 import {ReversedPredicateBuilder} from "./ReversedPredicateBuilder";
-import {ValueTypePredicateBuilder} from "../finalizer/ValueTypePredicateBuilder";
+import {ValuePredicateBuilder} from "../value/ValuePredicateBuilder";
 
 export abstract class PredicateRootBuilder extends PredicateDefinitionBuilder {
-    is:ValueTypePredicateBuilder;
-    isNot:ValueTypePredicateBuilder;
+    is:ValuePredicateBuilder;
+    isNot:ValuePredicateBuilder;
 
 
     constructor() {
         super();
-        this.is = new ValueTypePredicateBuilder(this);
-        this.isNot = new ValueTypePredicateBuilder(new ReversedPredicateBuilder(this));
+        this.is = new ValuePredicateBuilder(this);
+        this.isNot = new ValuePredicateBuilder(new ReversedPredicateBuilder(this));
     }
 
 }

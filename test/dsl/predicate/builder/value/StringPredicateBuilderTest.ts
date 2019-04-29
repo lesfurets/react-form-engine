@@ -1,7 +1,7 @@
 import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPredicate";
 import {StringEqualToPredicate} from "../../../../../src/dsl/predicate/data/leaf/StringEqualToPredicate";
 import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
-import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/StringPredicateBuilder";
+import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/StringPredicateBuilder";
 import {StringCheckPredicate} from "../../../../../src/dsl/predicate/data/leaf/StringCheckPredicate";
 
 describe("DSL/Predicate/Builder/StringPredicateBuilder", () => {
