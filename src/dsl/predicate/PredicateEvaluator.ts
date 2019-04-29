@@ -9,21 +9,10 @@ import {EqualToPredicate} from "./data/leaf/EqualToPredicate";
 import {EqualToFieldPredicate} from "./data/leaf/EqualToFieldPredicate";
 import {TruePredicate} from "./data/root/TruePredicate";
 import {FalsePredicate} from "./data/root/FalsePredicate";
-import {MatchPredicate} from "./data/leaf/MatchPredicate";
 
 export class PredicateEvaluator {
 
     static build(field: Field, predicate: Predicate):(context: FieldContext) => boolean {
-        // console.log(predicate);
-        // console.log("SelfPredicate", predicate instanceof SelfPredicate);
-        // console.log("FieldPredicate", predicate instanceof FieldPredicate);
-        // console.log("ReversedPredicate", predicate instanceof ReversedPredicate);
-        // console.log("DefinedPredicate", predicate instanceof DefinedPredicate);
-        // console.log("EqualToPredicate", predicate instanceof EqualToPredicate);
-        // console.log("EqualToFieldPredicate", predicate instanceof EqualToFieldPredicate);
-        // console.log("TruePredicate", predicate instanceof TruePredicate);
-        // console.log("FalsePredicate", predicate instanceof FalsePredicate);
-
         // Target Predicates
         if(predicate instanceof SelfPredicate) {
             return PredicateEvaluator.build(field, predicate.predicate);
@@ -51,10 +40,6 @@ export class PredicateEvaluator {
 
         if(predicate instanceof EqualToFieldPredicate) {
             return (context: FieldContext) => context[field.id] === context[predicate.field.id];
-        }
-
-        if(predicate instanceof MatchPredicate) {
-            return (context: FieldContext) => predicate.matcher(context);
         }
 
         if(predicate instanceof TruePredicate) {

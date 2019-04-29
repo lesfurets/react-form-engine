@@ -2,29 +2,15 @@ import {Field} from "../../../../../src/definition/FormModel";
 import {FieldTypes} from "../../../../../src/definition/FieldTypes";
 import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPredicate";
 import {DefinedPredicate} from "../../../../../src/dsl/predicate/data/leaf/DefinedPredicate";
-import {EqualToPredicate} from "../../../../../src/dsl/predicate/data/leaf/EqualToPredicate";
 import {EqualToFieldPredicate} from "../../../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
 import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
-import {ValuePredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/ValuePredicateBuilder";
-import Matchers = jest.Matchers;
-import {MatchPredicate} from "../../../../../src/dsl/predicate/data/leaf/MatchPredicate";
+import {ValueTypePredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/ValueTypePredicateBuilder";
+import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/StringPredicateBuilder";
 
-describe("DSL/Predicate/Builder/ValuePredicateBuilder", () => {
+describe("DSL/Predicate/Builder/ValueTypePredicateBuilder", () => {
 
     const parentPredicate = new SelfPredicateBuilder();
-    const predicateTest = new ValuePredicateBuilder(parentPredicate);
-
-    it("Should handle Equal ", () => {
-        // Given
-        const value = "value";
-
-        // When
-        let predicate = (<SelfPredicate>predicateTest.equalTo(value)).predicate;
-
-        // Then
-        expect(predicate).toBeInstanceOf(EqualToPredicate);
-        expect((<EqualToPredicate>predicate).value).toBe(value);
-    });
+    const predicateTest = new ValueTypePredicateBuilder(parentPredicate);
 
     it("Should handle EqualToField ", () => {
         //Given
@@ -45,17 +31,8 @@ describe("DSL/Predicate/Builder/ValuePredicateBuilder", () => {
         expect((<SelfPredicate>predicateTest.defined()).predicate).toBeInstanceOf(DefinedPredicate);
     });
 
-    it("Should handle Match ", () => {
-        //Given
-        const matcher= () => true;
-
-        // When
-        let predicate = (<SelfPredicate>predicateTest.matches(matcher)).predicate;
-
-        // Then
-        expect(predicate).toBeInstanceOf(MatchPredicate);
-        expect((<MatchPredicate>predicate).matcher).toBe(matcher);
+    it("Should handle aString ", () => {
+        expect(predicateTest.aString).toBeInstanceOf(StringPredicateBuilder);
     });
-
 
 });

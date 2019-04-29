@@ -1,6 +1,6 @@
 import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
 import {ReversedPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/ReversedPredicateBuilder";
-import {ValuePredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/ValuePredicateBuilder";
+import {ValueTypePredicateBuilder} from "../../../../../src/dsl/predicate/builder/finalizer/ValueTypePredicateBuilder";
 import {Predicate} from "../../../../../src/dsl/predicate/data/Predicate";
 import {FieldPredicate} from "../../../../../src/dsl/predicate/data/root/FieldPredicate";
 import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPredicate";
@@ -11,13 +11,13 @@ describe("DSL/Predicate/Builder/SelfPredicateBuilder", () => {
 
     it("Should handle is", () => {
         let valuePredicateBuilder = predicateTarget.is;
-        expect(valuePredicateBuilder).toBeInstanceOf(ValuePredicateBuilder);
+        expect(valuePredicateBuilder).toBeInstanceOf(ValueTypePredicateBuilder);
         expect(valuePredicateBuilder.parent).toBe(predicateTarget);
     });
 
     it("Should handle isNot", () => {
         let valuePredicateBuilder = predicateTarget.isNot;
-        expect(valuePredicateBuilder).toBeInstanceOf(ValuePredicateBuilder);
+        expect(valuePredicateBuilder).toBeInstanceOf(ValueTypePredicateBuilder);
         let parentPredicate = valuePredicateBuilder.parent;
         expect(parentPredicate).toBeInstanceOf(ReversedPredicateBuilder);
         expect((<ReversedPredicateBuilder>parentPredicate).parent).toBe(predicateTarget);
