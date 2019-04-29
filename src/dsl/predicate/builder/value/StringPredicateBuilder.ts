@@ -1,7 +1,7 @@
 import {PredicateDefinitionBuilder} from "../definition/PredicateDefinitionBuilder";
 import {Predicate} from "../../data/Predicate";
-import {StringEqualToPredicate} from "../../data/leaf/StringEqualToPredicate";
-import {StringCheckPredicate} from "../../data/leaf/StringCheckPredicate";
+import {StringEqualToPredicate} from "../../data/leaf/string/StringEqualToPredicate";
+import {StringCheckPredicate} from "../../data/leaf/string/StringCheckPredicate";
 
 export class StringPredicateBuilder {
     parent: PredicateDefinitionBuilder;

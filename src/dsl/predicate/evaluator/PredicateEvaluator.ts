@@ -5,9 +5,9 @@ import {SelfPredicate} from "../data/root/SelfPredicate";
 import {FieldPredicate} from "../data/root/FieldPredicate";
 import {TruePredicate} from "../data/root/TruePredicate";
 import {FalsePredicate} from "../data/root/FalsePredicate";
-import {StringPredicate} from "../data/leaf/StringPredicate";
+import {StringPredicate} from "../data/leaf/string/StringPredicate";
 import {StringPredicateEvaluator} from "./StringPredicateEvaluator";
-import {ValuePredicate} from "../data/leaf/ValuePredicate";
+import {ValuePredicate} from "../data/leaf/value/ValuePredicate";
 import {ValuePredicateEvaluator} from "./ValuePredicateEvaluator";
 
 export class PredicateEvaluator {

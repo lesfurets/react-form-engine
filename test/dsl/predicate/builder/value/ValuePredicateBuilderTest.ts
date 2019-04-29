@@ -1,8 +1,8 @@
 import {Field} from "../../../../../src/definition/FormModel";
 import {FieldTypes} from "../../../../../src/definition/FieldTypes";
 import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPredicate";
-import {DefinedPredicate} from "../../../../../src/dsl/predicate/data/leaf/DefinedPredicate";
-import {EqualToFieldPredicate} from "../../../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
+import {ValueDefinedPredicate} from "../../../../../src/dsl/predicate/data/leaf/value/ValueDefinedPredicate";
+import {ValueEqualToFieldPredicate} from "../../../../../src/dsl/predicate/data/leaf/value/ValueEqualToFieldPredicate";
 import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
 import {ValuePredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/ValuePredicateBuilder";
 import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/StringPredicateBuilder";
@@ -23,12 +23,12 @@ describe("DSL/Predicate/Builder/ValuePredicateBuilder", () => {
         let predicate = (<SelfPredicate>predicateTest.equalToField(field)).predicate;
 
         // Then
-        expect(predicate).toBeInstanceOf(EqualToFieldPredicate);
-        expect((<EqualToFieldPredicate>predicate).field).toBe(field);
+        expect(predicate).toBeInstanceOf(ValueEqualToFieldPredicate);
+        expect((<ValueEqualToFieldPredicate>predicate).field).toBe(field);
     });
 
     it("Should handle Defined ", () => {
-        expect((<SelfPredicate>predicateTest.defined()).predicate).toBeInstanceOf(DefinedPredicate);
+        expect((<SelfPredicate>predicateTest.defined()).predicate).toBeInstanceOf(ValueDefinedPredicate);
     });
 
     it("Should handle aString ", () => {

@@ -4,9 +4,9 @@ import {PredicateEvaluator} from "../../../../src/dsl/predicate/evaluator/Predic
 import {ReversedPredicate} from "../../../../src/dsl/predicate/data/operation/ReversedPredicate";
 import {SelfPredicate} from "../../../../src/dsl/predicate/data/root/SelfPredicate";
 import {FieldPredicate} from "../../../../src/dsl/predicate/data/root/FieldPredicate";
-import {DefinedPredicate} from "../../../../src/dsl/predicate/data/leaf/DefinedPredicate";
-import {StringEqualToPredicate} from "../../../../src/dsl/predicate/data/leaf/StringEqualToPredicate";
-import {EqualToFieldPredicate} from "../../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
+import {ValueDefinedPredicate} from "../../../../src/dsl/predicate/data/leaf/value/ValueDefinedPredicate";
+import {StringEqualToPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringEqualToPredicate";
+import {ValueEqualToFieldPredicate} from "../../../../src/dsl/predicate/data/leaf/value/ValueEqualToFieldPredicate";
 import {TruePredicate} from "../../../../src/dsl/predicate/data/root/TruePredicate";
 import {FalsePredicate} from "../../../../src/dsl/predicate/data/root/FalsePredicate";
 
@@ -17,8 +17,8 @@ describe("DSL/Predicate/ValuePredicateEvaluator", () => {
         type: FieldTypes.INPUT_TEXT,
     };
 
-    describe("DefinedPredicate", () => {
-        const predicate = new SelfPredicate(new DefinedPredicate());
+    describe("ValueDefinedPredicate", () => {
+        const predicate = new SelfPredicate(new ValueDefinedPredicate());
         const predicateFunction = PredicateEvaluator.build(field, predicate);
 
         it("Should be false if undefined", () => {
@@ -55,14 +55,14 @@ describe("DSL/Predicate/ValuePredicateEvaluator", () => {
 
     });
 
-    describe("EqualToFieldPredicate", () => {
+    describe("ValueEqualToFieldPredicate", () => {
 
         const otherField: Field = {
             id: "otherField",
             type: FieldTypes.INPUT_TEXT,
         };
 
-        const predicate = new SelfPredicate(new EqualToFieldPredicate(otherField));
+        const predicate = new SelfPredicate(new ValueEqualToFieldPredicate(otherField));
         const predicateFunction = PredicateEvaluator.build(field, predicate);
 
         it("Should be false if fields have different value", () => {

@@ -1,8 +1,8 @@
 import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPredicate";
-import {StringEqualToPredicate} from "../../../../../src/dsl/predicate/data/leaf/StringEqualToPredicate";
+import {StringEqualToPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringEqualToPredicate";
 import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
 import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/StringPredicateBuilder";
-import {StringCheckPredicate} from "../../../../../src/dsl/predicate/data/leaf/StringCheckPredicate";
+import {StringCheckPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringCheckPredicate";
 
 describe("DSL/Predicate/Builder/StringPredicateBuilder", () => {
 

@@ -4,23 +4,23 @@ import {ReversedPredicate} from "../data/operation/ReversedPredicate";
 import {ValueUtils} from "../../../definition/ValueUtils";
 import {SelfPredicate} from "../data/root/SelfPredicate";
 import {FieldPredicate} from "../data/root/FieldPredicate";
-import {DefinedPredicate} from "../data/leaf/DefinedPredicate";
-import {StringEqualToPredicate} from "../data/leaf/StringEqualToPredicate";
-import {EqualToFieldPredicate} from "../data/leaf/EqualToFieldPredicate";
+import {ValueDefinedPredicate} from "../data/leaf/value/ValueDefinedPredicate";
+import {StringEqualToPredicate} from "../data/leaf/string/StringEqualToPredicate";
+import {ValueEqualToFieldPredicate} from "../data/leaf/value/ValueEqualToFieldPredicate";
 import {TruePredicate} from "../data/root/TruePredicate";
 import {FalsePredicate} from "../data/root/FalsePredicate";
-import {StringCheckPredicate} from "../data/leaf/StringCheckPredicate";
-import {StringPredicate} from "../data/leaf/StringPredicate";
-import {ValuePredicate} from "../data/leaf/ValuePredicate";
+import {StringCheckPredicate} from "../data/leaf/string/StringCheckPredicate";
+import {StringPredicate} from "../data/leaf/string/StringPredicate";
+import {ValuePredicate} from "../data/leaf/value/ValuePredicate";
 
 export class ValuePredicateEvaluator {
 
     static build(field: Field, predicate: ValuePredicate):(context: FieldContext) => boolean {
-        if(predicate instanceof DefinedPredicate) {
+        if(predicate instanceof ValueDefinedPredicate) {
             return (context: FieldContext) => ValueUtils.isDefined(context[field.id]);
         }
 
-        if(predicate instanceof EqualToFieldPredicate) {
+        if(predicate instanceof ValueEqualToFieldPredicate) {
             return (context: FieldContext) => context[field.id] === context[predicate.field.id];
         }
 
