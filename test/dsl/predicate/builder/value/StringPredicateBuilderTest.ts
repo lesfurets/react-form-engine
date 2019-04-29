@@ -3,6 +3,7 @@ import {StringEqualToPredicate} from "../../../../../src/dsl/predicate/data/leaf
 import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/SelfPredicateBuilder";
 import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/StringPredicateBuilder";
 import {StringCheckPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringCheckPredicate";
+import {StringEmptyPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
 
 describe("DSL/Predicate/Builder/StringPredicateBuilder", () => {
 
@@ -19,6 +20,14 @@ describe("DSL/Predicate/Builder/StringPredicateBuilder", () => {
         // Then
         expect(predicate).toBeInstanceOf(StringEqualToPredicate);
         expect((<StringEqualToPredicate>predicate).value).toBe(value);
+    });
+
+    it("Should handle empty ", () => {
+        // Given
+        let predicate = (<SelfPredicate>predicateTest.empty()).predicate;
+
+        // Then
+        expect(predicate).toBeInstanceOf(StringEmptyPredicate);
     });
 
     it("Should handle Checking ", () => {

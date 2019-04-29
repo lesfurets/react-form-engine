@@ -10,6 +10,7 @@ import {ValueEqualToFieldPredicate} from "../../../../src/dsl/predicate/data/lea
 import {TruePredicate} from "../../../../src/dsl/predicate/data/root/TruePredicate";
 import {FalsePredicate} from "../../../../src/dsl/predicate/data/root/FalsePredicate";
 import {StringCheckPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringCheckPredicate";
+import {StringEmptyPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
 
 describe("DSL/Predicate/StringPredicateEvaluator", () => {
 
@@ -45,14 +46,33 @@ describe("DSL/Predicate/StringPredicateEvaluator", () => {
 
         it("Should call specified test with the right param", () => {
             // Given
-            // const matcher = jasmine.createSpy("matcher", () => false);
-            const fieldValue = "value";
+            const fieldValue = "";
             const matcher = jasmine.createSpy().and.returnValue(false);
             const predicate = new StringCheckPredicate(matcher);
 
             // Then
             expect(PredicateEvaluator.build(field, predicate)({[field.id]: fieldValue})).toBe(false);
             expect(matcher).toHaveBeenCalledWith(fieldValue);
+        });
+
+    });
+
+    describe("StringEmptyPredicate", () => {
+
+        it("Should call be true if empty", () => {
+            // Given
+            const predicate = new StringEmptyPredicate();
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: ""})).toBe(true);
+        });
+
+        it("Should call be true if empty", () => {
+            // Given
+            const predicate = new StringEmptyPredicate();
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: "NotEmpty"})).toBe(false);
         });
 
     });

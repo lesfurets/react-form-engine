@@ -11,6 +11,7 @@ import {TruePredicate} from "../data/root/TruePredicate";
 import {FalsePredicate} from "../data/root/FalsePredicate";
 import {StringCheckPredicate} from "../data/leaf/string/StringCheckPredicate";
 import {StringPredicate} from "../data/leaf/string/StringPredicate";
+import {StringEmptyPredicate} from "../data/leaf/string/StringEmptyPredicate";
 
 export class StringPredicateEvaluator {
 
@@ -21,6 +22,10 @@ export class StringPredicateEvaluator {
 
         if(predicate instanceof StringCheckPredicate) {
             return (context: FieldContext) => predicate.test(<string>context[field.id]);
+        }
+
+        if(predicate instanceof StringEmptyPredicate) {
+            return (context: FieldContext) => (<string>context[field.id]).length === 0;
         }
 
         return () => true;
