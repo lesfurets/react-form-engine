@@ -5,10 +5,11 @@ import {ValueUtils} from "../../definition/ValueUtils";
 import {SelfPredicate} from "./data/root/SelfPredicate";
 import {FieldPredicate} from "./data/root/FieldPredicate";
 import {DefinedPredicate} from "./data/leaf/DefinedPredicate";
-import {EqualToPredicate} from "./data/leaf/EqualToPredicate";
+import {StringEqualToPredicate} from "./data/leaf/StringEqualToPredicate";
 import {EqualToFieldPredicate} from "./data/leaf/EqualToFieldPredicate";
 import {TruePredicate} from "./data/root/TruePredicate";
 import {FalsePredicate} from "./data/root/FalsePredicate";
+import {StringCheckPredicate} from "./data/leaf/StringCheckPredicate";
 
 export class PredicateEvaluator {
 
@@ -32,10 +33,12 @@ export class PredicateEvaluator {
             return (context: FieldContext) => ValueUtils.isDefined(context[field.id]);
         }
 
-        if(predicate instanceof EqualToPredicate) {
-            return (context: FieldContext) => {
-                return context[field.id] === predicate.value;
-            }
+        if(predicate instanceof StringEqualToPredicate) {
+            return (context: FieldContext) => context[field.id] === predicate.value;
+        }
+
+        if(predicate instanceof StringCheckPredicate) {
+            return (context: FieldContext) => predicate.test(<string>context[field.id]);
         }
 
         if(predicate instanceof EqualToFieldPredicate) {

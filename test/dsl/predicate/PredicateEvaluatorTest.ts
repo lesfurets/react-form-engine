@@ -5,10 +5,11 @@ import {ReversedPredicate} from "../../../src/dsl/predicate/data/operation/Rever
 import {SelfPredicate} from "../../../src/dsl/predicate/data/root/SelfPredicate";
 import {FieldPredicate} from "../../../src/dsl/predicate/data/root/FieldPredicate";
 import {DefinedPredicate} from "../../../src/dsl/predicate/data/leaf/DefinedPredicate";
-import {EqualToPredicate} from "../../../src/dsl/predicate/data/leaf/EqualToPredicate";
+import {StringEqualToPredicate} from "../../../src/dsl/predicate/data/leaf/StringEqualToPredicate";
 import {EqualToFieldPredicate} from "../../../src/dsl/predicate/data/leaf/EqualToFieldPredicate";
 import {TruePredicate} from "../../../src/dsl/predicate/data/root/TruePredicate";
 import {FalsePredicate} from "../../../src/dsl/predicate/data/root/FalsePredicate";
+import {StringCheckPredicate} from "../../../src/dsl/predicate/data/leaf/StringCheckPredicate";
 
 describe("DSL/Predicate/PredicateEvaluator", () => {
 
@@ -40,7 +41,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
             };
 
             // When
-            const predicate = new SelfPredicate(new EqualToPredicate(value));
+            const predicate = new SelfPredicate(new StringEqualToPredicate(value));
 
             // Then
             expect(PredicateEvaluator.build(field, predicate)(context)).toBe(true);
@@ -73,7 +74,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
             };
 
             // When
-            const predicate = new FieldPredicate(field, new EqualToPredicate(value));
+            const predicate = new FieldPredicate(field, new StringEqualToPredicate(value));
 
             // Then
             expect(PredicateEvaluator.build(field, predicate)(context)).toBe(true);
@@ -85,7 +86,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
     describe("ReversedPredicate", () => {
         const value = "value";
-        const predicate = new ReversedPredicate(new FieldPredicate(field, new EqualToPredicate(value)));
+        const predicate = new ReversedPredicate(new FieldPredicate(field, new StringEqualToPredicate(value)));
         const predicateFunction = PredicateEvaluator.build(field, predicate);
 
         it("Should return false if inner predicate is true", () => {
@@ -144,9 +145,9 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
     });
 
-    describe("EqualToPredicate", () => {
+    describe("StringEqualToPredicate", () => {
         const value = "value";
-        const predicate = new SelfPredicate(new EqualToPredicate(value));
+        const predicate = new SelfPredicate(new StringEqualToPredicate(value));
         const predicateFunction = PredicateEvaluator.build(field, predicate);
 
         it("Should be false if field has different value", () => {
@@ -184,7 +185,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
                 [otherField.id]: "value2",
             };
 
-            // Then
+            // ThenStringCheckPredicate
             expect(predicateFunction(context)).toBe(false);
         });
 
@@ -197,6 +198,22 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
             // Then
             expect(predicateFunction(context)).toBe(true);
+        });
+
+    });
+
+    describe("StringCheckPredicate", () => {
+
+        it("Should call specified test with the right param", () => {
+            // Given
+            // const matcher = jasmine.createSpy("matcher", () => false);
+            const fieldValue = "value";
+            const matcher = jasmine.createSpy().and.returnValue(false);
+            const predicate = new StringCheckPredicate(matcher);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: fieldValue})).toBe(false);
+            expect(matcher).toHaveBeenCalledWith(fieldValue);
         });
 
     });

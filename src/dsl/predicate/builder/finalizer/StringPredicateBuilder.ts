@@ -1,7 +1,8 @@
 import {PredicateDefinitionBuilder} from "../definition/PredicateDefinitionBuilder";
 import {Predicate} from "../../data/Predicate";
-import {EqualToPredicate} from "../../data/leaf/EqualToPredicate";
+import {StringEqualToPredicate} from "../../data/leaf/StringEqualToPredicate";
 import {ValuePredicateBuilder} from "./ValuePredicateBuilder";
+import {StringCheckPredicate} from "../../data/leaf/StringCheckPredicate";
 
 export class StringPredicateBuilder extends ValuePredicateBuilder {
     parent: PredicateDefinitionBuilder;
@@ -12,7 +13,11 @@ export class StringPredicateBuilder extends ValuePredicateBuilder {
     }
 
     equalTo(value: string): Predicate {
-        return this.parent.build(new EqualToPredicate(value));
+        return this.parent.build(new StringEqualToPredicate(value));
+    }
+
+    checking(predicate: (value: string) => boolean): Predicate {
+        return this.parent.build(new StringCheckPredicate(predicate));
     }
 
 }

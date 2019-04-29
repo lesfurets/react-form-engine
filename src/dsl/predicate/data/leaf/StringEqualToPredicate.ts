@@ -1,6 +1,6 @@
 import {PredicateLeaf} from "./PredicateLeaf";
 
-export class EqualToPredicate extends PredicateLeaf {
+export class StringEqualToPredicate extends PredicateLeaf {
     value: String;
 
     constructor(value: String) {
