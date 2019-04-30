@@ -9,6 +9,7 @@ import {StringPredicate} from "../data/leaf/string/StringPredicate";
 import {StringPredicateEvaluator} from "./StringPredicateEvaluator";
 import {ValuePredicate} from "../data/leaf/value/ValuePredicate";
 import {ValuePredicateEvaluator} from "./ValuePredicateEvaluator";
+import {ValueUtils} from "../../../definition/ValueUtils";
 
 export class PredicateEvaluator {
 
@@ -39,7 +40,8 @@ export class PredicateEvaluator {
         }
 
         if(predicate instanceof StringPredicate) {
-            return StringPredicateEvaluator.build(field, predicate);
+            return (context: FieldContext) => ValueUtils.isDefined(context[field.id])
+                && StringPredicateEvaluator.build(field, predicate)(context);
         }
 
         return () => true;
