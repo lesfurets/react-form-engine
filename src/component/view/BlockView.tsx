@@ -45,5 +45,5 @@ export const BlockView : React.SFC<BlockViewProps> = ({children, block, index, b
 
 BlockView.defaultProps = {
     blockState: BLOCK_STATE.DOING,
-    index: 1
+    index: 0
 };

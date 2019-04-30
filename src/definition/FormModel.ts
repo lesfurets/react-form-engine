@@ -28,7 +28,7 @@ export class Block implements FormElement{
 export class Form implements FormElement{
     id: string;
     label: string;
-    fields: Block[]
+    blocks: Block[]
 }
 
 export type FieldContext = {

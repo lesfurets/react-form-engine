@@ -24,7 +24,7 @@ export class EventMulticaster {
     }
 
     subscribeForElements(callback: EventCallBack, elements: FormElement[]) {
-        let elementMatcher: EventFilter = (event: FormEvent, source: FormElement) => elements.some(element => source === element);
+        let elementMatcher: EventFilter = (event: FormEvent, source: FormElement) => elements.some(element => source.id === element.id);
         this.subscribers.push(new EventSubscriber(callback, elementMatcher));
     }
 

@@ -14,7 +14,7 @@ export default class FormWrapper extends React.Component {
     }
 
     componentWillMount() {
-        EVENT_MULTICASTER.subscribeForElements(this.onBlockEvent, [this.props.form]);
+        EVENT_MULTICASTER.subscribeForElements(this.onBlockEvent, this.props.form.blocks);
     }
 
     componentWillUnmount() {

@@ -39,6 +39,7 @@ export class BlockWrapperComponent extends React.Component {
         let {block, blockState, View, FieldView} = this.props;
         return (
             <View block={block}
+                  index={block.index}
                   blockState={blockState}
                   onEvent={this.onEvent}>
                 {this.props.block.fields.map((field, index) =>
