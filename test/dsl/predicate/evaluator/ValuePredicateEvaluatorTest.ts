@@ -37,14 +37,6 @@ describe("DSL/Predicate/ValuePredicateEvaluator", () => {
             expect(predicateFunction(context)).toBe(false);
         });
 
-        it("Should be false if empty", () => {
-            // Given
-            const context: FieldContext = {[field.id]: ""};
-
-            // Then
-            expect(predicateFunction(context)).toBe(false);
-        });
-
         it("Should be true if defined", () => {
             // Given
             const context: FieldContext = {[field.id]: "value"};

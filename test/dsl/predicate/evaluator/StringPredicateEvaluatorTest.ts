@@ -71,7 +71,7 @@ describe("DSL/Predicate/StringPredicateEvaluator", () => {
             expect(PredicateEvaluator.build(field, predicate)({[field.id]: ""})).toBe(true);
         });
 
-        it("Should call be true if empty", () => {
+        it("Should call be false if not empty", () => {
             // Given
             const predicate = new StringEmptyPredicate();
 
