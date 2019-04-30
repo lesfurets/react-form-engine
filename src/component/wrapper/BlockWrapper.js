@@ -6,12 +6,7 @@ import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation/Validation";
 import {BLOCK_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
-
-export const BLOCK_STATE = {
-    TODO: "block-todo",
-    DOING: "block-doing",
-    DONE: "block-done"
-};
+import {BLOCK_STATE} from "../../definition/FormModel";
 
 export class BlockWrapperComponent extends React.Component {
     constructor(props) {

@@ -21,6 +21,7 @@ export class Field implements FormElement {
 export class Block implements FormElement{
     id: string;
     label: string;
+    ctaLabel? : string;
     fields: Field[]
 }
 
@@ -33,3 +34,15 @@ export class Form implements FormElement{
 export type FieldContext = {
     [fieldId: string]: string | null
 }
+
+export enum BLOCK_STATE {
+    TODO = "block-todo",
+    DOING = "block-doing",
+    DONE = "block-done"
+}
+
+export const FIELD_STATE = {
+    DEFAULT: "field-default",
+    VALID: "field-valid",
+    ERROR: "field-error"
+};

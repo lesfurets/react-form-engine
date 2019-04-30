@@ -6,12 +6,7 @@ import {VALID} from "../../definition/validation/Validation";
 import {EMPTY_CALLBACK} from "../../definition/props-utils";
 import {FIELD_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
-
-export const FIELD_STATE = {
-    DEFAULT: "field-default",
-    VALID: "field-valid",
-    ERROR: "field-error"
-};
+import {FIELD_STATE} from "../../definition/FormModel";
 
 export class FieldWrapperComponent extends React.Component {
 

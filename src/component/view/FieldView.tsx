@@ -1,11 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-
-import {FIELD_STATE} from "../wrapper/FieldWrapper";
+import * as React from "react";
 
 import "../../styles/components/view/field-view.less";
+import {Field, FIELD_STATE} from "../../definition/FormModel";
 
-export const FieldView = ({field, fieldState, errorMessage ,children, isVisible}) => {
+export interface FieldViewProps {
+    field: Field
+    fieldState: string
+    errorMessage: string
+    isVisible: boolean
+}
+
+export const FieldView : React.SFC<FieldViewProps> = ({field, fieldState, errorMessage ,children, isVisible}) => {
     let hasLabel = field.label != null;
     return isVisible ? (
         <div className={`FieldView ${fieldState} ${field.id} ${field.type}`}>
@@ -15,15 +20,6 @@ export const FieldView = ({field, fieldState, errorMessage ,children, isVisible}
                 <div className="FieldView-error">{errorMessage}</div> : null}
         </div>
     ): null;
-};
-
-FieldView.propTypes = {
-    field: PropTypes.shape({
-        label: PropTypes.string,
-    }).isRequired,
-    fieldState: PropTypes.string.isRequired,
-    errorMessage: PropTypes.string.isRequired,
-    isVisible: PropTypes.bool,
 };
 
 FieldView.defaultProps = {

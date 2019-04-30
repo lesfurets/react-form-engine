@@ -1,17 +1,34 @@
-import React from "react";
+import * as React from "react";
 import {createStore} from "redux";
 import {Provider} from 'react-redux'
 import reducer from '../redux/reducers';
 import ResponsiveContainer from "react-responsive-widget";
-import FormWrapper from "./wrapper/FormWrapper";
-import {FormView} from "./view/FormView";
-import {BlockView} from "./view/BlockView";
-import {FieldView} from "./view/FieldView";
+import {FormView, FormViewProps} from "./view/FormView";
+import {BlockView, BlockViewProps} from "./view/BlockView";
+import {FieldView, FieldViewProps} from "./view/FieldView";
 import {EMPTY_CALLBACK} from "../definition/props-utils";
-import {EVENT_MULTICASTER} from "../definition/event/EventMulticaster";
-import PropTypes from "prop-types";
+import {EVENT_MULTICASTER, EventCallBack} from "../definition/event/EventMulticaster";
+import {Form} from "../definition/FormModel";
+import FormWrapper from "./wrapper/FormWrapper";
 
-export default class FormEngine extends React.Component {
+interface FormEngineProps {
+    form: Form,
+    FormView: React.SFC<FormViewProps>
+    BlockView: React.SFC<BlockViewProps>
+    FieldView: React.SFC<FieldViewProps>
+    onEvent: EventCallBack
+}
+
+
+export default class FormEngine extends React.Component<FormEngineProps> {
+
+    static defaultProps = {
+        onEvent: EMPTY_CALLBACK,
+        FormView: FormView,
+        BlockView: BlockView,
+        FieldView: FieldView,
+    };
+
     componentWillMount() {
         EVENT_MULTICASTER.subscribe(this.props.onEvent);
     }
@@ -33,17 +50,3 @@ export default class FormEngine extends React.Component {
     }
 
 }
-
-FormEngine.propTypes = {
-    form: PropTypes.array.isRequired,
-    FormView: PropTypes.func.isRequired,
-    BlockView: PropTypes.func.isRequired,
-    FieldView: PropTypes.func.isRequired,
-};
-
-FormEngine.defaultProps = {
-    onEvent: EMPTY_CALLBACK,
-    FormView: FormView,
-    BlockView: BlockView,
-    FieldView: FieldView,
-};

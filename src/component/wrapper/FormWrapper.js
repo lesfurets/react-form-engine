@@ -1,5 +1,6 @@
 import React from "react";
-import {BLOCK_STATE, BlockWrapper} from "./BlockWrapper";
+import {BlockWrapper} from "./BlockWrapper";
+import {BLOCK_STATE} from "../../definition/FormModel";
 import PropTypes from "prop-types";
 import {BLOCK_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";

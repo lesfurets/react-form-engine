@@ -1,7 +1,7 @@
 import {FormEvent} from "./Event";
 import {FormElement} from "../FormModel";
 
-type EventCallBack = (event: FormEvent, source: FormElement, details: any) => {};
+export type EventCallBack = (event: FormEvent, source: FormElement, details: any) => void;
 type EventFilter = (event: FormEvent, source: FormElement, details: any) => boolean;
 
 const universalMatcher: EventFilter = () => true;
