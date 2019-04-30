@@ -11,6 +11,10 @@ import {TruePredicate} from "../../../../src/dsl/predicate/data/root/TruePredica
 import {FalsePredicate} from "../../../../src/dsl/predicate/data/root/FalsePredicate";
 import {StringCheckPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringCheckPredicate";
 import {StringEmptyPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
+import {StringContainPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringContainPredicate";
+import {StringEndWithPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringEndWithPredicate";
+import {StringStartWithPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringStartWithPredicate";
+import {StringRegExpPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringRegExpPredicate";
 
 describe("DSL/Predicate/StringPredicateEvaluator", () => {
 
@@ -73,6 +77,90 @@ describe("DSL/Predicate/StringPredicateEvaluator", () => {
 
             // Then
             expect(PredicateEvaluator.build(field, predicate)({[field.id]: "NotEmpty"})).toBe(false);
+        });
+
+    });
+
+    describe("StringContainsPredicate", () => {
+
+        it("Should call be true if value is contained", () => {
+            // Given
+            const testValue = "test";
+            const predicate = new StringContainPredicate(testValue);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: "this is a test value"})).toBe(true);
+        });
+
+        it("Should call be false if value is not contained", () => {
+            const testValue = "test";
+            const predicate = new StringContainPredicate(testValue);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: "azer"})).toBe(false);
+        });
+
+    });
+
+    describe("StringStartWithPredicate", () => {
+
+        it("Should call be true if value is at the beginning", () => {
+            // Given
+            const testValue = "test";
+            const predicate = new StringStartWithPredicate(testValue);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: "test value"})).toBe(true);
+        });
+
+        it("Should call be false if value is not at the beginning", () => {
+            const testValue = "test";
+            const predicate = new StringStartWithPredicate(testValue);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: "this is a test"})).toBe(false);
+        });
+
+    });
+
+    describe("StringEndWithPredicate", () => {
+
+        it("Should call be true if value is at the end", () => {
+            // Given
+            const testValue = "test";
+            const predicate = new StringEndWithPredicate(testValue);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: "this is a test"})).toBe(true);
+        });
+
+        it("Should call be false if value is not at the end", () => {
+            const testValue = "test";
+            const predicate = new StringEndWithPredicate(testValue);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: "test value"})).toBe(false);
+        });
+
+    });
+
+    describe("StringEndWithPredicate", () => {
+
+        it("Should call be true if value is matching regexp", () => {
+            // Given
+            const testRegExp = /.*test.*/;
+            const predicate = new StringRegExpPredicate(testRegExp);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: "this is a test"})).toBe(true);
+        });
+
+        it("Should call be false if value is not matching regexp", () => {
+            const testRegExp = /.*test.*/;
+            const predicate = new StringRegExpPredicate(testRegExp);
+
+            // Then
+            expect(PredicateEvaluator.build(field, predicate)({[field.id]: "tet value"})).toBe(false);
         });
 
     });

@@ -4,6 +4,10 @@ import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/def
 import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/StringPredicateBuilder";
 import {StringCheckPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringCheckPredicate";
 import {StringEmptyPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
+import {StringContainPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringContainPredicate";
+import {StringRegExpPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringRegExpPredicate";
+import {StringStartWithPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringStartWithPredicate";
+import {StringEndWithPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringEndWithPredicate";
 
 describe("DSL/Predicate/Builder/StringPredicateBuilder", () => {
 
@@ -32,14 +36,62 @@ describe("DSL/Predicate/Builder/StringPredicateBuilder", () => {
 
     it("Should handle Checking ", () => {
         // Given
-        const test = () => false;
+        const testValue = "test";
 
         // When
-        let predicate = (<SelfPredicate>predicateTest.checking(test)).predicate;
+        let predicate = (<SelfPredicate>predicateTest.containing(testValue)).predicate;
 
         // Then
-        expect(predicate).toBeInstanceOf(StringCheckPredicate);
-        expect((<StringCheckPredicate>predicate).test).toBe(test);
+        expect(predicate).toBeInstanceOf(StringContainPredicate);
+        expect((<StringContainPredicate>predicate).value).toBe(testValue);
+    });
+
+    it("Should handle Containing ", () => {
+        // Given
+        const testValue = "test";
+
+        // When
+        let predicate = (<SelfPredicate>predicateTest.containing(testValue)).predicate;
+
+        // Then
+        expect(predicate).toBeInstanceOf(StringContainPredicate);
+        expect((<StringContainPredicate>predicate).value).toBe(testValue);
+    });
+
+    it("Should handle StartingWith ", () => {
+        // Given
+        const testValue = "test";
+
+        // When
+        let predicate = (<SelfPredicate>predicateTest.startingWith(testValue)).predicate;
+
+        // Then
+        expect(predicate).toBeInstanceOf(StringStartWithPredicate);
+        expect((<StringStartWithPredicate>predicate).value).toBe(testValue);
+    });
+
+    it("Should handle EndingingWith ", () => {
+        // Given
+        const testValue = "test";
+
+        // When
+        let predicate = (<SelfPredicate>predicateTest.endingWith(testValue)).predicate;
+
+        // Then
+        expect(predicate).toBeInstanceOf(StringEndWithPredicate);
+        expect((<StringEndWithPredicate>predicate).value).toBe(testValue);
+    });
+
+    it("Should handle Matching ", () => {
+        // Given
+        const testRegExp = /.*/;
+
+        // When
+        let predicate = (<SelfPredicate>predicateTest.matching(testRegExp)).predicate;
+
+        // Then
+        expect(predicate).toBeInstanceOf(StringRegExpPredicate);
+        expect((<StringRegExpPredicate>predicate).regExp).toBe(testRegExp);
     });
 
 });

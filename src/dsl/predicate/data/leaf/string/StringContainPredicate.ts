@@ -1,6 +1,6 @@
 import {StringPredicate} from "./StringPredicate";
 
-export class StringEqualToPredicate extends StringPredicate {
+export class StringContainPredicate extends StringPredicate {
     value: string;
 
     constructor(value: string) {
