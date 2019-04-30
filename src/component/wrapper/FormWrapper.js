@@ -63,7 +63,7 @@ export default class FormWrapper extends React.Component {
 }
 
 FormWrapper.propTypes = {
-    form: PropTypes.array.isRequired,
+    form: PropTypes.object.isRequired,
     View: PropTypes.func.isRequired,
     BlockView: PropTypes.func.isRequired,
     FieldView: PropTypes.func.isRequired,
