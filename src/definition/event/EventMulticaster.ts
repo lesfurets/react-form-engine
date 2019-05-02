@@ -32,7 +32,7 @@ export class EventMulticaster {
         this.subscribers = this.subscribers.filter(subs => subs.callback !== callback);
     }
 
-    event(event: FormEvent, source: FormElement, details: any) {
+    event(event: FormEvent, source: FormElement, details: any = null) {
         this.subscribers
             .filter(subs => subs.idFilter(event, source, details))
             .forEach(subs => subs.callback(event, source, details));

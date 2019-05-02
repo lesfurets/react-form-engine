@@ -1,15 +1,41 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
-import {FieldWrapper} from "./FieldWrapper";
-import {fieldConnect} from "../../redux/fieldConnect";
 import {VALID} from "../../definition/validation/Validation";
 import {BLOCK_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
-import {BLOCK_STATE} from "../../definition/FormModel";
+import {Block, BLOCK_STATE, FieldContext} from "../../definition/FormModel";
+import {BlockView} from "../view/BlockView";
+import {FieldView} from "../view/FieldView";
+import {FormEvent} from "../../definition/event/Event";
+import {FieldWrapper} from "./FieldWrapper";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
+import {FieldValueAction} from "../../redux/constants";
+import {setFieldValueAction} from "../../redux/actions";
+import {FieldProps} from "../../redux/fieldConnect";
 
-export class BlockWrapperComponent extends React.Component {
-    constructor(props) {
+export interface BlockWrapperProps {
+    blockState: BLOCK_STATE,
+    block: Block,
+    View: typeof BlockView,
+    FieldView: typeof FieldView,
+    // fieldContext: FieldContext,
+    // setFieldValue: (id: string, value: string) => void
+}
+
+
+interface BlockWrapperState {
+    forceValidation: boolean
+}
+
+export class BlockWrapperComponent extends React.Component<BlockWrapperProps & FieldProps, BlockWrapperState> {
+
+    static defaultProps = {
+        blockState: BLOCK_STATE.DOING,
+        hasPrevious: false,
+    };
+
+    constructor(props: BlockWrapperProps & FieldProps) {
         super(props);
         this.state = {forceValidation: false};
         this.onEvent = this.onEvent.bind(this);
@@ -28,7 +54,7 @@ export class BlockWrapperComponent extends React.Component {
         this.setState({forceValidation: true});
     }
 
-    onEvent(event, details) {
+    onEvent(event: FormEvent, details: any) {
         EVENT_MULTICASTER.event(event, this.props.block, details);
         if (event === BLOCK_EVENT.NEXT) {
             this.validate();
@@ -53,18 +79,19 @@ export class BlockWrapperComponent extends React.Component {
     }
 }
 
-BlockWrapperComponent.propTypes = {
-    blockIndex: PropTypes.number,
-    blockState: PropTypes.string,
-    block: PropTypes.object.isRequired,
-    fieldContext: PropTypes.object.isRequired,
-    View: PropTypes.func.isRequired,
-    FieldView: PropTypes.func.isRequired,
+
+const mapStateToProps = (state: FieldContext, ownProps: BlockWrapperProps) => {
+    return {
+        ...ownProps,
+        fieldContext: state,
+    }
 };
 
-BlockWrapperComponent.defaultProps = {
-    blockState: BLOCK_STATE.DOING,
-    hasPrevious: false,
+const mapDispatchToProps = (dispatch: Dispatch<FieldValueAction>, ownProps: BlockWrapperProps) => {
+    return {
+        ... ownProps,
+        setFieldValue: (id: string, value: string) => dispatch(setFieldValueAction(id, value)),
+    }
 };
 
-export const BlockWrapper = fieldConnect(BlockWrapperComponent);
+export const BlockWrapper = connect(mapStateToProps, mapDispatchToProps)(BlockWrapperComponent);

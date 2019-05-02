@@ -5,15 +5,30 @@ import {FieldValueAction} from "./constants";
 import {ComponentType} from "react";
 import {FieldContext} from "../definition/FormModel";
 
-export const mapDispatchToProps = (dispatch: Dispatch<FieldValueAction>) => {
+export interface FieldContextProps {
+    fieldContext: FieldContext
+}
+
+export const mapStateToProps = <P>(state: FieldContext, ownProps: P): P => {
     return {
+        ...ownProps,
+        fieldContext: state.fieldContext,
+    }
+};
+
+export interface FieldDispatchProps {
+    setFieldValue: (id: string, value: string) => void
+}
+
+export const mapDispatchToProps = <P>(dispatch: Dispatch<FieldValueAction>, ownProps: P): P => {
+    return {
+        ... ownProps,
         setFieldValue: (id: string, value: string) => dispatch(setFieldValueAction(id, value)),
     }
 };
 
-export const mapStateToProps = (state: FieldContext) => {
-    return {
-        fieldContext: state.fieldContext,
-    }
-};
-export const fieldConnect = (Element: ComponentType) => connect(mapStateToProps, mapDispatchToProps)(Element);
+export type FieldProps = FieldContextProps & FieldDispatchProps
+
+// export function fieldConnect<P extends FieldProps, C extends ComponentType<P>>(element: C) {
+//     return connect(mapStateToProps, mapDispatchToProps)(element)
+// }

@@ -17,12 +17,13 @@ export class Field implements FormElement {
     visibilityRule? : VisibilityRule;
     // TODO rename 'isValid' ?
     getValidation?: (state: FieldContext) => Validation;
-    isVisible?: (state: FieldContext) => boolean
+    isVisible?: (state: FieldContext) => boolean;
 }
 
 export class Block implements FormElement{
     id: string;
     label: string;
+    index: number;
     ctaLabel? : string;
     fields: Field[]
 }
