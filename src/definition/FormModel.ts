@@ -11,6 +11,8 @@ export class Field implements FormElement {
     id: string;
     type: FieldTypes;
     label?: string;
+    placeholder?: string;
+    symbol?: string;
     validationRule? : ValidationRule;
     visibilityRule? : VisibilityRule;
     // TODO rename 'isValid' ?
