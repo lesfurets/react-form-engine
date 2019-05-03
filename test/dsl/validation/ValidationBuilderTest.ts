@@ -1,6 +1,5 @@
 import {ValidationBuilder} from "../../../src/dsl/validation/ValidationBuilder";
 import {ValidationRule} from "../../../src/dsl/validation/ValidationRule";
-import {VisibilityBuilder} from "../../../src/dsl/visibility/VisibilityBuilder";
 import {VALID} from "../../../src/definition/validation/Validation";
 
 describe("DSL/Validation/ValidationBuilder", () => {

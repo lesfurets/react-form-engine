@@ -1,20 +1,21 @@
-import React from "react";
-import {initTest} from "../../test-utils";
 import {EventMulticaster} from "../../../src/definition/event/EventMulticaster";
-
-initTest();
+import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
+import {FormElement} from "../../../src/definition/FormModel";
 
 describe("FormEngine/Definition/EventMulticaster", () => {
 
-    let event = "event";
-    let source = {id: "id"};
-    let details = "details";
+    const event: FormEvent = {
+        id: "event",
+        type: EventTypes.Form
+    };
+    const source: FormElement = {id: "id"};
+    const details = "details";
 
     describe("subscribe", () => {
         it("Should notify subscribers", () => {
             // Given
-            let eventMulticaster = new EventMulticaster();
-            let callback = jasmine.createSpy();
+            const eventMulticaster = new EventMulticaster();
+            const callback = jasmine.createSpy();
             eventMulticaster.subscribe(callback);
 
             // When
@@ -28,8 +29,8 @@ describe("FormEngine/Definition/EventMulticaster", () => {
     describe("subscribeForElement", () => {
         it("Should notify if subcribed to id", () => {
             // Given
-            let eventMulticaster = new EventMulticaster();
-            let callback = jasmine.createSpy();
+            const eventMulticaster = new EventMulticaster();
+            const callback = jasmine.createSpy();
             eventMulticaster.subscribeForElements(callback, [source]);
 
             // When
@@ -41,12 +42,12 @@ describe("FormEngine/Definition/EventMulticaster", () => {
 
         it("Should notify subscribers", () => {
             // Given
-            let eventMulticaster = new EventMulticaster();
-            let idTest = {id: "idTest"};
-            let callback = jasmine.createSpy();
+            const eventMulticaster = new EventMulticaster();
+            const idTest: FormElement = {id: "idTest"};
+            const callback = jasmine.createSpy();
             eventMulticaster.subscribeForElements(callback, [idTest]);
 
-            let callbackTemoin = jasmine.createSpy();
+            const callbackTemoin = jasmine.createSpy();
             eventMulticaster.subscribeForElements(callbackTemoin, [idTest, source]);
 
             // When

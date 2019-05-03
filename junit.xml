@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" time="1.376">
-  <testsuite name="FormEngine/Definition/Predicate/Predicates" errors="0" failures="0" skipped="0" timestamp="2019-04-17T15:29:30" time="0.884" tests="1">
-    <testcase classname="FormEngine/Definition/Predicate/Predicates Should create FieldPredicate" name="FormEngine/Definition/Predicate/Predicates Should create FieldPredicate" time="0.004">
-    </testcase>
-  </testsuite>
-</testsuites>

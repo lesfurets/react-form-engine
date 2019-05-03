@@ -1,15 +1,11 @@
-import React from "react";
 import {VALID, Validation} from "../../../src/definition/validation/Validation";
-import {initTest} from "../../test-utils";
-
-initTest();
 
 describe("FormEngine/Definition/Validation/Validation", () => {
 
     describe("Structure", () => {
-        let valid = false;
-        let message = "error";
-        let validation = new Validation(valid, message);
+        const valid = false;
+        const message = "error";
+        const validation = new Validation(valid, message);
         it("Should have isValid", () => {
             expect(validation.isValid).not.toBe(null);
             expect(typeof validation.isValid).toBe("boolean");

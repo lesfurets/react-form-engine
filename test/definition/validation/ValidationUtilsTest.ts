@@ -1,20 +1,17 @@
-import React from "react";
 import {VALID} from "../../../src/definition/validation/Validation";
 import {ValidationUtils} from "../../../src/definition/validation/ValidationUtils";
-import {initTest} from "../../test-utils";
-
-initTest();
+import {Field} from "../../../src/definition/FormModel";
+import {FieldTypes} from "../../../src/definition/FieldTypes";
 
 describe("FormEngine/Definition/Validation/ValidationUtils", () => {
 
-    let field = {id: "fieldId"};
-    let errorMessage = "errorMessage";
+    const field: Field = {
+        id: "fieldId",
+        type: FieldTypes.INPUT_TEXT
+    };
+    const errorMessage = "errorMessage";
 
     describe("isNullOrUndefined", () => {
-
-        it("Should be true with no values", () => {
-            expect(ValidationUtils.isNullOrUndefined()).toBe(true);
-        });
 
         it("Should be true if undefined", () => {
             expect(ValidationUtils.isNullOrUndefined(undefined)).toBe(true);

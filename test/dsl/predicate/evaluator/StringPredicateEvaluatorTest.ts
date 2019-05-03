@@ -1,14 +1,8 @@
 import {Field, FieldContext} from "../../../../src/definition/FormModel";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
 import {PredicateEvaluator} from "../../../../src/dsl/predicate/evaluator/PredicateEvaluator";
-import {ReversedPredicate} from "../../../../src/dsl/predicate/data/operation/ReversedPredicate";
 import {SelfPredicate} from "../../../../src/dsl/predicate/data/root/SelfPredicate";
-import {FieldPredicate} from "../../../../src/dsl/predicate/data/root/FieldPredicate";
-import {ValueDefinedPredicate} from "../../../../src/dsl/predicate/data/leaf/value/ValueDefinedPredicate";
 import {StringEqualToPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringEqualToPredicate";
-import {ValueEqualToFieldPredicate} from "../../../../src/dsl/predicate/data/leaf/value/ValueEqualToFieldPredicate";
-import {TruePredicate} from "../../../../src/dsl/predicate/data/root/TruePredicate";
-import {FalsePredicate} from "../../../../src/dsl/predicate/data/root/FalsePredicate";
 import {StringCheckPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringCheckPredicate";
 import {StringEmptyPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
 import {StringContainPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringContainPredicate";

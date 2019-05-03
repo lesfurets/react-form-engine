@@ -17,16 +17,20 @@ You need to have installed:
 ## Set-up
 To import all required modules, after cloning the github project, run in the root directory :
 ```bash
-$ npm install 
-$ npm install react react-dom 
+$ yarn install --pure-lockfile
 ```
 To build the project : 
 ```bash
-$ npm run build
+$ yarn install
 ```
 This command generates a bundle file in the public directory: index.js
 
 ## Run example
 ```bash
-$ npm run start-example
+$ yarn start:example
+```
+
+## Run tests
+```bash
+$ yarn test:project
 ```
