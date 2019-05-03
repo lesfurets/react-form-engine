@@ -1,16 +1,5 @@
 module.exports = {
-    testMatch: ["**/test/**/*Test.ts"],
-    moduleNameMapper: {
-        "\\.(css|less|scss|png)$": "identity-obj-proxy"
-    },
+    testMatch: ["**/test/**/*Test.ts", "**/test/**/*Test.tsx"],
     reporters: ["default", "jest-junit"],
     preset:"ts-jest"
-    // transform: {
-    //     '^.+\\.tsx?$': 'ts-jest',
-    // },
-    // globals: {
-    //     'ts-jest': {
-    //         tsConfigFile: 'tsconfig.jest.json',
-    //     },
-    // },
 };
