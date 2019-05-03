@@ -1,6 +1,6 @@
 import * as React from "react";
 import {shallow} from "enzyme";
-import * as TestUtils from "../../TestUtils";
+import {TestUtils} from "../../TestUtils";
 import {EmailField} from "../../../src/component/field/EmailField";
 import {Field} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
