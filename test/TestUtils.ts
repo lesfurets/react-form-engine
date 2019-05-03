@@ -8,7 +8,8 @@ export const TestUtils = {
         Enzyme.configure({
             adapter: new Adapter(),
         })
-    }
+    },
+    emptyCallback:() => {}
 };
 
 export const ERROR = new Validation(false, "error-test");

@@ -1,22 +1,24 @@
-import React from "react";
-import {shallow} from "enzyme";
-import {TextField} from "../../../src/component/field/TextField";
-import {initTest} from "../../test-utils";
+import * as React from "react";
+import {shallow, ShallowWrapper} from "enzyme";
+import {TextField, TextFieldProps, TextFieldState} from "../../../src/component/field/TextField";
+import {TestUtils} from "../../TestUtils";
+import {Field} from "../../../src/definition/FormModel";
+import {FieldTypes} from "../../../src/definition/FieldTypes";
 
-initTest();
+TestUtils.init();
 
 describe("FormEngine/Field/TextField", () => {
-    let testId = "testId";
     let testValue = "testValue";
-    let emptyCallback = () => {
+    const field: Field = {
+        id: "fieldId",
+        type: FieldTypes.INPUT_TEXT,
     };
 
     describe("Construction", () => {
         it("Input should have type text", () => {
-            let container = shallow(<TextField field={{id: testId}}
-                                               helperContext={{}}
-                                               onValueChange={emptyCallback}
-                                               fieldContext={{}}/>);
+            let container = shallow(<TextField field={field}
+                                               onValueChange={TestUtils.emptyCallback}
+                                               contextValue=""/>);
             expect(container.find("input").props().type).toBe("text");
             expect(container.find("input").props().inputMode).toBe("text");
         });
@@ -25,19 +27,17 @@ describe("FormEngine/Field/TextField", () => {
     describe("placeholder", () => {
         it("Should have a placeholder", () => {
             let placeholderValue = "placeholder";
-            let container = shallow(<TextField field={{id: "test", placeholder: placeholderValue}}
-                                               fieldContext={{}}
-                                               helperContext={{}}
-                                               onValueChange={emptyCallback}/>);
+            let container = shallow(<TextField field={{...field, placeholder: placeholderValue}}
+                                               contextValue=""
+                                               onValueChange={TestUtils.emptyCallback}/>);
             expect(container.find('input').props().placeholder).toBe(placeholderValue)
         });
 
 
         it("Should have empty placeholder", () => {
-            let container = shallow(<TextField field={{id: "test"}}
-                                               fieldContext={{}}
-                                               helperContext={{}}
-                                               onValueChange={emptyCallback}/>);
+            let container = shallow(<TextField field={field}
+                                               contextValue=""
+                                               onValueChange={TestUtils.emptyCallback}/>);
             expect(container.find('input').props().placeholder).toBe("")
         });
     });
@@ -45,13 +45,12 @@ describe("FormEngine/Field/TextField", () => {
     describe("props", () => {
         it("Should pass props id, name, tabindex to input", () => {
             let tabIndex = 8;
-            let container = shallow(<TextField field={{id: testId}}
+            let container = shallow(<TextField field={field}
                                                tabIndex={tabIndex}
-                                               fieldContext={{}}
-                                               helperContext={{}}
-                                               onValueChange={emptyCallback}/>);
-            expect(container.find('input').props().id).toBe(testId);
-            expect(container.find('input').props().name).toBe(testId);
+                                               contextValue=""
+                                               onValueChange={TestUtils.emptyCallback}/>);
+            expect(container.find('input').props().id).toBe(field.id);
+            expect(container.find('input').props().name).toBe(field.id);
             expect(container.find('input').props().tabIndex).toBe(tabIndex);
         });
     });
@@ -59,9 +58,8 @@ describe("FormEngine/Field/TextField", () => {
     describe("onChange", () => {
         it("Should update only state", () => {
             let onValueChange = jasmine.createSpy();
-            let container = shallow(<TextField field={{id: testId}}
-                                               fieldContext={{}}
-                                               helperContext={{}}
+            let container: ShallowWrapper<TextFieldProps, TextFieldState, React.Component> = shallow(<TextField field={field}
+                                               contextValue=""
                                                onValueChange={onValueChange}/>);
             let input = container.find('input');
             input.simulate('change', {target: {value: testValue}});
@@ -73,9 +71,8 @@ describe("FormEngine/Field/TextField", () => {
     describe("onBlur", () => {
         it("Should update state and onValueChange", () => {
             let onValueChange = jasmine.createSpy();
-            let container = shallow(<TextField field={{id: testId}}
-                                               fieldContext={{}}
-                                               helperContext={{}}
+            let container: ShallowWrapper<TextFieldProps, TextFieldState, React.Component> = shallow(<TextField field={field}
+                                               contextValue=""
                                                onValueChange={onValueChange}/>);
             let input = container.find('input');
             input.simulate('change', {target: {value: testValue}});

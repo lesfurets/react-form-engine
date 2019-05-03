@@ -1,25 +1,25 @@
 import * as React from "react";
+import {PasswordField} from "../../../src/component/field/PasswordField";
 import {shallow} from "enzyme";
 import {TestUtils} from "../../TestUtils";
-import {EmailField} from "../../../src/component/field/EmailField";
 import {Field} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 
-TestUtils.init();
 
-describe("FormEngine/Field/EmailField", () => {
+TestUtils.init()
+
+describe("FormEngine/Field/PasswordField", () => {
     const field: Field = {
         id: "fieldId",
-        type: FieldTypes.INPUT_EMAIL,
+        type: FieldTypes.INPUT_PASSWORD,
     };
 
     describe("Construction", () => {
-        it("Input should have type email", () => {
-            let container = shallow(<EmailField field={field}
+        it("Input should have type decimal", () => {
+            let container = shallow(<PasswordField field={field}
                                                onValueChange={TestUtils.emptyCallback}
                                                contextValue=""/>);
-            expect(container.find("input").props().type).toBe("email");
-            expect(container.find("input").props().inputMode).toBe("email");
+            expect(container.find("input").props().type).toBe("password");
         });
     });
 
