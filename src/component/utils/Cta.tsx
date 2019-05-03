@@ -11,7 +11,7 @@ export interface CtaProps {
     type?: CTA_TYPE
     fullWidth?: boolean
     className?: string
-    onClick: () => void
+    onClick?: () => void
 }
 
 export const Cta : React.SFC<CtaProps> = ({children, type, onClick, fullWidth, className}) => (

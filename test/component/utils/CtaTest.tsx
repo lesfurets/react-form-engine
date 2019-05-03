@@ -1,9 +1,9 @@
-import React from "react";
+import * as React from "react";
 import {shallow} from "enzyme";
-import {initTest} from "../../test-utils";
 import {Cta, CTA_TYPE} from "../../../src/component/utils/Cta";
+import {TestUtils} from "../../TestUtils";
 
-initTest();
+TestUtils.init();
 
 describe("FormEngine/Utils/Cta", () => {
 
