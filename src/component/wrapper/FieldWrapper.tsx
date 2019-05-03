@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {FieldValueAction} from "../../redux/constants";
 import {setFieldValueAction} from "../../redux/actions";
+import {FieldState} from "../../redux/reducers";
 
 export interface FieldWrapperProps {
     key: string
@@ -81,10 +82,10 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
     }
 }
 
-const mapStateToProps = (state: FieldContext, ownProps: FieldWrapperProps) => {
+const mapStateToProps = (state: FieldState, ownProps: FieldWrapperProps) => {
     return {
         ...ownProps,
-        fieldContext: state,
+        fieldContext: state.fieldContext,
     }
 };
 

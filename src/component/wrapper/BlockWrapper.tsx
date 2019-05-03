@@ -13,6 +13,7 @@ import {Dispatch} from "redux";
 import {FieldValueAction} from "../../redux/constants";
 import {setFieldValueAction} from "../../redux/actions";
 import {FieldProps} from "../../redux/fieldConnect";
+import {FieldState} from "../../redux/reducers";
 
 export interface BlockWrapperProps {
     blockState: BLOCK_STATE,
@@ -80,10 +81,10 @@ export class BlockWrapperComponent extends React.Component<BlockWrapperProps & F
 }
 
 
-const mapStateToProps = (state: FieldContext, ownProps: BlockWrapperProps) => {
+const mapStateToProps = (state: FieldState, ownProps: BlockWrapperProps) => {
     return {
         ...ownProps,
-        fieldContext: state,
+        fieldContext: state.fieldContext,
     }
 };
 
