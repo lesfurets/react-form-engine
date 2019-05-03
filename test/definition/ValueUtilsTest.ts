@@ -1,8 +1,4 @@
-import React from "react";
-import {initTest} from "../test-utils";
 import {ValueUtils} from "../../src/definition/ValueUtils";
-
-initTest();
 
 describe("FormEngine/Definition/ValueUtils", () => {
 
@@ -21,7 +17,7 @@ describe("FormEngine/Definition/ValueUtils", () => {
         });
 
         it("Should not match if empty", () => {
-            expect(ValueUtils.isDefined("")).toBe(false);
+            expect(ValueUtils.isDefined("")).toBe(true);
         });
 
     });

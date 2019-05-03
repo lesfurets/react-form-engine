@@ -1,14 +1,9 @@
-import React from "react";
-
 import {FieldTypes} from "../../src/definition/FieldTypes";
 import {FieldInjector, UNKNOWN_FIELD} from "../../src/definition/FieldInjector";
 import {TextField} from "../../src/component/field/TextField";
 import {EmailField} from "../../src/component/field/EmailField";
 import {NumberField} from "../../src/component/field/NumberField";
 import {PasswordField} from "../../src/component/field/PasswordField";
-import {initTest} from "../test-utils";
-
-initTest();
 
 describe("FormEngine/Definition/FieldInjector", () => {
 
