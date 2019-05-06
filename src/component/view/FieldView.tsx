@@ -9,12 +9,12 @@ export interface FieldViewProps {
     field: Field
     fieldState: string
     errorMessage: string
-    isVisible: boolean
+    isVisible?: boolean
     onEvent?: (e: FormEvent, details: any) => void
     children?: ReactNode
 }
 
-export const FieldView : React.SFC<FieldViewProps> = ({field, fieldState, errorMessage ,children, isVisible}) => {
+export const FieldView : React.SFC<FieldViewProps> = ({field, fieldState, errorMessage ,children, isVisible = true}) => {
     let hasLabel = field.label != null;
     return isVisible ? (
         <div className={`FieldView ${fieldState} ${field.id} ${field.type}`}>

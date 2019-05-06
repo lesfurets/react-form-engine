@@ -1,14 +1,16 @@
-import React from "react";
+import * as React from "react";
 import {shallow} from "enzyme";
-import {initTest} from "../../test-utils";
 import {FieldView} from "../../../src/component/view/FieldView";
-import {FIELD_STATE} from "../../../src/component/wrapper/FieldWrapper";
+import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {FIELD_STATE} from "../../../src/definition/FormModel";
+import {TestUtils} from "../../TestUtils";
 
-initTest();
+TestUtils.init();
 
 describe("FormEngine/View/FieldView", () => {
 
-    let field = {id: "id-test", type: "type-test"};
+    let field = {id: "id-test", type: FieldTypes.INPUT_TEXT};
+
     describe("Label", () => {
         it("Should not display label by default", () => {
             let container = shallow(<FieldView field={field}
