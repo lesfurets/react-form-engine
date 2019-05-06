@@ -29,12 +29,12 @@ export const BlockView : React.SFC<BlockViewProps> = ({children, block, index, b
                                 null : <Cta type={CTA_TYPE.SECONDARY}
                                             className={"BlockView-previous"}
                                             fullWidth={true}
-                                            onClick={() => onEvent!(BLOCK_EVENT.PREVIOUS, this)}>Previous</Cta>}
+                                            onClick={() => onEvent!(BLOCK_EVENT.PREVIOUS)}>Previous</Cta>}
                         </div>
                         <div className="app-col-xs-12 app-col-sm-3 app-col-sm-offset-6">
                             <Cta fullWidth={true}
                                  className={"BlockView-next"}
-                                 onClick={() => onEvent!(BLOCK_EVENT.NEXT, this)}>{block!.ctaLabel || "Next"}</Cta>
+                                 onClick={() => onEvent!(BLOCK_EVENT.NEXT)}>{block!.ctaLabel || "Next"}</Cta>
                         </div>
                     </div>
                 </div>
