@@ -3,6 +3,7 @@ import * as React from "react";
 import "../../styles/components/view/field-view.less";
 import {Field, FIELD_STATE} from "../../definition/FormModel";
 import {FormEvent} from "../../definition/event/Event";
+import {ReactNode} from "react";
 
 export interface FieldViewProps {
     field: Field
@@ -10,6 +11,7 @@ export interface FieldViewProps {
     errorMessage: string
     isVisible: boolean
     onEvent?: (e: FormEvent, details: any) => void
+    children?: ReactNode
 }
 
 export const FieldView : React.SFC<FieldViewProps> = ({field, fieldState, errorMessage ,children, isVisible}) => {

@@ -13,7 +13,7 @@ export interface BlockViewProps {
     block?: Block
     index: number
     blockState: BLOCK_STATE
-    onEvent?: (e: FormEvent, details: any) => void
+    onEvent?: (e: FormEvent, details?: any) => void
 }
 
 export const BlockView : React.SFC<BlockViewProps> = ({children, block, index, blockState, onEvent}) => (

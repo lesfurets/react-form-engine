@@ -9,7 +9,10 @@ export const TestUtils = {
             adapter: new Adapter(),
         })
     },
-    emptyCallback:() => {}
+
+    emptyCallback:() => {},
+
+    ERROR: new Validation(false, "error-test")
 };
 
 export const ERROR = new Validation(false, "error-test");

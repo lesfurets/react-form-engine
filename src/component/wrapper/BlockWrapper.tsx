@@ -25,7 +25,7 @@ export interface BlockWrapperProps {
 }
 
 
-interface BlockWrapperState {
+export interface BlockWrapperState {
     forceValidation: boolean
 }
 
