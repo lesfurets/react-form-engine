@@ -30,7 +30,7 @@ export class Block implements FormElement{
 
 export class Form implements FormElement{
     id: string;
-    label: string;
+    label?: string;
     blocks: Block[]
 }
 
