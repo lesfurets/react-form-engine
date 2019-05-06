@@ -16,7 +16,7 @@ export interface BlockViewProps {
     onEvent?: (e: FormEvent, details?: any) => void
 }
 
-export const BlockView : React.SFC<BlockViewProps> = ({children, block, index, blockState, onEvent}) => (
+export const BlockView : React.SFC<BlockViewProps> = ({children, block, index, blockState = BLOCK_STATE.DOING, onEvent}) => (
     <div className={`BlockView app-row ${blockState} ${block!.id}`}>
         <div className="BlockView-label app-col-xs-12">{index + 1}. {block!.label}</div>
         {blockState !== BLOCK_STATE.DOING ? null : (

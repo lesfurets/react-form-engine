@@ -49,14 +49,17 @@ describe("FormEngine/View/BlockView", () => {
 
         it("Should display model ctaLabel in next button", () => {
             let ctaLabel = "ctaLabel";
-            let container = mount(<BlockView block={{...blockTest, index: 0, ctaLabel: ctaLabel}} index={0} blockState={BLOCK_STATE.TODO}/>);
+            let container = mount(<BlockView block={{...blockTest, index: 0, ctaLabel: ctaLabel}} index={0} blockState={BLOCK_STATE.DOING}/>);
+
+            console.log(container.debug());
+            console.log(container.find(".BlockView-next").debug());
 
             expect(container.find(".BlockView-next").first().text()).toBe(ctaLabel);
         });
 
         it("Should call validation when clicking next", () => {
             let onEvent = jasmine.createSpy();
-            let container = shallow(<BlockView block={{...blockTest, index: 1}} onEvent={onEvent} index={1} blockState={BLOCK_STATE.TODO}/>);
+            let container = shallow(<BlockView block={{...blockTest, index: 1}} onEvent={onEvent} index={1} blockState={BLOCK_STATE.DOING}/>);
 
             container.find(".BlockView-next").simulate("click");
 
@@ -65,7 +68,7 @@ describe("FormEngine/View/BlockView", () => {
 
         it("Should call event when clicking previous", () => {
             let onEvent = jasmine.createSpy();
-            let container = shallow(<BlockView block={{...blockTest, index: 1}} onEvent={onEvent} index={1} blockState={BLOCK_STATE.TODO}/>);
+            let container = shallow(<BlockView block={{...blockTest, index: 1}} onEvent={onEvent} index={1} blockState={BLOCK_STATE.DOING}/>);
 
             container.find(".BlockView-previous").simulate("click");
 

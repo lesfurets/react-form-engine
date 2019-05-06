@@ -1,4 +1,3 @@
-// import {configure} from "enzyme/build/index";
 import {Validation} from "../src/definition/validation/Validation";
 import * as Adapter from 'enzyme-adapter-react-16'
 import * as Enzyme from 'enzyme'
@@ -14,5 +13,3 @@ export const TestUtils = {
 
     ERROR: new Validation(false, "error-test"),
 };
-
-export const ERROR = new Validation(false, "error-test");
