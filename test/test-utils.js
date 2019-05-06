@@ -6,8 +6,4 @@ export const initTest = () => {
     configure({adapter: new Adapter()});
 };
 
-export const mockPredicate = (ifOk) => ({not: !ifOk});
-
-export const EMPTY_CALLBACK = () => {};
-
 export const ERROR = new Validation(false, "error-test");

@@ -1,32 +1,33 @@
-import React from "react";
-import {FIELD_STATE, FieldWrapperComponent} from "../../../src/component/wrapper/FieldWrapper";
-import {ERROR, initTest, IS_NOT_VISIBLE, IS_VISIBLE, setFieldValue} from "../../../test/test-utils";
+import * as React from "react";
+import {FieldWrapperComponent} from "../../../src/component/wrapper/FieldWrapper";
 import {VALID} from "../../../src/definition/validation/Validation";
-import {shallow, mount} from "enzyme/build/index";
-import {EMPTY_CALLBACK, mockPredicate} from "../../test-utils";
-import {VisibilityRule} from "../../../src/dsl/visibility/VisibilityRule";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
+import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {TestUtils} from "../../TestUtils";
+import {mount, shallow} from "enzyme";
+import {FieldViewProps} from "../../../src/component/view/FieldView";
+import {FIELD_STATE} from "../../../src/definition/FormModel";
 
-initTest();
+TestUtils.init();
 
 describe("FormEngine/Wrapper/FieldWrapper", () => {
 
-    let DefaultView = () => <div/>;
+    let TestFieldView = (p: FieldViewProps) => (<div>{p.children}</div>);
     let testId = 'testChild1';
-    let model = {id: testId, type: 'type-test'};
+    let model = {id: testId, type: FieldTypes.INPUT_TEXT};
     let props = {
         field: model,
-        setFieldValue: EMPTY_CALLBACK,
+        setFieldValue: TestUtils.emptyCallback,
         fieldContext: {},
-        View: DefaultView
+        View: TestFieldView
     };
 
     describe("States", () => {
 
         it("Should have default state when loaded", () => {
             // When
-            let container = shallow(<FieldWrapperComponent {...props}/>);
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}/>);
 
             // Then
             let {fieldState} = container.instance().getState();
@@ -38,7 +39,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let fieldContext = {[testId]:"OK"};
 
             // When
-            let container = shallow(<FieldWrapperComponent {...props}
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            fieldContext={fieldContext}/>);
 
             // Then
@@ -51,12 +52,12 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let fieldContext = {[testId]:"OK"};
             let field = {
                 id: testId,
-                type: 'type-test',
+                type: FieldTypes.INPUT_TEXT,
                 getValidation: () => VALID
             };
 
             // When
-            let container = shallow(<FieldWrapperComponent {...props}
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            field={field}
                                                            fieldContext={fieldContext}/>);
 
@@ -70,12 +71,12 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let fieldContext = {[testId]:"OK"};
             let field = {
                 id: testId,
-                type: 'type-test',
-                getValidation: () => ERROR
+                type: FieldTypes.INPUT_TEXT,
+                getValidation: () => TestUtils.ERROR
             };
 
             // When
-            let container = shallow(<FieldWrapperComponent {...props}
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            field={field}
                                                            fieldContext={fieldContext}/>);
 
@@ -89,17 +90,17 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let fieldContext = {[testId]:"OK"};
             let field = {
                 id: testId,
-                type: 'type-test',
+                type: FieldTypes.INPUT_TEXT,
                 getValidation: () => VALID
             };
 
             // When
-            let container = shallow(<FieldWrapperComponent {...props}
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            field={field}
                                                            fieldContext={fieldContext}/>);
 
             // Then
-            expect(container.find(DefaultView).props().fieldState).toBe(FIELD_STATE.VALID);
+            expect(container.find(TestFieldView).props().fieldState).toBe(FIELD_STATE.VALID);
         });
 
     });
@@ -109,7 +110,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
 
         it("Should be valid by default when forced", () => {
             // When
-            let container = shallow(<FieldWrapperComponent {...props}
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            forceValidation={true}/>);
 
             // Then
@@ -121,12 +122,12 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             // Given
             let field = {
                 id: testId,
-                type: 'type-test',
-                getValidation: () => ERROR
+                type: FieldTypes.INPUT_TEXT,
+                getValidation: () => TestUtils.ERROR
             };
 
             // When
-            let container = shallow(<FieldWrapperComponent {...props}
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            field={field}
                                                            forceValidation={true}/>);
 
@@ -139,12 +140,12 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             // Given
             let field = {
                 id: testId,
-                type: 'type-test',
+                type: FieldTypes.INPUT_TEXT,
                 getValidation: () => VALID
             };
 
             // When
-            let container = shallow(<FieldWrapperComponent {...props}
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            field={field}
                                                            forceValidation={true}/>);
 
@@ -163,7 +164,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let setFieldValue = jasmine.createSpy();
 
             // When
-            let container = shallow(<FieldWrapperComponent {...props}
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            setFieldValue={setFieldValue}
                                                            forceValidation={true}/>);
             container.instance().onValueChange(testValue);
@@ -191,8 +192,6 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             expect(predicate).toHaveBeenCalledWith(fieldContext);
         });
 
-        let simplePredicate = mockPredicate(() => true)
-
         it("Should pass visibility true to children", () => {
             // When
             let container = mount(<FieldWrapperComponent {...props}
@@ -202,7 +201,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                                                          }}/>);
 
             // Then
-            expect(container.find(DefaultView).props().isVisible).toBe(true);
+            expect(container.find(TestFieldView).props().isVisible).toBe(true);
         });
 
         it("Should pass visibility false to children", () => {
@@ -214,7 +213,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                                                          }}/>);
 
             // Then
-            expect(container.find(DefaultView).props().isVisible).toBe(false);
+            expect(container.find(TestFieldView).props().isVisible).toBe(false);
         });
 
     });
@@ -228,7 +227,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
 
             // When
             EVENT_MULTICASTER.subscribe(onEvent);
-            let container = shallow(<FieldWrapperComponent {...props}
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            forceValidation={true}/>);
             container.instance().onValueChange(testValue);
 

@@ -12,7 +12,7 @@ export const TestUtils = {
 
     emptyCallback:() => {},
 
-    ERROR: new Validation(false, "error-test")
+    ERROR: new Validation(false, "error-test"),
 };
 
 export const ERROR = new Validation(false, "error-test");

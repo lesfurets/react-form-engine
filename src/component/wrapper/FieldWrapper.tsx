@@ -14,7 +14,6 @@ import {setFieldValueAction} from "../../redux/actions";
 import {FieldState} from "../../redux/reducers";
 
 export interface FieldWrapperProps {
-    key: string
     field: Field;
     tabIndex: number;
     forceValidation: boolean;
