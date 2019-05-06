@@ -51,9 +51,6 @@ describe("FormEngine/View/BlockView", () => {
             let ctaLabel = "ctaLabel";
             let container = mount(<BlockView block={{...blockTest, index: 0, ctaLabel: ctaLabel}} index={0} blockState={BLOCK_STATE.DOING}/>);
 
-            console.log(container.debug());
-            console.log(container.find(".BlockView-next").debug());
-
             expect(container.find(".BlockView-next").first().text()).toBe(ctaLabel);
         });
 
