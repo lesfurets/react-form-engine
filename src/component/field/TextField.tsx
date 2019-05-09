@@ -1,11 +1,13 @@
 import * as React from "react";
 import {Field} from "../../definition/FormModel";
 import {ReactNode} from "react";
+import {FormEvent} from "../../definition/event/Event";
+import {FIELD_EVENT} from "../../definition/event/events";
 
 export interface TextFieldProps {
     contextValue?: string,
     tabIndex?: number,
-    onValueChange?: (value: string) => void,
+    onFieldEvent?: (e: FormEvent, details?: any) => void,
     field: Field
 }
 
@@ -26,20 +28,17 @@ export class TextField extends React.Component<TextFieldProps, TextFieldState> {
         super(props);
         this.inputType = "text";
         this.inputMode = "text";
-        this.state = {
-            value: props.contextValue || "",
-        };
+        this.getSuffix = this.getSuffix.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onBlur = this.onBlur.bind(this);
-        this.getSuffix = this.getSuffix.bind(this);
     }
 
     handleChange(event : React.ChangeEvent<HTMLInputElement>) {
-        this.setState({value: event.target.value});
+        this.props.onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, event.target.value.trim());
     }
 
     onBlur() {
-        this.props.onValueChange!(this.state.value.trim());
+        this.props.onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, (this.props.contextValue || "").trim());
     }
 
     getSuffix() : ReactNode {
@@ -56,7 +55,7 @@ export class TextField extends React.Component<TextFieldProps, TextFieldState> {
                        name={field!.id}
                        id={field!.id}
                        tabIndex={tabIndex}
-                       value={this.state.value}
+                       value={this.props.contextValue || ""}
                        onChange={this.handleChange}
                        onBlur={this.onBlur}/>
                 {this.getSuffix()}

@@ -4,6 +4,7 @@ import {TextField, TextFieldProps, TextFieldState} from "../../../src/component/
 import {TestUtils} from "../../TestUtils";
 import {Field} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {FIELD_EVENT} from "../../../src/definition/event/events";
 
 TestUtils.init();
 
@@ -17,7 +18,7 @@ describe("FormEngine/Field/TextField", () => {
     describe("Construction", () => {
         it("Input should have type text", () => {
             let container = shallow(<TextField field={field}
-                                               onValueChange={TestUtils.emptyCallback}
+                                               onFieldEvent={TestUtils.emptyCallback}
                                                contextValue=""/>);
             expect(container.find("input").props().type).toBe("text");
             expect(container.find("input").props().inputMode).toBe("text");
@@ -29,7 +30,7 @@ describe("FormEngine/Field/TextField", () => {
             let placeholderValue = "placeholder";
             let container = shallow(<TextField field={{...field, placeholder: placeholderValue}}
                                                contextValue=""
-                                               onValueChange={TestUtils.emptyCallback}/>);
+                                               onFieldEvent={TestUtils.emptyCallback}/>);
             expect(container.find('input').props().placeholder).toBe(placeholderValue)
         });
 
@@ -37,7 +38,7 @@ describe("FormEngine/Field/TextField", () => {
         it("Should have empty placeholder", () => {
             let container = shallow(<TextField field={field}
                                                contextValue=""
-                                               onValueChange={TestUtils.emptyCallback}/>);
+                                               onFieldEvent={TestUtils.emptyCallback}/>);
             expect(container.find('input').props().placeholder).toBe("")
         });
     });
@@ -48,7 +49,7 @@ describe("FormEngine/Field/TextField", () => {
             let container = shallow(<TextField field={field}
                                                tabIndex={tabIndex}
                                                contextValue=""
-                                               onValueChange={TestUtils.emptyCallback}/>);
+                                               onFieldEvent={TestUtils.emptyCallback}/>);
             expect(container.find('input').props().id).toBe(field.id);
             expect(container.find('input').props().name).toBe(field.id);
             expect(container.find('input').props().tabIndex).toBe(tabIndex);
@@ -56,29 +57,27 @@ describe("FormEngine/Field/TextField", () => {
     });
 
     describe("onChange", () => {
-        it("Should update only state", () => {
-            let onValueChange = jasmine.createSpy();
+        it("Should update value", () => {
+            let onFieldEvent = jasmine.createSpy();
             let container: ShallowWrapper<TextFieldProps, TextFieldState, React.Component> = shallow(<TextField field={field}
                                                contextValue=""
-                                               onValueChange={onValueChange}/>);
+                                               onFieldEvent={onFieldEvent}/>);
             let input = container.find('input');
             input.simulate('change', {target: {value: testValue}});
-            expect(container.state().value).toBe(testValue);
-            expect(onValueChange).not.toHaveBeenCalled();
+            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, testValue);
+            expect(onFieldEvent).not.toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, testValue);
         });
     });
 
     describe("onBlur", () => {
-        it("Should update state and onValueChange", () => {
-            let onValueChange = jasmine.createSpy();
+        it("Should submit value", () => {
+            let onFieldEvent = jasmine.createSpy();
             let container: ShallowWrapper<TextFieldProps, TextFieldState, React.Component> = shallow(<TextField field={field}
-                                               contextValue=""
-                                               onValueChange={onValueChange}/>);
+                                               contextValue={testValue}
+                                               onFieldEvent={onFieldEvent}/>);
             let input = container.find('input');
-            input.simulate('change', {target: {value: testValue}});
             input.simulate('blur');
-            expect(container.state().value).toBe(testValue);
-            expect(onValueChange).toHaveBeenCalledWith(testValue);
+            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, testValue);
         });
     });
 

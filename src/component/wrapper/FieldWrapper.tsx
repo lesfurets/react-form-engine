@@ -30,8 +30,8 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
     constructor(props: FieldWrapperProps & FieldProps) {
         super(props);
         this.getState = this.getState.bind(this);
-        this.onValueChange = this.onValueChange.bind(this);
-        this.onEvent = this.onEvent.bind(this);
+        this.onFieldEvent = this.onFieldEvent.bind(this);
+        this.onViewEvent = this.onViewEvent.bind(this);
     }
 
     static getFieldState(validation: Validation, contextValue: string | null, forceValidation: boolean) {
@@ -49,12 +49,15 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
         return {fieldState, validation};
     }
 
-    onValueChange(value: string) {
-        this.props.setFieldValue(this.props.field.id, value);
-        this.onEvent(FIELD_EVENT.SET_VALUE, value);
+    onFieldEvent(e: FormEvent, details?: any) {
+        if(e = FIELD_EVENT.SUMBIT_VALUE){
+            this.setState({forceValidation: true});
+        }
+        this.props.setFieldValue(this.props.field.id, details!);
+        this.onViewEvent(e, details!);
     }
 
-    onEvent(event: FormEvent, value: string) {
+    onViewEvent(event: FormEvent, value: any) {
         EVENT_MULTICASTER.event(event, this.props.field, value);
     }
 
@@ -68,12 +71,12 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
         return (
             <View field={field}
                   isVisible={isVisible}
-                  onEvent={this.onEvent}
+                  onEvent={this.onViewEvent}
                   errorMessage={validation.message}
                   fieldState={fieldState}>
                 <Field field={field}
                        tabIndex={tabIndex}
-                       onValueChange={this.onValueChange}
+                       onFieldEvent={this.onFieldEvent}
                         // TODO ?
                        contextValue={contextValue ? contextValue : undefined}/>
             </View>

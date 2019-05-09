@@ -167,10 +167,26 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            setFieldValue={setFieldValue}
                                                            forceValidation={true}/>);
-            container.instance().onValueChange(testValue);
+            container.instance().onFieldEvent(FIELD_EVENT.UPDATE_VALUE, testValue);
 
             // Then
             expect(setFieldValue).toHaveBeenCalledWith(model.id, testValue);
+        });
+
+        it("Should force validation if value is submitted", () => {
+            // Given
+            let testValue = "testValue";
+            let setFieldValue = jasmine.createSpy();
+
+            // When
+            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
+                                                                                  setFieldValue={setFieldValue}
+                                                                                  forceValidation={true}/>);
+            container.instance().onFieldEvent(FIELD_EVENT.SUMBIT_VALUE, testValue);
+
+            // Then
+            let {forceValidation} = container.instance().getState();
+            expect(forceValidation).toBe(true);
         });
 
     });
@@ -229,10 +245,10 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             EVENT_MULTICASTER.subscribe(onEvent);
             let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            forceValidation={true}/>);
-            container.instance().onValueChange(testValue);
+            container.instance().onFieldEvent(FIELD_EVENT.UPDATE_VALUE, testValue);
 
             // Then
-            expect(onEvent).toHaveBeenCalledWith(FIELD_EVENT.SET_VALUE, model, testValue);
+            expect(onEvent).toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, model, testValue);
         });
 
     });

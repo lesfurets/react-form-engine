@@ -16,7 +16,7 @@ describe("FormEngine/Field/EmailField", () => {
     describe("Construction", () => {
         it("Input should have type email", () => {
             let container = shallow(<EmailField field={field}
-                                               onValueChange={TestUtils.emptyCallback}
+                                               onFieldEvent={TestUtils.emptyCallback}
                                                contextValue=""/>);
             expect(container.find("input").props().type).toBe("email");
             expect(container.find("input").props().inputMode).toBe("email");

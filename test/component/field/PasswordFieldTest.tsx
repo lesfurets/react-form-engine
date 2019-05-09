@@ -17,8 +17,8 @@ describe("FormEngine/Field/PasswordField", () => {
     describe("Construction", () => {
         it("Input should have type decimal", () => {
             let container = shallow(<PasswordField field={field}
-                                               onValueChange={TestUtils.emptyCallback}
-                                               contextValue=""/>);
+                                                   onFieldEvent={TestUtils.emptyCallback}
+                                                   contextValue=""/>);
             expect(container.find("input").props().type).toBe("password");
         });
     });
