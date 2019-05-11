@@ -11,11 +11,11 @@ import {Provider} from "react-redux";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 import {TestUtils} from "../../TestUtils";
-import {BlockViewProps} from "../../../src/component/view/BlockView";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {Field} from "../../../src/definition/model/Field";
 import {Block} from "../../../src/definition/model/Block";
 import {FieldViewProps} from "../../../src/definition/view/FieldView";
+import {BlockViewProps} from "../../../src/definition/view/BlockView";
 
 TestUtils.init();
 

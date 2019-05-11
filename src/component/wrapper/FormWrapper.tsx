@@ -3,17 +3,17 @@ import * as React from "react";
 import {BLOCK_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 import {FormView} from "../view/FormView";
-import {BlockView} from "../view/BlockView";
 import {FormEvent} from "../../definition/event/Event";
 import {BlockWrapper} from "./BlockWrapper";
-import {BLOCK_STATE} from "../../definition/model/Block";
+import {Block, BLOCK_STATE} from "../../definition/model/Block";
 import {Form} from "../../definition/model/Form";
 import {FieldView} from "../../definition/view/FieldView";
+import {BlockView} from "../../definition/view/BlockView";
 
 export interface FormWrapperProps {
     form: Form,
     View: typeof FormView,
-    BlockView: typeof BlockView,
+    BlockView: BlockView,
     FieldView: FieldView,
 }
 
@@ -37,7 +37,7 @@ export default class FormWrapper extends React.Component<FormWrapperProps, FormW
         EVENT_MULTICASTER.unsubscribe(this.onBlockEvent);
     }
 
-    onBlockEvent(event: FormEvent, block: BlockView) {
+    onBlockEvent(event: FormEvent, block: Block) {
         switch (event) {
             case BLOCK_EVENT.VALIDATED:
                 this.setState({currentIndex: block.index + 1});

@@ -3,7 +3,6 @@ import * as React from "react";
 import {VALID} from "../../definition/validation/Validation";
 import {BLOCK_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
-import {BlockView} from "../view/BlockView";
 import {FormEvent} from "../../definition/event/Event";
 import {FieldWrapper} from "./FieldWrapper";
 import {connect} from "react-redux";
@@ -13,13 +12,13 @@ import {setFieldValueAction} from "../../redux/actions";
 import {FieldProps} from "../../redux/fieldConnect";
 import {FieldState} from "../../redux/reducers";
 import {Block, BLOCK_STATE} from "../../definition/model/Block";
-import {FieldContext} from "../../definition/FieldContext";
 import {FieldView} from "../../definition/view/FieldView";
+import {BlockView} from "../../definition/view/BlockView";
 
 export interface BlockWrapperProps {
     blockState: BLOCK_STATE,
     block: Block,
-    View: typeof BlockView,
+    View: BlockView,
     FieldView: FieldView,
     // fieldContext: FieldContext,
     // setFieldValue: (id: string, value: string) => void

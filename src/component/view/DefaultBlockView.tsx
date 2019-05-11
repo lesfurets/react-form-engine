@@ -4,19 +4,10 @@ import {BLOCK_EVENT} from "../../definition/event/events";
 import {Cta, CTA_TYPE} from "../utils/Cta";
 
 import "../../styles/components/view/block-view.less"
-import {ReactNode} from "react";
-import {FormEvent} from "../../definition/event/Event";
-import {Block, BLOCK_STATE} from "../../definition/model/Block";
+import {BLOCK_STATE} from "../../definition/model/Block";
+import {BlockView} from "../../definition/view/BlockView";
 
-export interface BlockViewProps {
-    children?: ReactNode
-    block?: Block
-    index: number
-    blockState: BLOCK_STATE
-    onEvent?: (e: FormEvent, details?: any) => void
-}
-
-export const BlockView : React.SFC<BlockViewProps> = ({children, block, index, blockState = BLOCK_STATE.DOING, onEvent}) => (
+export const DefaultBlockView : BlockView = ({children, block, index, blockState = BLOCK_STATE.DOING, onEvent}) => (
     <div className={`BlockView app-row ${blockState} ${block!.id}`}>
         <div className="BlockView-label app-col-xs-12">{index + 1}. {block!.label}</div>
         {blockState !== BLOCK_STATE.DOING ? null : (
@@ -43,7 +34,7 @@ export const BlockView : React.SFC<BlockViewProps> = ({children, block, index, b
     </div>
 );
 
-BlockView.defaultProps = {
+DefaultBlockView.defaultProps = {
     blockState: BLOCK_STATE.DOING,
     index: 0
 };
