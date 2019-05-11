@@ -19,8 +19,11 @@ export interface FieldWrapperProps {
     forceValidation: boolean;
     View: typeof FieldView;
 }
+export interface FieldWrapperState {
+    forceValidation: boolean;
+}
 
-export class FieldWrapperComponent extends React.Component<FieldWrapperProps & FieldProps> {
+export class FieldWrapperComponent extends React.Component<FieldWrapperProps & FieldProps, FieldWrapperState> {
 
     static defaultProps = {
         tabIndex: 1,
@@ -29,6 +32,7 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
 
     constructor(props: FieldWrapperProps & FieldProps) {
         super(props);
+        this.state = {forceValidation:false};
         this.getState = this.getState.bind(this);
         this.onFieldEvent = this.onFieldEvent.bind(this);
         this.onViewEvent = this.onViewEvent.bind(this);
@@ -45,12 +49,12 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
         let {field, fieldContext, forceValidation} = this.props;
         let contextValue = fieldContext[field.id];
         let validation = field.getValidation === undefined ? VALID : field.getValidation(fieldContext);
-        let fieldState = FieldWrapperComponent.getFieldState(validation, contextValue, forceValidation);
+        let fieldState = FieldWrapperComponent.getFieldState(validation, contextValue, forceValidation || this.state.forceValidation);
         return {fieldState, validation};
     }
 
     onFieldEvent(e: FormEvent, details?: any) {
-        if(e = FIELD_EVENT.SUMBIT_VALUE){
+        if(e == FIELD_EVENT.SUMBIT_VALUE){
             this.setState({forceValidation: true});
         }
         this.props.setFieldValue(this.props.field.id, details!);

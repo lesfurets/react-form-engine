@@ -185,8 +185,8 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             container.instance().onFieldEvent(FIELD_EVENT.SUMBIT_VALUE, testValue);
 
             // Then
-            let {forceValidation} = container.instance().getState();
-            expect(forceValidation).toBe(true);
+            let {fieldState} = container.instance().getState();
+            expect(fieldState).toBe(FIELD_STATE.VALID);
         });
 
     });
