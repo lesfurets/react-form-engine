@@ -1,9 +1,9 @@
 import {PredicateDefinitionBuilder} from "../definition/PredicateDefinitionBuilder";
 import {Predicate} from "../../data/Predicate";
 import {ValueDefinedPredicate} from "../../data/leaf/value/ValueDefinedPredicate";
-import {Field} from "../../../../definition/FormModel";
 import {ValueEqualToFieldPredicate} from "../../data/leaf/value/ValueEqualToFieldPredicate";
 import {StringPredicateBuilder} from "./StringPredicateBuilder";
+import {Field} from "../../../../definition/model/Field";
 
 export class ValuePredicateBuilder {
     parent: PredicateDefinitionBuilder;

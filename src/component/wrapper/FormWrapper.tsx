@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import {BLOCK_STATE, Form} from "../../definition/FormModel";
 import {BLOCK_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 import {FormView} from "../view/FormView";
@@ -8,6 +7,8 @@ import {BlockView} from "../view/BlockView";
 import {FieldView} from "../view/FieldView";
 import {FormEvent} from "../../definition/event/Event";
 import {BlockWrapper} from "./BlockWrapper";
+import {BLOCK_STATE} from "../../definition/model/Block";
+import {Form} from "../../definition/model/Form";
 
 export interface FormWrapperProps {
     form: Form,

@@ -3,8 +3,8 @@ import {shallow, mount} from "enzyme";
 import {BlockView} from "../../../src/component/view/BlockView";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {TestUtils} from "../../TestUtils";
-import {BLOCK_STATE} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {BLOCK_STATE} from "../../../src/definition/model/Block";
 
 TestUtils.init();
 

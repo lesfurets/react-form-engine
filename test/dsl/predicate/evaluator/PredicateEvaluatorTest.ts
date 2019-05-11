@@ -1,4 +1,3 @@
-import {Field, FieldContext} from "../../../../src/definition/FormModel";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
 import {PredicateEvaluator} from "../../../../src/dsl/predicate/evaluator/PredicateEvaluator";
 import {ReversedPredicate} from "../../../../src/dsl/predicate/data/operation/ReversedPredicate";
@@ -7,6 +6,8 @@ import {FieldPredicate} from "../../../../src/dsl/predicate/data/root/FieldPredi
 import {StringEqualToPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringEqualToPredicate";
 import {TruePredicate} from "../../../../src/dsl/predicate/data/root/TruePredicate";
 import {FalsePredicate} from "../../../../src/dsl/predicate/data/root/FalsePredicate";
+import {Field} from "../../../../src/definition/model/Field";
+import {FieldContext} from "../../../../src/definition/FieldContext";
 
 describe("DSL/Predicate/PredicateEvaluator", () => {
 

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {FieldValueAction} from "./constants";
 import {ComponentType} from "react";
-import {FieldContext} from "../definition/FormModel";
+import {FieldContext} from "../definition/FieldContext";
 
 export interface FieldContextProps {
     fieldContext: FieldContext

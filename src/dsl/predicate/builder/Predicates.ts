@@ -1,8 +1,8 @@
-import {Field} from "../../../definition/FormModel";
 import {FieldPredicateBuilder} from "./definition/FieldPredicateBuilder";
 import {SelfPredicateBuilder} from "./definition/SelfPredicateBuilder";
 import {TruePredicate} from "../data/root/TruePredicate";
 import {FalsePredicate} from "../data/root/FalsePredicate";
+import {Field} from "../../../definition/model/Field";
 
 
 export class Predicates {

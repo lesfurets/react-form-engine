@@ -4,9 +4,9 @@ import {BLOCK_EVENT} from "../../definition/event/events";
 import {Cta, CTA_TYPE} from "../utils/Cta";
 
 import "../../styles/components/view/block-view.less"
-import {Block, BLOCK_STATE} from "../../definition/FormModel";
 import {ReactNode} from "react";
 import {FormEvent} from "../../definition/event/Event";
+import {Block, BLOCK_STATE} from "../../definition/model/Block";
 
 export interface BlockViewProps {
     children?: ReactNode

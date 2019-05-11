@@ -1,7 +1,7 @@
 import {PredicateRootBuilder} from "./PredicateRootBuilder";
-import {Field} from "../../../../definition/FormModel";
 import {Predicate} from "../../data/Predicate";
 import {FieldPredicate} from "../../data/root/FieldPredicate";
+import {Field} from "../../../../definition/model/Field";
 
 export class FieldPredicateBuilder extends PredicateRootBuilder {
     field: Field;

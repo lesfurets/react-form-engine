@@ -13,8 +13,9 @@ import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster"
 import {TestUtils} from "../../TestUtils";
 import {BlockViewProps} from "../../../src/component/view/BlockView";
 import {FieldViewProps} from "../../../src/component/view/FieldView";
-import {Block, Field} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {Field} from "../../../src/definition/model/Field";
+import {Block} from "../../../src/definition/model/Block";
 
 TestUtils.init();
 

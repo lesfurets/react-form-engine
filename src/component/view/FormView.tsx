@@ -2,8 +2,8 @@ import * as React from "react";
 
 import "../../styles/components/view/form-view.less"
 import {ReactNode} from "react";
-import {Form} from "../../definition/FormModel";
 import {FormEvent} from "../../definition/event/Event";
+import {Form} from "../../definition/model/Form";
 
 export interface FormViewProps {
     children?: ReactNode

@@ -1,4 +1,3 @@
-import {Field, FieldContext} from "../../../../src/definition/FormModel";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
 import {PredicateEvaluator} from "../../../../src/dsl/predicate/evaluator/PredicateEvaluator";
 import {SelfPredicate} from "../../../../src/dsl/predicate/data/root/SelfPredicate";
@@ -9,6 +8,8 @@ import {StringContainPredicate} from "../../../../src/dsl/predicate/data/leaf/st
 import {StringEndWithPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringEndWithPredicate";
 import {StringStartWithPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringStartWithPredicate";
 import {StringRegExpPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringRegExpPredicate";
+import {Field} from "../../../../src/definition/model/Field";
+import {FieldContext} from "../../../../src/definition/FieldContext";
 
 describe("DSL/Predicate/StringPredicateEvaluator", () => {
 

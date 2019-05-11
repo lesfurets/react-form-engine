@@ -2,8 +2,8 @@ import * as React from "react";
 import {shallow} from "enzyme";
 import {NumberField} from "../../../src/component/field/NumberField";
 import {TestUtils} from "../../TestUtils";
-import {Field} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {Field} from "../../../src/definition/model/Field";
 
 TestUtils.init();
 

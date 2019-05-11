@@ -1,6 +1,6 @@
 import {combineReducers, Reducer} from "redux";
 import {FieldValueAction, SET_FIELD_VALUE} from "./constants";
-import {FieldContext} from "../definition/FormModel";
+import {FieldContext} from "../definition/FieldContext";
 
 export interface FieldState {
     fieldContext : FieldContext

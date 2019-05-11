@@ -1,10 +1,10 @@
 import {ReversedPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/ReversedPredicateBuilder";
 import {ValuePredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/ValuePredicateBuilder";
-import {Field} from "../../../../../src/definition/FormModel";
 import {FieldTypes} from "../../../../../src/definition/FieldTypes";
 import {FieldPredicateBuilder} from "../../../../../src/dsl/predicate/builder/definition/FieldPredicateBuilder";
 import {Predicate} from "../../../../../src/dsl/predicate/data/Predicate";
 import {FieldPredicate} from "../../../../../src/dsl/predicate/data/root/FieldPredicate";
+import {Field} from "../../../../../src/definition/model/Field";
 
 describe("DSL/Predicate/Builder/FieldPredicateBuilder", () => {
 

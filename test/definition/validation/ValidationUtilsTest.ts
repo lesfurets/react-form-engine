@@ -1,7 +1,7 @@
 import {VALID} from "../../../src/definition/validation/Validation";
 import {ValidationUtils} from "../../../src/definition/validation/ValidationUtils";
-import {Field} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {Field} from "../../../src/definition/model/Field";
 
 describe("FormEngine/Definition/Validation/ValidationUtils", () => {
 

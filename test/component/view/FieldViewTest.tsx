@@ -2,8 +2,8 @@ import * as React from "react";
 import {shallow} from "enzyme";
 import {FieldView} from "../../../src/component/view/FieldView";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
-import {FIELD_STATE} from "../../../src/definition/FormModel";
 import {TestUtils} from "../../TestUtils";
+import {FIELD_STATE} from "../../../src/definition/model/Field";
 
 TestUtils.init();
 

@@ -8,8 +8,8 @@ import {BlockView, BlockViewProps} from "./view/BlockView";
 import {FieldView, FieldViewProps} from "./view/FieldView";
 import {EMPTY_CALLBACK} from "../definition/props-utils";
 import {EVENT_MULTICASTER, EventCallBack} from "../definition/event/EventMulticaster";
-import {Form} from "../definition/FormModel";
 import FormWrapper from "./wrapper/FormWrapper";
+import {Form} from "../definition/model/Form";
 
 interface FormEngineProps {
     form: Form,

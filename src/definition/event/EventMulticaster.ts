@@ -1,5 +1,5 @@
 import {FormEvent} from "./Event";
-import {FormElement} from "../FormModel";
+import {FormElement} from "../model/FormElement";
 
 export type EventCallBack = (event: FormEvent, source: FormElement, details: any) => void;
 type EventFilter = (event: FormEvent, source: FormElement, details: any) => boolean;

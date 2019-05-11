@@ -1,5 +1,5 @@
-import {Field} from "../../../../../definition/FormModel";
 import {ValuePredicate} from "./ValuePredicate";
+import {Field} from "../../../../../definition/model/Field";
 
 export class ValueEqualToFieldPredicate extends ValuePredicate {
     field: Field;

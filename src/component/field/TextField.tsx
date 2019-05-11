@@ -1,8 +1,8 @@
 import * as React from "react";
-import {Field} from "../../definition/FormModel";
 import {ReactNode} from "react";
 import {FormEvent} from "../../definition/event/Event";
 import {FIELD_EVENT} from "../../definition/event/events";
+import {Field} from "../../definition/model/Field";
 
 export interface TextFieldProps {
     contextValue?: string,

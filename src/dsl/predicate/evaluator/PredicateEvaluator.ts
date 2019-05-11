@@ -1,4 +1,3 @@
-import {Field, FieldContext} from "../../../definition/FormModel";
 import {Predicate} from "../data/Predicate";
 import {ReversedPredicate} from "../data/operation/ReversedPredicate";
 import {SelfPredicate} from "../data/root/SelfPredicate";
@@ -10,6 +9,8 @@ import {StringPredicateEvaluator} from "./StringPredicateEvaluator";
 import {ValuePredicate} from "../data/leaf/value/ValuePredicate";
 import {ValuePredicateEvaluator} from "./ValuePredicateEvaluator";
 import {ValueUtils} from "../../../definition/ValueUtils";
+import {Field} from "../../../definition/model/Field";
+import {FieldContext} from "../../../definition/FieldContext";
 
 export class PredicateEvaluator {
 

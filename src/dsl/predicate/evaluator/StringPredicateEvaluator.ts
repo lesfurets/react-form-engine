@@ -1,4 +1,3 @@
-import {Field, FieldContext} from "../../../definition/FormModel";
 import {StringEqualToPredicate} from "../data/leaf/string/StringEqualToPredicate";
 import {StringCheckPredicate} from "../data/leaf/string/StringCheckPredicate";
 import {StringPredicate} from "../data/leaf/string/StringPredicate";
@@ -7,6 +6,8 @@ import {StringContainPredicate} from "../data/leaf/string/StringContainPredicate
 import {StringStartWithPredicate} from "../data/leaf/string/StringStartWithPredicate";
 import {StringEndWithPredicate} from "../data/leaf/string/StringEndWithPredicate";
 import {StringRegExpPredicate} from "../data/leaf/string/StringRegExpPredicate";
+import {Field} from "../../../definition/model/Field";
+import {FieldContext} from "../../../definition/FieldContext";
 
 export class StringPredicateEvaluator {
 

@@ -2,9 +2,9 @@ import * as React from "react";
 import {shallow, ShallowWrapper} from "enzyme";
 import {TextField, TextFieldProps, TextFieldState} from "../../../src/component/field/TextField";
 import {TestUtils} from "../../TestUtils";
-import {Field} from "../../../src/definition/FormModel";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
+import {Field} from "../../../src/definition/model/Field";
 
 TestUtils.init();
 

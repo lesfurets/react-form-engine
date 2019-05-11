@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import "../../styles/components/view/field-view.less";
-import {Field, FIELD_STATE} from "../../definition/FormModel";
 import {FormEvent} from "../../definition/event/Event";
 import {ReactNode} from "react";
+import {Field, FIELD_STATE} from "../../definition/model/Field";
 
 export interface FieldViewProps {
     field: Field

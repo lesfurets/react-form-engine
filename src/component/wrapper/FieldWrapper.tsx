@@ -4,7 +4,6 @@ import {FieldContextProps, FieldDispatchProps, FieldProps} from "../../redux/fie
 import {VALID, Validation} from "../../definition/validation/Validation";
 import {FIELD_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
-import {Field, FIELD_STATE, FieldContext} from "../../definition/FormModel";
 import {FieldView} from "../view/FieldView";
 import {FormEvent} from "../../definition/event/Event";
 import {connect} from "react-redux";
@@ -12,6 +11,8 @@ import {Dispatch} from "redux";
 import {FieldValueAction} from "../../redux/constants";
 import {setFieldValueAction} from "../../redux/actions";
 import {FieldState} from "../../redux/reducers";
+import {Field, FIELD_STATE} from "../../definition/model/Field";
+import {FieldContext} from "../../definition/FieldContext";
 
 export interface FieldWrapperProps {
     field: Field;

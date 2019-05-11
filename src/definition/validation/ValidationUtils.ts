@@ -1,5 +1,6 @@
 import {VALID, Validation} from "./Validation";
-import {Field, FieldContext} from "../FormModel";
+import {Field} from "../model/Field";
+import {FieldContext} from "../FieldContext";
 
 export class ValidationUtils {
 

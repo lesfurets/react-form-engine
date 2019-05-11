@@ -1,7 +1,7 @@
 import {VisibilityEvaluator} from "./visibility/VisibilityEvaluator";
 import {ValidationEvaluator} from "./validation/ValidationEvaluator";
 import {ModelUtils} from "../definition/ModelUtils";
-import {Field} from "../definition/FormModel";
+import {Field} from "../definition/model/Field";
 
 export class ModelExtender {
     // TODO replace model :any by FormModel
