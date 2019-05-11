@@ -6,12 +6,12 @@ import {Provider} from "react-redux";
 import FormEngine from "../../src/component/FormEngine";
 import FormWrapper from "../../src/component/wrapper/FormWrapper";
 import {FieldTypes} from "../../src/definition/FieldTypes";
-import {FormViewProps} from "../../src/component/view/FormView";
 import {EventCallBack} from "../../src/definition/event/EventMulticaster";
 import {TestUtils} from "../TestUtils";
 import {Form} from "../../src/definition/model/Form";
 import {FieldViewProps} from "../../src/definition/view/FieldView";
 import {BlockViewProps} from "../../src/definition/view/BlockView";
+import {FormViewProps} from "../../src/definition/view/FormView";
 
 TestUtils.init();
 

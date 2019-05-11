@@ -4,12 +4,12 @@ import {shallow} from "enzyme";
 import {BlockWrapper} from "../../../src/component/wrapper/BlockWrapper";
 import FormWrapper from "../../../src/component/wrapper/FormWrapper";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
-import {FormViewProps} from "../../../src/component/view/FormView";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {TestUtils} from "../../TestUtils";
 import {FieldViewProps} from "../../../src/definition/view/FieldView";
 import {BlockViewProps} from "../../../src/definition/view/BlockView";
+import {FormViewProps} from "../../../src/definition/view/FormView";
 
 TestUtils.init();
 

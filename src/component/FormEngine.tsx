@@ -3,7 +3,7 @@ import {createStore} from "redux";
 import {Provider} from 'react-redux'
 import reducer from '../redux/reducers';
 import ResponsiveContainer from "react-responsive-widget";
-import {FormView, FormViewProps} from "./view/FormView";
+import {DefaultFormView} from "./view/DefaultFormView";
 import {DefaultBlockView} from "./view/DefaultBlockView";
 import {DefaultFieldView} from "./view/DefaultFieldView";
 import {EMPTY_CALLBACK} from "../definition/props-utils";
@@ -12,6 +12,7 @@ import FormWrapper from "./wrapper/FormWrapper";
 import {Form} from "../definition/model/Form";
 import {FieldViewProps} from "../definition/view/FieldView";
 import {BlockViewProps} from "../definition/view/BlockView";
+import {FormViewProps} from "../definition/view/FormView";
 
 interface FormEngineProps {
     form: Form,
@@ -26,7 +27,7 @@ export default class FormEngine extends React.Component<FormEngineProps> {
 
     static defaultProps = {
         onEvent: EMPTY_CALLBACK,
-        FormView: FormView,
+        FormView: DefaultFormView,
         BlockView: DefaultBlockView,
         FieldView: DefaultFieldView,
     };

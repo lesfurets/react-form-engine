@@ -1,12 +1,12 @@
 import * as React from "react";
 import {shallow} from "enzyme";
-import {FormView} from "../../../src/component/view/FormView";
+import {DefaultFormView} from "../../../src/component/view/DefaultFormView";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {TestUtils} from "../../TestUtils";
 
 TestUtils.init();
 
-describe("FormEngine/View/FormView", () => {
+describe("FormEngine/View/DefaultFormView", () => {
 
     let formModel = {
         id: "form",
@@ -20,9 +20,9 @@ describe("FormEngine/View/FormView", () => {
     describe("Content", () => {
 
         it("Should display content", () => {
-            let container = shallow(<FormView  form={formModel}/>);
+            let container = shallow(<DefaultFormView form={formModel}/>);
 
-            expect(container.find(".FormView").length).toBe(1);
+            expect(container.find(".DefaultFormView").length).toBe(1);
         });
 
     });
