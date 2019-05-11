@@ -5,11 +5,11 @@ import {BlockWrapper} from "../../../src/component/wrapper/BlockWrapper";
 import FormWrapper from "../../../src/component/wrapper/FormWrapper";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 import {FormViewProps} from "../../../src/component/view/FormView";
-import {FieldViewProps} from "../../../src/component/view/FieldView";
 import {BlockViewProps} from "../../../src/component/view/BlockView";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {TestUtils} from "../../TestUtils";
+import {FieldViewProps} from "../../../src/definition/view/FieldView";
 
 TestUtils.init();
 

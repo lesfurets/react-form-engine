@@ -1,20 +1,10 @@
 import * as React from "react";
 
 import "../../styles/components/view/field-view.less";
-import {FormEvent} from "../../definition/event/Event";
-import {ReactNode} from "react";
-import {Field, FIELD_STATE} from "../../definition/model/Field";
+import {FIELD_STATE} from "../../definition/model/Field";
+import {FieldView} from "../../definition/view/FieldView";
 
-export interface FieldViewProps {
-    field: Field
-    fieldState: string
-    errorMessage: string
-    isVisible?: boolean
-    onEvent?: (e: FormEvent, details: any) => void
-    children?: ReactNode
-}
-
-export const FieldView : React.SFC<FieldViewProps> = ({field, fieldState, errorMessage ,children, isVisible = true}) => {
+export const DefaultFieldView : FieldView = ({field, fieldState, errorMessage ,children, isVisible = true}) => {
     let hasLabel = field.label != null;
     return isVisible ? (
         <div className={`FieldView ${fieldState} ${field.id} ${field.type}`}>
@@ -26,6 +16,6 @@ export const FieldView : React.SFC<FieldViewProps> = ({field, fieldState, errorM
     ): null;
 };
 
-FieldView.defaultProps = {
+DefaultFieldView.defaultProps = {
     isVisible: true
 };

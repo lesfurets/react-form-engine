@@ -5,11 +5,12 @@ import reducer from '../redux/reducers';
 import ResponsiveContainer from "react-responsive-widget";
 import {FormView, FormViewProps} from "./view/FormView";
 import {BlockView, BlockViewProps} from "./view/BlockView";
-import {FieldView, FieldViewProps} from "./view/FieldView";
+import {DefaultFieldView} from "./view/DefaultFieldView";
 import {EMPTY_CALLBACK} from "../definition/props-utils";
 import {EVENT_MULTICASTER, EventCallBack} from "../definition/event/EventMulticaster";
 import FormWrapper from "./wrapper/FormWrapper";
 import {Form} from "../definition/model/Form";
+import {FieldViewProps} from "../definition/view/FieldView";
 
 interface FormEngineProps {
     form: Form,
@@ -26,7 +27,7 @@ export default class FormEngine extends React.Component<FormEngineProps> {
         onEvent: EMPTY_CALLBACK,
         FormView: FormView,
         BlockView: BlockView,
-        FieldView: FieldView,
+        FieldView: DefaultFieldView,
     };
 
     componentWillMount() {

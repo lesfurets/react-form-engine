@@ -6,8 +6,8 @@ import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster"
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {TestUtils} from "../../TestUtils";
 import {mount, shallow} from "enzyme";
-import {FieldViewProps} from "../../../src/component/view/FieldView";
 import {FIELD_STATE} from "../../../src/definition/model/Field";
+import {FieldViewProps} from "../../../src/definition/view/FieldView";
 
 TestUtils.init();
 

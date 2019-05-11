@@ -7,11 +7,11 @@ import FormEngine from "../../src/component/FormEngine";
 import FormWrapper from "../../src/component/wrapper/FormWrapper";
 import {BlockViewProps} from "../../src/component/view/BlockView";
 import {FieldTypes} from "../../src/definition/FieldTypes";
-import {FieldViewProps} from "../../src/component/view/FieldView";
 import {FormViewProps} from "../../src/component/view/FormView";
 import {EventCallBack} from "../../src/definition/event/EventMulticaster";
 import {TestUtils} from "../TestUtils";
 import {Form} from "../../src/definition/model/Form";
+import {FieldViewProps} from "../../src/definition/view/FieldView";
 
 TestUtils.init();
 
