@@ -5,6 +5,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from '@material-ui/core/IconButton';
 import Send from '@material-ui/icons/Send';
 import {Controlled as CodeMirror} from 'react-codemirror2'
+import 'codemirror/mode/xml/xml.js';
 import "codemirror/mode/javascript/javascript";
 
 import "../../styles/json-editor.less";
@@ -20,7 +21,7 @@ class JsonEditor extends React.Component {
     }
 
     onChange(editor, data, value) {
-        this.setState({form: value});
+        this.setState({model: value});
     }
 
     sendModel() {

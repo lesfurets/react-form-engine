@@ -26,7 +26,7 @@
     "jquery-ui-bundle": "1.12.1-migrate",
     "prop-types": "15.7.2",
     "react": "16.8.6",
-    "react-codemirror2": "^6.0.0",
+    "react-codemirror2": "6.0.0",
     "react-dom": "16.8.6",
     "react-redux": "5.1.1",
     "react-responsive-widget": "1.0.2",
