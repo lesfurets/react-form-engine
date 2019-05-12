@@ -1,17 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from '@material-ui/core/IconButton';
 import Send from '@material-ui/icons/Send';
 import {Controlled as CodeMirror} from 'react-codemirror2'
-import 'codemirror/mode/xml/xml.js';
 import "codemirror/mode/javascript/javascript";
 
 import "../../styles/json-editor.less";
+import {Form} from "../../../src/definition/model/Form";
 
-class JsonEditor extends React.Component {
-    constructor(props) {
+interface JsonEditorProps {
+    form: Form,
+    onChange: (form: Form) => void
+}
+
+interface JsonEditorState {
+    model: string,
+}
+
+
+class JsonEditor extends React.Component<JsonEditorProps, JsonEditorState> {
+    constructor(props: JsonEditorProps) {
         super(props);
         this.state = {
             model: JSON.stringify(props.form, null, 4)
@@ -20,7 +29,7 @@ class JsonEditor extends React.Component {
         this.sendModel = this.sendModel.bind(this);
     }
 
-    onChange(editor, data, value) {
+    onChange(editor: any, data: any, value: string) {
         this.setState({model: value});
     }
 
@@ -41,7 +50,7 @@ class JsonEditor extends React.Component {
                     value={this.state.model}
                     className={"JsonEditor-mirror"}
                     options={{
-                        mode: 'xml',
+                        mode: 'javascript',
                         theme: 'material',
                         lineNumbers: true
                     }}
@@ -51,9 +60,5 @@ class JsonEditor extends React.Component {
         );
     }
 }
-
-JsonEditor.propTypes = {
-    form: PropTypes.array.isRequired
-};
 
 export default JsonEditor;
