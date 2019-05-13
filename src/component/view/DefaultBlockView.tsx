@@ -1,14 +1,14 @@
 import * as React from "react";
 
 import {BLOCK_EVENT} from "../../definition/event/events";
-import {Cta, CTA_TYPE} from "../utils/Cta";
+import {Cta, CTA_TYPE} from "./elements/Cta";
 
 import "../../styles/components/view/block-view.less"
 import {BLOCK_STATE} from "../../definition/model/Block";
 import {BlockView} from "../../definition/view/BlockView";
 
 export const DefaultBlockView : BlockView = ({children, block, index, blockState = BLOCK_STATE.DOING, onEvent}) => (
-    <div className={`BlockView app-row ${blockState} ${block!.id}`}>
+    <div className={`DefaultBlockView app-row ${blockState} ${block!.id}`}>
         <div className="DefaultBlockView-label app-col-xs-12">{index + 1}. {block!.label}</div>
         {blockState !== BLOCK_STATE.DOING ? null : (
             <div className="app-col-xs-12 app-col-sm-8">

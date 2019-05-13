@@ -1,6 +1,6 @@
 import * as React from "react";
 import {shallow} from "enzyme";
-import {Cta, CTA_TYPE} from "../../../src/component/utils/Cta";
+import {Cta, CTA_TYPE} from "../../../src/component/view/elements/Cta";
 import {TestUtils} from "../../TestUtils";
 
 TestUtils.init();
