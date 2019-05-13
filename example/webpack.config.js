@@ -10,7 +10,7 @@ module.exports = (env, argv) => ({
         test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'awesome-typescript-loader'
+          loader: 'ts-loader'
         }
       },
       {
