@@ -4,7 +4,7 @@ import "../../styles/components/view/form-view.less"
 import {FormView, FormViewProps} from "../../definition/view/FormView";
 
 export const DefaultFormView : FormView = (props : FormViewProps) => (
-    <div className="FormView">
+    <div className="DefaultFormView">
         {props.children}
     </div>
 );
