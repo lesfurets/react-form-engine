@@ -1,8 +1,8 @@
 import {setFieldValueAction} from "./actions";
-import {connect} from "react-redux";
+import {connect, ConnectedComponentClass, InferableComponentEnhancerWithProps, Matching} from "react-redux";
 import {Dispatch} from "redux";
 import {FieldValueAction} from "./constants";
-import {ComponentType} from "react";
+import {ComponentType, ElementType} from "react";
 import {FieldContext} from "../definition/FieldContext";
 
 export interface FieldContextProps {
@@ -29,6 +29,5 @@ export const mapDispatchToProps = <P>(dispatch: Dispatch<FieldValueAction>, ownP
 
 export type FieldProps = FieldContextProps & FieldDispatchProps
 
-// export function fieldConnect<P extends FieldProps, C extends ComponentType<P>>(element: C) {
-//     return connect(mapStateToProps, mapDispatchToProps)(element)
-// }
+export const fieldConnect: (element: ComponentType) => ConnectedComponentClass<ComponentType, any>  =
+    (element: ComponentType) => connect(mapStateToProps, mapDispatchToProps)(element);

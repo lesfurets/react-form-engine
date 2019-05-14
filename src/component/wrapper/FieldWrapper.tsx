@@ -1,6 +1,6 @@
 import * as React from "react";
 import {FieldInjector} from "../../definition/FieldInjector";
-import {FieldContextProps, FieldDispatchProps, FieldProps} from "../../redux/fieldConnect";
+import {fieldConnect, FieldContextProps, FieldDispatchProps, FieldProps} from "../../redux/fieldConnect";
 import {VALID, Validation} from "../../definition/validation/Validation";
 import {FIELD_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
@@ -89,18 +89,4 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
     }
 }
 
-const mapStateToProps = (state: FieldState, ownProps: FieldWrapperProps) => {
-    return {
-        ...ownProps,
-        fieldContext: state.fieldContext,
-    }
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<FieldValueAction>, ownProps: FieldWrapperProps) => {
-    return {
-        ... ownProps,
-        setFieldValue: (id: string, value: string) => dispatch(setFieldValueAction(id, value)),
-    }
-};
-
-export const FieldWrapper = connect(mapStateToProps, mapDispatchToProps)(FieldWrapperComponent);
+export const FieldWrapper = fieldConnect(FieldWrapperComponent);

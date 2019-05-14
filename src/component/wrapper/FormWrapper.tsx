@@ -40,10 +40,10 @@ export default class FormWrapper extends React.Component<FormWrapperProps, FormW
     onBlockEvent(event: FormEvent, block: Block) {
         switch (event) {
             case BLOCK_EVENT.VALIDATED:
-                this.setState({currentIndex: block.index + 1});
+                this.setState({currentIndex: block.index! + 1});
                 break;
             case BLOCK_EVENT.PREVIOUS:
-                this.setState({currentIndex: block.index - 1});
+                this.setState({currentIndex: block.index! - 1});
                 break;
         }
     }

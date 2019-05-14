@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {FieldValueAction} from "../../redux/constants";
 import {setFieldValueAction} from "../../redux/actions";
-import {FieldProps} from "../../redux/fieldConnect";
+import {fieldConnect, FieldProps} from "../../redux/fieldConnect";
 import {FieldState} from "../../redux/reducers";
 import {Block, BLOCK_STATE} from "../../definition/model/Block";
 import {FieldView} from "../../definition/view/FieldView";
@@ -66,7 +66,7 @@ export class BlockWrapperComponent extends React.Component<BlockWrapperProps & F
         let {block, blockState, View, FieldView} = this.props;
         return (
             <View block={block}
-                  index={block.index}
+                  index={block.index!}
                   blockState={blockState}
                   onEvent={this.onEvent}>
                 {this.props.block.fields.map((field, index) =>
@@ -80,19 +80,4 @@ export class BlockWrapperComponent extends React.Component<BlockWrapperProps & F
     }
 }
 
-
-const mapStateToProps = (state: FieldState, ownProps: BlockWrapperProps) => {
-    return {
-        ...ownProps,
-        fieldContext: state.fieldContext,
-    }
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<FieldValueAction>, ownProps: BlockWrapperProps) => {
-    return {
-        ... ownProps,
-        setFieldValue: (id: string, value: string) => dispatch(setFieldValueAction(id, value)),
-    }
-};
-
-export const BlockWrapper = connect(mapStateToProps, mapDispatchToProps)(BlockWrapperComponent);
+export const BlockWrapper = fieldConnect(BlockWrapperComponent);
