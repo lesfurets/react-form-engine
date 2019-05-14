@@ -16,6 +16,7 @@ export class Field implements FormElement {
     // TODO rename 'isValid' ?
     getValidation?: (state: FieldContext) => Validation;
     isVisible?: (state: FieldContext) => boolean;
+    [key: string]: any;
 }
 
 export const FIELD_STATE = {

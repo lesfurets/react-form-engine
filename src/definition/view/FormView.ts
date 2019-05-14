@@ -6,7 +6,7 @@ import {FormEvent} from "../event/Event";
 export interface FormViewProps {
     children?: ReactNode
     form: Form
-    onEvent?: (e: FormEvent, details: any) => void
+    onEvent?: (e: FormEvent, details?: any) => void
 }
 
 export type FormView = React.FunctionComponent<FormViewProps>;

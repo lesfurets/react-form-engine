@@ -8,7 +8,7 @@ export interface FieldViewProps {
     fieldState: string
     errorMessage: string
     isVisible?: boolean
-    onEvent?: (e: FormEvent, details: any) => void
+    onEvent?: (e: FormEvent, details?: any) => void
     children?: ReactNode
 }
 
