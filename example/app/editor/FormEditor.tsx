@@ -5,8 +5,7 @@ import {Provider} from 'react-redux'
 
 import {BLOCK_EDITOR_EVENT, BlockEditorView} from "../view/BlockEditorView";
 import {FORM_EDITOR_EVENT, FormEditorView} from "../view/FormEditorView";
-import {FIELD_EDITOR_EVENT, FieldEditorView} from "../view/FieldEditorView";
-import {EMPTY_CALLBACK} from "../../../src/definition/props-utils";
+import {FieldEditorView} from "../view/FieldEditorView";
 
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {VisibilityBuilder} from "../../../src/dsl/visibility/VisibilityBuilder";
@@ -16,17 +15,14 @@ import FormWrapper from "../../../src/component/wrapper/FormWrapper";
 
 import "../../styles/json-editor.less";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
-import {setFieldValueAction} from "../../../src/redux/actions";
 import {ModelUtils} from "../../../src/definition/ModelUtils";
-import * as ModelUpdater from "./ModelUpdater";
 import {Predicates} from "../../../src/dsl/predicate/builder/Predicates";
 import {Form} from "../../../src/definition/model/Form";
 import {FormEvent} from "../../../src/definition/event/Event";
 import {FormElement} from "../../../src/definition/model/FormElement";
-import {FieldContext} from "../../../src/definition/FieldContext";
 import {Field} from "../../../src/definition/model/Field";
 import {Block} from "../../../src/definition/model/Block";
-import {VisibilityRule} from "../../../src/dsl/visibility/VisibilityRule";
+import {remove} from "lodash";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -88,28 +84,28 @@ export class FormEditor extends React.Component<FormEditorProps, FormEditorState
         let {form} = this.props;
         console.log(event, element, details);
         switch (event) {
-            // case FORM_EDITOR_EVENT.NEW_BLOCK:
-            //     form.push(generateNewBlock());
-            //     break;
+            case FORM_EDITOR_EVENT.NEW_BLOCK:
+                form.blocks.push(generateNewBlock());
+                break;
             // case FORM_EDITOR_EVENT.MOVE_BLOCK:
             //     let blocks = remove(form, block => block.id === details.id);
             //     form.splice(details.index, 0, blocks[0]);
             //     break;
-            // case BLOCK_EDITOR_EVENT.DELETE:
-            //     remove(form, block => block.id === element.id);
-            //     break;
-            // case BLOCK_EDITOR_EVENT.EDIT_LABEL:
-            //     form.filter(block => block.id === element.id)
-            //         .forEach(block => block.label = details);
-            //     break;
+            case BLOCK_EDITOR_EVENT.DELETE:
+                remove(form.blocks, (block : Block) => block.id === element.id);
+                break;
+            case BLOCK_EDITOR_EVENT.EDIT_LABEL:
+                form.blocks.filter((block : Block) => block.id === element.id)
+                    .forEach((block : Block) => block.label = details);
+                break;
             // case BLOCK_EDITOR_EVENT.MOVE_FIELD:
             //     let blockSrc = form.find(block => block.id === details.blockSrc);
             //     let fields = remove(blockSrc.fields, field => field.id === details.id);
             //     form.find(block => block.id === details.blockDst).fields.splice(details.index, 0, fields[0]);
             //     break;
-            // case BLOCK_EDITOR_EVENT.NEW_FIELD:
-            //     form.find(block => block.id === element.id).fields.push(generateNewField(form));
-            //     break;
+            case BLOCK_EDITOR_EVENT.NEW_FIELD:
+                form.blocks.find((block: Block) => block.id === element.id)!.fields.push(generateNewField());
+                break;
             // case FIELD_EDITOR_EVENT.EDIT_PROPERTY:
             //     ModelUpdater.updateFieldProperty(form, element, field => field[details.key] = details.value);
             //     break;
