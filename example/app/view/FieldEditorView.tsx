@@ -55,7 +55,7 @@ export const FieldEditorView:FieldView = ({field, onEvent}) => {
                                                            onChange={updateProperty("visibilityRule")}
                                                            onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}
                         {hasValidation ? <ValidationEditor validationRule={field.validationRule!}
-                                                           onChange={updateProperty("visibilityRule")}
+                                                           onChange={updateProperty("validationRule")}
                                                            onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VALIDATION)}/> : null}
                     </div>
                 </CardContent>

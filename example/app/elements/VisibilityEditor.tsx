@@ -1,6 +1,7 @@
 import * as React from "react";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+
 import {VisibilityRule} from "../../../src/dsl/visibility/VisibilityRule";
 import {PredicateEditor} from "./predicate/PredicateEditor";
 import Clear from "@material-ui/icons/Clear";

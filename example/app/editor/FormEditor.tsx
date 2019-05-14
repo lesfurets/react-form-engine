@@ -24,6 +24,7 @@ import {remove} from "lodash";
 
 import "../../styles/json-editor.less";
 import {ModelUpdater} from "./ModelUpdater";
+import {setFieldValueAction} from "../../../src/redux/actions";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -68,10 +69,10 @@ export class FormEditor extends React.Component<FormEditorProps, FormEditorState
         super(props);
         this.state = {store: createStore(reducer)};
         this.onEvent = this.onEvent.bind(this);
-        // this.state.store.dispatch(setFieldValueAction(FormEditor.MODEL, props.form));
+        FormEditor.MODEL = props.form;
     }
 
-    static MODEL = "MODEL";
+    static MODEL?:Form = undefined;
 
     componentWillMount() {
         EVENT_MULTICASTER.subscribe(this.onEvent);

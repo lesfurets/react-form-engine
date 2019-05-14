@@ -1,12 +1,21 @@
 import * as React from "react";
-// import TextField from "@material-ui/core/TextField";
-// import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
 // import {ValueDetailEditor} from "./ValueDetailEditor";
 // import {FieldSelector} from "./FieldSelector";
 // import {fieldConnect} from "../../../../src/redux/fieldConnect";
 // import {ModelUtils} from "../../../../src/definition/ModelUtils";
-// import {FormEditor} from "../../editor/FormEditor";
+import {FormEditor} from "../../editor/FormEditor";
 import {Predicate} from "../../../../src/dsl/predicate/data/Predicate";
+import {SelfPredicate} from "../../../../src/dsl/predicate/data/root/SelfPredicate";
+import {FieldPredicate} from "../../../../src/dsl/predicate/data/root/FieldPredicate";
+import {ModelUtils} from "../../../../src/definition/ModelUtils";
+import {FieldSelector} from "../FieldSelector";
+import {Field} from "../../../../src/definition/model/Field";
+import {ReversedPredicate} from "../../../../src/dsl/predicate/data/operation/ReversedPredicate";
+import {ReversedPredicateEditor} from "./definition/ReversedPredicateEditor";
+import {FieldPredicateEditor} from "./definition/FieldPredicateEditor";
+import {SelfPredicateEditor} from "./definition/SelfPredicateEditor";
 // import {ValueDefinedPredicate} from "../../../../src/dsl/predicate/data/leaf/value/ValueDefinedPredicate";
 // import {StringEqualToPredicate} from "../../../../src/dsl/predicate/data/leaf/string/StringEqualToPredicate";
 // import {ValueEqualToFieldPredicate} from "../../../../src/dsl/predicate/data/leaf/value/ValueEqualToFieldPredicate";
@@ -16,10 +25,10 @@ import {Predicate} from "../../../../src/dsl/predicate/data/Predicate";
 // let NOT = "not";
 // let DETAILS = "details";
 //
-// let TARGET = {
-//     SELF: "self",
-//     OTHER: "other",
-// };
+let TARGET = {
+    SELF: "self",
+    OTHER: "other",
+};
 //
 // export const FieldPredicateTypes = {
 //     defined: "defined",
@@ -28,7 +37,7 @@ import {Predicate} from "../../../../src/dsl/predicate/data/Predicate";
 // };
 
 
-interface PredicateEditorComponentProps {
+export interface PredicateEditorComponentProps {
     predicate: Predicate,
     onChange: (predicate: Predicate) => void
 };
@@ -60,51 +69,48 @@ interface PredicateEditorComponentProps {
 //
 // } ;
 
+const getNewPredicate = (isSelf: boolean, field: Field, childPredicate: Predicate) =>
+    isSelf ? new SelfPredicate(childPredicate) :
+        new FieldPredicate(field, childPredicate);
+
 export const PredicateEditor: React.FunctionComponent<PredicateEditorComponentProps> = ({predicate, onChange}) => {
-    // let Details = TypeDetails[predicate.type].Component;
-    // let fieldList = ModelUtils.getFieldList(fieldContext[FormEditor.MODEL]);
+    let fieldList = ModelUtils.getFieldList(FormEditor.MODEL);
+    const currentPredicate = predicate as SelfPredicate | FieldPredicate;
+    const isSelfPredicate = predicate instanceof SelfPredicate;
 
-    // let updatePredicate = (key, value) => {
-    //     let model = this.props.predicate;
-    //     model[key] = value;
-    //     if (key === "type") {
-    //         model.details = TypeDetails[value].defaultDetails(this.props.fieldContext[FormEditor.MODEL]);
-    //     }
-    //     this.props.onChange(/*FieldPredicate2.load(model)*/);
-    // };
-
-    // return (
-    //     <span className="PredicateEditor">
-    //             if&nbsp;
-    //         <TextField select
-    //                    value={predicate[FIELD_ID] === null ? TARGET.SELF : TARGET.OTHER}
-    //                    onChange={(event) => this.updatePredicate(FIELD_ID, event.target.value === TARGET.SELF ? null : fieldList[0].id)}
-    //                    margin="normal">
-    //                 <MenuItem value={TARGET.SELF}>self</MenuItem>
-    //                 <MenuItem value={TARGET.OTHER}>the field</MenuItem>
-    //             </TextField>
-    //         {predicate[FIELD_ID] === null ? null :
-    //             <FieldSelector field={predicate.fieldId}
-    //                            fieldList={fieldList}
-    //                            onChange={(fieldId) => this.updatePredicate(FIELD_ID, fieldId)}/>}
-    //         <TextField select
-    //                    value={predicate.not.toString()}
-    //                    onChange={(event) => this.updatePredicate(NOT, event.target.value === 'true')}
-    //                    margin="normal">
-    //                 <MenuItem value={"false"}>is</MenuItem>
-    //                 <MenuItem value={"true"}>is not</MenuItem>
-    //             </TextField>
-    //             <TextField select
-    //                        value={predicate.type}
-    //                        onChange={(event) => this.updatePredicate(TYPE, event.target.value)}
-    //                        margin="normal">
-    //                 {Object.keys(FieldPredicateTypes)
-    //                     .map(type => <MenuItem key={type} value={type}>{TypeDetails[type].label}</MenuItem>)}
-    //             </TextField>
-    //         {Details ? <Details details={predicate.details}
-    //                             fieldList={fieldList}
-    //                             onChange={(details) => this.updatePredicate(DETAILS, details)}/> : null}
-    //         </span>
-    // );
-    return <div>Predicate Editor</div>
+    return (
+        <span className="PredicateEditor">
+            if&nbsp;
+            <TextField select
+                       value={isSelfPredicate ? TARGET.SELF : TARGET.OTHER}
+                       onChange={(event) => onChange(getNewPredicate(event.target.value === TARGET.SELF, fieldList[0], currentPredicate.predicate))}
+                       margin="normal">
+                 <MenuItem value={TARGET.SELF}>self</MenuItem>
+                 <MenuItem value={TARGET.OTHER}>the field</MenuItem>
+             </TextField>
+            {isSelfPredicate ?
+                <SelfPredicateEditor predicate={predicate as SelfPredicate} onChange={onChange}/> :
+                <FieldPredicateEditor predicate={predicate as FieldPredicate} onChange={onChange}/>}
+        </span>
+    );
 };
+
+
+/*
+{predicate instanceof FieldPredicate ? <FieldSelector field={predicate.field}
+                                                                  fieldList={fieldList}
+                                                                  onChange={(field) => onChange(getPredicate(false, field, currentPredicate.predicate))}/> : null}
+            <ReversedPredicateEditor predicate={currentPredicate.predicate}
+                                     onChange={(childPredicate) => onChange(getPredicateWithChild(predicate, childPredicate))}/>
+ */
+
+//             <TextField select
+//                        value={predicate.type}
+//                        onChange={(event) => this.updatePredicate(TYPE, event.target.value)}
+//                        margin="normal">
+//                 {Object.keys(FieldPredicateTypes)
+//                     .map(type => <MenuItem key={type} value={type}>{TypeDetails[type].label}</MenuItem>)}
+//             </TextField>
+//         {Details ? <Details details={predicate.details}
+//                             fieldList={fieldList}
+//                             onChange={(details) => this.updatePredicate(DETAILS, details)}/> : null}

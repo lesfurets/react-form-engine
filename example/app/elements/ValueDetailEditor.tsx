@@ -10,6 +10,3 @@ export const ValueDetailEditor: React.FunctionComponent<ValueDetailEditorProps> 
     <TextField value={details || ""}
                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(event.target.value)}
                       margin="normal"/>);
-
-ValueDetailEditor.propTypes = {
-};
