@@ -1,19 +1,34 @@
-import React from "react";
-import PropTypes from "prop-types";
-import * as ReactDOM from "react-dom";
+import * as React from "react";
 import Create from "@material-ui/icons/Create";
 import Button from "@material-ui/core/Button";
-import $ from "jquery";
-import 'jquery-ui-bundle';
+// import 'jquery-ui-bundle';
+
+import {FormView} from "../../../src/definition/view/FormView";
+import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
 
 import "../../styles/view/form-editor-view.less"
 
 export const FORM_EDITOR_EVENT = {
-    NEW_BLOCK: "NEW_BLOCK",
-    MOVE_BLOCK: "MOVE_BLOCK"
+    NEW_BLOCK: new FormEvent("NEW_BLOCK",EventTypes.Form),
+    MOVE_BLOCK: new FormEvent("MOVE_BLOCK",EventTypes.Form),
 };
-export class FormEditorView extends React.Component {
-    constructor(props){
+
+export const FormEditorView: FormView = ({children, onEvent}) => {
+    return (
+        <div className="FormEditorView">
+            {children}
+            <Button className="FormEditorView-add"
+                    variant="contained"
+                    onClick={() => onEvent!(FORM_EDITOR_EVENT.NEW_BLOCK)}
+                    color="primary">
+                <Create/> New block
+            </Button>
+        </div>
+    );
+};
+
+/*
+constructor(props){
         super(props);
         this.onDrop = this.onDrop.bind(this);
         this.onDrag = this.onDrag.bind(this);
@@ -47,23 +62,4 @@ export class FormEditorView extends React.Component {
     onStop(details, ui) {
         ui.item.removeClass("dragged");
     }
-
-    render() {
-        let {children, onEvent} = this.props;
-        return (
-            <div className="FormEditorView">
-                {children}
-                <Button className="FormEditorView-add"
-                        variant="contained"
-                        onClick={() => onEvent(FORM_EDITOR_EVENT.NEW_BLOCK)}
-                        color="primary">
-                    <Create/> New block
-                </Button>
-            </div>
-        );
-    }
-}
-
-FormEditorView.propTypes = {
-    onEvent: PropTypes.func
-};
+ */

@@ -1,15 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import TextField from "@material-ui/core/TextField";
 import {PredicateEditor} from "./predicate/PredicateEditor";
 import Clear from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
-import {ValidationRule} from "../../../src/definition/validation/ValidationRule";
+
+import {Validation} from "../../../src/definition/validation/Validation";
+import {ValidationRule} from "../../../src/dsl/validation/ValidationRule";
 
 import "../../styles/elements/validation-editor.less";
-import {Validation} from "../../../src/definition/validation/Validation";
 
-export const ValidationEditor = ({validationRule, onChange, onDelete}) => (
+
+
+interface ValidationEditorProps {
+    validationRule: ValidationRule,
+    onChange: (rule : ValidationRule) => void,
+    onDelete: ()=>void
+};
+
+export const ValidationEditor: React.FunctionComponent<ValidationEditorProps> = ({validationRule, onChange, onDelete}) => (
     <div className="ValidationEditor">
         <div className="ValidationEditor-header">
             <div className="ValidationEditor-label">Validation rule:</div>
@@ -33,9 +41,3 @@ export const ValidationEditor = ({validationRule, onChange, onDelete}) => (
         </div>
     </div>
 );
-
-ValidationEditor.propTypes = {
-    validationRule: PropTypes.object,
-    onChange: PropTypes.func,
-    onDelete: PropTypes.func
-};

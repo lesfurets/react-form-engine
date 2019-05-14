@@ -13,10 +13,11 @@ import {ValidationBuilder} from "../../src/dsl/validation/ValidationBuilder";
 import {Predicates} from "../../src/dsl/predicate/builder/Predicates";
 // import {FormEditor} from "./editor/FormEditor";
 import JsonEditor from "./editor/JsonEditor";
+import {FormEditor} from "./editor/FormEditor";
 
 const FIRST_NAME = {
     id: "FIRST_NAME",
-    type: FieldTypes.INPUT_TEXT,
+    type: "Tlkdfgmsl",
     label: "First Name",
     validationRule: ValidationBuilder.error("The first name is mandatory").when(Predicates.self.isNot.aString.startingWith("azer"))
 };
@@ -140,7 +141,7 @@ const FORM = {
 
 const EDITOR_STATE = {
     OVERVIEW: {id: "OVERVIEW", label: "Overview"},
-    // EDIT_FORM: {id: "EDIT_FORM", label: "Edit"},
+    EDIT_FORM: {id: "EDIT_FORM", label: "Edit"},
     EDIT_JSON: {id: "EDIT_JSON", label: "As Json"},
 };
 
@@ -148,7 +149,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            view: EDITOR_STATE.EDIT_JSON,
+            view: EDITOR_STATE.EDIT_FORM,
             model: ModelExtender.extendModel(FORM)
         };
         this.handleTabChange = this.handleTabChange.bind(this);
@@ -182,7 +183,7 @@ class App extends React.Component {
                     </Tabs>
                 </AppBar>
                 {view === EDITOR_STATE.OVERVIEW ? <FormEngine form={model} onEvent={this.onEvent}/> : null}
-                {/*{view === EDITOR_STATE.EDIT_FORM ? <FormEditor form={model} onChange={this.handleModelChange}/> : null}*/}
+                {view === EDITOR_STATE.EDIT_FORM ? <FormEditor form={model} onChange={this.handleModelChange}/> : null}
                 {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor form={model} onChange={this.handleModelChange}/> : null}
             </div>
         );

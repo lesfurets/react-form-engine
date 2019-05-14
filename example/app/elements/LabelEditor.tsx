@@ -1,9 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import TextField from "@material-ui/core/TextField";
 
-export class LabelEditor extends React.Component {
-    constructor(props) {
+
+
+interface LabelEditorProps {
+    label: string,
+    className: string,
+    onChange: (value: string) => void
+};
+
+interface LabelEditorState {
+    focus: boolean,
+};
+
+export class LabelEditor extends React.Component<LabelEditorProps,LabelEditorState> {
+    constructor(props: LabelEditorProps) {
         super(props);
         this.state = {focus:false}
         this.onClick = this.onClick.bind(this);
@@ -15,7 +26,7 @@ export class LabelEditor extends React.Component {
         this.setState({focus: true})
     }
 
-    onChange(event){
+    onChange(event: React.ChangeEvent<HTMLInputElement>){
         this.props.onChange(event.target.value);
     }
 
@@ -37,9 +48,3 @@ export class LabelEditor extends React.Component {
             <span className={className} onClick={this.onClick}>{label}</span>;
     }
 }
-
-LabelEditor.propTypes = {
-    label: PropTypes.string,
-    className: PropTypes.string,
-    onChange: PropTypes.func
-};
