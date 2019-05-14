@@ -1,4 +1,4 @@
-import {FieldTypes} from "../FieldTypes";
+import {FieldType, FieldTypes} from "../FieldTypes";
 import {ValidationRule} from "../../dsl/validation/ValidationRule";
 import {VisibilityRule} from "../../dsl/visibility/VisibilityRule";
 import {Validation} from "../validation/Validation";
@@ -7,7 +7,7 @@ import {FieldContext} from "../FieldContext";
 
 export class Field implements FormElement {
     id: string;
-    type: FieldTypes;
+    type: FieldType;
     label?: string;
     placeholder?: string;
     symbol?: string;

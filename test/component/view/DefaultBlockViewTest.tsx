@@ -22,7 +22,6 @@ describe("FormEngine/View/DefaultBlockView", () => {
     describe("Navigation", () => {
         it("Should just display next button for first block", () => {
             let container = shallow(<DefaultBlockView block={{...blockTest, index: 0 }} index={0} blockState={BLOCK_STATE.DOING}/>);
-            console.log(container.debug());
             expect(container.find(".DefaultBlockView-next").length).toBe(1);
             expect(container.find(".DefaultBlockView-previous").length).toBe(0);
         });
