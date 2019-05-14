@@ -42,22 +42,22 @@ export const FieldEditorView:FieldView = ({field, onEvent}) => {
                                     type={field.type}
                                     onChange={updateProperty("type")}/>
                     </div>
-                    {/*<div className={"FieldEditorView-details"}>*/}
-                    {/*    {FieldTypesDetails[field.type].properties.map(property => (*/}
-                    {/*        <div key={property.key}>*/}
-                    {/*            <PropertyEditor label={property.label}*/}
-                    {/*                            value={(field[property.key])}*/}
-                    {/*                            onChange={updateProperty(property.key)}*/}
-                    {/*                            className={`PropertyEditor-${property.key}`}/>*/}
-                    {/*        </div>*/}
-                    {/*    ))}*/}
+                    <div className={"FieldEditorView-details"}>
+                        {FieldTypesDetails[field.type].properties.map(property => (
+                            <div key={property.key}>
+                                <PropertyEditor label={property.label}
+                                                value={(field[property.key])}
+                                                onChange={updateProperty(property.key)}
+                                                className={`PropertyEditor-${property.key}`}/>
+                            </div>
+                        ))}
                     {/*    {hasVisibility ? <VisibilityEditor visibilityRule={field.visibilityRule!}*/}
                     {/*                                       onChange={updateProperty("visibilityRule")}*/}
                     {/*                                       onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}*/}
                     {/*    {hasValidation ? <ValidationEditor validationRule={field.validationRule!}*/}
                     {/*                                       onChange={updateProperty("visibilityRule")}*/}
                     {/*                                       onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VALIDATION)}/> : null}*/}
-                    {/*</div>*/}
+                    </div>
                 </CardContent>
                 <CardActions className="FieldEditorView-actions" disableActionSpacing>
                     <Button className="FieldEditorView-visibility"
