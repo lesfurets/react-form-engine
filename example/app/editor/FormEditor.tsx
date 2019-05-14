@@ -110,18 +110,18 @@ export class FormEditor extends React.Component<FormEditorProps, FormEditorState
             case FIELD_EDITOR_EVENT.EDIT_PROPERTY:
                 ModelUpdater.updateFieldProperty(form, element as Field, field => field[details.key] = details.value);
                 break;
-            // case FIELD_EDITOR_EVENT.ADD_VISIBILITY:
-            //     ModelUpdater.updateFieldProperty(form, element, field => field.visibilityRule = generateVisibilityRules(form));
-            //     break;
-            // case FIELD_EDITOR_EVENT.DELETE_VISIBILITY:
-            //     ModelUpdater.removeFieldProperties(form, element, ["visibilityRule","isVisible"]);
-            //     break;
-            // case FIELD_EDITOR_EVENT.ADD_VALIDATION:
-            //     ModelUpdater.updateFieldProperty(form, element, field => field.validationRule = generateValidationRules());
-            //     break;
-            // case FIELD_EDITOR_EVENT.DELETE_VALIDATION:
-            //     ModelUpdater.removeFieldProperties(form, element, ["validationRule","getValidation"]);
-            //     break;
+            case FIELD_EDITOR_EVENT.ADD_VISIBILITY:
+                ModelUpdater.updateFieldProperty(form, element as Field, field => field.visibilityRule = generateVisibilityRules(form));
+                break;
+            case FIELD_EDITOR_EVENT.DELETE_VISIBILITY:
+                ModelUpdater.removeFieldProperties(form, element as Field, ["visibilityRule","isVisible"]);
+                break;
+            case FIELD_EDITOR_EVENT.ADD_VALIDATION:
+                ModelUpdater.updateFieldProperty(form, element as Field, field => field.validationRule = generateValidationRules());
+                break;
+            case FIELD_EDITOR_EVENT.DELETE_VALIDATION:
+                ModelUpdater.removeFieldProperties(form, element as Field, ["validationRule","getValidation"]);
+                break;
             case FIELD_EDITOR_EVENT.DELETE:
                 form.blocks.forEach((block : Block) => remove(block.fields, field => field.id === element.id));
                 break;

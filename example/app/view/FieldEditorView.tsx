@@ -51,12 +51,12 @@ export const FieldEditorView:FieldView = ({field, onEvent}) => {
                                                 className={`PropertyEditor-${property.key}`}/>
                             </div>
                         ))}
-                    {/*    {hasVisibility ? <VisibilityEditor visibilityRule={field.visibilityRule!}*/}
-                    {/*                                       onChange={updateProperty("visibilityRule")}*/}
-                    {/*                                       onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}*/}
-                    {/*    {hasValidation ? <ValidationEditor validationRule={field.validationRule!}*/}
-                    {/*                                       onChange={updateProperty("visibilityRule")}*/}
-                    {/*                                       onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VALIDATION)}/> : null}*/}
+                        {hasVisibility ? <VisibilityEditor visibilityRule={field.visibilityRule!}
+                                                           onChange={updateProperty("visibilityRule")}
+                                                           onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}
+                        {hasValidation ? <ValidationEditor validationRule={field.validationRule!}
+                                                           onChange={updateProperty("visibilityRule")}
+                                                           onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VALIDATION)}/> : null}
                     </div>
                 </CardContent>
                 <CardActions className="FieldEditorView-actions" disableActionSpacing>
