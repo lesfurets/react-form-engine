@@ -1,11 +1,10 @@
 import * as React from "react";
-// import remove from "lodash/remove";
 import {createStore, Store} from "redux";
 import {Provider} from 'react-redux'
 
 import {BLOCK_EDITOR_EVENT, BlockEditorView} from "../view/BlockEditorView";
 import {FORM_EDITOR_EVENT, FormEditorView} from "../view/FormEditorView";
-import {FieldEditorView} from "../view/FieldEditorView";
+import {FIELD_EDITOR_EVENT, FieldEditorView} from "../view/FieldEditorView";
 
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {VisibilityBuilder} from "../../../src/dsl/visibility/VisibilityBuilder";
@@ -13,7 +12,6 @@ import {ValidationBuilder} from "../../../src/dsl/validation/ValidationBuilder";
 import reducer from "../../../src/redux/reducers";
 import FormWrapper from "../../../src/component/wrapper/FormWrapper";
 
-import "../../styles/json-editor.less";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 import {ModelUtils} from "../../../src/definition/ModelUtils";
 import {Predicates} from "../../../src/dsl/predicate/builder/Predicates";
@@ -23,6 +21,9 @@ import {FormElement} from "../../../src/definition/model/FormElement";
 import {Field} from "../../../src/definition/model/Field";
 import {Block} from "../../../src/definition/model/Block";
 import {remove} from "lodash";
+
+import "../../styles/json-editor.less";
+import {ModelUpdater} from "./ModelUpdater";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -106,9 +107,9 @@ export class FormEditor extends React.Component<FormEditorProps, FormEditorState
             case BLOCK_EDITOR_EVENT.NEW_FIELD:
                 form.blocks.find((block: Block) => block.id === element.id)!.fields.push(generateNewField());
                 break;
-            // case FIELD_EDITOR_EVENT.EDIT_PROPERTY:
-            //     ModelUpdater.updateFieldProperty(form, element, field => field[details.key] = details.value);
-            //     break;
+            case FIELD_EDITOR_EVENT.EDIT_PROPERTY:
+                ModelUpdater.updateFieldProperty(form, element as Field, field => field[details.key] = details.value);
+                break;
             // case FIELD_EDITOR_EVENT.ADD_VISIBILITY:
             //     ModelUpdater.updateFieldProperty(form, element, field => field.visibilityRule = generateVisibilityRules(form));
             //     break;
@@ -121,9 +122,9 @@ export class FormEditor extends React.Component<FormEditorProps, FormEditorState
             // case FIELD_EDITOR_EVENT.DELETE_VALIDATION:
             //     ModelUpdater.removeFieldProperties(form, element, ["validationRule","getValidation"]);
             //     break;
-            // case FIELD_EDITOR_EVENT.DELETE:
-            //     form.forEach(block => remove(block.fields, field => field.id === element.id));
-            //     break;
+            case FIELD_EDITOR_EVENT.DELETE:
+                form.blocks.forEach((block : Block) => remove(block.fields, field => field.id === element.id));
+                break;
             default: // We don't want to update model for other events.
                 return;
         }
