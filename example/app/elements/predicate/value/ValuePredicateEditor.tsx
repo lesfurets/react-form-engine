@@ -12,6 +12,7 @@ import {StringEmptyPredicate} from "../../../../../src/dsl/predicate/data/leaf/s
 import {PropertyEditor} from "../../PropertyEditor";
 import {FieldSelector} from "../../FieldSelector";
 import {ValuePredicate} from "../../../../../src/dsl/predicate/data/leaf/value/ValuePredicate";
+import {StringPredicateEditor} from "./StringPredicateEditor";
 
 
 let VALUE_TEST = {
@@ -21,23 +22,27 @@ let VALUE_TEST = {
 };
 
 const getType = (predicate: Predicate) => {
-    switch (predicate.constructor) {
-        case ValueDefinedPredicate:
-            return VALUE_TEST.DEFINED;
-        case ValueEqualToFieldPredicate:
-            return VALUE_TEST.EQUAL_TO_FIELD;
-        case StringPredicate:
-            return VALUE_TEST.A_STRING;
+    if (predicate instanceof ValueDefinedPredicate) {
+        return VALUE_TEST.DEFINED;
     }
+    if (predicate instanceof ValueEqualToFieldPredicate) {
+        return VALUE_TEST.EQUAL_TO_FIELD;
+    }
+    if (predicate instanceof StringPredicate) {
+        return VALUE_TEST.A_STRING;
+    }
+    return ""
 };
 
 const getDetailsEditor = (currentPredicate: Predicate, onChange: (predicate: ValuePredicate | StringPredicate) => void) => {
-    switch (currentPredicate.constructor) {
-        case ValueEqualToFieldPredicate:
-            let equalToPredicate = currentPredicate as ValueEqualToFieldPredicate;
-            return <FieldSelector field={equalToPredicate.field}
-                                  fieldList={ModelUtils.getFieldList(FormEditor.MODEL)}
-                                  onChange={field => onChange(new ValueEqualToFieldPredicate(field))}/>;
+    if (currentPredicate instanceof ValueEqualToFieldPredicate) {
+        let equalToPredicate = currentPredicate as ValueEqualToFieldPredicate;
+        return <FieldSelector field={equalToPredicate.field}
+                              fieldList={ModelUtils.getFieldList(FormEditor.MODEL)}
+                              onChange={field => onChange(new ValueEqualToFieldPredicate(field))}/>;
+    }
+    if (currentPredicate instanceof StringPredicate) {
+        return <StringPredicateEditor predicate={currentPredicate} onChange={onChange}/>
     }
     return null;
 };
@@ -58,7 +63,7 @@ const getPredicate = (code: string) => {
 interface ValuePredicateEditorProps {
     predicate: Predicate,
     onChange: (predicate: ValuePredicate | StringPredicate) => void
-};
+}
 
 export const ValuePredicateEditor: React.FunctionComponent<ValuePredicateEditorProps> = ({predicate, onChange}) => {
     return (
