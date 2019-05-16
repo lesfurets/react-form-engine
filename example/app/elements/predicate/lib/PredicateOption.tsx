@@ -1,5 +1,9 @@
+import * as React from "react";
 import {ReactNode} from "react";
 import {Predicate} from "../../../../../src/dsl/predicate/data/Predicate";
+import {PredicateEditorComponentProps} from "../PredicateEditor";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
 
 export interface PredicateOption {
     id: string,
@@ -29,3 +33,21 @@ export class PredicateOptionUtils {
     };
 
 }
+
+export const buildOptionPredicateEditor = (options: PredicateOption[]) => {
+    const optionUtils = new PredicateOptionUtils(options);
+    const OptionPredicateEditor: React.FunctionComponent<PredicateEditorComponentProps> = ({predicate, onChange}) => {
+        return (
+            <>
+                <TextField select
+                           value={optionUtils.getType(predicate)}
+                           onChange={(event) => onChange(optionUtils.getPredicate(event.target.value))}
+                           margin="normal">
+                    {optionUtils.options.map(option => <MenuItem key={option.id} value={option.id}>{option.label}</MenuItem>)}
+                </TextField>
+                {optionUtils.getDetailsEditor(predicate, onChange)}
+            </>
+        );
+    };
+    return OptionPredicateEditor;
+};
