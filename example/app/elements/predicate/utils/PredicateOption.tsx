@@ -8,9 +8,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 export interface PredicateOption {
     id: string,
     label: string,
-    predicate: (predicate: Predicate) => boolean,
-    detailsProvider: (currentPredicate: Predicate, onChange: (predicate: Predicate) => void) => ReactNode,
-    defaultPredicate: () => Predicate,
+    matchesPredicate: (predicate: Predicate) => boolean,
+    detailsComponent: (currentPredicate: Predicate, onChange: (predicate: Predicate) => void) => ReactNode,
+    defaultPredicate: (predicate: Predicate) => Predicate,
 }
 
 export class PredicateOptionUtils {
@@ -21,15 +21,15 @@ export class PredicateOptionUtils {
     }
 
     getType(predicate: Predicate) {
-        return (this.options.find(option => option.predicate(predicate)) || this.options[0]).id
+        return (this.options.find(option => option.matchesPredicate(predicate)) || this.options[0]).id;
     }
 
     getDetailsEditor(predicate: Predicate, onChange: (predicate: Predicate) => void) {
-        return (this.options.find(option => option.predicate(predicate)) || this.options[0]).detailsProvider(predicate,onChange)
+        return (this.options.find(option => option.matchesPredicate(predicate)) || this.options[0]).detailsComponent(predicate,onChange);
     }
 
-    getPredicate(code: string) {
-        return (this.options.find(option => option.id === code) || this.options[0]).defaultPredicate()
+    getPredicate(code: string, predicate?: Predicate) {
+        return (this.options.find(option => option.id === code) || this.options[0]).defaultPredicate(predicate!);
     };
 
 }
@@ -41,7 +41,7 @@ export const buildOptionPredicateEditor = (options: PredicateOption[]) => {
             <>
                 <TextField select
                            value={optionUtils.getType(predicate)}
-                           onChange={(event) => onChange(optionUtils.getPredicate(event.target.value))}
+                           onChange={(event) => onChange(optionUtils.getPredicate(event.target.value, predicate))}
                            margin="normal">
                     {optionUtils.options.map(option => <MenuItem key={option.id} value={option.id}>{option.label}</MenuItem>)}
                 </TextField>

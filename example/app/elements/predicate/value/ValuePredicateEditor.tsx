@@ -13,15 +13,15 @@ export const ValuePredicateEditor = buildOptionPredicateEditor([
     {
         id: "defined",
         label: "defined",
-        predicate: (predicate) => predicate instanceof ValueDefinedPredicate,
-        detailsProvider: () => null,
+        matchesPredicate: (predicate) => predicate instanceof ValueDefinedPredicate,
+        detailsComponent: () => null,
         defaultPredicate: () => new ValueDefinedPredicate()
     },
     {
         id: "equalToField",
         label: "equal to field",
-        predicate: (predicate) => predicate instanceof ValueEqualToFieldPredicate,
-        detailsProvider: (predicate, onChange) => {
+        matchesPredicate: (predicate) => predicate instanceof ValueEqualToFieldPredicate,
+        detailsComponent: (predicate, onChange) => {
             let equalToPredicate = predicate as ValueEqualToFieldPredicate;
             return <FieldSelector field={equalToPredicate.field}
                                   fieldList={ModelUtils.getFieldList(FormEditor.MODEL)}
@@ -32,8 +32,8 @@ export const ValuePredicateEditor = buildOptionPredicateEditor([
     {
         id: "aString",
         label: "a string",
-        predicate: (predicate) => predicate instanceof StringPredicate,
-        detailsProvider: (predicate, onChange) => <StringPredicateEditor predicate={predicate} onChange={onChange}/>,
+        matchesPredicate: (predicate) => predicate instanceof StringPredicate,
+        detailsComponent: (predicate, onChange) => <StringPredicateEditor predicate={predicate} onChange={onChange}/>,
         defaultPredicate: () => new StringEmptyPredicate()
     },
 ]);
