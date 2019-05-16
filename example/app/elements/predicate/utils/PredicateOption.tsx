@@ -34,6 +34,11 @@ export class PredicateOptionUtils {
 
 }
 
+export interface PredicateEditorComponentProps {
+    predicate: Predicate,
+    onChange: (predicate: Predicate) => void
+}
+
 export const buildOptionPredicateEditor = (options: PredicateOption[]) => {
     const optionUtils = new PredicateOptionUtils(options);
     const OptionPredicateEditor: React.FunctionComponent<PredicateEditorComponentProps> = ({predicate, onChange}) => {
