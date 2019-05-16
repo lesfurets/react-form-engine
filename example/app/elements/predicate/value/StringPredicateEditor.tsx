@@ -17,96 +17,49 @@ import {StringRegExpPredicate} from "../../../../../src/dsl/predicate/data/leaf/
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import {ValueDetailEditor} from "../../ValueDetailEditor";
+import {buildOptionPredicateEditor} from "../utils/PredicateOption";
 
-let STRING_TEST = {
-    EMPTY: "empty",
-    EQUAL_TO: "equalTo",
-    CONTAINING: "containing",
-    STARTING_WITH: "startingWith",
-    ENDING_WITH: "endingWith",
-    MATCHING: "matching",
-};
-
-const getType = (predicate: Predicate) => {
-    if (predicate instanceof StringEmptyPredicate) {
-        return STRING_TEST.EMPTY;
-    }
-    if (predicate instanceof StringEqualToPredicate) {
-        return STRING_TEST.EQUAL_TO;
-    }
-    if (predicate instanceof StringContainPredicate) {
-        return STRING_TEST.CONTAINING;
-    }
-    if (predicate instanceof StringStartWithPredicate) {
-        return STRING_TEST.STARTING_WITH;
-    }
-    if (predicate instanceof StringEndWithPredicate) {
-        return STRING_TEST.ENDING_WITH;
-    }
-    if (predicate instanceof StringRegExpPredicate) {
-        return STRING_TEST.MATCHING;
-    }
-    return ""
-};
-
-const getDetailsEditor = (currentPredicate: Predicate, onChange: (predicate: StringPredicate) => void) => {
-    if (currentPredicate instanceof StringEqualToPredicate) {
-        return <ValueDetailEditor details={currentPredicate.value} onChange={details => onChange(new StringEqualToPredicate(details))}/>;
-    }
-    if (currentPredicate instanceof StringContainPredicate) {
-        return <ValueDetailEditor details={currentPredicate.value} onChange={details => onChange(new StringContainPredicate(details))}/>;
-    }
-    if (currentPredicate instanceof StringStartWithPredicate) {
-        return <ValueDetailEditor details={currentPredicate.value} onChange={details => onChange(new StringStartWithPredicate(details))}/>;
-    }
-    if (currentPredicate instanceof StringEndWithPredicate) {
-        return <ValueDetailEditor details={currentPredicate.value} onChange={details => onChange(new StringEndWithPredicate(details))}/>;
-    }
-    if (currentPredicate instanceof StringRegExpPredicate) {
-        return <ValueDetailEditor details={currentPredicate.regExp.source} onChange={details => onChange(new StringRegExpPredicate(new RegExp(details)))}/>;
-    }
-    return null;
-};
-
-const getPredicate = (code: string) => {
-    switch (code) {
-        case STRING_TEST.EMPTY:
-            return new StringEmptyPredicate();
-        case STRING_TEST.EQUAL_TO:
-            return new StringEqualToPredicate("");
-        case STRING_TEST.CONTAINING:
-            return new StringContainPredicate("");
-        case STRING_TEST.STARTING_WITH:
-            return new StringStartWithPredicate("");
-        case STRING_TEST.ENDING_WITH:
-            return new StringEndWithPredicate("");
-        case STRING_TEST.MATCHING:
-            return new StringRegExpPredicate(/.*/);
-    }
-    return new StringEmptyPredicate();
-};
-
-
-interface StringPredicateEditorProps {
-    predicate: Predicate,
-    onChange: (predicate: StringPredicate) => void
-}
-
-export const StringPredicateEditor: React.FunctionComponent<StringPredicateEditorProps> = ({predicate, onChange}) => {
-    return (
-        <>
-            <TextField select
-                       value={getType(predicate)}
-                       onChange={(event) => onChange(getPredicate(event.target.value))}
-                       margin="normal">
-                <MenuItem value={STRING_TEST.EMPTY}>empty</MenuItem>
-                <MenuItem value={STRING_TEST.EQUAL_TO}>equal to</MenuItem>
-                <MenuItem value={STRING_TEST.CONTAINING}>contains</MenuItem>
-                <MenuItem value={STRING_TEST.STARTING_WITH}>starts with</MenuItem>
-                <MenuItem value={STRING_TEST.ENDING_WITH}>ends with</MenuItem>
-                <MenuItem value={STRING_TEST.MATCHING}>matches</MenuItem>
-            </TextField>
-            {getDetailsEditor(predicate, onChange)}
-        </>
-    );
-};
+export const StringPredicateEditor = buildOptionPredicateEditor([
+    {
+        id: "empty",
+        label:"empty",
+        predicate: predicate => predicate instanceof StringEmptyPredicate,
+        detailsProvider: () => null,
+        defaultPredicate: () => new StringEmptyPredicate()
+    },
+    {
+        id: "equalTo",
+        label:"equal to",
+        predicate: predicate => predicate instanceof StringEqualToPredicate,
+        detailsProvider: (predicate, onChange) => <ValueDetailEditor details={(predicate as StringEqualToPredicate).value} onChange={details => onChange(new StringEqualToPredicate(details))}/>,
+        defaultPredicate: () => new StringEqualToPredicate("")
+    },
+    {
+        id: "containing",
+        label:"containing",
+        predicate: predicate => predicate instanceof StringContainPredicate,
+        detailsProvider: (predicate, onChange) => <ValueDetailEditor details={(predicate as StringContainPredicate).value} onChange={details => onChange(new StringContainPredicate(details))}/>,
+        defaultPredicate: () => new StringContainPredicate("")
+    },
+    {
+        id: "startingWith",
+        label:"starting with",
+        predicate: predicate => predicate instanceof StringStartWithPredicate,
+        detailsProvider: (predicate, onChange) => <ValueDetailEditor details={(predicate as StringStartWithPredicate).value} onChange={details => onChange(new StringStartWithPredicate(details))}/>,
+        defaultPredicate: () => new StringStartWithPredicate("")
+    },
+    {
+        id: "endingWith",
+        label:"ending with",
+        predicate: predicate => predicate instanceof StringEndWithPredicate,
+        detailsProvider: (predicate, onChange) => <ValueDetailEditor details={(predicate as StringEndWithPredicate).value} onChange={details => onChange(new StringEndWithPredicate(details))}/>,
+        defaultPredicate: () => new StringEndWithPredicate("")
+    },
+    {
+        id: "matching",
+        label:"matching",
+        predicate: predicate => predicate instanceof StringRegExpPredicate,
+        detailsProvider: (predicate, onChange) => <ValueDetailEditor details={(predicate as StringRegExpPredicate).regExp.source} onChange={details => onChange(new StringRegExpPredicate(new RegExp(details)))}/>,
+        defaultPredicate: () => new StringRegExpPredicate(/.*/)
+    },
+]);

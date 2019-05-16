@@ -7,7 +7,7 @@ import {StringPredicate} from "../../../../../src/dsl/predicate/data/leaf/string
 import {StringEmptyPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
 import {FieldSelector} from "../../FieldSelector";
 import {StringPredicateEditor} from "./StringPredicateEditor";
-import {buildOptionPredicateEditor} from "../lib/PredicateOption";
+import {buildOptionPredicateEditor} from "../utils/PredicateOption";
 
 export const ValuePredicateEditor = buildOptionPredicateEditor([
     {
