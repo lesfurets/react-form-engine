@@ -14,7 +14,7 @@ export const TypeEditor: React.FunctionComponent<TypeEditorProps> = ({type, clas
                value={type}
                label={"Field Type"}
                className={className}
-               onChange={(event) => onChange(FieldTypes[event.target.value])}
+               onChange={(event) => onChange(AllTypes.find(type => type === event.target.value) || AllTypes[0])}
                margin="normal">
         {AllTypes.map(type => (<MenuItem key={type} value={type}>{FieldTypesDetails[type].label}</MenuItem>))}
     </TextField>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {FieldPredicate} from "../../../../../src/dsl/predicate/data/root/FieldPredicate";
-import {FieldSelector} from "../../FieldSelector";
+import {FieldSelector} from "../utils/FieldSelector";
 import {ModelUtils} from "../../../../../src/definition/ModelUtils";
 import {FormEditor} from "../../../editor/FormEditor";
 import {ReversedPredicateEditor} from "./ReversedPredicateEditor";

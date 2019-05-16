@@ -5,7 +5,7 @@ import {FormEditor} from "../../../editor/FormEditor";
 import {ModelUtils} from "../../../../../src/definition/ModelUtils";
 import {StringPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringPredicate";
 import {StringEmptyPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
-import {FieldSelector} from "../../FieldSelector";
+import {FieldSelector} from "../utils/FieldSelector";
 import {StringPredicateEditor} from "./StringPredicateEditor";
 import {buildOptionPredicateEditor} from "../utils/PredicateOption";
 

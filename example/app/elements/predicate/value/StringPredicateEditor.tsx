@@ -1,22 +1,11 @@
 import * as React from "react";
-import {PredicateEditorComponentProps} from "../PredicateEditor";
-import {Predicate} from "../../../../../src/dsl/predicate/data/Predicate";
-import {ValueDefinedPredicate} from "../../../../../src/dsl/predicate/data/leaf/value/ValueDefinedPredicate";
-import {ValueEqualToFieldPredicate} from "../../../../../src/dsl/predicate/data/leaf/value/ValueEqualToFieldPredicate";
-import {StringPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringPredicate";
-import {ValuePredicate} from "../../../../../src/dsl/predicate/data/leaf/value/ValuePredicate";
-import {FieldSelector} from "../../FieldSelector";
-import {ModelUtils} from "../../../../../src/definition/ModelUtils";
-import {FormEditor} from "../../../editor/FormEditor";
 import {StringEmptyPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
 import {StringEqualToPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringEqualToPredicate";
 import {StringContainPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringContainPredicate";
 import {StringStartWithPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringStartWithPredicate";
 import {StringEndWithPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringEndWithPredicate";
 import {StringRegExpPredicate} from "../../../../../src/dsl/predicate/data/leaf/string/StringRegExpPredicate";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
-import {ValueDetailEditor} from "../../ValueDetailEditor";
+import {ValueDetailEditor} from "../utils/ValueDetailEditor";
 import {buildOptionPredicateEditor} from "../utils/PredicateOption";
 
 export const StringPredicateEditor = buildOptionPredicateEditor([
