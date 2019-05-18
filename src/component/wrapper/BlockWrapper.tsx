@@ -67,6 +67,7 @@ export class BlockWrapperComponent extends React.Component<BlockWrapperProps & F
                 {this.props.block.fields.map((field, index) =>
                     <FieldWrapper key={field.id}
                                   field={{...field}}
+                                  index={index}
                                   tabIndex={index + 1}
                                   forceValidation={this.state.forceValidation}
                                   View={FieldView}/>)}

@@ -14,6 +14,7 @@ describe("FormEngine/View/DefaultFieldView", () => {
     describe("Label", () => {
         it("Should not display label by default", () => {
             let container = shallow(<DefaultFieldView field={field}
+                                                      index={0}
                                                       fieldState={FIELD_STATE.DEFAULT}
                                                       errorMessage={""}/>);
 
@@ -23,6 +24,7 @@ describe("FormEngine/View/DefaultFieldView", () => {
         it("Should display label if specified", () => {
             const labelTest = "label-test";
             let container = shallow(<DefaultFieldView field={{...field, label: labelTest}}
+                                                      index={0}
                                                       fieldState={FIELD_STATE.DEFAULT}
                                                       errorMessage={""}/>);
 
@@ -34,6 +36,7 @@ describe("FormEngine/View/DefaultFieldView", () => {
     describe("Error", () => {
         it("Should not display error on state DEFAULT", () => {
             let container = shallow(<DefaultFieldView field={field}
+                                                      index={0}
                                                       fieldState={FIELD_STATE.DEFAULT}
                                                       errorMessage={""}/>);
 
@@ -42,6 +45,7 @@ describe("FormEngine/View/DefaultFieldView", () => {
 
         it("Should not display error on state VALID", () => {
             let container = shallow(<DefaultFieldView field={field}
+                                                      index={0}
                                                       fieldState={FIELD_STATE.VALID}
                                                       errorMessage={""}/>);
 
@@ -51,6 +55,7 @@ describe("FormEngine/View/DefaultFieldView", () => {
         it("Should display error on state ERROR", () => {
             let errorMessage = "errorMessage";
             let container = shallow(<DefaultFieldView field={field}
+                                                      index={0}
                                                       fieldState={FIELD_STATE.ERROR}
                                                       errorMessage={errorMessage}/>);
 
@@ -62,6 +67,7 @@ describe("FormEngine/View/DefaultFieldView", () => {
     describe("VisibilityRule", () => {
         it("Should display field by default", () => {
             let container = shallow(<DefaultFieldView field={field}
+                                                      index={0}
                                                       fieldState={FIELD_STATE.DEFAULT}
                                                       errorMessage={""}/>);
 
@@ -70,6 +76,7 @@ describe("FormEngine/View/DefaultFieldView", () => {
 
         it("Should display field if specified", () => {
             let container = shallow(<DefaultFieldView field={field}
+                                                      index={0}
                                                       fieldState={FIELD_STATE.DEFAULT}
                                                       isVisible={true}
                                                       errorMessage={""}/>);
@@ -79,6 +86,7 @@ describe("FormEngine/View/DefaultFieldView", () => {
 
         it("Should not display field if specified", () => {
             let container = shallow(<DefaultFieldView field={field}
+                                                      index={0}
                                                       fieldState={FIELD_STATE.DEFAULT}
                                                       isVisible={false}
                                                       errorMessage={""}/>);

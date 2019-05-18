@@ -10,6 +10,7 @@ import {FieldView} from "../../definition/view/FieldView";
 
 export interface FieldWrapperProps {
     field: Field;
+    index: number;
     tabIndex: number;
     forceValidation: boolean;
     View: FieldView;
@@ -69,7 +70,7 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
     }
 
     render() {
-        let {View, field, tabIndex, fieldContext} = this.props;
+        let {View, field, index, tabIndex, fieldContext} = this.props;
         let isVisible = field.hasOwnProperty('isVisible') ? field.isVisible!(fieldContext) : true;
         let contextValue: any = fieldContext[field.id];
         let {fieldState, validation} = this.getState();
@@ -77,6 +78,7 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
 
         return (
             <View field={field}
+                  index={index}
                   isVisible={isVisible}
                   onEvent={this.onViewEvent}
                   errorMessage={validation.message}
