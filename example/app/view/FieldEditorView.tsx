@@ -27,13 +27,13 @@ export const FIELD_EDITOR_EVENT = {
     DELETE: new FormEvent("DELETE_FIELD", EventTypes.Field),
 };
 
-export const FieldEditorView:FieldView = ({field, onEvent}) => {
+export const FieldEditorView:FieldView = ({field, onEvent, index}) => {
         const hasVisibility = field.hasOwnProperty('visibilityRule');
         const hasValidation = field.hasOwnProperty('validationRule');
         const updateProperty = (key: string) => (value: any) => onEvent!(FIELD_EDITOR_EVENT.EDIT_PROPERTY, new PropertyUpdate(key, value))
 
         return (
-            <Draggable key={field.id} draggableId={field.id} index={0}>
+            <Draggable key={field.id} draggableId={field.id} index={index}>
                 {(provided:DraggableProvided, snapshot:DraggableStateSnapshot) => (
                     <div className={`FieldEditorView ${snapshot.isDragging ? "dragged" : ""}`}
                          ref={provided.innerRef}

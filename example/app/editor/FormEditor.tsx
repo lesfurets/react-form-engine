@@ -2,7 +2,7 @@ import * as React from "react";
 import {createStore, Store} from "redux";
 import {Provider} from 'react-redux'
 
-import {BLOCK_EDITOR_EVENT, BlockEditorView} from "../view/BlockEditorView";
+import {BLOCK_EDITOR_EVENT, BlockEditorView, FieldMovement} from "../view/BlockEditorView";
 import {FORM_EDITOR_EVENT, FormEditorView} from "../view/FormEditorView";
 import {FIELD_EDITOR_EVENT, FieldEditorView} from "../view/FieldEditorView";
 
@@ -100,11 +100,12 @@ export class FormEditor extends React.Component<FormEditorProps, FormEditorState
                 form.blocks.filter((block : Block) => block.id === element.id)
                     .forEach((block : Block) => block.label = details);
                 break;
-            // case BLOCK_EDITOR_EVENT.MOVE_FIELD:
-            //     let blockSrc = form.find(block => block.id === details.blockSrc);
-            //     let fields = remove(blockSrc.fields, field => field.id === details.id);
-            //     form.find(block => block.id === details.blockDst).fields.splice(details.index, 0, fields[0]);
-            //     break;
+            case BLOCK_EDITOR_EVENT.MOVE_FIELD:
+                const fieldMovement = details as FieldMovement;
+                let blockSrc = form.blocks.find(block => block.id === fieldMovement.blockSrc);
+                let fields = remove(blockSrc!.fields, field => field.id === details.id);
+                form.blocks.find(block => block.id === fieldMovement.blockDst)!.fields.splice(fieldMovement.indexDst, 0, fields[0]);
+                break;
             case BLOCK_EDITOR_EVENT.NEW_FIELD:
                 form.blocks.find((block: Block) => block.id === element.id)!.fields.push(generateNewField());
                 break;

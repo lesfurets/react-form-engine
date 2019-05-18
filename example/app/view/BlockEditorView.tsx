@@ -32,6 +32,13 @@ export const BLOCK_EDITOR_EVENT = {
     NEW_FIELD: new FormEvent("NEW_FIELD",EventTypes.Block),
 };
 
+export interface FieldMovement {
+    id: string
+    blockSrc: string
+    blockDst: string
+    indexDst: number
+}
+
 export const BlockEditorView:BlockView = (props: BlockViewProps) => <BlockEditorViewInner {...props}/>
 
 interface BlockEditorViewInnerState {
@@ -51,7 +58,30 @@ export class BlockEditorViewInner extends React.Component<BlockViewProps, BlockE
     };
 
     onDragEnd(result: DropResult) {
-        console.log(result);
+        this.props.onEvent!(BLOCK_EDITOR_EVENT.MOVE_FIELD, {
+            id: result.draggableId,
+            blockSrc: result.source.droppableId,
+            blockDst: result.destination!.droppableId,
+            indexDst: result.destination!.index,
+        });
+        // if (result.source.droppableId === this.props.block.id) {
+        //
+        //     let value = {
+        //         id: ui.item.attr("sortable-id"),
+        //         blockSrc: ui.item.attr("block-source"),
+        //         blockDst: details.target.getAttribute("sortable-id"),
+        //         index: ui.item.index()
+        //     };
+        //
+        //     if(value.blockSrc !== value.blockDst){
+        //         // If we try to move a field from one block to another, we dont want React to try to remove the dom element
+        //         // after it was moved by jquery.sortable. That's why we are cancelling the jquery move.
+        //         // On ne doit cancel que l'action du block courant
+        //         $(".BlockEditorView-content[sortable-id=" + value.blockSrc + "]").sortable('cancel');
+        //     }
+        //
+        //     this.props.onEvent(BLOCK_EDITOR_EVENT.MOVE_FIELD, value);
+        // }
     }
 
     render() {
