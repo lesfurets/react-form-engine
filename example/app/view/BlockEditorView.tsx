@@ -16,6 +16,14 @@ import {LabelEditor} from "../elements/LabelEditor";
 import "../../styles/view/block-editor-view.less"
 import {BlockView, BlockViewProps} from "../../../src/definition/view/BlockView";
 import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
+import {
+    DragDropContext,
+    Draggable,
+    Droppable,
+    DroppableProvided,
+    DroppableStateSnapshot,
+    DropResult
+} from "react-beautiful-dnd";
 
 export const BLOCK_EDITOR_EVENT = {
     DELETE: new FormEvent("DELETE",EventTypes.Block),
@@ -35,11 +43,16 @@ export class BlockEditorViewInner extends React.Component<BlockViewProps, BlockE
         super(props);
         this.state = {expanded: true};
         this.handleExpandClick = this.handleExpandClick.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this);
     }
 
     handleExpandClick() {
         this.setState({ expanded: !this.state.expanded });
     };
+
+    onDragEnd(result: DropResult) {
+        console.log(result);
+    }
 
     render() {
         let {children, block, onEvent} = this.props;
@@ -65,7 +78,17 @@ export class BlockEditorViewInner extends React.Component<BlockViewProps, BlockE
                             className={"BlockEditorView-header"}/>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <div className={"BlockEditorView-content"} sortable-id={block.id}>
-                        {children}
+                        <DragDropContext onDragEnd={this.onDragEnd}>
+                            <Droppable droppableId={block.id}>
+                                {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
+                                    <div ref={provided.innerRef}
+                                         {...provided.droppableProps}>
+                                        {children}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
                     </div>
                     <CardActions className={"BlockEditorView-actions"} disableActionSpacing>
                         <Button className="BlockEditorView-add"

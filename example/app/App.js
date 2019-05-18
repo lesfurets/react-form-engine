@@ -11,9 +11,9 @@ import {VisibilityBuilder} from "../../src/dsl/visibility/VisibilityBuilder";
 import {ModelExtender} from "../../src/dsl/ModelExtender";
 import {ValidationBuilder} from "../../src/dsl/validation/ValidationBuilder";
 import {Predicates} from "../../src/dsl/predicate/builder/Predicates";
-// import {FormEditor} from "./editor/FormEditor";
 import JsonEditor from "./editor/JsonEditor";
 import {FormEditor} from "./editor/FormEditor";
+import {DragDrop} from "./DragDrop";
 
 const FIRST_NAME = {
     id: "FIRST_NAME",
@@ -182,6 +182,7 @@ class App extends React.Component {
                         {Object.values(EDITOR_STATE).map(value => <Tab key={value.id} label={value.label} />)}
                     </Tabs>
                 </AppBar>
+                <DragDrop/>
                 {view === EDITOR_STATE.OVERVIEW ? <FormEngine form={model} onEvent={this.onEvent}/> : null}
                 {view === EDITOR_STATE.EDIT_FORM ? <FormEditor form={model} onChange={this.handleModelChange}/> : null}
                 {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor form={model} onChange={this.handleModelChange}/> : null}
