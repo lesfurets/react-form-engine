@@ -108,17 +108,15 @@ export class BlockEditorViewInner extends React.Component<BlockViewProps, BlockE
                             className={"BlockEditorView-header"}/>
                 <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                     <div className={"BlockEditorView-content"} sortable-id={block.id}>
-                        <DragDropContext onDragEnd={this.onDragEnd}>
-                            <Droppable droppableId={block.id}>
-                                {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
-                                    <div ref={provided.innerRef}
-                                         {...provided.droppableProps}>
-                                        {children}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                        </DragDropContext>
+                        <Droppable droppableId={block.id}>
+                            {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
+                                <div ref={provided.innerRef}
+                                     {...provided.droppableProps}>
+                                    {children}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
                     </div>
                     <CardActions className={"BlockEditorView-actions"} disableActionSpacing>
                         <Button className="BlockEditorView-add"
