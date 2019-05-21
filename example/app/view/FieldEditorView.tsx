@@ -17,6 +17,7 @@ import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
 import {FieldTypesDetails} from "../definition/FieldTypesDetails";
 
 import "../../styles/view/field-editor-view.less"
+import {DRAG_DROP_TYPE} from "./FormEditorView";
 
 export const FIELD_EDITOR_EVENT = {
     EDIT_PROPERTY: new FormEvent("EDIT_FIELD_PROPERTY", EventTypes.Field),
@@ -33,7 +34,7 @@ export const FieldEditorView:FieldView = ({field, onEvent, index}) => {
         const updateProperty = (key: string) => (value: any) => onEvent!(FIELD_EDITOR_EVENT.EDIT_PROPERTY, new PropertyUpdate(key, value))
 
         return (
-            <Draggable key={field.id} draggableId={field.id} index={index}>
+            <Draggable key={field.id} draggableId={field.id} index={index} type={DRAG_DROP_TYPE.FIELD}>
                 {(provided:DraggableProvided, snapshot:DraggableStateSnapshot) => (
                     <div className={`FieldEditorView ${snapshot.isDragging ? "dragged" : ""}`}
                          ref={provided.innerRef}

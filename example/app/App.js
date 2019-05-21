@@ -13,7 +13,6 @@ import {ValidationBuilder} from "../../src/dsl/validation/ValidationBuilder";
 import {Predicates} from "../../src/dsl/predicate/builder/Predicates";
 import JsonEditor from "./editor/JsonEditor";
 import {FormEditor} from "./editor/FormEditor";
-import {DragDrop} from "./DragDrop";
 
 const FIRST_NAME = {
     id: "FIRST_NAME",
@@ -116,18 +115,18 @@ const BLOCKS = {
         label: "All Fields",
         fields: [TEXT, PASSWORD , NUMBER , AMOUNT, TEXT_AREA, SELECT, RADIO, CHECKBOX]
     },
-    IDENTITY: {
-        id:"IDENTITY",
+    BLK_IDENTITY: {
+        id:"BLK_IDENTITY",
         label: "Personal information",
         fields: [FIRST_NAME, LAST_NAME]
     },
-    CONTACT: {
-        id:"CONTACT",
+    BLK_CONTACT: {
+        id:"BLK_CONTACT",
         label: "Contact",
         fields: [EMAIL, PHONE]
     },
-    PASSWORD: {
-        id:"PASSWORD",
+    BLK_PASSWORD: {
+        id:"BLK_PASSWORD",
         label: "Password",
         fields: [PASSWORD, PASSWORD_CONFIRMATION],
         ctaLabel: "Submit"
@@ -182,7 +181,6 @@ class App extends React.Component {
                         {Object.values(EDITOR_STATE).map(value => <Tab key={value.id} label={value.label} />)}
                     </Tabs>
                 </AppBar>
-                <DragDrop/>
                 {view === EDITOR_STATE.OVERVIEW ? <FormEngine form={model} onEvent={this.onEvent}/> : null}
                 {view === EDITOR_STATE.EDIT_FORM ? <FormEditor form={model} onChange={this.handleModelChange}/> : null}
                 {view === EDITOR_STATE.EDIT_JSON ? <JsonEditor form={model} onChange={this.handleModelChange}/> : null}

@@ -2,7 +2,7 @@ import * as React from "react";
 import {createStore, Store} from "redux";
 import {Provider} from 'react-redux'
 
-import {BLOCK_EDITOR_EVENT, BlockEditorView, FieldMovement} from "../view/BlockEditorView";
+import {BLOCK_EDITOR_EVENT, BlockEditorView} from "../view/BlockEditorView";
 import {FORM_EDITOR_EVENT, FormEditorView} from "../view/FormEditorView";
 import {FIELD_EDITOR_EVENT, FieldEditorView} from "../view/FieldEditorView";
 
@@ -64,6 +64,18 @@ interface FormEditorState {
     store: Store<{}>,
 }
 
+export interface FieldMovement {
+    id: string
+    blockSrc: string
+    blockDst: string
+    indexDst: number
+}
+
+export interface BlockMovement {
+    id: string
+    indexDst: number
+}
+
 export class FormEditor extends React.Component<FormEditorProps, FormEditorState> {
     constructor(props: FormEditorProps) {
         super(props);
@@ -89,10 +101,11 @@ export class FormEditor extends React.Component<FormEditorProps, FormEditorState
             case FORM_EDITOR_EVENT.NEW_BLOCK:
                 form.blocks.push(generateNewBlock());
                 break;
-            // case FORM_EDITOR_EVENT.MOVE_BLOCK:
-            //     let blocks = remove(form, block => block.id === details.id);
-            //     form.splice(details.index, 0, blocks[0]);
-            //     break;
+            case FORM_EDITOR_EVENT.MOVE_BLOCK:
+                const blockMovement = details as BlockMovement;
+                let blocks = remove(form.blocks, block => block.id === details.id);
+                form.blocks.splice(details.index, 0, blocks[0]);
+                break;
             case BLOCK_EDITOR_EVENT.DELETE:
                 remove(form.blocks, (block : Block) => block.id === element.id);
                 break;
