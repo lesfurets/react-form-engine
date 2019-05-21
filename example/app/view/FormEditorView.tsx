@@ -1,15 +1,14 @@
 import * as React from "react";
 import Create from "@material-ui/icons/Create";
 import Button from "@material-ui/core/Button";
-// import 'jquery-ui-bundle';
+import {DragDropContext, Droppable, DroppableProvided, DroppableStateSnapshot, DropResult} from "react-beautiful-dnd";
 
-import {FormView, FormViewProps} from "../../../src/definition/view/FormView";
 import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
+import {FormView, FormViewProps} from "../../../src/definition/view/FormView";
+
+import {BLOCK_EDITOR_EVENT} from "./BlockEditorView";
 
 import "../../styles/view/form-editor-view.less"
-import {DragDropContext, Droppable, DroppableProvided, DroppableStateSnapshot, DropResult} from "react-beautiful-dnd";
-import {BlockViewProps} from "../../../src/definition/view/BlockView";
-import {BLOCK_EDITOR_EVENT} from "./BlockEditorView";
 
 export const FORM_EDITOR_EVENT = {
     NEW_BLOCK: new FormEvent("NEW_BLOCK",EventTypes.Form),
@@ -48,24 +47,6 @@ export class FormEditorInnerView extends React.Component<FormViewProps, any> {
                 break;
 
         }
-        // if (result.source.droppableId === this.props.block.id) {
-        //
-        //     let value = {
-        //         id: ui.item.attr("sortable-id"),
-        //         blockSrc: ui.item.attr("block-source"),
-        //         blockDst: details.target.getAttribute("sortable-id"),
-        //         index: ui.item.index()
-        //     };
-        //
-        //     if(value.blockSrc !== value.blockDst){
-        //         // If we try to move a field from one block to another, we dont want React to try to remove the dom element
-        //         // after it was moved by jquery.sortable. That's why we are cancelling the jquery move.
-        //         // On ne doit cancel que l'action du block courant
-        //         $(".BlockEditorView-content[sortable-id=" + value.blockSrc + "]").sortable('cancel');
-        //     }
-        //
-        //     this.props.onEvent(BLOCK_EDITOR_EVENT.MOVE_FIELD, value);
-        // }
     }
 
     render() {
@@ -93,40 +74,3 @@ export class FormEditorInnerView extends React.Component<FormViewProps, any> {
         );
     }
 }
-
-/*
-constructor(props){
-        super(props);
-        this.onDrop = this.onDrop.bind(this);
-        this.onDrag = this.onDrag.bind(this);
-        this.onStop = this.onStop.bind(this);
-    }
-
-    componentDidMount() {
-        $(ReactDOM.findDOMNode(this)).sortable({
-            // handle: ".BlockEditorView",
-            start: this.onDrag,
-            update: this.onDrop,
-            stop: this.onStop,
-            placeholder: "FormEditorView-placeholder"
-        });
-    }
-
-    onDrop(details, ui) {
-        this.props.onEvent(FORM_EDITOR_EVENT.MOVE_BLOCK, {
-            id: ui.item.attr('id'),
-            index: ui.item.index()
-        });
-    }
-
-    onDrag(details, ui) {
-        ui.item.addClass("dragged");
-        let height = ui.item.find(".BlockEditorView-header").outerHeight();
-        ui.item.height(height);
-        ui.placeholder.height(height + 40);
-    }
-
-    onStop(details, ui) {
-        ui.item.removeClass("dragged");
-    }
- */

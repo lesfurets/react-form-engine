@@ -24,7 +24,6 @@ import {remove} from "lodash";
 
 import "../../styles/json-editor.less";
 import {ModelUpdater} from "./ModelUpdater";
-import {setFieldValueAction} from "../../../src/redux/actions";
 
 const values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

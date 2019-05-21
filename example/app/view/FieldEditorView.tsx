@@ -6,18 +6,19 @@ import Button from "@material-ui/core/Button";
 import Delete from "@material-ui/icons/Delete";
 import {Draggable, DraggableProvided, DraggableStateSnapshot} from "react-beautiful-dnd";
 
+import {FieldView} from "../../../src/definition/view/FieldView";
+
 import {LabelEditor} from "../elements/LabelEditor";
 import {TypeEditor} from "../elements/TypeEditor";
 import {PropertyEditor} from "../elements/PropertyEditor";
 import {VisibilityEditor} from "../elements/VisibilityEditor";
 import {ValidationEditor} from "../elements/ValidationEditor";
 import {PropertyUpdate} from "../editor/ModelUpdater";
-import {FieldView} from "../../../src/definition/view/FieldView";
 import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
 import {FieldTypesDetails} from "../definition/FieldTypesDetails";
+import {DRAG_DROP_TYPE} from "./FormEditorView";
 
 import "../../styles/view/field-editor-view.less"
-import {DRAG_DROP_TYPE} from "./FormEditorView";
 
 export const FIELD_EDITOR_EVENT = {
     EDIT_PROPERTY: new FormEvent("EDIT_FIELD_PROPERTY", EventTypes.Field),
