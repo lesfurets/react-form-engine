@@ -1,17 +1,11 @@
 import * as React from "react";
 import {FieldInjector} from "../../definition/FieldInjector";
-import {fieldConnect, FieldContextProps, FieldDispatchProps, FieldProps} from "../../redux/fieldConnect";
+import {fieldConnect, FieldProps} from "../../redux/fieldConnect";
 import {VALID, Validation} from "../../definition/validation/Validation";
 import {FIELD_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 import {FormEvent} from "../../definition/event/Event";
-import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import {FieldValueAction} from "../../redux/constants";
-import {setFieldValueAction} from "../../redux/actions";
-import {FieldState} from "../../redux/reducers";
 import {Field, FIELD_STATE} from "../../definition/model/Field";
-import {FieldContext} from "../../definition/FieldContext";
 import {FieldView} from "../../definition/view/FieldView";
 
 export interface FieldWrapperProps {
@@ -21,7 +15,7 @@ export interface FieldWrapperProps {
     View: FieldView;
 }
 export interface FieldWrapperState {
-    forceValidation: boolean;
+    shouldValidate: boolean;
 }
 
 export class FieldWrapperComponent extends React.Component<FieldWrapperProps & FieldProps, FieldWrapperState> {
@@ -33,14 +27,15 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
 
     constructor(props: FieldWrapperProps & FieldProps) {
         super(props);
-        this.state = {forceValidation:false};
+        let {field, fieldContext} = this.props;
+        this.state = {shouldValidate:fieldContext[field.id] !== undefined};
         this.getState = this.getState.bind(this);
         this.onFieldEvent = this.onFieldEvent.bind(this);
         this.onViewEvent = this.onViewEvent.bind(this);
     }
 
-    static getFieldState(validation: Validation, contextValue: string | null, forceValidation: boolean) {
-        if (!forceValidation && contextValue === undefined) {
+    static getFieldState(validation: Validation, forceValidation: boolean, shouldValidate: boolean) {
+        if (!shouldValidate && !forceValidation) {
             return FIELD_STATE.DEFAULT;
         }
         return validation.isValid ? FIELD_STATE.VALID : FIELD_STATE.ERROR;
@@ -48,15 +43,15 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
 
     getState() {
         let {field, fieldContext, forceValidation} = this.props;
-        let contextValue = fieldContext[field.id];
         let validation = field.getValidation === undefined ? VALID : field.getValidation(fieldContext);
-        let fieldState = FieldWrapperComponent.getFieldState(validation, contextValue, forceValidation || this.state.forceValidation);
+        let fieldState = FieldWrapperComponent.getFieldState(validation, forceValidation, this.state.shouldValidate);
         return {fieldState, validation};
     }
 
     onFieldEvent(e: FormEvent, details?: any) {
+        console.log(e);
         if(e == FIELD_EVENT.SUMBIT_VALUE){
-            this.setState({forceValidation: true});
+            this.setState({shouldValidate: true});
         }
         this.props.setFieldValue(this.props.field.id, details!);
         this.onViewEvent(e, details!);
@@ -72,7 +67,7 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
         let contextValue = fieldContext[field.id];
         let {fieldState, validation} = this.getState();
         let Field = FieldInjector.inject(field.type);
-
+        console.log(fieldState);
         return (
             <View field={field}
                   isVisible={isVisible}
@@ -82,7 +77,6 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
                 <Field field={field}
                        tabIndex={tabIndex}
                        onFieldEvent={this.onFieldEvent}
-                        // TODO ?
                        contextValue={contextValue ? contextValue : undefined}/>
             </View>
         );
