@@ -13,4 +13,8 @@ export class NumberField extends TextField {
         let symbol = this.props.field.symbol;
         return symbol ? <span className="TextField-symbol">{symbol}</span> : null
     }
+
+    parseValue(value: any): any {
+        return parseInt(value);
+    }
 }

@@ -49,7 +49,6 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
     }
 
     onFieldEvent(e: FormEvent, details?: any) {
-        console.log(e);
         if(e == FIELD_EVENT.SUMBIT_VALUE){
             this.setState({shouldValidate: true});
         }

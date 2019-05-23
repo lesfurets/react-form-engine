@@ -31,14 +31,19 @@ export class TextField extends React.Component<TextFieldProps, TextFieldState> {
         this.getSuffix = this.getSuffix.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onBlur = this.onBlur.bind(this);
+        this.parseValue = this.parseValue.bind(this);
+    }
+
+    parseValue(value: any):any {
+        return value;
     }
 
     handleChange(event : React.ChangeEvent<HTMLInputElement>) {
-        this.props.onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, event.target.value.trim());
+        this.props.onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, this.parseValue(event.target.value.trim()));
     }
 
     onBlur() {
-        this.props.onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, (this.props.contextValue || "").trim());
+        this.props.onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, this.parseValue((this.props.contextValue || "").trim()));
     }
 
     getSuffix() : ReactNode {

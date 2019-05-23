@@ -64,11 +64,11 @@ const AMOUNT = {
 };
 
 const BLOCKS = {
-    // ALL_FIELDS: {
-    //     id:"ALL_FIELDS",
-    //     label: "All Fields",
-    //     fields: Object.values(FIELDS)
-    // },
+    ALL_FIELDS: {
+        id:"ALL_FIELDS",
+        label: "All Fields",
+        fields: [FIRST_NAME , LAST_NAME , EMAIL , PHONE , PASSWORD , PASSWORD_CONFIRMATION , NUMBER , AMOUNT]
+    },
     IDENTITY: {
         id:"IDENTITY",
         label: "Personal information",
