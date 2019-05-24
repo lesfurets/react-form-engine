@@ -63,10 +63,10 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
     render() {
         let {View, field, tabIndex, fieldContext} = this.props;
         let isVisible = field.hasOwnProperty('isVisible') ? field.isVisible!(fieldContext) : true;
-        let contextValue = fieldContext[field.id];
+        let contextValue: any = fieldContext[field.id];
         let {fieldState, validation} = this.getState();
         let Field = FieldInjector.inject(field.type);
-        console.log(fieldState);
+
         return (
             <View field={field}
                   isVisible={isVisible}

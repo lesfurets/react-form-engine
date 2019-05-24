@@ -1,9 +1,5 @@
+import * as React from "react";
 import {TextField, TextFieldProps} from "./TextField";
 
-export class EmailField extends TextField {
-    constructor(props: TextFieldProps) {
-        super(props);
-        this.inputType = "email";
-        this.inputMode = "email";
-    }
-}
+export const EmailField: React.FunctionComponent<TextFieldProps> =
+    (props: TextFieldProps) => <TextField {...props} inputType="email" inputMode="email"/>;

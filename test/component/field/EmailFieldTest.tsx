@@ -1,5 +1,5 @@
 import * as React from "react";
-import {shallow} from "enzyme";
+import {mount, shallow} from "enzyme";
 import {TestUtils} from "../../TestUtils";
 import {EmailField} from "../../../src/component/field/EmailField";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
@@ -15,7 +15,7 @@ describe("FormEngine/Field/EmailField", () => {
 
     describe("Construction", () => {
         it("Input should have type email", () => {
-            let container = shallow(<EmailField field={field}
+            let container = mount(<EmailField field={field}
                                                onFieldEvent={TestUtils.emptyCallback}
                                                contextValue=""/>);
             expect(container.find("input").props().type).toBe("email");

@@ -1,8 +1,5 @@
+import * as React from "react";
 import {TextField, TextFieldProps} from "./TextField";
 
-export class PasswordField extends TextField {
-    constructor(props: TextFieldProps) {
-        super(props);
-        this.inputType = "password";
-    }
-}
+export const PasswordField: React.FunctionComponent<TextFieldProps> =
+    (props: TextFieldProps) => <TextField {...props} inputType="password"/>;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {shallow} from "enzyme";
+import {mount, shallow} from "enzyme";
 import {NumberField} from "../../../src/component/field/NumberField";
 import {TestUtils} from "../../TestUtils";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
@@ -16,16 +16,17 @@ describe("FormEngine/Field/NumericField", () => {
 
     describe("Construction", () => {
         it("Input should have type decimal", () => {
-            let container = shallow(<NumberField field={field}
+            let container = mount(<NumberField field={field}
                                                  onFieldEvent={TestUtils.emptyCallback}
                                                contextValue=""/>);
+            console.log(container.debug());
             expect(container.find("input").props().inputMode).toBe("decimal");
         });
     });
 
     describe("Symbol", () => {
         it("Input should have no symbol by default", () => {
-            let container = shallow(<NumberField field={field}
+            let container = mount(<NumberField field={field}
                                                  onFieldEvent={TestUtils.emptyCallback}
                                                contextValue=""/>);
             expect(container.find("TextField-symbol").length).toBe(0);
@@ -33,7 +34,7 @@ describe("FormEngine/Field/NumericField", () => {
 
         it("Input should symbol if specified", () => {
             let symbol = "%";
-            let container = shallow(<NumberField field={{...field, symbol: symbol}}
+            let container = mount(<NumberField field={{...field, symbol: symbol}}
                                                  onFieldEvent={TestUtils.emptyCallback}
                                                  contextValue=""/>);
             expect(container.find(".TextField-symbol").length).toBe(1);

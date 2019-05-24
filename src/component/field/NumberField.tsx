@@ -1,20 +1,15 @@
 import * as React from "react";
 
-import {TextField, TextFieldProps} from "./TextField";
-import {ReactNode} from "react";
+import {InputField, InputFieldProps} from "./InputField";
 
-export class NumberField extends TextField {
-    constructor(props: TextFieldProps) {
-        super(props);
-        this.inputMode = "decimal";
-    }
+export type NumberFieldProps = InputFieldProps<number>;
 
-    getSuffix() : ReactNode {
-        let symbol = this.props.field.symbol;
-        return symbol ? <span className="TextField-symbol">{symbol}</span> : null
-    }
-
-    parseValue(value: any): any {
-        return parseInt(value);
-    }
-}
+export const NumberField: React.FunctionComponent<NumberFieldProps> =
+    (props: NumberFieldProps) => (
+        <InputField<number> {...props}
+                            inputMode=""
+                            valueFromString={(value: string) => parseInt(value)}
+                            valueToString={(value: number) => value ? value.toString() : ""}>
+            {props.field.symbol ? <span className="TextField-symbol">{props.field.symbol}</span> : null}
+        </InputField>
+    );
