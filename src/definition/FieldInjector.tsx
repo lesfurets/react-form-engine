@@ -2,7 +2,7 @@ import {FieldTypes} from "./FieldTypes";
 import {TextField} from "../component/field/TextField";
 import {EmailField} from "../component/field/EmailField";
 import {PasswordField} from "../component/field/PasswordField";
-import {NumberField} from "../component/field/NumberField";
+import {IntegerField} from "../component/field/IntegerField";
 import * as React from "react";
 
 export class FieldInjector {
@@ -15,7 +15,7 @@ export class FieldInjector {
             case FieldTypes.INPUT_PASSWORD:
                 return PasswordField;
             case FieldTypes.INPUT_NUMBER:
-                return NumberField;
+                return IntegerField;
             default:
                 return UNKNOWN_FIELD;
         }
