@@ -7,6 +7,7 @@ export const BLOCK_EVENT = {
 };
 
 export const FIELD_EVENT = {
+    RESET_VALUE: new FormEvent("reset-value", EventTypes.Field),
     UPDATE_VALUE: new FormEvent("set-value", EventTypes.Field),
     SUMBIT_VALUE: new FormEvent("sumbit-value", EventTypes.Field),
 };

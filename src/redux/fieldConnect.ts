@@ -17,7 +17,7 @@ export const mapStateToProps = <P>(state: FieldContext, ownProps: P): P => {
 };
 
 export interface FieldDispatchProps {
-    setFieldValue: (id: string, value: string) => void
+    setFieldValue: (id: string, value: any) => void
 }
 
 export const mapDispatchToProps = <P>(dispatch: Dispatch<FieldValueAction>, ownProps: P): P => {

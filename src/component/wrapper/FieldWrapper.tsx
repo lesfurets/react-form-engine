@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FieldInjector} from "../../definition/FieldInjector";
+import {FieldInjector} from "../field/FieldInjector";
 import {fieldConnect, FieldProps} from "../../redux/fieldConnect";
 import {VALID, Validation} from "../../definition/validation/Validation";
 import {FIELD_EVENT} from "../../definition/event/events";
@@ -49,10 +49,18 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
     }
 
     onFieldEvent(e: FormEvent, details?: any) {
-        if(e == FIELD_EVENT.SUMBIT_VALUE){
-            this.setState({shouldValidate: true});
+        switch (e) {
+            case FIELD_EVENT.RESET_VALUE:
+                this.props.setFieldValue(this.props.field.id, undefined);
+                break;
+            case FIELD_EVENT.UPDATE_VALUE:
+                this.props.setFieldValue(this.props.field.id, details!);
+                break;
+            case FIELD_EVENT.SUMBIT_VALUE:
+                this.setState({shouldValidate: true});
+                this.props.setFieldValue(this.props.field.id, details!);
+                break;
         }
-        this.props.setFieldValue(this.props.field.id, details!);
         this.onViewEvent(e, details!);
     }
 

@@ -1,9 +1,9 @@
-import {FieldTypes} from "../../src/definition/FieldTypes";
-import {FieldInjector, UNKNOWN_FIELD} from "../../src/definition/FieldInjector";
-import {TextField} from "../../src/component/field/TextField";
-import {EmailField} from "../../src/component/field/EmailField";
-import {IntegerField} from "../../src/component/field/IntegerField";
-import {PasswordField} from "../../src/component/field/PasswordField";
+import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {FieldInjector, UNKNOWN_FIELD} from "../../../src/component/field/FieldInjector";
+import {TextField} from "../../../src/component/field/TextField";
+import {EmailField} from "../../../src/component/field/EmailField";
+import {IntegerField} from "../../../src/component/field/IntegerField";
+import {PasswordField} from "../../../src/component/field/PasswordField";
 
 describe("FormEngine/Definition/FieldInjector", () => {
 
@@ -17,8 +17,8 @@ describe("FormEngine/Definition/FieldInjector", () => {
             expect(FieldInjector.inject(FieldTypes.INPUT_EMAIL)).toBe(EmailField);
         });
 
-        it("Should display IntegerField on INPUT_NUMBER", () => {
-            expect(FieldInjector.inject(FieldTypes.INPUT_NUMBER)).toBe(IntegerField);
+        it("Should display IntegerField on INPUT_INTEGER", () => {
+            expect(FieldInjector.inject(FieldTypes.INPUT_INTEGER)).toBe(IntegerField);
         });
 
         it("Should display PasswordField on INPUT_PASSWORD", () => {

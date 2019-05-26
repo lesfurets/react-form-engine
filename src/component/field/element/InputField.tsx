@@ -9,6 +9,15 @@ export interface InputFieldProps<T> extends FieldComponentProps<T>{
 
 export const InputField = (props: React.PropsWithChildren<InputFieldProps<string>>) => {
     let {field, tabIndex, children, inputType, inputMode, contextValue, onFieldEvent} = props;
+    let onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        let value = event.target.value;
+        if (value === "") {
+            onFieldEvent!(FIELD_EVENT.RESET_VALUE)
+        } else {
+            onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, value.trim());
+        }
+    };
+
     return (
         <div className="TextField-container">
             <input type={inputType}
@@ -18,7 +27,7 @@ export const InputField = (props: React.PropsWithChildren<InputFieldProps<string
                    id={field!.id}
                    tabIndex={tabIndex}
                    value={contextValue || ""}
-                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, event.target.value.trim())}
+                   onChange={onChange}
                    onBlur={() => onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, contextValue)}/>
             {children}
         </div>

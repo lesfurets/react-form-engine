@@ -52,13 +52,13 @@ const PASSWORD_CONFIRMATION = {
 
 const NUMBER = {
     id: "NUMBER",
-    type: FieldTypes.INPUT_NUMBER,
+    type: FieldTypes.INPUT_INTEGER,
     label: "Enter a number",
 };
 
 const AMOUNT = {
     id: "AMOUNT",
-    type: FieldTypes.INPUT_NUMBER,
+    type: FieldTypes.INPUT_DECIMAL,
     label: "Enter an amount",
     symbol: "€"
 };

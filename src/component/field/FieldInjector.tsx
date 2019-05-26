@@ -1,9 +1,10 @@
-import {FieldTypes} from "./FieldTypes";
-import {TextField} from "../component/field/TextField";
-import {EmailField} from "../component/field/EmailField";
-import {PasswordField} from "../component/field/PasswordField";
-import {IntegerField} from "../component/field/IntegerField";
+import {FieldTypes} from "../../definition/FieldTypes";
+import {TextField} from "./TextField";
+import {EmailField} from "./EmailField";
+import {PasswordField} from "./PasswordField";
+import {IntegerField} from "./IntegerField";
 import * as React from "react";
+import {DecimalField} from "./DecimalField";
 
 export class FieldInjector {
     static inject(type: string) {
@@ -14,8 +15,10 @@ export class FieldInjector {
                 return EmailField;
             case FieldTypes.INPUT_PASSWORD:
                 return PasswordField;
-            case FieldTypes.INPUT_NUMBER:
+            case FieldTypes.INPUT_INTEGER:
                 return IntegerField;
+            case FieldTypes.INPUT_DECIMAL:
+                return DecimalField;
             default:
                 return UNKNOWN_FIELD;
         }
