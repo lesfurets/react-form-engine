@@ -11,6 +11,8 @@ import {ValuePredicateEvaluator} from "./ValuePredicateEvaluator";
 import {ValueUtils} from "../../../definition/ValueUtils";
 import {Field} from "../../../definition/model/Field";
 import {FieldContext} from "../../../definition/FieldContext";
+import {NumberPredicate} from "../data/leaf/number/NumberPredicate";
+import {NumberPredicateEvaluator} from "./NumberPredicateEvaluator";
 
 export class PredicateEvaluator {
 
@@ -43,6 +45,11 @@ export class PredicateEvaluator {
         if(predicate instanceof StringPredicate) {
             return (context: FieldContext) => ValueUtils.isDefined(context[field.id])
                 && StringPredicateEvaluator.build(field, predicate)(context);
+        }
+
+        if(predicate instanceof NumberPredicate) {
+            return (context: FieldContext) => ValueUtils.isDefined(context[field.id])
+                && NumberPredicateEvaluator.build(field, predicate)(context);
         }
 
         return () => true;

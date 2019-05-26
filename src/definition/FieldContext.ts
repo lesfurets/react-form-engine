@@ -1,3 +1,3 @@
 export type FieldContext = {
-    [fieldId: string]: string | null
+    [fieldId: string]: any | null
 }
