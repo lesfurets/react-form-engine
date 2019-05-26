@@ -6,6 +6,7 @@ import {SelfPredicateBuilder} from "../../../../../src/dsl/predicate/builder/def
 import {ValuePredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/ValuePredicateBuilder";
 import {StringPredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/StringPredicateBuilder";
 import {Field} from "../../../../../src/definition/model/Field";
+import {NumberPredicateBuilder} from "../../../../../src/dsl/predicate/builder/value/NumberPredicateBuilder";
 
 describe("DSL/Predicate/Builder/ValuePredicateBuilder", () => {
 
@@ -33,6 +34,10 @@ describe("DSL/Predicate/Builder/ValuePredicateBuilder", () => {
 
     it("Should handle aString ", () => {
         expect(predicateTest.aString).toBeInstanceOf(StringPredicateBuilder);
+    });
+
+    it("Should handle aNumber ", () => {
+        expect(predicateTest.aNumber).toBeInstanceOf(NumberPredicateBuilder);
     });
 
 });
