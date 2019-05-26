@@ -1,11 +1,11 @@
 import * as React from "react";
 import {mount, ReactWrapper, shallow, ShallowWrapper} from "enzyme";
-import {TextField, TextFieldProps} from "../../../src/component/field/TextField";
+import {TextField} from "../../../src/component/field/TextField";
 import {TestUtils} from "../../TestUtils";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
 import {Field} from "../../../src/definition/model/Field";
-import {InputFieldProps, InputFieldState} from "../../../src/component/field/InputField";
+import {FieldComponentProps} from "../../../src/definition/component/FieldComponent";
 
 TestUtils.init();
 
@@ -60,7 +60,7 @@ describe("FormEngine/Field/TextField", () => {
     describe("onChange", () => {
         it("Should update value", () => {
             let onFieldEvent = jasmine.createSpy();
-            let container: ReactWrapper<TextFieldProps, InputFieldState, React.Component> = mount(<TextField field={field}
+            let container: ReactWrapper<FieldComponentProps<string>, any, React.Component> = mount(<TextField field={field}
                                                                                                                   contextValue=""
                                                                                                                   onFieldEvent={onFieldEvent}/>);
             let input = container.find('input');
@@ -73,7 +73,7 @@ describe("FormEngine/Field/TextField", () => {
     describe("onBlur", () => {
         it("Should submit value", () => {
             let onFieldEvent = jasmine.createSpy();
-            let container: ReactWrapper<TextFieldProps, InputFieldState, React.Component> = mount(<TextField field={field}
+            let container: ReactWrapper<FieldComponentProps<string>, any, React.Component> = mount(<TextField field={field}
                                                                                                                   contextValue={testValue}
                                                                                                                   onFieldEvent={onFieldEvent}/>);
             let input = container.find('input');

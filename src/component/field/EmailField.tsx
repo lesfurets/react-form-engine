@@ -1,5 +1,6 @@
 import * as React from "react";
-import {TextField, TextFieldProps} from "./TextField";
+import {FieldComponent, FieldComponentProps} from "../../definition/component/FieldComponent";
+import {InputField} from "./element/InputField";
 
-export const EmailField: React.FunctionComponent<TextFieldProps> =
-    (props: TextFieldProps) => <TextField {...props} inputType="email" inputMode="email"/>;
+export const EmailField: FieldComponent<string> =
+    (props: FieldComponentProps<string>) => <InputField {...props} inputType="email" inputMode="email"/>;

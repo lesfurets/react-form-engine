@@ -1,5 +1,6 @@
 import * as React from "react";
-import {TextField, TextFieldProps} from "./TextField";
+import {InputField, InputFieldProps} from "./element/InputField";
+import {FieldComponent} from "../../definition/component/FieldComponent";
 
-export const PasswordField: React.FunctionComponent<TextFieldProps> =
-    (props: TextFieldProps) => <TextField {...props} inputType="password"/>;
+export const PasswordField: FieldComponent<string> =
+    (props: InputFieldProps<string>) => <InputField {...props} inputType="password"/>;

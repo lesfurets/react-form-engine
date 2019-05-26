@@ -18,7 +18,7 @@ describe("FormEngine/Field/NumericField", () => {
         it("Input should have type decimal", () => {
             let container = mount(<IntegerField field={field}
                                                 onFieldEvent={TestUtils.emptyCallback}
-                                                contextValue=""/>);
+                                                contextValue={undefined}/>);
             console.log(container.debug());
             expect(container.find("input").props().inputMode).toBe("decimal");
         });
@@ -28,7 +28,7 @@ describe("FormEngine/Field/NumericField", () => {
         it("Input should have no symbol by default", () => {
             let container = mount(<IntegerField field={field}
                                                 onFieldEvent={TestUtils.emptyCallback}
-                                                contextValue=""/>);
+                                                contextValue={undefined}/>);
             expect(container.find("TextField-symbol").length).toBe(0);
         });
 
@@ -36,7 +36,7 @@ describe("FormEngine/Field/NumericField", () => {
             let symbol = "%";
             let container = mount(<IntegerField field={{...field, symbol: symbol}}
                                                 onFieldEvent={TestUtils.emptyCallback}
-                                                contextValue=""/>);
+                                                contextValue={undefined}/>);
             expect(container.find(".TextField-symbol").length).toBe(1);
             expect(container.find(".TextField-symbol").text()).toEqual(symbol);
         });

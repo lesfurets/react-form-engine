@@ -1,15 +1,20 @@
 import * as React from "react";
 
-import {InputField, InputFieldProps} from "./InputField";
+import {InputField, InputFieldProps} from "./element/InputField";
+import {FieldComponent} from "../../definition/component/FieldComponent";
+import {FormEvent} from "../../definition/event/Event";
 
-export type NumberFieldProps = InputFieldProps<number>;
+export const IntegerField: FieldComponent<number> =
+    (props: InputFieldProps<number>) => {
+        const contextValue = props.contextValue ? props.contextValue.toLocaleString() : "";
+        const onFieldEvent = (e: FormEvent, details: string) =>
+            props.onFieldEvent!(e, parseInt(details!.replace(/\s/g, "")));
 
-export const IntegerField: React.FunctionComponent<NumberFieldProps> =
-    (props: NumberFieldProps) => (
-        <InputField<number> {...props}
-                            inputMode="decimal"
-                            valueFromString={(value: string) => parseInt(value.replace(/\s/g,""))}
-                            valueToString={(value: number) => value ? value.toLocaleString() : ""}>
-            {props.field.symbol ? <span className="TextField-symbol">{props.field.symbol}</span> : null}
-        </InputField>
-    );
+        return (
+            <InputField {...props} inputMode="decimal"
+                        contextValue={contextValue}
+                        onFieldEvent={onFieldEvent}>
+                {props.field.symbol ? <span className="TextField-symbol">{props.field.symbol}</span> : null}
+            </InputField>
+        );
+    };
