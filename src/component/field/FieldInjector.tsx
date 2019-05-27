@@ -6,6 +6,7 @@ import {IntegerField} from "./IntegerField";
 import * as React from "react";
 import {DecimalField} from "./DecimalField";
 import {TextAreaField} from "./TextAreaField";
+import {SelectField} from "./SelectField";
 
 export class FieldInjector {
     static inject(type: string) {
@@ -22,6 +23,8 @@ export class FieldInjector {
                 return DecimalField;
             case FieldTypes.INPUT_TEXT_AREA:
                 return TextAreaField;
+            case FieldTypes.INPUT_SELECT:
+                return SelectField;
             default:
                 return UNKNOWN_FIELD;
         }

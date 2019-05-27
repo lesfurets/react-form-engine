@@ -21,7 +21,7 @@
     border: none;
   }
 
-  .TextField-container {
+  .TextField-container, .SelectField-container {
     display: flex;
     background-color: @highlight-light;
     border-left: solid transparent 5px;
@@ -45,6 +45,15 @@
       box-shadow: none;
     }
 
+    select {
+      font-size: 18px;
+      width: 100%;
+      box-shadow: none;
+      background-color: @highlight-light;
+      border: none;
+      outline: none;
+    }
+
     .TextField-symbol {
       padding: 0 5px;
       font-size: 22px;
@@ -52,24 +61,20 @@
     }
   }
 
-  .NumberField input {
-    text-align: right;
-  }
-
   &.field-default {
-    .TextField-container {
+    .TextField-container, .SelectField-container {
       border-left-color: @primary;
     }
   }
 
   &.field-valid {
-    .TextField-container {
+    .TextField-container, .SelectField-container {
       border-left-color: @valid;
     }
   }
 
   &.field-error {
-    .TextField-container {
+    .TextField-container, .SelectField-container {
       border-left-color: @error;
     }
   }

@@ -69,11 +69,23 @@ const TEXT_AREA = {
     label: "Enter a paragraph",
 };
 
+const SELECT = {
+    id: "SELECT",
+    type: FieldTypes.INPUT_SELECT,
+    label: "Select a value",
+    values:[
+        {id: "value1", label: "Value 1"},
+        {id: "value2", label: "Value 2"},
+        {id: "value3", label: "Value 3"},
+        {id: "value4", label: "Value 4"},
+    ]
+};
+
 const BLOCKS = {
     ALL_FIELDS: {
         id:"ALL_FIELDS",
         label: "All Fields",
-        fields: [FIRST_NAME , LAST_NAME , EMAIL , PHONE , PASSWORD , PASSWORD_CONFIRMATION , NUMBER , AMOUNT, TEXT_AREA]
+        fields: [FIRST_NAME , LAST_NAME , EMAIL , PHONE , PASSWORD , PASSWORD_CONFIRMATION , NUMBER , AMOUNT, TEXT_AREA, SELECT]
     },
     IDENTITY: {
         id:"IDENTITY",

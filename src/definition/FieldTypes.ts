@@ -7,6 +7,7 @@ export const FieldTypes: { [key: string]: FieldType } = {
     INPUT_PASSWORD: "PasswordField" as FieldType,
     INPUT_INTEGER: "IntegerField" as FieldType,
     INPUT_DECIMAL: "DecimalField" as FieldType,
+    INPUT_SELECT: "SelectField" as FieldType,
 };
 
 export const AllTypes: FieldType[] = Object.keys(FieldTypes).map(key => FieldTypes[key]);
