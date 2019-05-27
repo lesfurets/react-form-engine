@@ -63,11 +63,17 @@ const AMOUNT = {
     symbol: "€"
 };
 
+const TEXT_AREA = {
+    id: "TEXT_AREA",
+    type: FieldTypes.INPUT_TEXT_AREA,
+    label: "Enter a paragraph",
+};
+
 const BLOCKS = {
     ALL_FIELDS: {
         id:"ALL_FIELDS",
         label: "All Fields",
-        fields: [FIRST_NAME , LAST_NAME , EMAIL , PHONE , PASSWORD , PASSWORD_CONFIRMATION , NUMBER , AMOUNT]
+        fields: [FIRST_NAME , LAST_NAME , EMAIL , PHONE , PASSWORD , PASSWORD_CONFIRMATION , NUMBER , AMOUNT, TEXT_AREA]
     },
     IDENTITY: {
         id:"IDENTITY",

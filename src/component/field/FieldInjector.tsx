@@ -5,6 +5,7 @@ import {PasswordField} from "./PasswordField";
 import {IntegerField} from "./IntegerField";
 import * as React from "react";
 import {DecimalField} from "./DecimalField";
+import {TextAreaField} from "./TextAreaField";
 
 export class FieldInjector {
     static inject(type: string) {
@@ -19,6 +20,8 @@ export class FieldInjector {
                 return IntegerField;
             case FieldTypes.INPUT_DECIMAL:
                 return DecimalField;
+            case FieldTypes.INPUT_TEXT_AREA:
+                return TextAreaField;
             default:
                 return UNKNOWN_FIELD;
         }
