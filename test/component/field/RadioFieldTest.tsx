@@ -1,6 +1,6 @@
 import * as React from "react";
 import {mount} from "enzyme";
-import {PLEASE_SELECT_UNDEFINED, SelectField} from "../../../src/component/field/SelectField";
+import {RadioField} from "../../../src/component/field/RadioField";
 import {TestUtils} from "../../TestUtils";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {Field} from "../../../src/definition/model/Field";
@@ -8,7 +8,7 @@ import {FIELD_EVENT} from "../../../src/definition/event/events";
 
 TestUtils.init();
 
-describe("FormEngine/Field/SelectField", () => {
+describe("FormEngine/Field/RadioField", () => {
     let fieldValues = [
         {id:"value1",label:"value1"},
         {id:"value2",label:"value2"},
@@ -16,7 +16,7 @@ describe("FormEngine/Field/SelectField", () => {
     ];
     const field: Field = {
         id: "fieldId",
-        type: FieldTypes.INPUT_SELECT,
+        type: FieldTypes.INPUT_RADIO,
         values: fieldValues,
     };
 
@@ -24,40 +24,41 @@ describe("FormEngine/Field/SelectField", () => {
         it("Select should have no value by default", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<SelectField field={field}
+            let container = mount(<RadioField field={field}
                                                onFieldEvent={onFieldEvent}
                                                contextValue={undefined}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
-            expect(container.find("select").props().value).toBe(PLEASE_SELECT_UNDEFINED);
-            expect(container.find(`option[value="${PLEASE_SELECT_UNDEFINED}"]`).length).toBe(1);
+            expect(container.find('input[checked=true]').length).toBe(0);
+            expect(container.find(".RadioField-value.checked").length).toBe(0);
         });
 
         it("Select should reload context value", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let contextValue = fieldValues[0];
-            let container = mount(<SelectField field={field}
+            let container = mount(<RadioField field={field}
                                                onFieldEvent={onFieldEvent}
                                                contextValue={contextValue.id}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
-            expect(container.find("select").props().value).toBe(contextValue.id);
+            expect(container.find('input[checked=true]').props().value).toBe(contextValue.id);
         });
 
         it("Select should have defaultValue if no context value", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let defaultValue = fieldValues[0];
-            let container = mount(<SelectField field={{...field, defaultValue:defaultValue}}
+            let container = mount(<RadioField field={{...field, defaultValue:defaultValue}}
                                                                                onFieldEvent={onFieldEvent}
                                                                                contextValue={undefined}/>);
 
             // Then
+            container.update();
+            console.log(container.debug());
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, defaultValue.id);
-            expect(container.find(`option[value="${PLEASE_SELECT_UNDEFINED}"]`).length).toBe(0);
         });
 
         it("Select should not have defaultValue if there is a context value", () => {
@@ -65,53 +66,54 @@ describe("FormEngine/Field/SelectField", () => {
             let onFieldEvent = jasmine.createSpy();
             let defaultValue = fieldValues[0];
             let contextValue = fieldValues[1];
-            let container = mount(<SelectField field={{...field, defaultValue:defaultValue}}
+            let container = mount(<RadioField field={{...field, defaultValue:defaultValue}}
                                                onFieldEvent={onFieldEvent}
                                                contextValue={contextValue.id}/>);
 
-            console.log(container.debug());
-
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
-            expect(container.find("select").props().value).toBe(contextValue.id);
+            expect(container.find('input[checked=true]').props().value).toBe(contextValue.id);
         });
 
         it("Select should have all required values", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<SelectField field={field}
+            let container = mount(<RadioField field={field}
                                                onFieldEvent={onFieldEvent}
                                                contextValue={undefined}/>);
 
             // Then
-            expect(container.find("option").length).toBe(4);
+            expect(container.find("input").length).toBe(3);
         });
     });
 
     describe("onChange", () => {
+        it("Should submit value on clic", () => {
+            // Given
+            let onFieldEvent = jasmine.createSpy();
+            let value = fieldValues[0];
+            let container = mount(<RadioField field={field}
+                                               onFieldEvent={onFieldEvent}
+                                               contextValue={undefined}/>);
+            // Then
+            let label = container.find(`label.${value.id}`);
+            console.log(container.debug());
+            label.simulate('click');
+            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, value.id);
+        });
+
         it("Should submit value on change", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let value = fieldValues[0];
-            let container = mount(<SelectField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
+            let container = mount(<RadioField field={field}
+                                              onFieldEvent={onFieldEvent}
+                                              contextValue={undefined}/>);
             // Then
-            let select = container.find('select');
-            select.simulate('change', {target: {value: value.id}});
+            let label = container.find(`input[value="${value.id}"]`);
+            console.log(container.debug());
+            label.simulate('change');
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, value.id);
-        });
-
-        it("Should reset value on default", () => {
-            // Given
-            let onFieldEvent = jasmine.createSpy();
-            let container = mount(<SelectField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
-            // Then
-            let select = container.find('select');
-            select.simulate('change', {target: {value: PLEASE_SELECT_UNDEFINED}});
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.RESET_VALUE);
         });
     });
 
