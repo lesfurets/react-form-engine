@@ -17,6 +17,7 @@ export class Field implements FormElement {
     getValidation?: (state: FieldContext) => Validation;
     isVisible?: (state: FieldContext) => boolean;
     values?: FieldValue[];
+    defaultValue?: FieldValue;
     [key: string]: any;
 }
 

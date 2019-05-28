@@ -69,23 +69,32 @@ const TEXT_AREA = {
     label: "Enter a paragraph",
 };
 
+let SELECT_VALUES = [
+    {id: "value1", label: "Value 1"},
+    {id: "value2", label: "Value 2"},
+    {id: "value3", label: "Value 3"},
+    {id: "value4", label: "Value 4"},
+];
 const SELECT = {
     id: "SELECT",
     type: FieldTypes.INPUT_SELECT,
     label: "Select a value",
-    values:[
-        {id: "value1", label: "Value 1"},
-        {id: "value2", label: "Value 2"},
-        {id: "value3", label: "Value 3"},
-        {id: "value4", label: "Value 4"},
-    ]
+    values: SELECT_VALUES
+};
+
+const FILLED_SELECT = {
+    id: "FILLED_SELECT",
+    type: FieldTypes.INPUT_SELECT,
+    label: "Select a value",
+    values:SELECT_VALUES,
+    defaultValue:SELECT_VALUES[0],
 };
 
 const BLOCKS = {
     ALL_FIELDS: {
         id:"ALL_FIELDS",
         label: "All Fields",
-        fields: [FIRST_NAME , LAST_NAME , EMAIL , PHONE , PASSWORD , PASSWORD_CONFIRMATION , NUMBER , AMOUNT, TEXT_AREA, SELECT]
+        fields: [FIRST_NAME , LAST_NAME , EMAIL , PHONE , PASSWORD , PASSWORD_CONFIRMATION , NUMBER , AMOUNT, TEXT_AREA, SELECT, FILLED_SELECT]
     },
     IDENTITY: {
         id:"IDENTITY",
