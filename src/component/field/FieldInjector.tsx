@@ -1,12 +1,13 @@
+import * as React from "react";
 import {FieldTypes} from "../../definition/FieldTypes";
 import {TextField} from "./TextField";
 import {EmailField} from "./EmailField";
 import {PasswordField} from "./PasswordField";
 import {IntegerField} from "./IntegerField";
-import * as React from "react";
 import {DecimalField} from "./DecimalField";
 import {TextAreaField} from "./TextAreaField";
 import {SelectField} from "./SelectField";
+import {RadioField} from "./RadioField";
 
 export class FieldInjector {
     static inject(type: string) {
@@ -25,6 +26,8 @@ export class FieldInjector {
                 return TextAreaField;
             case FieldTypes.INPUT_SELECT:
                 return SelectField;
+            case FieldTypes.INPUT_RADIO:
+                return RadioField;
             default:
                 return UNKNOWN_FIELD;
         }
