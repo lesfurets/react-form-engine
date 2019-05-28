@@ -4,7 +4,7 @@ import {FieldComponent} from "../../definition/component/FieldComponent";
 import {FIELD_EVENT} from "../../definition/event/events";
 import {useEffect} from "react";
 
-const PLEASE_SELECT_UNDEFINED = "PLEASE_SELECT_UNDEFINED";
+export const PLEASE_SELECT_UNDEFINED = "PLEASE_SELECT_UNDEFINED";
 
 export const SelectField: FieldComponent<string> =
     (props: InputFieldProps<string>) => {
