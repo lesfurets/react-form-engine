@@ -50,6 +50,12 @@ const PASSWORD_CONFIRMATION = {
     }
 };
 
+const TEXT = {
+    id: "TEXT",
+    type: FieldTypes.INPUT_TEXT,
+    label: "Enter a text"
+};
+
 const NUMBER = {
     id: "NUMBER",
     type: FieldTypes.INPUT_INTEGER,
@@ -79,13 +85,20 @@ let SELECT_VALUES = [
 const SELECT = {
     id: "SELECT",
     type: FieldTypes.INPUT_SELECT,
-    label: "Select a value",
+    label: "Make your choice",
     values: SELECT_VALUES
 };
 
 const RADIO = {
     id: "RADIO",
     type: FieldTypes.INPUT_RADIO,
+    label: "Make your choice",
+    values: SELECT_VALUES
+};
+
+const CHECKBOX = {
+    id: "CHECKBOX",
+    type: FieldTypes.INPUT_CHECKBOX,
     label: "Select a radio",
     values: SELECT_VALUES
 };
@@ -94,7 +107,7 @@ const BLOCKS = {
     ALL_FIELDS: {
         id:"ALL_FIELDS",
         label: "All Fields",
-        fields: [FIRST_NAME , LAST_NAME , EMAIL , PHONE , PASSWORD , PASSWORD_CONFIRMATION , NUMBER , AMOUNT, TEXT_AREA, SELECT, RADIO]
+        fields: [TEXT, PASSWORD , NUMBER , AMOUNT, TEXT_AREA, SELECT, RADIO, CHECKBOX]
     },
     IDENTITY: {
         id:"IDENTITY",

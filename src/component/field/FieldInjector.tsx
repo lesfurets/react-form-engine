@@ -8,6 +8,7 @@ import {DecimalField} from "./DecimalField";
 import {TextAreaField} from "./TextAreaField";
 import {SelectField} from "./SelectField";
 import {RadioField} from "./RadioField";
+import {CheckboxField} from "./CheckboxField";
 
 export class FieldInjector {
     static inject(type: string) {
@@ -28,6 +29,8 @@ export class FieldInjector {
                 return SelectField;
             case FieldTypes.INPUT_RADIO:
                 return RadioField;
+            case FieldTypes.INPUT_CHECKBOX:
+                return CheckboxField;
             default:
                 return UNKNOWN_FIELD;
         }

@@ -9,6 +9,7 @@ export const FieldTypes: { [key: string]: FieldType } = {
     INPUT_DECIMAL: "DecimalField" as FieldType,
     INPUT_SELECT: "SelectField" as FieldType,
     INPUT_RADIO: "RadioField" as FieldType,
+    INPUT_CHECKBOX: "CheckboxField" as FieldType,
 };
 
 export const AllTypes: FieldType[] = Object.keys(FieldTypes).map(key => FieldTypes[key]);

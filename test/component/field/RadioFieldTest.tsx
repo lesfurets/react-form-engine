@@ -57,7 +57,6 @@ describe("FormEngine/Field/RadioField", () => {
 
             // Then
             container.update();
-            console.log(container.debug());
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, defaultValue.id);
         });
 
@@ -88,20 +87,6 @@ describe("FormEngine/Field/RadioField", () => {
     });
 
     describe("onChange", () => {
-        it("Should submit value on clic", () => {
-            // Given
-            let onFieldEvent = jasmine.createSpy();
-            let value = fieldValues[0];
-            let container = mount(<RadioField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
-            // Then
-            let label = container.find(`label.${value.id}`);
-            console.log(container.debug());
-            label.simulate('click');
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, value.id);
-        });
-
         it("Should submit value on change", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
@@ -111,7 +96,6 @@ describe("FormEngine/Field/RadioField", () => {
                                               contextValue={undefined}/>);
             // Then
             let label = container.find(`input[value="${value.id}"]`);
-            console.log(container.debug());
             label.simulate('change');
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, value.id);
         });

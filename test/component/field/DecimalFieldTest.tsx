@@ -20,7 +20,6 @@ describe("FormEngine/Field/NumericField", () => {
             let container = mount(<DecimalField field={field}
                                                 onFieldEvent={TestUtils.emptyCallback}
                                                 contextValue={undefined}/>);
-            console.log(container.debug());
             expect(container.find("input").props().inputMode).toBe("decimal");
         });
     });

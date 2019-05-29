@@ -4,6 +4,9 @@ import {TextField} from "../../../src/component/field/TextField";
 import {EmailField} from "../../../src/component/field/EmailField";
 import {IntegerField} from "../../../src/component/field/IntegerField";
 import {PasswordField} from "../../../src/component/field/PasswordField";
+import {CheckboxField} from "../../../src/component/field/CheckboxField";
+import {RadioField} from "../../../src/component/field/RadioField";
+import {SelectField} from "../../../src/component/field/SelectField";
 
 describe("FormEngine/Definition/FieldInjector", () => {
 
@@ -23,6 +26,18 @@ describe("FormEngine/Definition/FieldInjector", () => {
 
         it("Should display PasswordField on INPUT_PASSWORD", () => {
             expect(FieldInjector.inject(FieldTypes.INPUT_PASSWORD)).toBe(PasswordField);
+        });
+
+        it("Should display PasswordField on INPUT_SELECT", () => {
+            expect(FieldInjector.inject(FieldTypes.INPUT_SELECT)).toBe(SelectField);
+        });
+
+        it("Should display PasswordField on INPUT_RADIO", () => {
+            expect(FieldInjector.inject(FieldTypes.INPUT_RADIO)).toBe(RadioField);
+        });
+
+        it("Should display PasswordField on INPUT_CHECKBOX", () => {
+            expect(FieldInjector.inject(FieldTypes.INPUT_CHECKBOX)).toBe(CheckboxField);
         });
 
         it("Should display nothing on unknown field", () => {

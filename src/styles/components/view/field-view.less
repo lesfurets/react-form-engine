@@ -37,7 +37,7 @@
   .TextField-container, .SelectField-container {
     display: flex;
     background-color: @highlight-light;
-    border-left: solid transparent 5px;
+    border-left: solid @primary 5px;
     align-items: center;
     padding: 10px 10px 10px 5px;
 
@@ -112,10 +112,51 @@
 
   }
 
-  &.field-default {
-    .TextField-container, .SelectField-container {
-      border-left-color: @primary;
+  .CheckboxField {
+    &-input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
     }
+
+    &-value {
+      font-size: 18px;
+      display: block;
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+
+      &.checked {
+        .CheckboxField-check {
+          //border: 3px solid @primary;
+          //padding: 3px;
+
+          &:after {
+            content: "\2713";
+            display: block;
+            position: absolute;
+            color: @primary;
+            font-size: 40px;
+            top: -13px;
+            left: -1px;
+            transform: rotate(17deg);
+          }
+        }
+      }
+    }
+
+    &-check {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 30px;
+      background-color: @highlight-light;
+      border-left: solid @primary 5px;
+    }
+
   }
 
   &.field-valid {
@@ -129,6 +170,13 @@
         background-color: @valid;
       }
     }
+
+    .CheckboxField-value.checked .CheckboxField-check {
+      border-color: @valid;
+      &:after {
+        color: @valid;
+      }
+    }
   }
 
   &.field-error {
@@ -140,6 +188,13 @@
       border-color: @error;
       &:after {
         background-color: @error;
+      }
+    }
+
+    .CheckboxField-value.checked .CheckboxField-check {
+      border-color: @error;
+      &:after {
+        color: @error;
       }
     }
   }

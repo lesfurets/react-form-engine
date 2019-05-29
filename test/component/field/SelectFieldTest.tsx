@@ -69,8 +69,6 @@ describe("FormEngine/Field/SelectField", () => {
                                                onFieldEvent={onFieldEvent}
                                                contextValue={contextValue.id}/>);
 
-            console.log(container.debug());
-
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
             expect(container.find("select").props().value).toBe(contextValue.id);

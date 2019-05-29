@@ -3,12 +3,13 @@ import {InputField, InputFieldProps} from "./element/InputField";
 import {FieldComponent} from "../../definition/component/FieldComponent";
 import {FIELD_EVENT} from "../../definition/event/events";
 import {useEffect} from "react";
+import {FieldValue} from "../../definition/model/Field";
 
 export const RadioField: FieldComponent<string> =
     ({contextValue, onFieldEvent, field}: InputFieldProps<string>) => {
         useEffect(() => {
             if(contextValue === undefined && field.defaultValue) {
-                onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, field.defaultValue!.id);
+                onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, (field.defaultValue! as FieldValue).id);
             }
         },[]);
 
@@ -20,7 +21,6 @@ export const RadioField: FieldComponent<string> =
 
                     return (
                         <label key={value.id}
-                               onClick={onChange}
                                className={`RadioField-value ${isChecked ? "checked" : ""} ${value.id}`}>
                             {value.label}
                             <input type="radio"
