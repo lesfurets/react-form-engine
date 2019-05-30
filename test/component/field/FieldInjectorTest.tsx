@@ -1,4 +1,4 @@
-import {FieldTypes} from "../../../src/definition/FieldTypes";
+import {FieldType, FieldTypes} from "../../../src/definition/FieldTypes";
 import {FieldInjector, UNKNOWN_FIELD} from "../../../src/component/field/FieldInjector";
 import {TextField} from "../../../src/component/field/TextField";
 import {EmailField} from "../../../src/component/field/EmailField";
@@ -41,7 +41,7 @@ describe("FormEngine/Definition/FieldInjector", () => {
         });
 
         it("Should display nothing on unknown field", () => {
-            expect(FieldInjector.inject("unexpected")).toBe(UNKNOWN_FIELD);
+            expect(FieldInjector.inject(new FieldType("unexpected"))).toBe(UNKNOWN_FIELD);
         });
 
     });

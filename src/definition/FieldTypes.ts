@@ -1,15 +1,23 @@
-export type FieldType = string;
+// export type FieldType = string;
 
-export const FieldTypes: { [key: string]: FieldType } = {
-    INPUT_TEXT: "TextField" as FieldType,
-    INPUT_TEXT_AREA: "TextAreaField" as FieldType,
-    INPUT_EMAIL: "EmailField" as FieldType,
-    INPUT_PASSWORD: "PasswordField" as FieldType,
-    INPUT_INTEGER: "IntegerField" as FieldType,
-    INPUT_DECIMAL: "DecimalField" as FieldType,
-    INPUT_SELECT: "SelectField" as FieldType,
-    INPUT_RADIO: "RadioField" as FieldType,
-    INPUT_CHECKBOX: "CheckboxField" as FieldType,
+export class FieldType {
+    id:string;
+
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+
+export const FieldTypes = {
+    INPUT_TEXT: new FieldType("TextField"),
+    INPUT_TEXT_AREA: new FieldType("TextAreaField"),
+    INPUT_EMAIL: new FieldType("EmailField"),
+    INPUT_PASSWORD: new FieldType("PasswordField"),
+    INPUT_INTEGER: new FieldType("IntegerField"),
+    INPUT_DECIMAL: new FieldType("DecimalField"),
+    INPUT_SELECT: new FieldType("SelectField"),
+    INPUT_RADIO: new FieldType("RadioField"),
+    INPUT_CHECKBOX: new FieldType("CheckboxField"),
 };
 
-export const AllTypes: FieldType[] = Object.keys(FieldTypes).map(key => FieldTypes[key]);
+export const AllTypes: FieldType[] = Object.values(FieldTypes);

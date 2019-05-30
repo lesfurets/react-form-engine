@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FieldTypes} from "../../definition/FieldTypes";
+import {FieldType, FieldTypes} from "../../definition/FieldTypes";
 import {TextField} from "./TextField";
 import {EmailField} from "./EmailField";
 import {PasswordField} from "./PasswordField";
@@ -11,7 +11,7 @@ import {RadioField} from "./RadioField";
 import {CheckboxField} from "./CheckboxField";
 
 export class FieldInjector {
-    static inject(type: string) {
+    static inject(type: FieldType) {
         switch (type) {
             case FieldTypes.INPUT_TEXT:
                 return TextField;
