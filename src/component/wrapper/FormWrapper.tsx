@@ -9,12 +9,11 @@ import {Form} from "../../definition/model/Form";
 import {FieldView} from "../../definition/view/FieldView";
 import {BlockView} from "../../definition/view/BlockView";
 import {FormView} from "../../definition/view/FormView";
+import {ViewContext} from "../context/ViewContext";
+import {DefaultFormView} from "../view/DefaultFormView";
 
 export interface FormWrapperProps {
     form: Form,
-    View: FormView,
-    BlockView: BlockView,
-    FieldView: FieldView,
 }
 
 export interface FormWrapperState {
@@ -63,18 +62,20 @@ export default class FormWrapper extends React.Component<FormWrapperProps, FormW
     }
 
     render() {
-        let {form, View, BlockView, FieldView} = this.props;
+        let {form} = this.props;
         let {currentIndex} = this.state;
         return (
-            <View onEvent={this.onEvent}
-                  form={form}>
-                {form.blocks.map((block, index) =>
-                    <BlockWrapper key={block.id}
-                                  block={{...block, index: index}}
-                                  blockState={FormWrapper.getBlockState(index, currentIndex)}
-                                  View={BlockView}
-                                  FieldView={FieldView}/>)}
-            </View>
+            <ViewContext.Consumer>
+                {({FormView: FormView}) => (
+                    <FormView onEvent={this.onEvent}
+                              form={form}>
+                        {form.blocks.map((block, index) =>
+                            <BlockWrapper key={block.id}
+                                          block={{...block, index: index}}
+                                          blockState={FormWrapper.getBlockState(index, currentIndex)}/>)}
+                    </FormView>
+                )}
+            </ViewContext.Consumer>
         );
     }
 }

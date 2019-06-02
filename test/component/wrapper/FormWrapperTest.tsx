@@ -1,22 +1,20 @@
 import * as React from "react";
 
-import {shallow} from "enzyme";
+import {mount, shallow} from "enzyme";
 import {BlockWrapper} from "../../../src/component/wrapper/BlockWrapper";
 import FormWrapper from "../../../src/component/wrapper/FormWrapper";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {TestUtils} from "../../TestUtils";
-import {FieldViewProps} from "../../../src/definition/view/FieldView";
-import {BlockViewProps} from "../../../src/definition/view/BlockView";
-import {FormViewProps} from "../../../src/definition/view/FormView";
+import {createStore} from "redux";
+import reducer from "../../../src/redux/reducers";
+import {Provider} from "react-redux";
 
 TestUtils.init();
 
 describe("FormEngine/Wrapper/FormWrapper", () => {
-    let TestFormView = (p: FormViewProps) => (<div>{p.children}</div>);
-    let TestFieldView = (p: FieldViewProps) => (<div>{p.children}</div>);
-    let TestBlockView = (p: BlockViewProps) => (<div>{p.children}</div>);
+    let store = createStore(reducer);
 
     let formModel = {
         id: "form",
@@ -29,11 +27,10 @@ describe("FormEngine/Wrapper/FormWrapper", () => {
 
     describe("Blocks", () => {
         it("Should render Blocks", () => {
-            let container = shallow(<FormWrapper
-                form={formModel}
-                View={TestFormView}
-                BlockView={TestBlockView}
-                FieldView={TestFieldView}/>);
+            let container = mount(
+                <Provider store={store}>
+                    <FormWrapper form={formModel}/>
+                </Provider>);
             expect(container.find(BlockWrapper).length).toBe(formModel.blocks.length);
         });
     })
@@ -48,11 +45,7 @@ describe("FormEngine/Wrapper/FormWrapper", () => {
 
             // When
             EVENT_MULTICASTER.subscribe(onEvent);
-            let container = shallow<FormWrapper>(<FormWrapper
-                form={formModel}
-                View={TestFormView}
-                BlockView={TestBlockView}
-                FieldView={TestFieldView}/>);
+            let container = shallow<FormWrapper>(<FormWrapper form={formModel}/>);
             container.instance().onEvent(event,details);
 
             // Then

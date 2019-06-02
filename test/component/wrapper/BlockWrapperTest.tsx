@@ -14,20 +14,10 @@ import {TestUtils} from "../../TestUtils";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {Field} from "../../../src/definition/model/Field";
 import {Block} from "../../../src/definition/model/Block";
-import {FieldViewProps} from "../../../src/definition/view/FieldView";
-import {BlockViewProps} from "../../../src/definition/view/BlockView";
 
 TestUtils.init();
 
 describe("FormEngine/Wrapper/BlockWrapper", () => {
-    let TestFieldView = (p: FieldViewProps) => (<div>{p.children}</div>);
-    let TestBlockView = (p: BlockViewProps) => (
-        <div>
-            <div>{p.children}</div>
-            <button className="TestButton" onClick={() => p.onEvent!(BLOCK_EVENT.NEXT)}/>
-        </div>
-    );
-
     let store = createStore(reducer);
 
     let blockTest: Block = {
@@ -42,12 +32,12 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
     describe("Fields", () => {
         it("Should render Fields by default", () => {
-            let container = shallow(<BlockWrapperComponent
-                block={blockTest}
-                setFieldValue={TestUtils.emptyCallback}
-                View={TestBlockView}
-                FieldView={TestFieldView}
-                fieldContext={{}}/>);
+            let container = mount(
+                <Provider store={store}>
+                    <BlockWrapper block={blockTest}/>
+                </Provider>);
+
+            console.log(container.debug());
             expect(container.find(FieldWrapper).length).toBe(blockTest.fields.length);
         });
     });
@@ -66,13 +56,13 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
             };
             block.fields = block.fields.concat(fields);
             EVENT_MULTICASTER.subscribe(onBlockEvent);
-            let container = mount(
-                <Provider store={store}>
-                    <BlockWrapper block={block}
-                                  View={TestBlockView}
-                                  FieldView={TestFieldView}/>
-                </Provider>);
-            container.find(".TestButton").simulate("click");
+
+            let container = shallow<BlockWrapperComponent>(<BlockWrapperComponent
+                setFieldValue={TestUtils.emptyCallback}
+                block={block}
+                fieldContext={{}}/>);
+
+            container.instance().onEvent(BLOCK_EVENT.NEXT,null);
             expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.NEXT, block, null);
             if (success) {
                 expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.VALIDATED, block, null);
@@ -140,8 +130,6 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
             let container = shallow<BlockWrapperComponent>(<BlockWrapperComponent
                 setFieldValue={TestUtils.emptyCallback}
                 block={blockTest}
-                View={TestBlockView}
-                FieldView={TestFieldView}
                 fieldContext={{}}/>);
 
             container.instance().onEvent(event,details);

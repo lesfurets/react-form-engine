@@ -7,12 +7,12 @@ import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 import {FormEvent} from "../../definition/event/Event";
 import {Field, FIELD_STATE} from "../../definition/model/Field";
 import {FieldView} from "../../definition/view/FieldView";
+import {ViewContext} from "../context/ViewContext";
 
 export interface FieldWrapperProps {
     field: Field;
     tabIndex: number;
     forceValidation: boolean;
-    View: FieldView;
 }
 export interface FieldWrapperState {
     shouldValidate: boolean;
@@ -69,23 +69,27 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
     }
 
     render() {
-        let {View, field, tabIndex, fieldContext} = this.props;
+        let {field, tabIndex, fieldContext} = this.props;
         let isVisible = field.hasOwnProperty('isVisible') ? field.isVisible!(fieldContext) : true;
         let contextValue: any = fieldContext[field.id];
         let {fieldState, validation} = this.getState();
         let Field = FieldInjector.inject(field.type);
 
         return (
-            <View field={field}
-                  isVisible={isVisible}
-                  onEvent={this.onViewEvent}
-                  errorMessage={validation.message}
-                  fieldState={fieldState}>
-                <Field field={field}
-                       tabIndex={tabIndex}
-                       onFieldEvent={this.onFieldEvent}
-                       contextValue={contextValue ? contextValue : undefined}/>
-            </View>
+            <ViewContext.Consumer>
+                {({FieldView: FieldView}) => (
+                    <FieldView field={field}
+                          isVisible={isVisible}
+                          onEvent={this.onViewEvent}
+                          errorMessage={validation.message}
+                          fieldState={fieldState}>
+                        <Field field={field}
+                               tabIndex={tabIndex}
+                               onFieldEvent={this.onFieldEvent}
+                               contextValue={contextValue ? contextValue : undefined}/>
+                    </FieldView>
+                )}
+            </ViewContext.Consumer>
         );
     }
 }

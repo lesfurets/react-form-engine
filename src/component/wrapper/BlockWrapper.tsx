@@ -7,16 +7,12 @@ import {FormEvent} from "../../definition/event/Event";
 import {FieldWrapper} from "./FieldWrapper";
 import {fieldConnect, FieldProps} from "../../redux/fieldConnect";
 import {Block, BLOCK_STATE} from "../../definition/model/Block";
-import {FieldView} from "../../definition/view/FieldView";
 import {BlockView} from "../../definition/view/BlockView";
+import {ViewContext} from "../context/ViewContext";
 
 export interface BlockWrapperProps {
     blockState: BLOCK_STATE,
     block: Block,
-    View: BlockView,
-    FieldView: FieldView,
-    // fieldContext: FieldContext,
-    // setFieldValue: (id: string, value: string) => void
 }
 
 
@@ -58,19 +54,22 @@ export class BlockWrapperComponent extends React.Component<BlockWrapperProps & F
     }
 
     render() {
-        let {block, blockState, View, FieldView} = this.props;
+        let {block, blockState} = this.props;
         return (
-            <View block={block}
-                  index={block.index!}
-                  blockState={blockState}
-                  onEvent={this.onEvent}>
-                {this.props.block.fields.map((field, index) =>
-                    <FieldWrapper key={field.id}
-                                  field={{...field}}
-                                  tabIndex={index + 1}
-                                  forceValidation={this.state.forceValidation}
-                                  View={FieldView}/>)}
-            </View>
+            <ViewContext.Consumer>
+                {({BlockView: BlockView}) => (
+                    <BlockView block={block}
+                               index={block.index!}
+                               blockState={blockState}
+                               onEvent={this.onEvent}>
+                        {this.props.block.fields.map((field, index) =>
+                            <FieldWrapper key={field.id}
+                                          field={{...field}}
+                                          tabIndex={index + 1}
+                                          forceValidation={this.state.forceValidation}/>)}
+                    </BlockView>
+                )}
+            </ViewContext.Consumer>
         );
     }
 }

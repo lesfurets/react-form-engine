@@ -7,20 +7,18 @@ import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {TestUtils} from "../../TestUtils";
 import {mount, shallow} from "enzyme";
 import {FIELD_STATE} from "../../../src/definition/model/Field";
-import {FieldViewProps} from "../../../src/definition/view/FieldView";
+import {DefaultFieldView} from "../../../src/component/view/DefaultFieldView";
 
 TestUtils.init();
 
 describe("FormEngine/Wrapper/FieldWrapper", () => {
 
-    let TestFieldView = (p: FieldViewProps) => (<div>{p.children}</div>);
     let testId = 'testChild1';
     let model = {id: testId, type: FieldTypes.INPUT_TEXT};
     let props = {
         field: model,
         setFieldValue: TestUtils.emptyCallback,
         fieldContext: {},
-        View: TestFieldView
     };
 
     describe("States", () => {
@@ -95,12 +93,13 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             };
 
             // When
-            let container = shallow<FieldWrapperComponent>(<FieldWrapperComponent {...props}
+            let container = mount<FieldWrapperComponent>(<FieldWrapperComponent {...props}
                                                            field={field}
                                                            fieldContext={fieldContext}/>);
 
+            console.log(container.debug());
             // Then
-            expect(container.find(TestFieldView).props().fieldState).toBe(FIELD_STATE.VALID);
+            expect(container.find(DefaultFieldView).props().fieldState).toBe(FIELD_STATE.VALID);
         });
 
     });
@@ -217,7 +216,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                                                          }}/>);
 
             // Then
-            expect(container.find(TestFieldView).props().isVisible).toBe(true);
+            expect(container.find(DefaultFieldView).props().isVisible).toBe(true);
         });
 
         it("Should pass visibility false to children", () => {
@@ -228,8 +227,9 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                                                              isVisible: () => false
                                                          }}/>);
 
+            console.log(container.debug());
             // Then
-            expect(container.find(TestFieldView).props().isVisible).toBe(false);
+            expect(container.find(DefaultFieldView).props().isVisible).toBe(false);
         });
 
     });
