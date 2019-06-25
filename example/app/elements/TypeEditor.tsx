@@ -1,8 +1,8 @@
 import * as React from "react";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import {AllTypes, FieldType, FieldTypes} from "../../../src/definition/FieldTypes";
-import {FieldTypesDetails} from "../definition/FieldTypesDetails";
+import {AllTypes, FieldType} from "../../../src/definition/FieldTypes";
+import {getFieldTypesDetails} from "../definition/FieldTypesDetails";
 
 interface TypeEditorProps {
     type: FieldType,
@@ -11,12 +11,12 @@ interface TypeEditorProps {
 };
 export const TypeEditor: React.FunctionComponent<TypeEditorProps> = ({type, className, onChange}) => (
     <TextField select
-               value={type}
+               value={type.id}
                label={"Field Type"}
                className={className}
-               onChange={(event) => onChange(AllTypes.find(type => type === event.target.value) || AllTypes[0])}
+               onChange={(event) => onChange(AllTypes.find(type => type.id === event.target.value) || AllTypes[0])}
                margin="normal">
-        {AllTypes.map(type => (<MenuItem key={type} value={type}>{FieldTypesDetails[type].label}</MenuItem>))}
+        {AllTypes.map(type => (<MenuItem key={type.id} value={type.id}>{getFieldTypesDetails(type).label}</MenuItem>))}
     </TextField>
 );
 

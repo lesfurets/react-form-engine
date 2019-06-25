@@ -15,7 +15,7 @@ import {VisibilityEditor} from "../elements/VisibilityEditor";
 import {ValidationEditor} from "../elements/ValidationEditor";
 import {PropertyUpdate} from "../editor/ModelUpdater";
 import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
-import {FieldTypesDetails} from "../definition/FieldTypesDetails";
+import {FieldTypesDetails, getFieldTypesDetails} from "../definition/FieldTypesDetails";
 import {DRAG_DROP_TYPE} from "./FormEditorView";
 
 import "../../styles/view/field-editor-view.less"
@@ -51,7 +51,7 @@ export const FieldEditorView:FieldView = ({field, onEvent, index}) => {
                                             onChange={updateProperty("type")}/>
                             </div>
                             <div className={"FieldEditorView-details"}>
-                                {FieldTypesDetails[field.type].properties.map(property => (
+                                {getFieldTypesDetails(field.type).properties.map(property => (
                                     <div key={property.key}>
                                         <PropertyEditor label={property.label}
                                                         value={(field[property.key])}
