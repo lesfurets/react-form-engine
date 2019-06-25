@@ -5,6 +5,7 @@ import {FormEvent} from "../event/Event";
 
 export interface FieldViewProps {
     field: Field
+    index: number
     fieldState: string
     errorMessage: string
     isVisible?: boolean

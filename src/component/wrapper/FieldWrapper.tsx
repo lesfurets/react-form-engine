@@ -11,6 +11,7 @@ import {ViewContext} from "../context/ViewContext";
 
 export interface FieldWrapperProps {
     field: Field;
+    index: number;
     tabIndex: number;
     forceValidation: boolean;
 }
@@ -69,7 +70,7 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
     }
 
     render() {
-        let {field, tabIndex, fieldContext} = this.props;
+        let {field, index, tabIndex, fieldContext} = this.props;
         let isVisible = field.hasOwnProperty('isVisible') ? field.isVisible!(fieldContext) : true;
         let contextValue: any = fieldContext[field.id];
         let {fieldState, validation} = this.getState();
@@ -79,10 +80,11 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
             <ViewContext.Consumer>
                 {({FieldView: FieldView}) => (
                     <FieldView field={field}
-                          isVisible={isVisible}
-                          onEvent={this.onViewEvent}
-                          errorMessage={validation.message}
-                          fieldState={fieldState}>
+                               index={index}
+                              isVisible={isVisible}
+                              onEvent={this.onViewEvent}
+                              errorMessage={validation.message}
+                              fieldState={fieldState}>
                         <Field field={field}
                                tabIndex={tabIndex}
                                onFieldEvent={this.onFieldEvent}

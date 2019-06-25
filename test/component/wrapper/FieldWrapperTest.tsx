@@ -17,6 +17,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
     let model = {id: testId, type: FieldTypes.INPUT_TEXT};
     let props = {
         field: model,
+        index: 0,
         setFieldValue: TestUtils.emptyCallback,
         fieldContext: {},
     };
