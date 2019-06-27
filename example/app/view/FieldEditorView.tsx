@@ -19,20 +19,29 @@ import {FieldTypesDetails, getFieldTypesDetails} from "../definition/FieldTypesD
 import {DRAG_DROP_TYPE} from "./FormEditorView";
 
 import "../../styles/view/field-editor-view.less"
+import {Form} from "../../../src/definition/model/Form";
+import {VisibilityBuilder} from "../../../src/dsl/visibility/VisibilityBuilder";
+import {Predicates} from "../../../src/dsl/predicate/builder/Predicates";
+import {ModelUtils} from "../../../src/definition/ModelUtils";
+import {ValidationBuilder} from "../../../src/dsl/validation/ValidationBuilder";
+import {FormEditor} from "../editor/FormEditor";
 
 export const FIELD_EDITOR_EVENT = {
-    EDIT_PROPERTY: new FormEvent("EDIT_FIELD_PROPERTY", EventTypes.Field),
-    ADD_VISIBILITY: new FormEvent("ADD_VISIBILITY", EventTypes.Field),
-    DELETE_VISIBILITY: new FormEvent("DELETE_VISIBILITY", EventTypes.Field),
-    ADD_VALIDATION: new FormEvent("ADD_VALIDATION", EventTypes.Field),
-    DELETE_VALIDATION: new FormEvent("DELETE_VALIDATION", EventTypes.Field),
+    EDIT_PROPERTIES: new FormEvent("EDIT_PROPERTIES", EventTypes.Field),
+    DELETE_PROPERTIES: new FormEvent("DELETE_PROPERTIES", EventTypes.Field),
     DELETE: new FormEvent("DELETE_FIELD", EventTypes.Field),
 };
+
+const generateVisibilityRules = (model: Form) =>
+    VisibilityBuilder.isNotVisible.when(Predicates.field(ModelUtils.getFieldList(model)[0]).is.defined());
+
+const generateValidationRules = () =>
+    ValidationBuilder.error("Error message").when(Predicates.self.is.defined());
 
 export const FieldEditorView:FieldView = ({field, onEvent, index}) => {
         const hasVisibility = field.hasOwnProperty('visibilityRule');
         const hasValidation = field.hasOwnProperty('validationRule');
-        const updateProperty = (key: string) => (value: any) => onEvent!(FIELD_EDITOR_EVENT.EDIT_PROPERTY, new PropertyUpdate(key, value))
+        const updateProperty = (key: string) => (value: any) => onEvent!(FIELD_EDITOR_EVENT.EDIT_PROPERTIES, new PropertyUpdate(key, value));
 
         return (
             <Draggable key={field.id} draggableId={field.id} index={index} type={DRAG_DROP_TYPE.FIELD}>
@@ -61,19 +70,31 @@ export const FieldEditorView:FieldView = ({field, onEvent, index}) => {
                                 ))}
                                 {hasVisibility ? <VisibilityEditor visibilityRule={field.visibilityRule!}
                                                                    onChange={updateProperty("visibilityRule")}
-                                                                   onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VISIBILITY)}/> : null}
+                                                                   onDelete={() => onEvent!(
+                                                                       FIELD_EDITOR_EVENT.DELETE_PROPERTIES,
+                                                                       ["visibilityRule", "isVisible"]
+                                                                   )}/> : null}
                                 {hasValidation ? <ValidationEditor validationRule={field.validationRule!}
                                                                    onChange={updateProperty("validationRule")}
-                                                                   onDelete={() => onEvent!(FIELD_EDITOR_EVENT.DELETE_VALIDATION)}/> : null}
+                                                                   onDelete={() => onEvent!(
+                                                                       FIELD_EDITOR_EVENT.DELETE_PROPERTIES,
+                                                                       ["validationRule","getValidation"]
+                                                                   )}/> : null}
                             </div>
                         </CardContent>
                         <CardActions className="FieldEditorView-actions" disableActionSpacing>
                             <Button className="FieldEditorView-visibility"
                                     disabled={hasVisibility}
-                                    onClick={() => onEvent!(FIELD_EDITOR_EVENT.ADD_VISIBILITY)}>Edit Visibility</Button>
+                                    onClick={() => onEvent!(
+                                        FIELD_EDITOR_EVENT.EDIT_PROPERTIES,
+                                        new PropertyUpdate("visibilityRule", generateVisibilityRules(FormEditor.MODEL!))
+                                    )}>Edit Visibility</Button>
                             <Button className="FieldEditorView-validation"
                                     disabled={hasValidation}
-                                    onClick={() => onEvent!(FIELD_EDITOR_EVENT.ADD_VALIDATION)}>Edit Validation</Button>
+                                    onClick={() => onEvent!(
+                                        FIELD_EDITOR_EVENT.EDIT_PROPERTIES ,
+                                        new PropertyUpdate("validationRule", generateValidationRules())
+                                    )}>Edit Validation</Button>
                             <IconButton className="FieldEditorView-delete"
                                         onClick={() => onEvent!(FIELD_EDITOR_EVENT.DELETE)}>
                                 <Delete/>

@@ -110,11 +110,11 @@ const CHECKBOX = {
 };
 
 const BLOCKS = {
-    ALL_FIELDS: {
-        id:"ALL_FIELDS",
-        label: "All Fields",
-        fields: [TEXT, PASSWORD , NUMBER , AMOUNT, TEXT_AREA, SELECT, RADIO, CHECKBOX]
-    },
+    // ALL_FIELDS: {
+    //     id:"ALL_FIELDS",
+    //     label: "All Fields",
+    //     fields: [TEXT, PASSWORD , NUMBER , AMOUNT, TEXT_AREA, SELECT, RADIO, CHECKBOX]
+    // },
     BLK_IDENTITY: {
         id:"BLK_IDENTITY",
         label: "Personal information",

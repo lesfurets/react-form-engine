@@ -13,14 +13,22 @@ export class PropertyUpdate {
 }
 
 export const ModelUpdater  = {
-    updateFieldProperty: (form: Form, targetedField: Field, updater: (field: Field) => void) => {
+    _changeFieldProperty: (form: Form, targetedField: Field, updater: (field: Field) => void) => {
         ModelUtils.getFieldList(form)
             .filter(field => field.id === targetedField.id)
             .forEach(updater);
     },
 
-    removeFieldProperties: (form: Form, targetedField: Field, properties: string[]) => {
-        ModelUpdater.updateFieldProperty(form, targetedField, field => properties.forEach(prop => delete field[prop]));
-    }
+    updateFieldProperty: (form: Form, targetedField: Field, updates: PropertyUpdate | PropertyUpdate[]) => {
+        const toUpdate = (updates instanceof PropertyUpdate ? [updates] : updates);
+        console.log(updates instanceof PropertyUpdate, toUpdate);
+        ModelUpdater._changeFieldProperty(form, targetedField, field => toUpdate.forEach(update => field[update.key] = update.value));
+    },
+
+    removeFieldProperties: (form: Form, targetedField: Field, properties: string | string[]) => {
+        const toDelete: string[] = (typeof properties === "string" ? [properties] : properties);
+        ModelUpdater._changeFieldProperty(form, targetedField, field => toDelete.forEach(prop => delete field[prop]));
+    },
+
 };
 
