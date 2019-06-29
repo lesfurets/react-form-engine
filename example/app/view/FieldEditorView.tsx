@@ -10,9 +10,6 @@ import {FieldView} from "../../../src/definition/view/FieldView";
 
 import {LabelEditor} from "../elements/LabelEditor";
 import {TypeEditor} from "../elements/TypeEditor";
-import {PropertyEditor} from "../elements/PropertyEditor";
-import {VisibilityEditor} from "../elements/VisibilityEditor";
-import {ValidationEditor} from "../elements/ValidationEditor";
 import {PropertyValueChange,PropertyRemoval, PropertyUpdate} from "../editor/ModelUpdater";
 import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
 import {getFieldTypesDetails} from "../definition/FieldTypesDetails";
@@ -26,7 +23,8 @@ import {ModelUtils} from "../../../src/definition/ModelUtils";
 import {ValidationBuilder} from "../../../src/dsl/validation/ValidationBuilder";
 import {FormEditor} from "../editor/FormEditor";
 import {FieldType} from "../../../src/definition/FieldTypes";
-import * as PROPERTIES from "../definition/FieldTypeProperties";
+import * as PROPERTIES from "../definition/FieldProperties";
+import {getEditorFor} from "./editor/EditorInjector";
 
 export const FIELD_EDITOR_EVENT = {
     UPDATE_PROPERTIES: new FormEvent("UPDATE_PROPERTIES", EventTypes.Field),
@@ -39,13 +37,14 @@ const generateVisibilityRules = (model: Form) =>
 const generateValidationRules = () =>
     ValidationBuilder.error("Error message").when(Predicates.self.is.defined());
 
+
+
 export const FieldEditorView:FieldView = ({field, onEvent, index}) => {
         const hasVisibility = field.hasOwnProperty('visibilityRule');
         const hasValidation = field.hasOwnProperty('validationRule');
-        const updateProperty = (key: string) => (value: any) => onEvent!(FIELD_EDITOR_EVENT.UPDATE_PROPERTIES, new PropertyValueChange(key, value));
         const updateType = (type: FieldType) => {
             const updates: PropertyUpdate[]  = [new PropertyValueChange("type", type)];
-            const details = getFieldTypesDetails(type)
+            const details = getFieldTypesDetails(type);
             Object.values(PROPERTIES).forEach(property => {
                 if(!details.properties.includes(property) && field[property.key] !== undefined){
                     updates.push(new PropertyRemoval(property.key));
@@ -70,32 +69,15 @@ export const FieldEditorView:FieldView = ({field, onEvent, index}) => {
                             <div className={"FieldEditorView-header"}>
                                 <LabelEditor label={field.label!}
                                              className="FieldEditorView-label"
-                                             onChange={updateProperty("label")}/>
+                                             onChange={(value: any) => onEvent!(FIELD_EDITOR_EVENT.UPDATE_PROPERTIES, new PropertyValueChange("label", value))}/>
                                 <TypeEditor className={"FieldEditorView-type"}
                                             type={field.type}
                                             onChange={updateType}/>
                             </div>
                             <div className={"FieldEditorView-details"}>
-                                {getFieldTypesDetails(field.type).properties.map(property => (
-                                    <div key={property.key}>
-                                        <PropertyEditor label={property.label}
-                                                        value={(field[property.key])}
-                                                        onChange={updateProperty(property.key)}
-                                                        className={`PropertyEditor-${property.key}`}/>
-                                    </div>
-                                ))}
-                                {hasVisibility ? <VisibilityEditor visibilityRule={field.visibilityRule!}
-                                                                   onChange={updateProperty("visibilityRule")}
-                                                                   onDelete={() => onEvent!(
-                                                                       FIELD_EDITOR_EVENT.UPDATE_PROPERTIES,
-                                                                       [new PropertyRemoval("visibilityRule"), new PropertyRemoval("isVisible")]
-                                                                   )}/> : null}
-                                {hasValidation ? <ValidationEditor validationRule={field.validationRule!}
-                                                                   onChange={updateProperty("validationRule")}
-                                                                   onDelete={() => onEvent!(
-                                                                       FIELD_EDITOR_EVENT.UPDATE_PROPERTIES,
-                                                                       [new PropertyRemoval("validationRule"),new PropertyRemoval("getValidation")]
-                                                                   )}/> : null}
+                                {getFieldTypesDetails(field.type).properties
+                                    .filter(property => field[property.key] !== undefined)
+                                    .map(property => getEditorFor(property, field, onEvent!))}
                             </div>
                         </CardContent>
                         <CardActions className="FieldEditorView-actions" disableActionSpacing>
