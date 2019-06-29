@@ -13,7 +13,7 @@ import {TypeEditor} from "../elements/TypeEditor";
 import {PropertyEditor} from "../elements/PropertyEditor";
 import {VisibilityEditor} from "../elements/VisibilityEditor";
 import {ValidationEditor} from "../elements/ValidationEditor";
-import {PropertyValueChange,PropertyRemoval} from "../editor/ModelUpdater";
+import {PropertyValueChange,PropertyRemoval, PropertyUpdate} from "../editor/ModelUpdater";
 import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
 import {getFieldTypesDetails} from "../definition/FieldTypesDetails";
 import {DRAG_DROP_TYPE} from "./FormEditorView";
@@ -25,6 +25,8 @@ import {Predicates} from "../../../src/dsl/predicate/builder/Predicates";
 import {ModelUtils} from "../../../src/definition/ModelUtils";
 import {ValidationBuilder} from "../../../src/dsl/validation/ValidationBuilder";
 import {FormEditor} from "../editor/FormEditor";
+import {FieldType} from "../../../src/definition/FieldTypes";
+import * as PROPERTIES from "../definition/FieldTypeProperties";
 
 export const FIELD_EDITOR_EVENT = {
     UPDATE_PROPERTIES: new FormEvent("UPDATE_PROPERTIES", EventTypes.Field),
@@ -41,6 +43,21 @@ export const FieldEditorView:FieldView = ({field, onEvent, index}) => {
         const hasVisibility = field.hasOwnProperty('visibilityRule');
         const hasValidation = field.hasOwnProperty('validationRule');
         const updateProperty = (key: string) => (value: any) => onEvent!(FIELD_EDITOR_EVENT.UPDATE_PROPERTIES, new PropertyValueChange(key, value));
+        const updateType = (type: FieldType) => {
+            const updates: PropertyUpdate[]  = [new PropertyValueChange("type", type)];
+            const details = getFieldTypesDetails(type)
+            Object.values(PROPERTIES).forEach(property => {
+                if(!details.properties.includes(property) && field[property.key] !== undefined){
+                    updates.push(new PropertyRemoval(property.key));
+                }
+                else if(details.properties.includes(property)
+                    && field[property.key] === undefined
+                    && property.defaultValue !== undefined){
+                    updates.push(new PropertyValueChange(property.key, property.defaultValue));
+                }
+            });
+            onEvent!(FIELD_EDITOR_EVENT.UPDATE_PROPERTIES, updates);
+        }
 
         return (
             <Draggable key={field.id} draggableId={field.id} index={index} type={DRAG_DROP_TYPE.FIELD}>
@@ -56,7 +73,7 @@ export const FieldEditorView:FieldView = ({field, onEvent, index}) => {
                                              onChange={updateProperty("label")}/>
                                 <TypeEditor className={"FieldEditorView-type"}
                                             type={field.type}
-                                            onChange={updateProperty("type")}/>
+                                            onChange={updateType}/>
                             </div>
                             <div className={"FieldEditorView-details"}>
                                 {getFieldTypesDetails(field.type).properties.map(property => (
