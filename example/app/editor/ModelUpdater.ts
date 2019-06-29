@@ -4,11 +4,26 @@ import {ModelUtils} from "../../../src/definition/ModelUtils";
 
 export class PropertyUpdate {
     key: string;
+
+
+    constructor(key: string) {
+        this.key = key;
+    }
+}
+
+export class PropertyValueChange extends PropertyUpdate{
     value: any;
 
     constructor(key: string, value: any) {
-        this.key = key;
+        super(key);
         this.value = value;
+    }
+}
+
+export class PropertyRemoval extends PropertyUpdate{
+
+    constructor(key: string) {
+        super(key);
     }
 }
 
@@ -21,14 +36,14 @@ export const ModelUpdater  = {
 
     updateFieldProperty: (form: Form, targetedField: Field, updates: PropertyUpdate | PropertyUpdate[]) => {
         const toUpdate = (updates instanceof PropertyUpdate ? [updates] : updates);
-        console.log(updates instanceof PropertyUpdate, toUpdate);
-        ModelUpdater._changeFieldProperty(form, targetedField, field => toUpdate.forEach(update => field[update.key] = update.value));
+        ModelUpdater._changeFieldProperty(form, targetedField, field => toUpdate.forEach(update => {
+            if(update instanceof PropertyValueChange){
+                field[update.key] = update.value
+            }
+            if(update instanceof PropertyRemoval){
+                delete field[update.key]
+            }
+        }));
     },
-
-    removeFieldProperties: (form: Form, targetedField: Field, properties: string | string[]) => {
-        const toDelete: string[] = (typeof properties === "string" ? [properties] : properties);
-        ModelUpdater._changeFieldProperty(form, targetedField, field => toDelete.forEach(prop => delete field[prop]));
-    },
-
 };
 

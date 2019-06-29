@@ -121,11 +121,8 @@ export class FormEditor extends React.Component<FormEditorProps, FormEditorState
             case BLOCK_EDITOR_EVENT.NEW_FIELD:
                 form.blocks.find((block: Block) => block.id === element.id)!.fields.push(generateNewField());
                 break;
-            case FIELD_EDITOR_EVENT.EDIT_PROPERTIES:
+            case FIELD_EDITOR_EVENT.UPDATE_PROPERTIES:
                 ModelUpdater.updateFieldProperty(form, element as Field, details);
-                break;
-            case FIELD_EDITOR_EVENT.DELETE_PROPERTIES:
-                ModelUpdater.removeFieldProperties(form, element as Field, details);
                 break;
             case FIELD_EDITOR_EVENT.DELETE:
                 form.blocks.forEach((block : Block) => remove(block.fields, field => field.id === element.id));
