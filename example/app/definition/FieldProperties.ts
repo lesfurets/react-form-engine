@@ -10,13 +10,13 @@ export const SYMBOL: Property = {key:"symbol", label: "Symbol", getDefaultValue:
 export const VALUES: Property = {key:"values", label: "Values", getDefaultValue: () => []};
 export const VALIDATION_RULE: Property = {
     key: "validationRule",
-    label: "Values",
+    label: "Validation Rule",
     getDefaultValue: () => ValidationBuilder.error("Error message").when(Predicates.self.is.defined()),
     cleanAlso: "getValidation"
 };
 export const VISIBILITY_RULE: Property = {
     key: "visibilityRule",
-    label: "Values",
+    label: "Visibility Rule",
     getDefaultValue: (model: Form) => VisibilityBuilder.isNotVisible.when(Predicates.field(ModelUtils.getFieldList(model)[0]).is.defined()),
     cleanAlso: "isVisible"
 };

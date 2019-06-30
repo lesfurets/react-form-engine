@@ -1,5 +1,5 @@
 import {FieldType, FieldTypes} from "../../../src/definition/FieldTypes";
-import {FieldTypeDetail} from "./FieldTypesDetail";
+import {TypeDetails} from "./TypeDetails";
 import {PLACEHOLDER, SYMBOL, VALIDATION_RULE, VALUES, VISIBILITY_RULE} from "./FieldProperties"
 import * as AllProperties from "./FieldProperties"
 import {PropertyRemoval, PropertyUpdate, PropertyValueChange} from "../editor/ModelUpdater";
@@ -8,13 +8,12 @@ import {Form} from "../../../src/definition/model/Form";
 
 const COMMON = [VISIBILITY_RULE, VALIDATION_RULE];
 
-export const getFieldTypesDetails: (type: FieldType) => FieldTypeDetail = (type: FieldType) => {
+export const getTypeDetails: (type: FieldType) => TypeDetails = (type: FieldType) => {
     switch (type) {
         case FieldTypes.INPUT_TEXT:
             return {
                 label: "Text",
                 properties: [PLACEHOLDER,...COMMON],
-                mandatory:[VISIBILITY_RULE]
             };
         case FieldTypes.INPUT_EMAIL:
             return {
@@ -69,7 +68,7 @@ export const getFieldTypesDetails: (type: FieldType) => FieldTypeDetail = (type:
 
 export const getUpdates  = (currentField: Field, newType: FieldType, model: Form) => {
     const updates: PropertyUpdate[]  = [new PropertyValueChange("type", newType)];
-    const details = getFieldTypesDetails(newType);
+    const details = getTypeDetails(newType);
     Object.values(AllProperties).forEach(property => {
         if(!details.properties.includes(property) && currentField[property.key] !== undefined){
             updates.push(new PropertyRemoval(property.key));

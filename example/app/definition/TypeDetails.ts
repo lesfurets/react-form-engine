@@ -1,6 +1,6 @@
 import {Property} from "./Property";
 
-export class FieldTypeDetail {
+export class TypeDetails {
     label: string;
     properties: Property[];
     mandatory?: Property[];
