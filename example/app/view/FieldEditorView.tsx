@@ -46,7 +46,7 @@ export const FieldEditorView: FieldView = ({field, onEvent, index}) => (
                             .map(property => getEditorFor(property, field, onEvent!))}
                     </div>
                 </CardContent>
-                <CardActions className="FieldEditorView-actions" disableActionSpacing>
+                <CardActions className="FieldEditorView-actions">
                     <AddProperty field={field}
                                  onAdd={(update) => onEvent!(FIELD_EDITOR_EVENT.UPDATE_PROPERTIES, update)}/>
                     <IconButton className="FieldEditorView-delete"

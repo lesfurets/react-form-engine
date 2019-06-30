@@ -90,7 +90,7 @@ export class BlockEditorViewInner extends React.Component<BlockViewProps, BlockE
                                         )}
                                     </Droppable>
                                 </div>
-                                <CardActions className={"BlockEditorView-actions"} disableActionSpacing>
+                                <CardActions className={"BlockEditorView-actions"}>
                                     <Button className="BlockEditorView-add"
                                             variant="contained"
                                             onClick={() => onEvent!(BLOCK_EDITOR_EVENT.NEW_FIELD)}>
