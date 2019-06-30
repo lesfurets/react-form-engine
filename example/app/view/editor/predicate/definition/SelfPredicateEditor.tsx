@@ -1,5 +1,5 @@
 import * as React from "react";
-import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPredicate";
+import {SelfPredicate} from "../../../../../../src/dsl/predicate/data/root/SelfPredicate";
 import {ReversedPredicateEditor} from "./ReversedPredicateEditor";
 import {PredicateEditorComponentProps} from "../utils/PredicateOption";
 

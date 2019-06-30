@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 import "../../../styles/elements/visibility-editor.less";
 import {VisibilityRule} from "../../../../src/dsl/visibility/VisibilityRule";
-import {PredicateEditor} from "../../elements/predicate/PredicateEditor";
+import {PredicateEditor} from "./predicate/PredicateEditor";
 import {PropertyEditor} from "../../definition/component/PropertyEditor";
 
 export const VisibilityEditor: PropertyEditor<VisibilityRule> = ({value, onChange, onDelete}) => (

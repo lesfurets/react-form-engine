@@ -1,6 +1,6 @@
 import * as React from "react";
 import {ReactNode} from "react";
-import {Predicate} from "../../../../../src/dsl/predicate/data/Predicate";
+import {Predicate} from "../../../../../../src/dsl/predicate/data/Predicate";
 import {PredicateEditorComponentProps} from "../PredicateEditor";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
