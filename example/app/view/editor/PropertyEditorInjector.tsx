@@ -2,22 +2,25 @@ import * as React from "react";
 import {Property} from "../../definition/Property";
 import {UNKNOWN_FIELD} from "../../../../src/component/field/FieldInjector";
 import * as FieldProperties from "../../definition/FieldProperties";
-import {StringEditor} from "./StringEditor";
-import {ValidationEditor} from "./ValidationEditor";
-import {VisibilityEditor} from "./VisibilityEditor";
+import {StringPropertyEditor} from "./StringPropertyEditor";
+import {ValidationPropertyEditor} from "./ValidationPropertyEditor";
+import {VisibilityPropertyEditor} from "./VisibilityPropertyEditor";
 import {Field} from "../../../../src/definition/model/Field";
 import {FormEvent} from "../../../../src/definition/event/Event";
 import {PropertyAction} from "../../definition/PropertyAction";
+import {ValuesPropertyEditor} from "./ValuesPropertyEditor";
 
 export const getComponent = (type: Property) => {
     switch (type) {
         case FieldProperties.PLACEHOLDER:
         case FieldProperties.SYMBOL:
-            return StringEditor;
+            return StringPropertyEditor;
         case FieldProperties.VALIDATION_RULE:
-            return ValidationEditor;
+            return ValidationPropertyEditor;
         case FieldProperties.VISIBILITY_RULE:
-            return VisibilityEditor;
+            return VisibilityPropertyEditor;
+        case FieldProperties.VALUES:
+            return ValuesPropertyEditor;
         default:
             return UNKNOWN_FIELD;
     }

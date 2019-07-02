@@ -5,12 +5,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Clear from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
 
-import "../../../styles/elements/visibility-editor.less";
+import "../../../styles/view/editor/visibility-property-editor.less";
 import {VisibilityRule} from "../../../../src/dsl/visibility/VisibilityRule";
-import {PredicateEditor} from "./predicate/PredicateEditor";
+import {PredicateEditor} from "./common/predicate/PredicateEditor";
 import {PropertyEditor} from "../../definition/component/PropertyEditor";
 
-export const VisibilityEditor: PropertyEditor<VisibilityRule> = ({value, onChange, onDelete}) => (
+export const VisibilityPropertyEditor: PropertyEditor<VisibilityRule> = ({value, onChange, onDelete}) => (
     <div className="VisibilityEditor">
         <div className="VisibilityEditor-header">
             <div className="VisibilityEditor-label">Visibility rule:</div>

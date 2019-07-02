@@ -14,8 +14,8 @@ import {getTypeDetails, getUpdates} from "../definition/FieldTypesDetails";
 import {DRAG_DROP_TYPE} from "./FormEditorView";
 import {FormEditor} from "../editor/FormEditor";
 import {FieldType} from "../../../src/definition/FieldTypes";
-import {getEditorFor} from "./editor/EditorInjector";
-import {AddProperty} from "./action/AddProperty";
+import {getEditorFor} from "./editor/PropertyEditorInjector";
+import {AddProperty} from "./editor/common/AddProperty";
 
 import "../../styles/view/field-editor-view.less"
 

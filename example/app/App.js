@@ -110,27 +110,32 @@ const CHECKBOX = {
 };
 
 const BLOCKS = {
+    EMPTY: {
+        id: "EMPTY",
+        label: "First",
+        fields: [SELECT],
+    }
     // ALL_FIELDS: {
     //     id:"ALL_FIELDS",
     //     label: "All Fields",
     //     fields: [TEXT, PASSWORD , NUMBER , AMOUNT, TEXT_AREA, SELECT, RADIO, CHECKBOX]
     // },
-    BLK_IDENTITY: {
-        id:"BLK_IDENTITY",
-        label: "Personal information",
-        fields: [FIRST_NAME, LAST_NAME]
-    },
-    BLK_CONTACT: {
-        id:"BLK_CONTACT",
-        label: "Contact",
-        fields: [EMAIL, PHONE]
-    },
-    BLK_PASSWORD: {
-        id:"BLK_PASSWORD",
-        label: "Password",
-        fields: [PASSWORD, PASSWORD_CONFIRMATION],
-        ctaLabel: "Submit"
-    }
+    // BLK_IDENTITY: {
+    //     id:"BLK_IDENTITY",
+    //     label: "Personal information",
+    //     fields: [FIRST_NAME, LAST_NAME]
+    // },
+    // BLK_CONTACT: {
+    //     id:"BLK_CONTACT",
+    //     label: "Contact",
+    //     fields: [EMAIL, PHONE]
+    // },
+    // BLK_PASSWORD: {
+    //     id:"BLK_PASSWORD",
+    //     label: "Password",
+    //     fields: [PASSWORD, PASSWORD_CONFIRMATION],
+    //     ctaLabel: "Submit"
+    // }
 };
 
 const FORM = {

@@ -16,7 +16,7 @@ interface LabelEditorState {
 export class LabelEditor extends React.Component<LabelEditorProps,LabelEditorState> {
     constructor(props: LabelEditorProps) {
         super(props);
-        this.state = {focus:false}
+        this.state = {focus:false};
         this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onBlur = this.onBlur.bind(this);
@@ -33,6 +33,7 @@ export class LabelEditor extends React.Component<LabelEditorProps,LabelEditorSta
     onBlur() {
         this.setState({focus: false});
     }
+
 
     render() {
         let {label, className} = this.props;

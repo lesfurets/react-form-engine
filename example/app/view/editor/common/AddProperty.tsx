@@ -3,11 +3,11 @@ import IconButton from "@material-ui/core/IconButton";
 import Tune from "@material-ui/icons/Tune";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import {Field} from "../../../../src/definition/model/Field";
-import {getTypeDetails} from "../../definition/FieldTypesDetails";
-import {PropertyUpdate, PropertyValueChange} from "../../editor/ModelUpdater";
-import {FormEditor} from "../../editor/FormEditor";
-import {Property} from "../../definition/Property";
+import {Field} from "../../../../../src/definition/model/Field";
+import {getTypeDetails} from "../../../definition/FieldTypesDetails";
+import {PropertyUpdate, PropertyValueChange} from "../../../editor/ModelUpdater";
+import {FormEditor} from "../../../editor/FormEditor";
+import {Property} from "../../../definition/Property";
 
 export interface AddPropertyProps {
     field: Field;

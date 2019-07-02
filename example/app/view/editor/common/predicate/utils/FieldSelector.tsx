@@ -1,7 +1,7 @@
 import * as React from "react";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import {Field} from "../../../../../../src/definition/model/Field";
+import {Field} from "../../../../../../../src/definition/model/Field";
 
 interface FieldSelectorProps {
     field: Field,

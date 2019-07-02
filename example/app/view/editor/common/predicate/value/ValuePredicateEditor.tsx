@@ -1,10 +1,10 @@
 import * as React from "react";
-import {ValueDefinedPredicate} from "../../../../../../src/dsl/predicate/data/leaf/value/ValueDefinedPredicate";
-import {ValueEqualToFieldPredicate} from "../../../../../../src/dsl/predicate/data/leaf/value/ValueEqualToFieldPredicate";
-import {FormEditor} from "../../../../editor/FormEditor";
-import {ModelUtils} from "../../../../../../src/definition/ModelUtils";
-import {StringPredicate} from "../../../../../../src/dsl/predicate/data/leaf/string/StringPredicate";
-import {StringEmptyPredicate} from "../../../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
+import {ValueDefinedPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/value/ValueDefinedPredicate";
+import {ValueEqualToFieldPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/value/ValueEqualToFieldPredicate";
+import {FormEditor} from "../../../../../editor/FormEditor";
+import {ModelUtils} from "../../../../../../../src/definition/ModelUtils";
+import {StringPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/string/StringPredicate";
+import {StringEmptyPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
 import {FieldSelector} from "../utils/FieldSelector";
 import {StringPredicateEditor} from "./StringPredicateEditor";
 import {buildOptionPredicateEditor} from "../utils/PredicateOption";

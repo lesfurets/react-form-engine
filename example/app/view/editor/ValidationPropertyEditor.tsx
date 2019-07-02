@@ -3,14 +3,14 @@ import TextField from "@material-ui/core/TextField";
 import Clear from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
 
-import "../../../styles/elements/validation-editor.less";
+import "../../../styles/view/editor/validation-property-editor.less";
 import {ValidationRule} from "../../../../src/dsl/validation/ValidationRule";
 import {Validation} from "../../../../src/definition/validation/Validation";
-import {PredicateEditor} from "./predicate/PredicateEditor";
+import {PredicateEditor} from "./common/predicate/PredicateEditor";
 import {PropertyEditor} from "../../definition/component/PropertyEditor";
 
 
-export const ValidationEditor: PropertyEditor<ValidationRule> = ({value, onChange, onDelete}) => (
+export const ValidationPropertyEditor: PropertyEditor<ValidationRule> = ({value, onChange, onDelete}) => (
     <div className="ValidationEditor">
         <div className="ValidationEditor-header">
             <div className="ValidationEditor-label">Validation rule:</div>

@@ -1,10 +1,10 @@
 import * as React from "react";
-import {StringEmptyPredicate} from "../../../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
-import {StringEqualToPredicate} from "../../../../../../src/dsl/predicate/data/leaf/string/StringEqualToPredicate";
-import {StringContainPredicate} from "../../../../../../src/dsl/predicate/data/leaf/string/StringContainPredicate";
-import {StringStartWithPredicate} from "../../../../../../src/dsl/predicate/data/leaf/string/StringStartWithPredicate";
-import {StringEndWithPredicate} from "../../../../../../src/dsl/predicate/data/leaf/string/StringEndWithPredicate";
-import {StringRegExpPredicate} from "../../../../../../src/dsl/predicate/data/leaf/string/StringRegExpPredicate";
+import {StringEmptyPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/string/StringEmptyPredicate";
+import {StringEqualToPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/string/StringEqualToPredicate";
+import {StringContainPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/string/StringContainPredicate";
+import {StringStartWithPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/string/StringStartWithPredicate";
+import {StringEndWithPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/string/StringEndWithPredicate";
+import {StringRegExpPredicate} from "../../../../../../../src/dsl/predicate/data/leaf/string/StringRegExpPredicate";
 import {ValueDetailEditor} from "../utils/ValueDetailEditor";
 import {buildOptionPredicateEditor} from "../utils/PredicateOption";
 

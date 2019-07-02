@@ -1,9 +1,9 @@
 import * as React from "react";
-import {FormEditor} from "../../../editor/FormEditor";
-import {Predicate} from "../../../../../src/dsl/predicate/data/Predicate";
-import {SelfPredicate} from "../../../../../src/dsl/predicate/data/root/SelfPredicate";
-import {FieldPredicate} from "../../../../../src/dsl/predicate/data/root/FieldPredicate";
-import {ModelUtils} from "../../../../../src/definition/ModelUtils";
+import {FormEditor} from "../../../../editor/FormEditor";
+import {Predicate} from "../../../../../../src/dsl/predicate/data/Predicate";
+import {SelfPredicate} from "../../../../../../src/dsl/predicate/data/root/SelfPredicate";
+import {FieldPredicate} from "../../../../../../src/dsl/predicate/data/root/FieldPredicate";
+import {ModelUtils} from "../../../../../../src/definition/ModelUtils";
 import {FieldPredicateEditor} from "./definition/FieldPredicateEditor";
 import {SelfPredicateEditor} from "./definition/SelfPredicateEditor";
 import {buildOptionPredicateEditor} from "./utils/PredicateOption";

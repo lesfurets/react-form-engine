@@ -73,7 +73,7 @@ export const getUpdates  = (currentField: Field, newType: FieldType, model: Form
         if(!details.properties.includes(property) && currentField[property.key] !== undefined){
             updates.push(new PropertyRemoval(property.key));
         }
-        else if(details.mandatory!.includes(property) && currentField[property.key] === undefined){
+        else if(details.mandatory && details.mandatory.includes(property) && currentField[property.key] === undefined){
             updates.push(new PropertyValueChange(property.key, property.getDefaultValue(model)));
         }
     });
