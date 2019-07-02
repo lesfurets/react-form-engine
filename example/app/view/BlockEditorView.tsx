@@ -21,10 +21,11 @@ import {
 import {BlockView, BlockViewProps} from "../../../src/definition/view/BlockView";
 import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
 
-import {LabelEditor} from "../elements/LabelEditor";
+import {LabelPropertyEditor} from "./editor/LabelPropertyEditor";
 import {DRAG_DROP_TYPE} from "./FormEditorView";
 
 import "../../styles/view/block-editor-view.less"
+import {LABEL} from "../definition/BlockProperties";
 
 export const BLOCK_EDITOR_EVENT = {
     DELETE: new FormEvent("DELETE", EventTypes.Block),
@@ -61,9 +62,10 @@ export class BlockEditorViewInner extends React.Component<BlockViewProps, BlockE
                               id={block.id}
                               className="BlockEditorView">
                             <div {...provided.dragHandleProps}>
-                            <CardHeader title={<LabelEditor label={block.label!}
-                                                            className="BlockEditorView-label"
-                                                            onChange={(value => onEvent!(BLOCK_EDITOR_EVENT.EDIT_LABEL, value))}/>}
+                            <CardHeader title={<LabelPropertyEditor value={block.label!}
+                                                                    property={LABEL}
+                                                                    onDelete={() => {}}
+                                                                    onChange={(value:string) => onEvent!(BLOCK_EDITOR_EVENT.EDIT_LABEL, value)}/>}
                                         action={[
                                             <IconButton key="1"
                                                         onClick={this.handleExpandClick}

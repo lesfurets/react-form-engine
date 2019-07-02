@@ -6,9 +6,7 @@ import Delete from "@material-ui/icons/Delete";
 import {Draggable, DraggableProvided, DraggableStateSnapshot} from "react-beautiful-dnd";
 
 import {FieldView} from "../../../src/definition/view/FieldView";
-import {LabelEditor} from "../elements/LabelEditor";
 import {TypeEditor} from "../elements/TypeEditor";
-import {PropertyValueChange} from "../editor/ModelUpdater";
 import {EventTypes, FormEvent} from "../../../src/definition/event/Event";
 import {getTypeDetails, getUpdates} from "../definition/FieldTypesDetails";
 import {DRAG_DROP_TYPE} from "./FormEditorView";
@@ -16,6 +14,7 @@ import {FormEditor} from "../editor/FormEditor";
 import {FieldType} from "../../../src/definition/FieldTypes";
 import {getEditorFor} from "./editor/PropertyEditorInjector";
 import {AddProperty} from "./editor/common/AddProperty";
+import {LABEL} from "../definition/FieldProperties";
 
 import "../../styles/view/field-editor-view.less"
 
@@ -33,9 +32,7 @@ export const FieldEditorView: FieldView = ({field, onEvent, index}) => (
                  {...provided.dragHandleProps}>
                 <CardContent className={"FieldEditorView-content"}>
                     <div className={"FieldEditorView-header"}>
-                        <LabelEditor label={field.label!}
-                                     className="FieldEditorView-label"
-                                     onChange={(value: any) => onEvent!(FIELD_EDITOR_EVENT.UPDATE_PROPERTIES, new PropertyValueChange("label", value))}/>
+                        {getEditorFor(LABEL, field, onEvent!)}
                         <TypeEditor className={"FieldEditorView-type"}
                                     type={field.type}
                                     onChange={(newType: FieldType) => onEvent!(FIELD_EDITOR_EVENT.UPDATE_PROPERTIES, getUpdates(field, newType, FormEditor.MODEL!))}/>

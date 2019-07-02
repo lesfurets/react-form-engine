@@ -9,9 +9,12 @@ import {Field} from "../../../../src/definition/model/Field";
 import {FormEvent} from "../../../../src/definition/event/Event";
 import {PropertyAction} from "../../definition/PropertyAction";
 import {ValuesPropertyEditor} from "./ValuesPropertyEditor";
+import {LabelPropertyEditor} from "./LabelPropertyEditor";
 
 export const getComponent = (type: Property) => {
     switch (type) {
+        case FieldProperties.LABEL:
+            return LabelPropertyEditor;
         case FieldProperties.PLACEHOLDER:
         case FieldProperties.SYMBOL:
             return StringPropertyEditor;

@@ -66,16 +66,17 @@ export const getTypeDetails: (type: FieldType) => TypeDetails = (type: FieldType
     }
 };
 
-export const getUpdates  = (currentField: Field, newType: FieldType, model: Form) => {
-    const updates: PropertyUpdate[]  = [new PropertyValueChange("type", newType)];
+export const getUpdates = (currentField: Field, newType: FieldType, model: Form) => {
+    const updates: PropertyUpdate[] = [new PropertyValueChange("type", newType)];
     const details = getTypeDetails(newType);
-    Object.values(AllProperties).forEach(property => {
-        if(!details.properties.includes(property) && currentField[property.key] !== undefined){
-            updates.push(new PropertyRemoval(property.key));
-        }
-        else if(details.mandatory && details.mandatory.includes(property) && currentField[property.key] === undefined){
-            updates.push(new PropertyValueChange(property.key, property.getDefaultValue(model)));
-        }
-    });
+    Object.values(AllProperties)
+        .filter(property => property !== AllProperties.LABEL)
+        .forEach(property => {
+            if (!details.properties.includes(property) && currentField[property.key] !== undefined) {
+                updates.push(new PropertyRemoval(property.key));
+            } else if (details.mandatory && details.mandatory.includes(property) && currentField[property.key] === undefined) {
+                updates.push(new PropertyValueChange(property.key, property.getDefaultValue(model)));
+            }
+        });
     return updates;
-}
+};

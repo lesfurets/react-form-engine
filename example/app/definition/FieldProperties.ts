@@ -5,6 +5,7 @@ import {ModelUtils} from "../../../src/definition/ModelUtils";
 import {Form} from "../../../src/definition/model/Form";
 import {ValidationBuilder} from "../../../src/dsl/validation/ValidationBuilder";
 
+export const LABEL: Property = {key:"label", label: "Label", getDefaultValue: () => ""};
 export const PLACEHOLDER: Property = {key:"placeholder", label: "Placeholder", getDefaultValue: () => ""};
 export const SYMBOL: Property = {key:"symbol", label: "Symbol", getDefaultValue: () => ""};
 export const VALUES: Property = {key:"values", label: "Values", getDefaultValue: () => []};
