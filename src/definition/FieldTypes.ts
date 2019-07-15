@@ -18,6 +18,7 @@ export const FieldTypes = {
     INPUT_SELECT: new FieldType("SelectField"),
     INPUT_RADIO: new FieldType("RadioField"),
     INPUT_CHECKBOX: new FieldType("CheckboxField"),
+    INPUT_DATE: new FieldType("DateField"),
 };
 
 export const AllTypes: FieldType[] = Object.values(FieldTypes);

@@ -34,12 +34,32 @@
     outline: none;
   }
 
-  .TextField-container, .SelectField-container {
+  .TextField-container, .SelectField-container, .DateField-container {
     display: flex;
     background-color: @highlight-light;
     border-left: solid @primary 5px;
     align-items: center;
     padding: 10px 10px 10px 5px;
+  }
+
+  .DateField {
+    &-container input {
+      font-size: 18px;
+      background-color: @highlight-light;
+    }
+
+    &-separator {
+      padding: 0 5px 0 0;
+    }
+
+    &-separator::before {
+      content: "/";
+      font-size: 18px;
+    }
+
+  }
+
+  .TextField-container, .SelectField-container {
 
     input {
       flex: 1;

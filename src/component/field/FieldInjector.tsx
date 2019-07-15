@@ -9,6 +9,7 @@ import {TextAreaField} from "./TextAreaField";
 import {SelectField} from "./SelectField";
 import {RadioField} from "./RadioField";
 import {CheckboxField} from "./CheckboxField";
+import {DateField} from "./DateField";
 
 export class FieldInjector {
     static inject(type: FieldType) {
@@ -31,6 +32,8 @@ export class FieldInjector {
                 return RadioField;
             case FieldTypes.INPUT_CHECKBOX:
                 return CheckboxField;
+            case FieldTypes.INPUT_DATE:
+                return DateField;
             default:
                 return UNKNOWN_FIELD;
         }
