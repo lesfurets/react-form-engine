@@ -17,19 +17,21 @@ const isRealDate = (date: UnstableDate) => {
     let month = date[DateInfo.MONTH];
     let day = date[DateInfo.DAY];
 
-    // console.log(year , month , day , year.length , month.length , day.length);
-
-    return year && month && day
+    return year !== undefined && month !== undefined && day !== undefined
         && year.length === 4 && month.length === 2 && day.length === 2;
-}
+};
 
 const parseDate = (date: UnstableDate) => {
-    return new Date(parseInt(date[DateInfo.YEAR]),parseInt(date[DateInfo.MONTH]),parseInt(date[DateInfo.DAY]));
-}
+    return new Date(parseInt(date[DateInfo.YEAR]),parseInt(date[DateInfo.MONTH])-1,parseInt(date[DateInfo.DAY]));
+};
 
 export const DateField: FieldComponent<Date> =
     ({field, tabIndex, contextValue, onFieldEvent}: FieldComponentProps<Date>) => {
         const [unstable, setUnstable] = React.useState<UnstableDate>({});
+
+        React.useEffect(() => {
+        }, [unstable]);
+
         React.useEffect(() => {
             let isDate = isRealDate(unstable);
             if (contextValue && !isDate) {
@@ -37,8 +39,7 @@ export const DateField: FieldComponent<Date> =
             } else if(isDate){
                 onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, parseDate(unstable));
             }
-        },[unstable]);
-
+        }, [unstable]);
 
         let onChange = (key: string, value: string) => {
             let numericValue = parseInt(value);
@@ -60,7 +61,7 @@ export const DateField: FieldComponent<Date> =
                        tabIndex={tabIndex}
                        value={unstable[DateInfo.DAY] || (contextValue ? contextValue.getDate().toString() : "")}
                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(DateInfo.DAY, event.target.value)}
-                       onBlur={() => {}}/>
+                       onBlur={() => onChange(DateInfo.DAY, unstable[DateInfo.DAY].padStart(2, '0'))}/>
                 <span className="DateField-separator">/</span>
                 <input className="DateField-month"
                        type={"text"}
@@ -73,7 +74,7 @@ export const DateField: FieldComponent<Date> =
                        tabIndex={tabIndex}
                        value={unstable[DateInfo.MONTH] || (contextValue ? (contextValue.getMonth() + 1).toString() : "")}
                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(DateInfo.MONTH, event.target.value)}
-                       onBlur={() => {}}/>
+                       onBlur={() => onChange(DateInfo.MONTH, unstable[DateInfo.MONTH].padStart(2, '0'))}/>
                 <span className="DateField-separator">/</span>
                 <input className="DateField-year"
                        type={"text"}
