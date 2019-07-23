@@ -1,6 +1,7 @@
 import * as React from "react";
 import {FieldComponent, FieldComponentProps} from "../../definition/component/FieldComponent";
 import {FIELD_EVENT} from "../../definition/event/events";
+import {DateElement} from "./element/DateElement";
 
 const DateInfo = {
     DAY: "DAY",
@@ -9,7 +10,7 @@ const DateInfo = {
 };
 
 interface UnstableDate {
-    [key: string] : string
+    [key: string]: number | undefined
 }
 
 const isRealDate = (date: UnstableDate) => {
@@ -17,77 +18,70 @@ const isRealDate = (date: UnstableDate) => {
     let month = date[DateInfo.MONTH];
     let day = date[DateInfo.DAY];
 
-    return year !== undefined && month !== undefined && day !== undefined
-        && year.length === 4 && month.length === 2 && day.length === 2;
+    return year !== undefined && month !== undefined && day !== undefined;
 };
 
 const parseDate = (date: UnstableDate) => {
-    return new Date(parseInt(date[DateInfo.YEAR]),parseInt(date[DateInfo.MONTH])-1,parseInt(date[DateInfo.DAY]));
+    return new Date(date[DateInfo.YEAR]!, date[DateInfo.MONTH]! - 1, date[DateInfo.DAY]!);
 };
+
+function formatDayMonth(value: number) {
+    return value.toString().padStart(2, '0');
+}
+
+function formatYear(value: number) {
+    if (value > 100) {
+        return value.toString();
+    }
+    if(value > 30) {
+        return (1900 + value).toString();
+    }
+    return (2000 + value).toString();
+}
 
 export const DateField: FieldComponent<Date> =
     ({field, tabIndex, contextValue, onFieldEvent}: FieldComponentProps<Date>) => {
         const [unstable, setUnstable] = React.useState<UnstableDate>({});
 
         React.useEffect(() => {
-        }, [unstable]);
-
-        React.useEffect(() => {
             let isDate = isRealDate(unstable);
             if (contextValue && !isDate) {
                 onFieldEvent!(FIELD_EVENT.RESET_VALUE)
-            } else if(isDate){
+            } else if (isDate) {
                 onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, parseDate(unstable));
             }
         }, [unstable]);
 
-        let onChange = (key: string, value: string) => {
-            let numericValue = parseInt(value);
-            if(Number.isInteger(numericValue)){
-                setUnstable({...unstable, [key]: value});
-            }
+        let onChange = (key: string, value: number | undefined) => {
+            setUnstable({...unstable, [key]: value});
         };
+
 
         return (
             <div className="DateField-container">
-                <input className="DateField-day"
-                       type={"text"}
-                       inputMode={"decimal"}
-                       placeholder={field!.placeholder || ""}
-                       name={`${field!.id}-day`}
-                       id={`${field!.id}-day`}
-                       maxLength={2}
-                       size={2}
-                       tabIndex={tabIndex}
-                       value={unstable[DateInfo.DAY] || (contextValue ? contextValue.getDate().toString() : "")}
-                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(DateInfo.DAY, event.target.value)}
-                       onBlur={() => onChange(DateInfo.DAY, unstable[DateInfo.DAY].padStart(2, '0'))}/>
+                <DateElement tabIndex={tabIndex!}
+                             size={2}
+                             type={DateInfo.DAY}
+                             id={`${field!.id}-day`}
+                             value={unstable[DateInfo.DAY]}
+                             onValueChange={(value) => onChange(DateInfo.DAY, value)}
+                             formatValue={formatDayMonth}/>
                 <span className="DateField-separator">/</span>
-                <input className="DateField-month"
-                       type={"text"}
-                       inputMode={"decimal"}
-                       placeholder={field!.placeholder || ""}
-                       name={`${field!.id}-month`}
-                       id={`${field!.id}-month`}
-                       maxLength={2}
-                       size={2}
-                       tabIndex={tabIndex}
-                       value={unstable[DateInfo.MONTH] || (contextValue ? (contextValue.getMonth() + 1).toString() : "")}
-                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(DateInfo.MONTH, event.target.value)}
-                       onBlur={() => onChange(DateInfo.MONTH, unstable[DateInfo.MONTH].padStart(2, '0'))}/>
+                <DateElement tabIndex={tabIndex!}
+                             size={2}
+                             type={DateInfo.MONTH}
+                             id={`${field!.id}-day`}
+                             value={unstable[DateInfo.MONTH]}
+                             onValueChange={(value) => onChange(DateInfo.MONTH, value)}
+                             formatValue={formatDayMonth}/>
                 <span className="DateField-separator">/</span>
-                <input className="DateField-year"
-                       type={"text"}
-                       inputMode={"decimal"}
-                       placeholder={field!.placeholder || ""}
-                       name={`${field!.id}-year`}
-                       id={`${field!.id}-year`}
-                       maxLength={4}
-                       size={4}
-                       tabIndex={tabIndex}
-                       value={unstable[DateInfo.YEAR] || (contextValue ? contextValue.getFullYear().toString() : "")}
-                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(DateInfo.YEAR, event.target.value)}
-                       onBlur={() => {}}/>
+                <DateElement tabIndex={tabIndex!}
+                             size={4}
+                             type={DateInfo.YEAR}
+                             id={`${field!.id}-day`}
+                             value={unstable[DateInfo.YEAR]}
+                             onValueChange={(value) => onChange(DateInfo.YEAR, value)}
+                             formatValue={formatYear}/>
             </div>
         );
     };
