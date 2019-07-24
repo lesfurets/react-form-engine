@@ -1,13 +1,10 @@
 import * as React from "react";
-import {mount, ReactWrapper, shallow, ShallowWrapper} from "enzyme";
-import {TextField} from "../../../src/component/field/TextField";
+import {mount} from "enzyme";
 import {TestUtils} from "../../TestUtils";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
 import {Field} from "../../../src/definition/model/Field";
-import {FieldComponentProps} from "../../../src/definition/component/FieldComponent";
 import {DateField, DateInfo, formatDayMonth, formatYear} from "../../../src/component/field/DateField";
-import anything = jasmine.anything;
 import {act} from "react-dom/test-utils";
 import {DateElement} from "../../../src/component/field/element/DateElement";
 
@@ -79,18 +76,18 @@ describe("FormEngine/Field/DateField", () => {
 
             // When
             act(() => {
-                container.find(".DateField-day").simulate("change", {target: {value: date.toString()}});
+                container.find(".DateField-day").simulate("change", {target: {value: formatDayMonth(date)}});
             });
             act(() => {
-                container.find(".DateField-month").simulate("change", {target: {value: month.toString()}});
+                container.find(".DateField-month").simulate("change", {target: {value: formatDayMonth(month)}});
             });
             act(() => {
-                container.find(".DateField-year").simulate("change", {target: {value: year.toString()}});
+                container.find(".DateField-year").simulate("change", {target: {value: formatYear(year)}});
             });
 
             // Then
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, new Date(year, month - 1, date));
-            expect(onFieldEvent).not.toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, new Date(year, month - 1, date));
+            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, testDate);
+            expect(onFieldEvent).not.toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, testDate);
         });
 
         it("Should reset value", () => {

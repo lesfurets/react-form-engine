@@ -11,6 +11,6 @@ export class ReversedPredicateBuilder extends PredicateDefinitionBuilder {
     }
 
     build(child: Predicate): Predicate {
-        return this.parent.build(new ReversedPredicate(this.parent.build(child)));
+        return this.parent.build(new ReversedPredicate(child));
     }
 }

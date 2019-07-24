@@ -19,14 +19,16 @@ describe("FormEngine/Field/DateField", () => {
     const date = 1;
 
     let tabIndex = 2;
-    let size = 4;
+    let size = 2;
     let type = "testType";
     let value = 10;
     let id = "testId";
     let onValueChange = () => "";
+    let onReset = () => {};
     let formatValue = (value: number) => value.toString();
+    let forceFocus = false;
 
-    let defaultProps = {tabIndex, size, type, value, id, onValueChange, formatValue};
+    let defaultProps = {tabIndex, size, type, value, id, onValueChange, formatValue, onReset, forceFocus};
 
     describe("constructor", () => {
         it("Input should have static attributes", () => {
@@ -67,11 +69,11 @@ describe("FormEngine/Field/DateField", () => {
 
             // When
             act(() => {
-                container.find("input").simulate("change", {target: {value: value.toString()}});
+                container.find("input").simulate("change", {target: {value: "02"}});
             });
 
             // Then
-            expect(onValueChange).toHaveBeenCalledWith(value);
+            expect(onValueChange).toHaveBeenCalledWith(type, value);
         });
 
         it("Should reset value", () => {
@@ -86,7 +88,7 @@ describe("FormEngine/Field/DateField", () => {
             });
 
             // Then
-            expect(onValueChange).toHaveBeenCalledWith(undefined);
+            expect(onValueChange).toHaveBeenCalledWith(type, undefined);
         });
     });
 

@@ -13,12 +13,23 @@ interface UnstableDate {
     [key: string]: number | undefined
 }
 
+export const NbDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+export const getNbDays = (month: number, year: number) =>
+    (month === 2 && isBisextile(year)) ? 29 : NbDaysInMonth[month - 1];
+
+export const isBisextile = (year: number) =>
+    year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+
 const isRealDate = (date: UnstableDate) => {
     const year = date[DateInfo.YEAR];
     const month = date[DateInfo.MONTH];
     const day = date[DateInfo.DAY];
 
-    return year !== undefined && month !== undefined && day !== undefined;
+    return year !== undefined && month !== undefined && day !== undefined
+        && year > 1000
+        && month > 0 && month <= 12
+        && day > 0 && day <= getNbDays(month, year);
 };
 
 const parseDate = (date: UnstableDate) => {
@@ -41,6 +52,7 @@ export function formatYear(value: number) {
 
 export const DateField: FieldComponent<Date> =
     ({field, tabIndex, contextValue, onFieldEvent}: FieldComponentProps<Date>) => {
+        const [focus, setFocus] = React.useState<string | undefined>(undefined);
         const [unstable, setUnstable] = React.useState<UnstableDate>(() => (contextValue ? {
             [DateInfo.DAY]: contextValue.getDate(),
             [DateInfo.MONTH]: contextValue.getMonth() + 1,
@@ -58,6 +70,31 @@ export const DateField: FieldComponent<Date> =
 
         let onChange = (key: string, value: number | undefined) => {
             setUnstable({...unstable, [key]: value});
+            switch (key) {
+                case DateInfo.DAY:
+                    setFocus(DateInfo.MONTH);
+                    break;
+                case DateInfo.MONTH:
+                    setFocus(DateInfo.YEAR);
+                    break;
+                case DateInfo.YEAR:
+                    setFocus(undefined);
+                    break;
+            }
+        };
+
+        let onReset = (key: string) => {
+            switch (key) {
+                case DateInfo.DAY:
+                    setFocus(undefined);
+                    break;
+                case DateInfo.MONTH:
+                    setFocus(DateInfo.DAY);
+                    break;
+                case DateInfo.YEAR:
+                    setFocus(DateInfo.MONTH);
+                    break;
+            }
         };
 
         return (
@@ -68,25 +105,31 @@ export const DateField: FieldComponent<Date> =
                              type={DateInfo.DAY}
                              id={`${field!.id}-day`}
                              value={unstable[DateInfo.DAY]}
-                             onValueChange={(value) => onChange(DateInfo.DAY, value)}
+                             forceFocus={focus === DateInfo.DAY}
+                             onValueChange={onChange}
+                             onReset={onReset}
                              formatValue={formatDayMonth}/>
                 <span className="DateField-separator"/>
                 <DateElement tabIndex={tabIndex!}
                              key={DateInfo.MONTH}
                              size={2}
                              type={DateInfo.MONTH}
-                             id={`${field!.id}-day`}
+                             id={`${field!.id}-month`}
                              value={unstable[DateInfo.MONTH]}
-                             onValueChange={(value) => onChange(DateInfo.MONTH, value)}
+                             forceFocus={focus === DateInfo.MONTH}
+                             onValueChange={onChange}
+                             onReset={onReset}
                              formatValue={formatDayMonth}/>
                 <span className="DateField-separator"/>
                 <DateElement tabIndex={tabIndex!}
                              key={DateInfo.YEAR}
                              size={4}
                              type={DateInfo.YEAR}
-                             id={`${field!.id}-day`}
+                             id={`${field!.id}-year`}
                              value={unstable[DateInfo.YEAR]}
-                             onValueChange={(value) => onChange(DateInfo.YEAR, value)}
+                             forceFocus={focus === DateInfo.YEAR}
+                             onValueChange={onChange}
+                             onReset={onReset}
                              formatValue={formatYear}/>
             </div>
         );

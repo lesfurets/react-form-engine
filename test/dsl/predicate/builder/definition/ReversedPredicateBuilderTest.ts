@@ -35,12 +35,12 @@ describe("DSL/Predicate/Builder/ReversedPredicateBuilder", () => {
         let builtPredicate = predicateTarget.build(child);
 
         // Then
-        expect(builtPredicate).toBeInstanceOf(ReversedPredicate);
+        expect(builtPredicate).toBeInstanceOf(TestPredicate);
 
-        let firstChild = (<ReversedPredicate>builtPredicate).child;
-        expect(firstChild).toBeInstanceOf(TestPredicate);
+        let firstChild = (<TestPredicate>builtPredicate).child;
+        expect(firstChild).toBeInstanceOf(ReversedPredicate);
 
-        let secondChild = (<TestPredicate>firstChild).child;
+        let secondChild = (<ReversedPredicate>firstChild).child;
         expect(secondChild).toBe(child);
     });
 

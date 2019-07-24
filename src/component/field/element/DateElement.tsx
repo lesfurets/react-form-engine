@@ -6,35 +6,55 @@ interface DateElementProps {
     id: string;
     size: number;
     value: number | undefined;
-    onValueChange: (value: number | undefined) => void;
+    onValueChange: (type: string, value: number | undefined) => void;
+    onReset: (type: string) => void;
     formatValue: (value: number) => string;
+    forceFocus: boolean;
 }
 
 export const DateElement: React.FunctionComponent<DateElementProps> =
-    ({type, size, id, tabIndex, value, onValueChange, formatValue}) => {
+    ({type, size, id, tabIndex, value, onValueChange, onReset, formatValue, forceFocus}) => {
         const [inputValue, setInputValue] = React.useState(() => value ? formatValue(value) : "");
         const [focus, setFocus] = React.useState(false);
+        const inputRef = React.useRef<HTMLInputElement>(null);
 
-        let onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             let numericValue = parseInt(event.target.value);
             if (Number.isInteger(numericValue)) {
                 setInputValue(event.target.value);
+            } else if (event.target.value === "") {
+                setInputValue( "");
             } else {
-                setInputValue(event.target.value === "" ? "" : inputValue);
+                setInputValue( inputValue);
             }
         };
 
-        let onBlur = () => {
+        React.useEffect(() => {
+            if(forceFocus) {
+                inputRef.current!.focus();
+            }
+        }, [forceFocus]);
+
+
+        const onBlur = () => {
             setFocus(false);
             if (inputValue !== "") {
                 setInputValue(formatValue(parseInt(inputValue)));
             }
         };
 
+        const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+            if(event.key === 'Backspace' && inputValue === ""){
+                onReset(type);
+            }
+        };
+
         React.useEffect(() => {
-            if(inputValue.length === size){
-                let numericValue = parseInt(inputValue);
-                onValueChange(Number.isInteger(numericValue) ? numericValue : undefined);
+            if(inputValue.length === size) {
+                onValueChange(type, parseInt(inputValue));
+
+            } else if (inputValue.length === 0) {
+                onValueChange(type, undefined);
             }
         }, [parseInt(inputValue)]);
 
@@ -47,7 +67,8 @@ export const DateElement: React.FunctionComponent<DateElementProps> =
         }, [value]);
 
         return (
-            <input className={`DateField-${type.toLowerCase()}`}
+            <input ref={inputRef}
+                   className={`DateField-${type.toLowerCase()}`}
                    type={"text"}
                    inputMode={"decimal"}
                    name={id}
@@ -57,6 +78,7 @@ export const DateElement: React.FunctionComponent<DateElementProps> =
                    tabIndex={tabIndex}
                    value={inputValue}
                    onFocus={() => setFocus(true)}
+                   onKeyDown={handleKeyDown}
                    onChange={onChange}
                    onBlur={onBlur}/>
         );
