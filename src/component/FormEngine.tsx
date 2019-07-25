@@ -15,44 +15,41 @@ import {BlockView} from "../definition/view/BlockView";
 import {FormView} from "../definition/view/FormView";
 import {ViewContext} from "./context/ViewContext";
 
-interface FormEngineProps {
+export interface FormEngineProps {
     form: Form,
-    FormView: FormView
-    BlockView: BlockView
-    FieldView: FieldView
+    FormView?: FormView
+    BlockView?: BlockView
+    FieldView?: FieldView
     onEvent: EventCallBack
 }
 
+export const FormEngine: React.FunctionComponent<FormEngineProps> =
+    ({form, onEvent, FormView, BlockView, FieldView}) => {
+        const [store] = React.useState(() => createStore(reducer));
 
-export default class FormEngine extends React.Component<FormEngineProps> {
+        React.useEffect(() => {
+            console.log("Subscribing");
+            EVENT_MULTICASTER.subscribe(onEvent);
+            return () => {
+                console.log("Unsubscribing");
+                EVENT_MULTICASTER.unsubscribe(onEvent);
+            }
+        }, []);
 
-    static defaultProps = {
-        onEvent: EMPTY_CALLBACK,
-        FormView: DefaultFormView,
-        BlockView: DefaultBlockView,
-        FieldView: DefaultFieldView,
-    };
-
-    componentWillMount() {
-        EVENT_MULTICASTER.subscribe(this.props.onEvent);
-    }
-
-    componentWillUnmount() {
-        EVENT_MULTICASTER.unsubscribe(this.props.onEvent);
-    }
-
-    render() {
-        let {FormView, BlockView, FieldView} = this.props;
-        const store = createStore(reducer);
         return (
             <Provider store={store}>
-                <ViewContext.Provider value={{FormView, BlockView, FieldView}}>
-                    <ResponsiveContainer lg={1200} md={992} sm={700} >
-                        <FormWrapper {...this.props}/>
+                <ViewContext.Provider value={{FormView:FormView!, BlockView:BlockView!, FieldView:FieldView!}}>
+                    <ResponsiveContainer lg={1200} md={992} sm={700}>
+                        <FormWrapper form={form}/>
                     </ResponsiveContainer>
                 </ViewContext.Provider>
             </Provider>
         );
-    }
+    };
 
-}
+FormEngine.defaultProps = {
+    onEvent: EMPTY_CALLBACK,
+    FormView: DefaultFormView,
+    BlockView: DefaultBlockView,
+    FieldView: DefaultFieldView,
+};

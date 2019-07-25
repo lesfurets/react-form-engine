@@ -3,7 +3,7 @@ import ResponsiveContainer from "react-responsive-widget";
 
 import {shallow} from "enzyme";
 import {Provider} from "react-redux";
-import FormEngine from "../../src/component/FormEngine";
+import {FormEngine} from "../../src/component/FormEngine";
 import FormWrapper from "../../src/component/wrapper/FormWrapper";
 import {FieldTypes} from "../../src/definition/FieldTypes";
 import {EventCallBack} from "../../src/definition/event/EventMulticaster";
