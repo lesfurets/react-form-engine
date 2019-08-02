@@ -20,7 +20,7 @@ export interface FormEngineProps {
     FormView?: FormView
     BlockView?: BlockView
     FieldView?: FieldView
-    onEvent: EventCallBack
+    onEvent?: EventCallBack
 }
 
 export const FormEngine: React.FunctionComponent<FormEngineProps> =
@@ -29,19 +29,17 @@ export const FormEngine: React.FunctionComponent<FormEngineProps> =
 
         React.useEffect(() => {
             console.log("Subscribing");
-            EVENT_MULTICASTER.subscribe(onEvent);
+            EVENT_MULTICASTER.subscribe(onEvent!);
             return () => {
                 console.log("Unsubscribing");
-                EVENT_MULTICASTER.unsubscribe(onEvent);
+                EVENT_MULTICASTER.unsubscribe(onEvent!);
             }
         }, []);
 
         return (
             <Provider store={store}>
                 <ViewContext.Provider value={{FormView:FormView!, BlockView:BlockView!, FieldView:FieldView!}}>
-                    <ResponsiveContainer lg={1200} md={992} sm={700}>
-                        <FormWrapper form={form}/>
-                    </ResponsiveContainer>
+                    <FormWrapper form={form}/>
                 </ViewContext.Provider>
             </Provider>
         );
