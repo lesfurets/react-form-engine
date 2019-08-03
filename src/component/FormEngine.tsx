@@ -2,7 +2,6 @@ import * as React from "react";
 import {createStore} from "redux";
 import {Provider} from 'react-redux'
 import reducer from '../redux/reducers';
-import ResponsiveContainer from "react-responsive-widget";
 import {DefaultFormView} from "./view/DefaultFormView";
 import {DefaultBlockView} from "./view/DefaultBlockView";
 import {DefaultFieldView} from "./view/DefaultFieldView";

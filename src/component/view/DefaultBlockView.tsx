@@ -9,20 +9,20 @@ import {BlockView} from "../../definition/view/BlockView";
 
 export const DefaultBlockView : BlockView = ({children, block, index, blockState = BLOCK_STATE.DOING, onEvent}) => (
     <div className={`DefaultBlockView app-row ${blockState} ${block!.id}`}>
-        <div className="DefaultBlockView-label app-col-xs-12">{index + 1}. {block!.label}</div>
+        <div className="DefaultBlockView-label app-col-12">{index + 1}. {block!.label}</div>
         {blockState !== BLOCK_STATE.DOING ? null : (
-            <div className="app-col-xs-12 app-col-sm-8">
+            <div className="app-col-12 app-col-sm-8">
                 <div className="DefaultBlockView-content">
                     {children}
                     <div className="app-row">
-                        <div className="app-col-xs-12 app-col-sm-3">
+                        <div className="app-col-12 app-col-sm-3">
                             {index === 0 ?
                                 null : <Cta type={CTA_TYPE.SECONDARY}
                                             className={"DefaultBlockView-previous"}
                                             fullWidth={true}
                                             onClick={() => onEvent!(BLOCK_EVENT.PREVIOUS)}>Previous</Cta>}
                         </div>
-                        <div className="app-col-xs-12 app-col-sm-3 app-col-sm-offset-6">
+                        <div className="app-col-12 app-col-sm-3 app-offset-sm-6">
                             <Cta fullWidth={true}
                                  className={"DefaultBlockView-next"}
                                  onClick={() => onEvent!(BLOCK_EVENT.NEXT)}>{block!.ctaLabel || "Next"}</Cta>

@@ -22,9 +22,9 @@
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-redux": "5.1.1",
-    "react-responsive-widget": "1.0.2",
-    "redux": "3.7.2"
+    "react-redux": "7.1.0",
+    "react-responsive-widget": "2.1.0",
+    "redux": "4.0.4"
   },
   "devDependencies": {
     "@types/enzyme": "3.9.1",
