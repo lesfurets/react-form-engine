@@ -9,11 +9,11 @@
   border: none;
 
   &.primary {
-    background-color: @valid;
+    background-color: $valid;
   }
 
   &.secondary {
-    background-color: @primary-light;
+    background-color: $primary-light;
   }
 
   &.fullWidth {

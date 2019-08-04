@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import "../../../styles/components/utils/cta.less"
+import "../../../styles/components/utils/cta.scss"
 
 export enum CTA_TYPE {
     PRIMARY = "primary",

@@ -1,8 +1,9 @@
 import * as React from "react";
 
-import "../../styles/components/view/field-view.less";
 import {FIELD_STATE} from "../../definition/model/Field";
 import {FieldView} from "../../definition/view/FieldView";
+
+import "../../styles/components/view/field-view.scss";
 
 export const DefaultFieldView : FieldView = ({field, fieldState, errorMessage ,children, isVisible = true}) => {
     let hasLabel = field.label != null;

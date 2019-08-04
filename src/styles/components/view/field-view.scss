@@ -13,7 +13,7 @@
     padding: 5px 5px;
     color: white;
     font-weight: 500;
-    background-color: @error;
+    background-color: $error;
   }
 
   input {
@@ -36,8 +36,8 @@
 
   .TextField-container, .SelectField-container, .DateField-container {
     display: flex;
-    background-color: @highlight-light;
-    border-left: solid @primary 5px;
+    background-color: $highlight-light;
+    border-left: solid $primary 5px;
     align-items: center;
     padding: 10px 10px 10px 5px;
   }
@@ -45,7 +45,7 @@
   .DateField {
     &-container input {
       font-size: 18px;
-      background-color: @highlight-light;
+      background-color: $highlight-light;
     }
 
     &-separator {
@@ -64,7 +64,7 @@
     input {
       flex: 1;
       font-size: 18px;
-      background-color: @highlight-light;
+      background-color: $highlight-light;
     }
 
     textarea {
@@ -77,13 +77,13 @@
     select {
       font-size: 18px;
       width: 100%;
-      background-color: @highlight-light;
+      background-color: $highlight-light;
     }
 
     .TextField-symbol {
       padding: 0 5px;
       font-size: 22px;
-      color: @primary;
+      color: $primary;
     }
   }
 
@@ -105,7 +105,7 @@
 
       &.checked {
         .RadioField-check {
-          border: 3px solid @primary;
+          border: 3px solid $primary;
           padding: 3px;
 
           &:after {
@@ -113,7 +113,7 @@
             display: block;
             width: 100%;
             height: 100%;
-            background-color: @primary;
+            background-color: $primary;
             border-radius: 50%;
           }
         }
@@ -126,7 +126,7 @@
       left: 0;
       height: 25px;
       width: 25px;
-      background-color: @highlight-light;
+      background-color: $highlight-light;
       border-radius: 50%;
     }
 
@@ -150,14 +150,14 @@
 
       &.checked {
         .CheckboxField-check {
-          //border: 3px solid @primary;
+          //border: 3px solid $primary;
           //padding: 3px;
 
           &:after {
             content: "\2713";
             display: block;
             position: absolute;
-            color: @primary;
+            color: $primary;
             font-size: 40px;
             top: -13px;
             left: -1px;
@@ -173,48 +173,48 @@
       left: 0;
       height: 25px;
       width: 30px;
-      background-color: @highlight-light;
-      border-left: solid @primary 5px;
+      background-color: $highlight-light;
+      border-left: solid $primary 5px;
     }
 
   }
 
   &.field-valid {
     .TextField-container, .SelectField-container {
-      border-left-color: @valid;
+      border-left-color: $valid;
     }
 
     .RadioField-value.checked .RadioField-check {
-      border-color: @valid;
+      border-color: $valid;
       &:after {
-        background-color: @valid;
+        background-color: $valid;
       }
     }
 
     .CheckboxField-value.checked .CheckboxField-check {
-      border-color: @valid;
+      border-color: $valid;
       &:after {
-        color: @valid;
+        color: $valid;
       }
     }
   }
 
   &.field-error {
     .TextField-container, .SelectField-container {
-      border-left-color: @error;
+      border-left-color: $error;
     }
 
     .RadioField-value.checked .RadioField-check {
-      border-color: @error;
+      border-color: $error;
       &:after {
-        background-color: @error;
+        background-color: $error;
       }
     }
 
     .CheckboxField-value.checked .CheckboxField-check {
-      border-color: @error;
+      border-color: $error;
       &:after {
-        color: @error;
+        color: $error;
       }
     }
   }

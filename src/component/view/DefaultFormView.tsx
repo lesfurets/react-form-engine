@@ -3,7 +3,7 @@ import ResponsiveContainer from "react-responsive-widget";
 
 import {FormView, FormViewProps} from "../../definition/view/FormView";
 
-import "../../styles/components/view/form-view.less"
+import "../../styles/components/view/form-view.scss"
 
 export const DefaultFormView : FormView = (props : FormViewProps) => (
     <div className="DefaultFormView">

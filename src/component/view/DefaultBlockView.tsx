@@ -2,10 +2,10 @@ import * as React from "react";
 
 import {BLOCK_EVENT} from "../../definition/event/events";
 import {Cta, CTA_TYPE} from "./elements/Cta";
-
-import "../../styles/components/view/block-view.less"
 import {BLOCK_STATE} from "../../definition/model/Block";
 import {BlockView} from "../../definition/view/BlockView";
+
+import "../../styles/components/view/block-view.scss"
 
 export const DefaultBlockView : BlockView = ({children, block, index, blockState = BLOCK_STATE.DOING, onEvent}) => (
     <div className={`DefaultBlockView app-row ${blockState} ${block!.id}`}>

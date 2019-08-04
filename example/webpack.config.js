@@ -26,23 +26,24 @@ module.exports = (env, argv) => ({
         loader: "source-map-loader"
       },
       {
-        test: /\.less$/,
+        test: /\.scss$/,
         use: ["style-loader",
           "css-loader",
           {
             loader: "postcss-loader",
             options: {
-              config: {path: __dirname, ctx: argv},
+              config: {path: __dirname, ctx: {env: argv.mode}},
               sourceMap: argv.mode !== "production",
             },
           },
-          "less-loader"]
+          "sass-loader"
+        ]
       }
     ]
   },
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.less', '.css'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss', '.css'],
   },
   devtool: 'source-map'
 });
