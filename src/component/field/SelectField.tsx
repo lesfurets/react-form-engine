@@ -1,19 +1,14 @@
 import * as React from "react";
-import {InputField, InputFieldProps} from "./element/InputField";
+import {InputFieldProps} from "./element/InputField";
 import {FieldComponent} from "../../definition/component/FieldComponent";
 import {FIELD_EVENT} from "../../definition/event/events";
-import {useEffect} from "react";
-import {FieldValue} from "../../definition/model/Field";
+import {useValues} from "./hook/useValues";
 
 export const PLEASE_SELECT_UNDEFINED = "PLEASE_SELECT_UNDEFINED";
 
 export const SelectField: FieldComponent<string> =
     ({contextValue, onFieldEvent, field}: InputFieldProps<string>) => {
-        useEffect(() => {
-            if(contextValue === undefined && field.defaultValue) {
-                onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, (field.defaultValue! as FieldValue).id);
-            }
-        },[]);
+        useValues(contextValue, field, onFieldEvent);
 
         let onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
             let value = event.target.value;
@@ -23,6 +18,7 @@ export const SelectField: FieldComponent<string> =
                 onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, value);
             }
         };
+
         return (
             <div className="SelectField-container">
                 <select onChange={onChange} value={contextValue || PLEASE_SELECT_UNDEFINED}>

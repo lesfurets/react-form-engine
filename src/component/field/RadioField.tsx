@@ -1,17 +1,12 @@
 import * as React from "react";
-import {InputField, InputFieldProps} from "./element/InputField";
+import {InputFieldProps} from "./element/InputField";
 import {FieldComponent} from "../../definition/component/FieldComponent";
 import {FIELD_EVENT} from "../../definition/event/events";
-import {useEffect} from "react";
-import {FieldValue} from "../../definition/model/Field";
+import {useValues} from "./hook/useValues";
 
 export const RadioField: FieldComponent<string> =
     ({contextValue, onFieldEvent, field}: InputFieldProps<string>) => {
-        useEffect(() => {
-            if(contextValue === undefined && field.defaultValue) {
-                onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, (field.defaultValue! as FieldValue).id);
-            }
-        },[]);
+        useValues(contextValue, field, onFieldEvent);
 
         return (
             <div className="RadioField-container">

@@ -41,7 +41,6 @@ describe("FormEngine/Entry", () => {
                 FieldView={TestFieldView}/>);
             expect(container.find(FormWrapper).length).toBe(1);
             expect(container.find(Provider).length).toBe(1);
-            expect(container.find(ResponsiveContainer).length).toBe(1);
         });
     });
 
