@@ -7,7 +7,7 @@ import {DefaultBlockView} from "./view/DefaultBlockView";
 import {DefaultFieldView} from "./view/DefaultFieldView";
 import {EMPTY_CALLBACK} from "../definition/props-utils";
 import {EVENT_MULTICASTER, EventCallBack} from "../definition/event/EventMulticaster";
-import FormWrapper from "./wrapper/FormWrapper";
+import {FormWrapper} from "./wrapper/FormWrapper";
 import {Form} from "../definition/model/Form";
 import {FieldView} from "../definition/view/FieldView";
 import {BlockView} from "../definition/view/BlockView";
@@ -34,7 +34,7 @@ export const FormEngine: React.FunctionComponent<FormEngineProps> =
                 EVENT_MULTICASTER.unsubscribe(onEvent!);
             }
         }, []);
-
+        
         return (
             <Provider store={store}>
                 <ViewContext.Provider value={{FormView:FormView!, BlockView:BlockView!, FieldView:FieldView!}}>

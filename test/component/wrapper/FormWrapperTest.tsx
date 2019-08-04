@@ -1,11 +1,9 @@
 import * as React from "react";
 
-import {mount, shallow} from "enzyme";
+import {mount} from "enzyme";
 import {BlockWrapper} from "../../../src/component/wrapper/BlockWrapper";
-import FormWrapper from "../../../src/component/wrapper/FormWrapper";
-import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
+import {FormWrapper} from "../../../src/component/wrapper/FormWrapper";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
-import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {TestUtils} from "../../TestUtils";
 import {createStore} from "redux";
 import reducer from "../../../src/redux/reducers";
@@ -33,25 +31,6 @@ describe("FormEngine/Wrapper/FormWrapper", () => {
                 </Provider>);
             expect(container.find(BlockWrapper).length).toBe(formModel.blocks.length);
         });
-    })
-
-    describe("Event", () => {
-
-        it("Should send events", () => {
-            // Given
-            let event = BLOCK_EVENT.NEXT;
-            let details = "details";
-            let onEvent = jasmine.createSpy();
-
-            // When
-            EVENT_MULTICASTER.subscribe(onEvent);
-            let container = shallow<FormWrapper>(<FormWrapper form={formModel}/>);
-            container.instance().onEvent(event,details);
-
-            // Then
-            expect(onEvent).toHaveBeenCalledWith(event, formModel, details);
-        });
-
     });
 
 });

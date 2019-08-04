@@ -6,76 +6,57 @@ import {FormEvent} from "../../definition/event/Event";
 import {BlockWrapper} from "./BlockWrapper";
 import {Block, BLOCK_STATE} from "../../definition/model/Block";
 import {Form} from "../../definition/model/Form";
-import {FieldView} from "../../definition/view/FieldView";
-import {BlockView} from "../../definition/view/BlockView";
 import {FormView} from "../../definition/view/FormView";
 import {ViewContext} from "../context/ViewContext";
-import {DefaultFormView} from "../view/DefaultFormView";
 
 export interface FormWrapperProps {
     form: Form,
 }
 
-export interface FormWrapperState {
-    currentIndex: number
-}
-
-export default class FormWrapper extends React.Component<FormWrapperProps, FormWrapperState> {
-    constructor(props: FormWrapperProps) {
-        super(props);
-        this.state = {currentIndex: 0};
-        this.onEvent = this.onEvent.bind(this);
-        this.onBlockEvent = this.onBlockEvent.bind(this);
+const getBlockState = (index: number, currentIndex: number) => {
+    if (index < currentIndex) {
+        return BLOCK_STATE.DONE;
     }
-
-    componentWillMount() {
-        EVENT_MULTICASTER.subscribeForElements(this.onBlockEvent, this.props.form.blocks);
+    if (index === currentIndex) {
+        return BLOCK_STATE.DOING;
     }
+    return BLOCK_STATE.TODO;
+};
 
-    componentWillUnmount() {
-        EVENT_MULTICASTER.unsubscribe(this.onBlockEvent);
-    }
+export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) => {
+    const [currentIndex, setCurrentIndex] = React.useState(0);
 
-    onBlockEvent(event: FormEvent, block: Block) {
-        switch (event) {
-            case BLOCK_EVENT.VALIDATED:
-                this.setState({currentIndex: block.index! + 1});
-                break;
-            case BLOCK_EVENT.PREVIOUS:
-                this.setState({currentIndex: block.index! - 1});
-                break;
-        }
-    }
+    const onEvent = (event: FormEvent, details: any) => {
+        EVENT_MULTICASTER.event(event, form, details);
+    };
 
-    static getBlockState(index: number, currentIndex: number) {
-        if (index < currentIndex) {
-            return BLOCK_STATE.DONE;
-        }
-        if (index === currentIndex) {
-            return BLOCK_STATE.DOING;
-        }
-        return BLOCK_STATE.TODO;
-    }
+    React.useEffect(() => {
+        const onBlockEvent = (event: FormEvent, block: Block) => {
+            switch (event) {
+                case BLOCK_EVENT.VALIDATED:
+                    setCurrentIndex(block.index! + 1);
+                    break;
+                case BLOCK_EVENT.PREVIOUS:
+                    setCurrentIndex(block.index! - 1);
+                    break;
+            }
+        };
+        EVENT_MULTICASTER.subscribeForElements(onBlockEvent, form.blocks);
+        return () => EVENT_MULTICASTER.unsubscribe(onBlockEvent);
+    }, []);
 
-    onEvent(event: FormEvent, details: any) {
-        EVENT_MULTICASTER.event(event, this.props.form, details);
-    }
 
-    render() {
-        let {form} = this.props;
-        let {currentIndex} = this.state;
-        return (
-            <ViewContext.Consumer>
-                {({FormView: FormView}) => (
-                    <FormView onEvent={this.onEvent}
-                              form={form}>
-                        {form.blocks.map((block, index) =>
-                            <BlockWrapper key={block.id}
-                                          block={{...block, index: index}}
-                                          blockState={FormWrapper.getBlockState(index, currentIndex)}/>)}
-                    </FormView>
-                )}
-            </ViewContext.Consumer>
-        );
-    }
-}
+    return (
+        <ViewContext.Consumer>
+            {({FormView: FormView}) => (
+                <FormView onEvent={onEvent}
+                          form={form}>
+                    {form.blocks.map((block, index) =>
+                        <BlockWrapper key={block.id}
+                                      block={{...block, index: index}}
+                                      blockState={getBlockState(index, currentIndex)}/>)}
+                </FormView>
+            )}
+        </ViewContext.Consumer>
+    );
+};
