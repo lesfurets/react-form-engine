@@ -41,7 +41,7 @@ export class BlockWrapperComponent extends React.Component<BlockWrapperProps & F
             .map(field => field.getValidation === undefined ? VALID : field.getValidation(fieldContext))
             .map(validation => validation.isValid)
             .reduce((acc, value) => acc && value, true)) {
-            EVENT_MULTICASTER.event(BLOCK_EVENT.VALIDATED, block);
+            EVENT_MULTICASTER.event(BLOCK_EVENT.VALIDATED, block, fieldContext);
         }
         this.setState({forceValidation: true});
     }

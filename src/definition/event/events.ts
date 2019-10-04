@@ -1,5 +1,9 @@
 import {FormEvent, EventTypes} from "./Event";
 
+export const FORM_EVENT = {
+    DONE: new FormEvent("DONE", EventTypes.Form),
+};
+
 export const BLOCK_EVENT = {
     NEXT: new FormEvent("NEXT", EventTypes.Block),
     PREVIOUS: new FormEvent("PREVIOUS", EventTypes.Block),
