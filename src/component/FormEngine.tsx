@@ -12,7 +12,9 @@ import {Form} from "../definition/model/Form";
 import {FieldView} from "../definition/view/FieldView";
 import {BlockView} from "../definition/view/BlockView";
 import {FormView} from "../definition/view/FormView";
-import {ViewContext} from "./context/ViewContext";
+import {ThemeContext} from "./context/ThemeContext";
+import {FieldInjector} from "../definition/component/FieldInjector";
+import {DefaultFieldInjector} from "./field/DefaultFieldInjector";
 
 export interface FormEngineProps {
     form: Form,
@@ -20,10 +22,11 @@ export interface FormEngineProps {
     BlockView?: BlockView
     FieldView?: FieldView
     onEvent?: EventCallBack
+    fieldInjector: FieldInjector,
 }
 
 export const FormEngine: React.FunctionComponent<FormEngineProps> =
-    ({form, onEvent, FormView, BlockView, FieldView}) => {
+    ({form, onEvent, FormView, BlockView, FieldView, fieldInjector}) => {
         const [store] = React.useState(() => createStore(reducer));
 
         React.useEffect(() => {
@@ -35,15 +38,16 @@ export const FormEngine: React.FunctionComponent<FormEngineProps> =
         
         return (
             <Provider store={store}>
-                <ViewContext.Provider value={{FormView:FormView!, BlockView:BlockView!, FieldView:FieldView!}}>
+                <ThemeContext.Provider value={{FormView:FormView!, BlockView:BlockView!, FieldView:FieldView!, fieldInjector:fieldInjector!}}>
                     <FormWrapper form={form}/>
-                </ViewContext.Provider>
+                </ThemeContext.Provider>
             </Provider>
         );
     };
 
 FormEngine.defaultProps = {
     onEvent: EMPTY_CALLBACK,
+    fieldInjector: DefaultFieldInjector.inject,
     FormView: DefaultFormView,
     BlockView: DefaultBlockView,
     FieldView: DefaultFieldView,

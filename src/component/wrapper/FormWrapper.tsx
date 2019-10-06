@@ -7,7 +7,7 @@ import {BlockWrapper, BlockWrapperComponent} from "./BlockWrapper";
 import {Block, BLOCK_STATE} from "../../definition/model/Block";
 import {Form} from "../../definition/model/Form";
 import {FormView} from "../../definition/view/FormView";
-import {ViewContext} from "../context/ViewContext";
+import {ThemeContext} from "../context/ThemeContext";
 import {fieldConnect, FieldProps} from "../../redux/fieldConnect";
 import {FieldContext} from "../../definition/FieldContext";
 
@@ -53,7 +53,7 @@ export const FormWrapperComponent: React.FunctionComponent<FormWrapperProps & Fi
 
 
     return (
-        <ViewContext.Consumer>
+        <ThemeContext.Consumer>
             {({FormView: FormView}) => (
                 <FormView onEvent={onEvent}
                           form={form}>
@@ -63,7 +63,7 @@ export const FormWrapperComponent: React.FunctionComponent<FormWrapperProps & Fi
                                       blockState={getBlockState(index, currentIndex)}/>)}
                 </FormView>
             )}
-        </ViewContext.Consumer>
+        </ThemeContext.Consumer>
     );
 };
 

@@ -11,7 +11,7 @@ import {RadioField} from "./RadioField";
 import {CheckboxField} from "./CheckboxField";
 import {DateField} from "./DateField";
 
-export class FieldInjector {
+export class DefaultFieldInjector {
     static inject(type: FieldType) {
         switch (type) {
             case FieldTypes.INPUT_TEXT:

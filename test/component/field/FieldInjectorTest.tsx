@@ -1,5 +1,5 @@
 import {FieldType, FieldTypes} from "../../../src/definition/FieldTypes";
-import {FieldInjector, UNKNOWN_FIELD} from "../../../src/component/field/FieldInjector";
+import {FieldInjector, UNKNOWN_FIELD} from "../../../src/component/field/DefaultFieldInjector";
 import {TextField} from "../../../src/component/field/TextField";
 import {EmailField} from "../../../src/component/field/EmailField";
 import {IntegerField} from "../../../src/component/field/IntegerField";

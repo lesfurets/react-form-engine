@@ -8,7 +8,7 @@ import {FieldWrapper} from "./FieldWrapper";
 import {fieldConnect, FieldProps} from "../../redux/fieldConnect";
 import {Block, BLOCK_STATE} from "../../definition/model/Block";
 import {BlockView} from "../../definition/view/BlockView";
-import {ViewContext} from "../context/ViewContext";
+import {ThemeContext} from "../context/ThemeContext";
 
 export interface BlockWrapperProps {
     blockState: BLOCK_STATE,
@@ -56,7 +56,7 @@ export class BlockWrapperComponent extends React.Component<BlockWrapperProps & F
     render() {
         let {block, blockState} = this.props;
         return (
-            <ViewContext.Consumer>
+            <ThemeContext.Consumer>
                 {({BlockView: BlockView}) => (
                     <BlockView block={block}
                                index={block.index!}
@@ -70,7 +70,7 @@ export class BlockWrapperComponent extends React.Component<BlockWrapperProps & F
                                           forceValidation={this.state.forceValidation}/>)}
                     </BlockView>
                 )}
-            </ViewContext.Consumer>
+            </ThemeContext.Consumer>
         );
     }
 }
