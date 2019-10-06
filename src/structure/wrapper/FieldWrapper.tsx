@@ -77,7 +77,7 @@ export class FieldWrapperComponent extends React.Component<FieldWrapperProps & F
         return (
             <ThemeContext.Consumer>
                 {({FieldView, fieldInjector}) => {
-                    let Field = fieldInjector(field.type);
+                    let Field = fieldInjector!(field.type);
                     return (
                         <FieldView field={field}
                                    index={index}
