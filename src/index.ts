@@ -1,3 +1,3 @@
-import {FormEngine} from "./component/FormEngine";
+import {FormEngine} from "./structure/FormEngine";
 
 export default FormEngine;
