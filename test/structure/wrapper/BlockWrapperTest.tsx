@@ -64,7 +64,6 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
         it("Should render Fields by default", () => {
             let container = mountWrapper(blockTest);
 
-            console.log(container.debug());
             expect(container.find(FieldWrapper).length).toBe(blockTest.fields.length);
         });
     });
