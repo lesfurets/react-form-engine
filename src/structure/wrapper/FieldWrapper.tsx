@@ -1,5 +1,4 @@
 import * as React from "react";
-import {fieldConnect, FieldProps} from "../../redux/fieldConnect";
 import {VALID, Validation} from "../../definition/validation/Validation";
 import {FIELD_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
@@ -8,15 +7,13 @@ import {Field, FIELD_STATE} from "../../definition/model/Field";
 import {FieldView} from "../../definition/view/FieldView";
 import {ThemeContext} from "../context/ThemeContext";
 import {FieldContext} from "../../definition/FieldContext";
+import {useFieldContext} from "../../redux/useFieldContext";
 
 export interface FieldWrapperProps {
     field: Field;
     index: number;
     tabIndex: number;
     forceValidation: boolean;
-}
-export interface FieldWrapperState {
-    shouldValidate: boolean;
 }
 
 const getFieldState = (validation: Validation, forceValidation: boolean, shouldValidate: boolean) => {
@@ -32,8 +29,9 @@ const getState = (field: Field, fieldContext: FieldContext, forceValidation: boo
     return {fieldState, validation};
 };
 
-export const FieldWrapperComponent: React.FunctionComponent<FieldWrapperProps & FieldProps> =
-    ({field, index, tabIndex, fieldContext, forceValidation, setFieldValue}) => {
+export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> =
+    ({field, index, tabIndex, forceValidation}) => {
+        const [fieldContext, setFieldValue] = useFieldContext();
         const [shouldValidate, setShouldValidate] = React.useState(fieldContext[field.id] !== undefined);
 
         const isVisible = field.hasOwnProperty('isVisible') ? field.isVisible!(fieldContext) : true;
@@ -81,9 +79,7 @@ export const FieldWrapperComponent: React.FunctionComponent<FieldWrapperProps & 
         );
     };
 
-FieldWrapperComponent.defaultProps = {
+FieldWrapper.defaultProps = {
     tabIndex: 1,
     forceValidation: false
 };
-
-export const FieldWrapper = fieldConnect(FieldWrapperComponent);

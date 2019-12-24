@@ -1,25 +1,22 @@
 import * as React from "react";
-import {FieldWrapperComponent} from "../../../src/structure/wrapper/FieldWrapper";
 import {VALID} from "../../../src/definition/validation/Validation";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
-import {FieldTypes} from "../../../src/definition/FieldTypes";
-import {TestUtils} from "../../TestUtils";
+import {dummyField, mockFormStore, TestUtils} from "../../TestUtils";
 import {mount} from "enzyme";
 import {Field, FIELD_STATE} from "../../../src/definition/model/Field";
 import {DefaultFieldView} from "../../../src/theme/component/view/DefaultFieldView";
 import {ThemeContext} from "../../../src/structure/context/ThemeContext";
 import {DefaultFieldInjector} from "../../../src/theme/component/field/DefaultFieldInjector";
 import {DefaultFormView} from "../../../src/theme/component/view/DefaultFormView";
-import {generateMock, testProps, triggerCallback} from "./MockComponent";
-import {Provider} from "react-redux";
-import {createStore} from "redux";
-import reducer from "../../../src/redux/reducers";
+import {generateMock} from "./MockComponent";
 import {DefaultBlockView} from "../../../src/theme/component/view/DefaultBlockView";
 import {FieldView, FieldViewProps} from "../../../src/definition/view/FieldView";
 import {FieldContext} from "../../../src/definition/FieldContext";
 import {FieldInjector} from "../../../src/definition/component/FieldInjector";
 import {FieldComponentProps} from "../../../src/definition/component/FieldComponent";
+import {ValueSetter} from "../../../src/redux/useFieldContext";
+import {FieldWrapper} from "../../../src/structure/wrapper/FieldWrapper";
 
 TestUtils.init();
 
@@ -29,34 +26,25 @@ interface MountingProps {
     wrapperProps?: any,
     fieldInjector?: FieldInjector,
     FieldView?: FieldView,
+    fieldContext?: FieldContext,
+    setFieldValue?: ValueSetter,
 }
 
 describe("FormEngine/Wrapper/FieldWrapper", () => {
     const fieldMock = generateMock<FieldComponentProps<any>>();
     const viewMock = generateMock<FieldViewProps>();
 
-    let testId = 'testChild1';
-    let model = {id: testId, type: FieldTypes.INPUT_TEXT};
-    let props = {
-        field: model,
-        index: 0,
-        setFieldValue: TestUtils.emptyCallback,
-        fieldContext: {},
-        tabIndex: 0,
-        forceValidation: false
-    };
+    const mountWrapper = (props: MountingProps) => {
+        mockFormStore(props.fieldContext, props.setFieldValue)
 
-    let store = createStore(reducer);
-
-    const mountWrapper = (props: MountingProps) => mount(
-        <Provider store={store}>
+        return mount(
             <ThemeContext.Provider value={{
                 fieldInjector: props.fieldInjector || DefaultFieldInjector.inject,
                 FormView: DefaultFormView,
                 BlockView: DefaultBlockView,
                 FieldView: props.FieldView || DefaultFieldView
             }}>
-                <FieldWrapperComponent
+                <FieldWrapper
                     field={props.field}
                     index={0}
                     tabIndex={0}
@@ -64,27 +52,24 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                     fieldContext={{}}
                     {...props.wrapperProps}/>
             </ThemeContext.Provider>
-        </Provider>
-    );
+        );
+    };
 
     describe("States", () => {
 
         it("Should have default state when loaded", () => {
             // When
-            let container = mountWrapper({field: model, FieldView: viewMock.component});
+            let container = mountWrapper({field: dummyField, FieldView: viewMock.component});
 
             // Then
             viewMock.handleMock(container, (props) => expect(props.fieldState).toBe(FIELD_STATE.DEFAULT));
         });
 
         it("Should be validated if context is set - valid by default", () => {
-            // Given
-            let fieldContext = {[testId]: "OK"};
-
             // When
             let container = mountWrapper({
-                field: model,
-                wrapperProps: {fieldContext: fieldContext},
+                field: dummyField,
+                fieldContext: {[dummyField.id]: "OK"},
                 FieldView: viewMock.component
             });
 
@@ -93,18 +78,13 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
         });
 
         it("Should be validated if context is set - valid", () => {
-            // Given
-            let fieldContext = {[testId]: "OK"};
-            let field = {
-                id: testId,
-                type: FieldTypes.INPUT_TEXT,
-                getValidation: () => VALID
-            };
-
             // When
             let container = mountWrapper({
-                field: field,
-                wrapperProps: {fieldContext: fieldContext},
+                field: {
+                    ...dummyField,
+                    getValidation: () => VALID
+                },
+                fieldContext: {[dummyField.id]: "OK"},
                 FieldView: viewMock.component
             });
 
@@ -113,17 +93,13 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
         });
 
         it("Should be validated if context is set - error", () => {
-            // Given
-            let field = {
-                id: testId,
-                type: FieldTypes.INPUT_TEXT,
-                getValidation: () => TestUtils.ERROR
-            };
-
             // When
             let container = mountWrapper({
-                field: field,
-                wrapperProps: {fieldContext: {[testId]: "OK"}},
+                field: {
+                    ...dummyField,
+                    getValidation: () => TestUtils.ERROR
+                },
+                fieldContext: {[dummyField.id]: "OK"},
                 FieldView: viewMock.component
             });
 
@@ -139,7 +115,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
         it("Should be valid by default when forced", () => {
             // When
             let container = mountWrapper({
-                field: model,
+                field: dummyField,
                 wrapperProps: {forceValidation: true},
                 FieldView: viewMock.component
             });
@@ -149,16 +125,12 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
         });
 
         it("Should force validation - error", () => {
-            // Given
-            let field = {
-                id: testId,
-                type: FieldTypes.INPUT_TEXT,
-                getValidation: () => TestUtils.ERROR
-            };
-
             // When
             let container = mountWrapper({
-                field: field,
+                field: {
+                    ...dummyField,
+                    getValidation: () => TestUtils.ERROR
+                },
                 wrapperProps: {forceValidation: true},
                 FieldView: viewMock.component
             });
@@ -168,16 +140,12 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
         });
 
         it("Should force validation - valid", () => {
-            // Given
-            let field = {
-                id: testId,
-                type: FieldTypes.INPUT_TEXT,
-                getValidation: () => VALID
-            };
-
             // When
             let container = mountWrapper({
-                field: field,
+                field: {
+                    ...dummyField,
+                    getValidation: () => VALID
+                },
                 wrapperProps: {forceValidation: true},
                 FieldView: viewMock.component
             });
@@ -197,28 +165,29 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
 
             // When
             const container = mountWrapper({
-                field: model,
-                wrapperProps: {setFieldValue: setFieldValue, forceValidation: true},
-                fieldInjector: () => viewMock.component
+                field: dummyField,
+                wrapperProps: {forceValidation: true},
+                fieldInjector: () => viewMock.component,
+                setFieldValue: setFieldValue,
             });
 
             viewMock.handleMock(container, (props) => props.onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, testValue));
 
             // Then
-            expect(setFieldValue).toHaveBeenCalledWith(model.id, testValue);
+            expect(setFieldValue).toHaveBeenCalledWith(dummyField.id, testValue);
         });
 
         it("Should force validation if value is submitted", () => {
             // Given
             let setFieldValue = jasmine.createSpy();
 
-
             // When
             const container = mountWrapper({
-                field: model,
-                wrapperProps: {setFieldValue: setFieldValue, forceValidation: true},
+                field: dummyField,
+                wrapperProps: {forceValidation: true},
                 fieldInjector: () => fieldMock.component,
-                FieldView: viewMock.component
+                FieldView: viewMock.component,
+                setFieldValue: setFieldValue,
             });
 
             fieldMock.handleMock(container, (props) => props.onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, "testValue"));
@@ -237,10 +206,10 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             // When
             const container = mountWrapper({
                 field: {
-                    ...model,
+                    ...dummyField,
                     isVisible: predicate
                 },
-                wrapperProps: {fieldContext:fieldContext},
+                fieldContext:fieldContext,
             });
 
             // Then
@@ -251,7 +220,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             // When
             const container = mountWrapper({
                 field: {
-                    ...model,
+                    ...dummyField,
                     isVisible: () => true
                 },
                 FieldView: viewMock.component
@@ -265,7 +234,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             // When
             const container = mountWrapper({
                 field: {
-                    ...model,
+                    ...dummyField,
                     isVisible: () => false
                 },
                 FieldView: viewMock.component
@@ -287,7 +256,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             // When
             EVENT_MULTICASTER.subscribe(onEvent);
             let container = mountWrapper({
-                field: model,
+                field: dummyField,
                 wrapperProps: {forceValidation: true},
                 FieldView: viewMock.component
             });
@@ -295,7 +264,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             viewMock.handleMock(container, (props) => props.onEvent!(FIELD_EVENT.UPDATE_VALUE, testValue));
 
             // Then
-            expect(onEvent).toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, model, testValue);
+            expect(onEvent).toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, dummyField, testValue);
         });
 
     });
