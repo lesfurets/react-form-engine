@@ -13,6 +13,7 @@ import {DefaultBlockView} from "../src/theme/component/view/DefaultBlockView";
 import {DefaultFormView} from "../src/theme/component/view/DefaultFormView";
 import {DefaultFieldInjector} from "../src/theme/component/field/DefaultFieldInjector";
 import {Block} from "../src/definition/model/Block";
+import {Form} from "../src/definition/model/Form";
 
 export const TestUtils = {
     init: () => {
@@ -41,12 +42,21 @@ export const dummyBlock: Block = {
     ]
 };
 
+export const dummyForm: Form = {
+    id: "form",
+    blocks:
+        [
+            {id: "block1", label: "block1", index: 0, fields: [{id: 'testChild1', type: FieldTypes.INPUT_TEXT}]},
+            {id: "block2", label: "block2", index: 1, fields: [{id: 'testChild2', type: FieldTypes.INPUT_TEXT}]}
+        ],
+};
+
 export const mockFormStore = (fieldContext?: FieldContext, setFieldValue?: ValueSetter) => {
     const useFormStoreSpy = jest.spyOn(UseFieldContext, 'useFieldContext');
     useFormStoreSpy.mockImplementation(() => [fieldContext || {}, setFieldValue || (() => {})]);
 }
 
-export const mockThemeContext = (theme: Partial<ThemeContextInterface>) => {
+export const mockThemeContext = (theme: Partial<ThemeContextInterface> = {}) => {
     const useThemeContextSpy = jest.spyOn(UseTheme, 'useTheme');
     useThemeContextSpy.mockImplementation(() => ({
         FieldView: theme.FieldView || DefaultFieldView,

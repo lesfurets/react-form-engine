@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {BLOCK_EVENT, FORM_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 import {FormEvent} from "../../definition/event/Event";
@@ -8,8 +7,8 @@ import {Block, BLOCK_STATE} from "../../definition/model/Block";
 import {Form} from "../../definition/model/Form";
 import {FormView} from "../../definition/view/FormView";
 import {ThemeContext} from "../context/ThemeContext";
-import {fieldConnect, FieldProps} from "../../redux/fieldConnect";
 import {FieldContext} from "../../definition/FieldContext";
+import {useTheme} from "../context/useTheme";
 
 export interface FormWrapperProps {
     form: Form,
@@ -25,7 +24,8 @@ const getBlockState = (index: number, currentIndex: number) => {
     return BLOCK_STATE.TODO;
 };
 
-export const FormWrapperComponent: React.FunctionComponent<FormWrapperProps & FieldProps> = ({form}) => {
+export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) => {
+    const {FormView} = useTheme();
     const [currentIndex, setCurrentIndex] = React.useState(0);
 
     const onEvent = (event: FormEvent, details: any) => {
@@ -51,20 +51,13 @@ export const FormWrapperComponent: React.FunctionComponent<FormWrapperProps & Fi
         return () => EVENT_MULTICASTER.unsubscribe(onBlockEvent);
     }, []);
 
-
     return (
-        <ThemeContext.Consumer>
-            {({FormView: FormView}) => (
-                <FormView onEvent={onEvent}
-                          form={form}>
-                    {form.blocks.map((block, index) =>
-                        <BlockWrapper key={block.id}
-                                      block={{...block, index: index}}
-                                      blockState={getBlockState(index, currentIndex)}/>)}
-                </FormView>
-            )}
-        </ThemeContext.Consumer>
+        <FormView onEvent={onEvent}
+                  form={form}>
+            {form.blocks.map((block, index) =>
+                <BlockWrapper key={block.id}
+                              block={{...block, index: index}}
+                              blockState={getBlockState(index, currentIndex)}/>)}
+        </FormView>
     );
 };
-
-export const FormWrapper = fieldConnect(FormWrapperComponent);
