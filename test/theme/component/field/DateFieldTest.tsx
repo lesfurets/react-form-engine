@@ -1,6 +1,6 @@
 import * as React from "react";
 import {mount} from "enzyme";
-import {TestUtils} from "../../../TestUtils";
+import {emptyCallback, initTest} from "../../../TestUtils";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
 import {FIELD_EVENT} from "../../../../src/definition/event/events";
 import {Field} from "../../../../src/definition/model/Field";
@@ -8,7 +8,7 @@ import {DateField, DateInfo, formatDayMonth, formatYear} from "../../../../src/t
 import {act} from "react-dom/test-utils";
 import {DateElement} from "../../../../src/theme/component/field/element/DateElement";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/Field/DateField", () => {
     const field: Field = {
@@ -24,7 +24,7 @@ describe("FormEngine/Field/DateField", () => {
     describe("constructor", () => {
         it("Input should have type text", () => {
             let container = mount(<DateField field={field}
-                                             onFieldEvent={TestUtils.emptyCallback}/>);
+                                             onFieldEvent={emptyCallback}/>);
 
             expect(container.find(DateElement).length).toBe(3);
         });
@@ -33,7 +33,7 @@ describe("FormEngine/Field/DateField", () => {
     describe("props", () => {
         it("Should use right formater", () => {
             let container = mount(<DateField field={field}
-                                             onFieldEvent={TestUtils.emptyCallback}/>);
+                                             onFieldEvent={emptyCallback}/>);
 
             expect(container.find(DateElement)
                 .findWhere(container => container.key() === DateInfo.DAY)
@@ -48,7 +48,7 @@ describe("FormEngine/Field/DateField", () => {
 
         it("Should have no initial value if contextValue is undefined", () => {
             let container = mount(<DateField field={field}
-                                             onFieldEvent={TestUtils.emptyCallback}/>);
+                                             onFieldEvent={emptyCallback}/>);
 
             expect(container.find('.DateField-day').props().value).toBe("");
             expect(container.find('.DateField-month').props().value).toBe("");
@@ -59,7 +59,7 @@ describe("FormEngine/Field/DateField", () => {
             // When
             let container = mount(<DateField field={field}
                                              contextValue={testDate}
-                                             onFieldEvent={TestUtils.emptyCallback}/>);
+                                             onFieldEvent={emptyCallback}/>);
 
             // Then
             expect(container.find('.DateField-day').props().value).toBe(formatDayMonth(date));

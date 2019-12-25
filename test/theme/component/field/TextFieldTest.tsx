@@ -1,13 +1,13 @@
 import * as React from "react";
-import {mount, ReactWrapper, shallow, ShallowWrapper} from "enzyme";
+import {mount, ReactWrapper} from "enzyme";
 import {TextField} from "../../../../src/theme/component/field/TextField";
-import {TestUtils} from "../../../TestUtils";
+import {emptyCallback, initTest} from "../../../TestUtils";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
 import {FIELD_EVENT} from "../../../../src/definition/event/events";
 import {Field} from "../../../../src/definition/model/Field";
 import {FieldComponentProps} from "../../../../src/definition/component/FieldComponent";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/Field/TextField", () => {
     let testValue = "testValue";
@@ -19,7 +19,7 @@ describe("FormEngine/Field/TextField", () => {
     describe("Construction", () => {
         it("Input should have type text", () => {
             let container = mount(<TextField field={field}
-                                               onFieldEvent={TestUtils.emptyCallback}
+                                               onFieldEvent={emptyCallback}
                                                contextValue=""/>);
             expect(container.find("input").props().type).toBe("text");
             expect(container.find("input").props().inputMode).toBe("text");
@@ -31,7 +31,7 @@ describe("FormEngine/Field/TextField", () => {
             let placeholderValue = "placeholder";
             let container = mount(<TextField field={{...field, placeholder: placeholderValue}}
                                                contextValue=""
-                                               onFieldEvent={TestUtils.emptyCallback}/>);
+                                               onFieldEvent={emptyCallback}/>);
             expect(container.find('input').props().placeholder).toBe(placeholderValue)
         });
 
@@ -39,7 +39,7 @@ describe("FormEngine/Field/TextField", () => {
         it("Should have empty placeholder", () => {
             let container = mount(<TextField field={field}
                                                contextValue=""
-                                               onFieldEvent={TestUtils.emptyCallback}/>);
+                                               onFieldEvent={emptyCallback}/>);
             expect(container.find('input').props().placeholder).toBe("")
         });
     });
@@ -50,7 +50,7 @@ describe("FormEngine/Field/TextField", () => {
             let container = mount(<TextField field={field}
                                                tabIndex={tabIndex}
                                                contextValue=""
-                                               onFieldEvent={TestUtils.emptyCallback}/>);
+                                               onFieldEvent={emptyCallback}/>);
             expect(container.find('input').props().id).toBe(field.id);
             expect(container.find('input').props().name).toBe(field.id);
             expect(container.find('input').props().tabIndex).toBe(tabIndex);

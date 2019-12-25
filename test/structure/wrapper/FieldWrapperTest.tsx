@@ -2,7 +2,7 @@ import * as React from "react";
 import {VALID} from "../../../src/definition/validation/Validation";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
-import {dummyField, mockFormStore, mockThemeContext, TestUtils} from "../../TestUtils";
+import {dummyField, fieldError, initTest, mockFormStore, mockThemeContext} from "../../TestUtils";
 import {shallow} from "enzyme";
 import {Field, FIELD_STATE} from "../../../src/definition/model/Field";
 import {DefaultFieldView} from "../../../src/theme/component/view/DefaultFieldView";
@@ -15,7 +15,7 @@ import {FieldComponentProps} from "../../../src/definition/component/FieldCompon
 import {ValueSetter} from "../../../src/redux/useFieldContext";
 import {FieldWrapper} from "../../../src/structure/wrapper/FieldWrapper";
 
-TestUtils.init();
+initTest();
 
 interface MountingProps {
     field: Field,
@@ -89,7 +89,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let container = shallowWrapper({
                 field: {
                     ...dummyField,
-                    getValidation: () => TestUtils.ERROR
+                    getValidation: () => fieldError
                 },
                 fieldContext: {[dummyField.id]: "OK"},
                 FieldView: viewMock.component
@@ -121,7 +121,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let container = shallowWrapper({
                 field: {
                     ...dummyField,
-                    getValidation: () => TestUtils.ERROR
+                    getValidation: () => fieldError
                 },
                 forceValidation: true,
                 FieldView: viewMock.component

@@ -1,12 +1,12 @@
 import * as React from "react";
-import {mount, shallow} from "enzyme";
+import {mount} from "enzyme";
 import {DecimalField} from "../../../../src/theme/component/field/DecimalField";
-import {TestUtils} from "../../../TestUtils";
+import {emptyCallback, initTest} from "../../../TestUtils";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
 import {Field} from "../../../../src/definition/model/Field";
 import {FIELD_EVENT} from "../../../../src/definition/event/events";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/Field/NumericField", () => {
     let testId = "testId";
@@ -18,7 +18,7 @@ describe("FormEngine/Field/NumericField", () => {
     describe("Construction", () => {
         it("Input should have type decimal", () => {
             let container = mount(<DecimalField field={field}
-                                                onFieldEvent={TestUtils.emptyCallback}
+                                                onFieldEvent={emptyCallback}
                                                 contextValue={undefined}/>);
             expect(container.find("input").props().inputMode).toBe("decimal");
         });
@@ -27,7 +27,7 @@ describe("FormEngine/Field/NumericField", () => {
     describe("Symbol", () => {
         it("Input should have no symbol by default", () => {
             let container = mount(<DecimalField field={field}
-                                                onFieldEvent={TestUtils.emptyCallback}
+                                                onFieldEvent={emptyCallback}
                                                 contextValue={undefined}/>);
             expect(container.find("TextField-symbol").length).toBe(0);
         });
@@ -35,7 +35,7 @@ describe("FormEngine/Field/NumericField", () => {
         it("Input should symbol if specified", () => {
             let symbol = "%";
             let container = mount(<DecimalField field={{...field, symbol: symbol}}
-                                                onFieldEvent={TestUtils.emptyCallback}
+                                                onFieldEvent={emptyCallback}
                                                 contextValue={undefined}/>);
             expect(container.find(".TextField-symbol").length).toBe(1);
             expect(container.find(".TextField-symbol").text()).toEqual(symbol);
@@ -91,7 +91,7 @@ describe("FormEngine/Field/NumericField", () => {
         it("Should format value", () => {
             // Given
             let container = mount(<DecimalField field={field}
-                                                onFieldEvent={TestUtils.emptyCallback}
+                                                onFieldEvent={emptyCallback}
                                                 contextValue={1234.56}/>);
             let input = container.find('input');
 

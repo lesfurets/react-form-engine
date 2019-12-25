@@ -2,10 +2,10 @@ import * as React from "react";
 import {shallow} from "enzyme";
 import {DefaultFieldView} from "../../../../src/theme/component/view/DefaultFieldView";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
-import {TestUtils} from "../../../TestUtils";
+import {initTest} from "../../../TestUtils";
 import {FIELD_STATE} from "../../../../src/definition/model/Field";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/View/DefaultFieldView", () => {
 

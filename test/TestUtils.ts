@@ -15,17 +15,10 @@ import {DefaultFieldInjector} from "../src/theme/component/field/DefaultFieldInj
 import {Block} from "../src/definition/model/Block";
 import {Form} from "../src/definition/model/Form";
 
-export const TestUtils = {
-    init: () => {
-        Enzyme.configure({
-            adapter: new Adapter(),
-        })
-    },
-
-    emptyCallback: () => {
-    },
-
-    ERROR: new Validation(false, "error-test"),
+export const initTest = () => {
+    Enzyme.configure({
+        adapter: new Adapter(),
+    })
 };
 
 export const TestType = new FieldType("TestType");
@@ -64,7 +57,9 @@ export const mockThemeContext = (theme: Partial<ThemeContextInterface> = {}) => 
         FormView: theme.FormView || DefaultFormView,
         fieldInjector: theme.fieldInjector || DefaultFieldInjector.inject,
     }));
-}
+};
+
+export const fieldError = new Validation(false, "error-test");
 
 export const emptyCallback = () => {
 };

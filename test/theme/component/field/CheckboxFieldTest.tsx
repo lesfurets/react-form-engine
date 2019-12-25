@@ -1,12 +1,12 @@
 import * as React from "react";
 import {mount} from "enzyme";
 import {CheckboxField} from "../../../../src/theme/component/field/CheckboxField";
-import {TestUtils} from "../../../TestUtils";
+import {initTest} from "../../../TestUtils";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
 import {Field} from "../../../../src/definition/model/Field";
 import {FIELD_EVENT} from "../../../../src/definition/event/events";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/Field/CheckboxField", () => {
     let fieldValues = [

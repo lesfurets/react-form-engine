@@ -4,13 +4,13 @@ import {shallow} from "enzyme";
 import {Provider} from "react-redux";
 import {FormEngine} from "../../src/structure/FormEngine";
 import {FormWrapper} from "../../src/structure/wrapper/FormWrapper";
-import {dummyForm, emptyCallback, TestUtils} from "../TestUtils";
+import {dummyForm, emptyCallback, initTest} from "../TestUtils";
 import {Form} from "../../src/definition/model/Form";
 import {FieldViewProps} from "../../src/definition/view/FieldView";
 import {BlockViewProps} from "../../src/definition/view/BlockView";
 import {FormViewProps} from "../../src/definition/view/FormView";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/Entry", () => {
     let TestBlockView = (p: BlockViewProps) => (<div>{p.children}</div>);

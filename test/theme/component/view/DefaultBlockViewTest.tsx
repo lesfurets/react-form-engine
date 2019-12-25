@@ -1,12 +1,12 @@
 import * as React from "react";
-import {shallow, mount} from "enzyme";
+import {mount, shallow} from "enzyme";
 import {DefaultBlockView} from "../../../../src/theme/component/view/DefaultBlockView";
 import {BLOCK_EVENT} from "../../../../src/definition/event/events";
-import {TestUtils} from "../../../TestUtils";
+import {initTest} from "../../../TestUtils";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
 import {BLOCK_STATE} from "../../../../src/definition/model/Block";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/View/DefaultBlockView", () => {
 

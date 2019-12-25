@@ -1,16 +1,13 @@
 import * as React from "react";
 
-import {mount, shallow} from "enzyme";
+import {shallow} from "enzyme";
 import {BlockWrapper} from "../../../src/structure/wrapper/BlockWrapper";
 import {FormWrapper} from "../../../src/structure/wrapper/FormWrapper";
-import {FieldTypes} from "../../../src/definition/FieldTypes";
-import {dummyForm, mockFormStore, mockThemeContext, TestUtils} from "../../TestUtils";
+import {dummyForm, initTest, mockFormStore, mockThemeContext} from "../../TestUtils";
 import {createStore} from "redux";
 import reducer from "../../../src/redux/reducers";
-import {Provider} from "react-redux";
-import {DefaultBlockView} from "../../../src/theme/component/view/DefaultBlockView";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/Wrapper/FormWrapper", () => {
     let store = createStore(reducer);

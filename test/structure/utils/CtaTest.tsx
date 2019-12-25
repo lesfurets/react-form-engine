@@ -1,9 +1,9 @@
 import * as React from "react";
 import {shallow} from "enzyme";
 import {Cta, CTA_TYPE} from "../../../src/theme/component/view/elements/Cta";
-import {TestUtils} from "../../TestUtils";
+import {initTest} from "../../TestUtils";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/Utils/Cta", () => {
 

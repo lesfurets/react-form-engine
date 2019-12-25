@@ -1,12 +1,12 @@
 import * as React from "react";
 import {mount} from "enzyme";
-import {TestUtils} from "../../../../TestUtils";
+import {initTest} from "../../../../TestUtils";
 import {FieldTypes} from "../../../../../src/definition/FieldTypes";
 import {Field} from "../../../../../src/definition/model/Field";
 import {act} from "react-dom/test-utils";
 import {DateElement} from "../../../../../src/theme/component/field/element/DateElement";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/Field/DateField", () => {
     const field: Field = {

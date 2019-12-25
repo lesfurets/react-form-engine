@@ -2,7 +2,7 @@ import {Field} from "../../src/definition/model/Field";
 import {Block} from "../../src/definition/model/Block";
 import {FieldTypes} from "../../src/definition/FieldTypes";
 import {VALID} from "../../src/definition/validation/Validation";
-import {TestUtils} from "../TestUtils";
+import {fieldError} from "../TestUtils";
 import {isBlockValid} from "../../src/definition/ModelUtils";
 
 describe("FormEngine/ModelUtils", () => {
@@ -50,12 +50,12 @@ describe("FormEngine/ModelUtils", () => {
         it("Should not validate if 1 Fields is not valid", () => {
             checkBlockValidation(false,
                 [{id: 'testChild1', type: FieldTypes.INPUT_TEXT, getValidation: () => VALID},
-                    {id: 'testChild2', type: FieldTypes.INPUT_TEXT, getValidation: () => TestUtils.ERROR},
+                    {id: 'testChild2', type: FieldTypes.INPUT_TEXT, getValidation: () => fieldError},
                     {id: 'testChild3', type: FieldTypes.INPUT_TEXT, getValidation: () => VALID}]);
         });
 
         it("Should not validate if Field is visible and invalid", () => {
-            checkBlockValidation(false, [{id: 'testChild1', type: FieldTypes.INPUT_TEXT, getValidation: () => TestUtils.ERROR}]);
+            checkBlockValidation(false, [{id: 'testChild1', type: FieldTypes.INPUT_TEXT, getValidation: () => fieldError}]);
         });
 
         it("Should validate if Field in error if not visible", () => {
@@ -63,7 +63,7 @@ describe("FormEngine/ModelUtils", () => {
                 id: 'testChild1',
                 type: FieldTypes.INPUT_TEXT,
                 isVisible: () => false,
-                getValidation: () => TestUtils.ERROR
+                getValidation: () => fieldError
             }]);
         });
 

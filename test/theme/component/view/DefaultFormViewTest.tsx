@@ -2,9 +2,9 @@ import * as React from "react";
 import {shallow} from "enzyme";
 import {DefaultFormView} from "../../../../src/theme/component/view/DefaultFormView";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
-import {TestUtils} from "../../../TestUtils";
+import {initTest} from "../../../TestUtils";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/View/DefaultFormView", () => {
 

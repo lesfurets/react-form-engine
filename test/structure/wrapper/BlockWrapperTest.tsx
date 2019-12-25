@@ -4,7 +4,7 @@ import {FieldWrapper} from "../../../src/structure/wrapper/FieldWrapper";
 import {BlockWrapper} from "../../../src/structure/wrapper/BlockWrapper";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
-import {dummyBlock, mockFormStore, mockThemeContext, TestUtils} from "../../TestUtils";
+import {dummyBlock, fieldError, initTest, mockFormStore, mockThemeContext} from "../../TestUtils";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {Field} from "../../../src/definition/model/Field";
 import {Block} from "../../../src/definition/model/Block";
@@ -13,7 +13,7 @@ import {FieldContext} from "../../../src/definition/FieldContext";
 import {DefaultBlockView} from "../../../src/theme/component/view/DefaultBlockView";
 import {generateMock} from "./MockComponent";
 
-TestUtils.init();
+initTest();
 
 interface MountingProps {
     block: Block,
@@ -74,7 +74,7 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
             checkBlockValidation(false, [{
                 id: 'testChild1',
                 type: FieldTypes.INPUT_TEXT,
-                getValidation: () => TestUtils.ERROR
+                getValidation: () => fieldError
             }]);
         });
 

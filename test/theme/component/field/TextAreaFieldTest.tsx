@@ -1,13 +1,13 @@
 import * as React from "react";
 import {mount, ReactWrapper} from "enzyme";
 import {TextAreaField} from "../../../../src/theme/component/field/TextAreaField";
-import {TestUtils} from "../../../TestUtils";
+import {emptyCallback, initTest} from "../../../TestUtils";
 import {FieldTypes} from "../../../../src/definition/FieldTypes";
 import {FIELD_EVENT} from "../../../../src/definition/event/events";
 import {Field} from "../../../../src/definition/model/Field";
 import {FieldComponentProps} from "../../../../src/definition/component/FieldComponent";
 
-TestUtils.init();
+initTest();
 
 describe("FormEngine/Field/TextAreaField", () => {
     let testValue = "testValue";
@@ -21,7 +21,7 @@ describe("FormEngine/Field/TextAreaField", () => {
             let placeholderValue = "placeholder";
             let container = mount(<TextAreaField field={{...field, placeholder: placeholderValue}}
                                                contextValue=""
-                                               onFieldEvent={TestUtils.emptyCallback}/>);
+                                               onFieldEvent={emptyCallback}/>);
             expect(container.find('textarea').props().placeholder).toBe(placeholderValue)
         });
 
@@ -29,7 +29,7 @@ describe("FormEngine/Field/TextAreaField", () => {
         it("Should have empty placeholder", () => {
             let container = mount(<TextAreaField field={field}
                                                contextValue=""
-                                               onFieldEvent={TestUtils.emptyCallback}/>);
+                                               onFieldEvent={emptyCallback}/>);
             expect(container.find('textarea').props().placeholder).toBe("")
         });
     });
@@ -40,7 +40,7 @@ describe("FormEngine/Field/TextAreaField", () => {
             let container = mount(<TextAreaField field={field}
                                                tabIndex={tabIndex}
                                                contextValue=""
-                                               onFieldEvent={TestUtils.emptyCallback}/>);
+                                               onFieldEvent={emptyCallback}/>);
             expect(container.find('textarea').props().id).toBe(field.id);
             expect(container.find('textarea').props().name).toBe(field.id);
             expect(container.find('textarea').props().tabIndex).toBe(tabIndex);
