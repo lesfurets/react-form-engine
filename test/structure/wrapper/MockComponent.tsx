@@ -1,11 +1,11 @@
 import * as React from "react";
-import {ReactWrapper} from "enzyme";
+import {ReactWrapper, ShallowWrapper} from "enzyme";
 
 type MockCallback = <T extends any>(props: T)=> void;
 
 interface MockManager<T extends any> {
     component: React.FunctionComponent<T>
-    handleMock: (container: ReactWrapper, callback: MockCallback) => void
+    handleMock: (container: ReactWrapper | ShallowWrapper, callback: MockCallback) => void
 }
 
 export const generateMock = <T extends any>() => {

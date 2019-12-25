@@ -8,6 +8,7 @@ import {FieldView} from "../../definition/view/FieldView";
 import {ThemeContext} from "../context/ThemeContext";
 import {FieldContext} from "../../definition/FieldContext";
 import {useFieldContext} from "../../redux/useFieldContext";
+import {useTheme} from "../context/useTheme";
 
 export interface FieldWrapperProps {
     field: Field;
@@ -32,6 +33,7 @@ const getState = (field: Field, fieldContext: FieldContext, forceValidation: boo
 export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> =
     ({field, index, tabIndex, forceValidation}) => {
         const [fieldContext, setFieldValue] = useFieldContext();
+        const {FieldView, fieldInjector} = useTheme();
         const [shouldValidate, setShouldValidate] = React.useState(fieldContext[field.id] !== undefined);
 
         const isVisible = field.hasOwnProperty('isVisible') ? field.isVisible!(fieldContext) : true;
@@ -57,25 +59,20 @@ export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> =
             onViewEvent(event, details!);
         };
 
+        let Field = fieldInjector!(field.type);
+
         return (
-            <ThemeContext.Consumer>
-                {({FieldView, fieldInjector}) => {
-                    let Field = fieldInjector!(field.type);
-                    return (
-                        <FieldView field={field}
-                                   index={index}
-                                   isVisible={isVisible}
-                                   onEvent={onViewEvent}
-                                   errorMessage={validation.message}
-                                   fieldState={fieldState}>
-                            <Field field={field}
-                                   tabIndex={tabIndex}
-                                   onFieldEvent={onFieldEvent}
-                                   contextValue={contextValue ? contextValue : undefined}/>
-                        </FieldView>
-                    )
-                }}
-            </ThemeContext.Consumer>
+            <FieldView field={field}
+                       index={index}
+                       isVisible={isVisible}
+                       onEvent={onViewEvent}
+                       errorMessage={validation.message}
+                       fieldState={fieldState}>
+                <Field field={field}
+                       tabIndex={tabIndex}
+                       onFieldEvent={onFieldEvent}
+                       contextValue={contextValue ? contextValue : undefined}/>
+            </FieldView>
         );
     };
 

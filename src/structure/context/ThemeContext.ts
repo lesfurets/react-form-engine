@@ -8,7 +8,7 @@ import {FieldView} from "../../definition/view/FieldView";
 import {FieldInjector} from "../../definition/component/FieldInjector";
 import {DefaultFieldInjector} from "../../theme/component/field/DefaultFieldInjector";
 
-interface ThemeContextInterface {
+export interface ThemeContextInterface {
     FormView: FormView
     BlockView: BlockView
     FieldView: FieldView

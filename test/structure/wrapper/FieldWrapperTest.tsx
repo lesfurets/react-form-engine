@@ -2,8 +2,8 @@ import * as React from "react";
 import {VALID} from "../../../src/definition/validation/Validation";
 import {FIELD_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
-import {dummyField, mockFormStore, TestUtils} from "../../TestUtils";
-import {mount} from "enzyme";
+import {dummyField, mockFormStore, mockThemeContext, TestUtils} from "../../TestUtils";
+import {mount, shallow} from "enzyme";
 import {Field, FIELD_STATE} from "../../../src/definition/model/Field";
 import {DefaultFieldView} from "../../../src/theme/component/view/DefaultFieldView";
 import {ThemeContext} from "../../../src/structure/context/ThemeContext";
@@ -35,23 +35,20 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
     const viewMock = generateMock<FieldViewProps>();
 
     const mountWrapper = (props: MountingProps) => {
-        mockFormStore(props.fieldContext, props.setFieldValue)
+        mockFormStore(props.fieldContext, props.setFieldValue);
+        mockThemeContext({
+            fieldInjector: props.fieldInjector || DefaultFieldInjector.inject,
+            FieldView: props.FieldView || DefaultFieldView,
+        });
 
-        return mount(
-            <ThemeContext.Provider value={{
-                fieldInjector: props.fieldInjector || DefaultFieldInjector.inject,
-                FormView: DefaultFormView,
-                BlockView: DefaultBlockView,
-                FieldView: props.FieldView || DefaultFieldView
-            }}>
-                <FieldWrapper
-                    field={props.field}
-                    index={0}
-                    tabIndex={0}
-                    forceValidation={false}
-                    fieldContext={{}}
-                    {...props.wrapperProps}/>
-            </ThemeContext.Provider>
+        return shallow(
+            <FieldWrapper
+                field={props.field}
+                index={0}
+                tabIndex={0}
+                forceValidation={false}
+                fieldContext={{}}
+                {...props.wrapperProps}/>
         );
     };
 
@@ -209,7 +206,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                     ...dummyField,
                     isVisible: predicate
                 },
-                fieldContext:fieldContext,
+                fieldContext: fieldContext,
             });
 
             // Then
