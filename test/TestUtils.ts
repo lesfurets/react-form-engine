@@ -2,7 +2,7 @@ import {Validation} from "../src/definition/validation/Validation";
 import * as Adapter from 'enzyme-adapter-react-16'
 import * as Enzyme from 'enzyme'
 import {Field} from "../src/definition/model/Field";
-import {FieldType} from "../src/definition/FieldTypes";
+import {FieldType, FieldTypes} from "../src/definition/FieldTypes";
 import * as UseFieldContext from "../src/redux/useFieldContext";
 import * as UseTheme from "../src/structure/context/useTheme";
 import {FieldContext} from "../src/definition/FieldContext";
@@ -12,6 +12,7 @@ import {DefaultFieldView} from "../src/theme/component/view/DefaultFieldView";
 import {DefaultBlockView} from "../src/theme/component/view/DefaultBlockView";
 import {DefaultFormView} from "../src/theme/component/view/DefaultFormView";
 import {DefaultFieldInjector} from "../src/theme/component/field/DefaultFieldInjector";
+import {Block} from "../src/definition/model/Block";
 
 export const TestUtils = {
     init: () => {
@@ -29,6 +30,16 @@ export const TestUtils = {
 export const TestType = new FieldType("TestType");
 
 export const dummyField: Field = {id: "test-field-id", type: TestType};
+
+export const dummyBlock: Block = {
+    id: "block-test",
+    label: "block-label",
+    index: 0,
+    fields: [
+        {id: 'testChild1', type: FieldTypes.INPUT_TEXT},
+        {id: 'testChild2', type: FieldTypes.INPUT_TEXT},
+    ]
+};
 
 export const mockFormStore = (fieldContext?: FieldContext, setFieldValue?: ValueSetter) => {
     const useFormStoreSpy = jest.spyOn(UseFieldContext, 'useFieldContext');

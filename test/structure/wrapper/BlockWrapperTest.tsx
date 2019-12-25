@@ -1,70 +1,47 @@
 import * as React from "react";
-
-import {createStore} from "redux";
-
-import {mount, shallow} from "enzyme";
-import reducer from "../../../src/redux/reducers";
+import {shallow} from "enzyme";
 import {FieldWrapper} from "../../../src/structure/wrapper/FieldWrapper";
-import {BlockWrapper, BlockWrapperComponent} from "../../../src/structure/wrapper/BlockWrapper";
-import {VALID} from "../../../src/definition/validation/Validation";
-import {Provider} from "react-redux";
+import {BlockWrapper} from "../../../src/structure/wrapper/BlockWrapper";
 import {BLOCK_EVENT} from "../../../src/definition/event/events";
 import {EVENT_MULTICASTER} from "../../../src/definition/event/EventMulticaster";
-import {TestUtils} from "../../TestUtils";
+import {dummyBlock, mockFormStore, mockThemeContext, TestUtils} from "../../TestUtils";
 import {FieldTypes} from "../../../src/definition/FieldTypes";
 import {Field} from "../../../src/definition/model/Field";
 import {Block} from "../../../src/definition/model/Block";
-import { ThemeContext } from "../../../src/structure/context/ThemeContext";
-import {BlockView} from "../../../src/definition/view/BlockView";
-import {DefaultFieldView} from "../../../src/theme/component/view/DefaultFieldView";
-import {DefaultFormView} from "../../../src/theme/component/view/DefaultFormView";
-import {DefaultFieldInjector} from "../../../src/theme/component/field/DefaultFieldInjector";
+import {BlockView, BlockViewProps} from "../../../src/definition/view/BlockView";
+import {FieldContext} from "../../../src/definition/FieldContext";
+import {DefaultBlockView} from "../../../src/theme/component/view/DefaultBlockView";
+import {generateMock} from "./MockComponent";
 
 TestUtils.init();
 
+interface MountingProps {
+    block: Block,
+    wrapperProps?: any,
+    BlockView?: BlockView,
+    fieldContext?: FieldContext,
+}
+
+const viewMock = generateMock<BlockViewProps>();
+
+const shallowWrapper = (props: MountingProps) => {
+    mockFormStore(props.fieldContext);
+    mockThemeContext({
+        BlockView: props.BlockView || DefaultBlockView,
+    });
+
+    return shallow(<BlockWrapper block={props.block}/>);
+};
+
+let testDetails = "test";
+
 describe("FormEngine/Wrapper/BlockWrapper", () => {
-    let store = createStore(reducer);
-
-    let blockTest: Block = {
-        id: "block-test",
-        label: "block-label",
-        index: 0,
-        fields: [
-            {id: 'testChild1', type: FieldTypes.INPUT_TEXT},
-            {id: 'testChild2', type: FieldTypes.INPUT_TEXT},
-        ]
-    };
-
-    let testDetails = "test";
-
-    let TestBlockView: BlockView = ({children, onEvent}) => (
-        <div>
-            <div>{children}</div>
-            <button className="TestButton" onClick={() => onEvent!(BLOCK_EVENT.NEXT, testDetails)}/>
-        </div>
-    );
-
-    const mountWrapper = (block: Block) => mount(
-        <Provider store={store}>
-            <ThemeContext.Provider value={{
-                fieldInjector: DefaultFieldInjector.inject,
-                FormView: DefaultFormView,
-                BlockView: TestBlockView,
-                FieldView: DefaultFieldView
-            }}>
-                <BlockWrapperComponent
-                    setFieldValue={TestUtils.emptyCallback}
-                    block={block}
-                    fieldContext={{}}/>
-            </ThemeContext.Provider>
-        </Provider>
-    );
 
     describe("Fields", () => {
         it("Should render Fields by default", () => {
-            let container = mountWrapper(blockTest);
+            let container = shallowWrapper({block: dummyBlock});
 
-            expect(container.find(FieldWrapper).length).toBe(blockTest.fields.length);
+            expect(container.find(FieldWrapper).length).toBe(dummyBlock.fields.length);
         });
     });
 
@@ -72,20 +49,14 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
         let checkBlockValidation = (success: boolean, fields: Field[]) => {
             let onBlockEvent = jasmine.createSpy();
-            let block: Block = {
-                id: "block-test",
-                label: "block-label",
-                index: 0,
-                fields: [
-                    {id: 'testChild0', type: FieldTypes.INPUT_TEXT, getValidation: () => VALID}
-                ]
-            };
+            let block: Block = {...dummyBlock,};
             block.fields = block.fields.concat(fields);
+
             EVENT_MULTICASTER.subscribe(onBlockEvent);
 
-            let container = mountWrapper(block);
+            let container = shallowWrapper({block: block, BlockView: viewMock.component});
 
-            container.find(".TestButton").simulate("click");
+            viewMock.handleMock(container, (props) => props.onEvent!(BLOCK_EVENT.NEXT, testDetails));
 
             expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.NEXT, block, testDetails);
             if (success) {
@@ -100,7 +71,11 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
         });
 
         it("Should not validate if Field is visible and invalid", () => {
-            checkBlockValidation(false, [{id: 'testChild1', type: FieldTypes.INPUT_TEXT, getValidation: () => TestUtils.ERROR}]);
+            checkBlockValidation(false, [{
+                id: 'testChild1',
+                type: FieldTypes.INPUT_TEXT,
+                getValidation: () => TestUtils.ERROR
+            }]);
         });
 
     });
@@ -114,12 +89,12 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
             // When
             EVENT_MULTICASTER.subscribe(onEvent);
-            let container = mountWrapper(blockTest);
+            let container = shallowWrapper({block: dummyBlock, BlockView: viewMock.component});
 
-            container.find(".TestButton").simulate("click");
+            viewMock.handleMock(container, (props) => props.onEvent!(BLOCK_EVENT.NEXT, testDetails));
 
             // Then
-            expect(onEvent).toHaveBeenCalledWith(event, blockTest, testDetails);
+            expect(onEvent).toHaveBeenCalledWith(event, dummyBlock, testDetails);
         });
 
     });

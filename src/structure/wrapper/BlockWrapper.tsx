@@ -3,11 +3,11 @@ import {BLOCK_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 import {FormEvent} from "../../definition/event/Event";
 import {FieldWrapper} from "./FieldWrapper";
-import {fieldConnect, FieldProps} from "../../redux/fieldConnect";
 import {Block, BLOCK_STATE} from "../../definition/model/Block";
 import {BlockView} from "../../definition/view/BlockView";
-import {ThemeContext} from "../context/ThemeContext";
 import {isBlockValid} from "../../definition/ModelUtils";
+import {useFieldContext} from "../../redux/useFieldContext";
+import {useTheme} from "../context/useTheme";
 
 export interface BlockWrapperProps {
     block: Block,
@@ -18,46 +18,41 @@ export interface BlockWrapperState {
     forceValidation: boolean
 }
 
-export const BlockWrapperComponent: React.FunctionComponent<BlockWrapperProps & FieldProps> =
-    ({block, blockState, fieldContext}) => {
+export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block, blockState}) => {
+    const [fieldContext] = useFieldContext();
+    const {BlockView} = useTheme();
 
-        const [forceValidation, setForceValidation] = React.useState(false);
+    const [forceValidation, setForceValidation] = React.useState(false);
 
-        const validate = () => {
-            if (isBlockValid(block, fieldContext)) {
-                EVENT_MULTICASTER.event(BLOCK_EVENT.VALIDATED, block, fieldContext);
-            }
-            setForceValidation(true);
-        };
-
-        const onEvent = (event: FormEvent, details: any) => {
-            EVENT_MULTICASTER.event(event, block, details);
-            if (event === BLOCK_EVENT.NEXT) {
-                validate();
-            }
+    const validate = () => {
+        if (isBlockValid(block, fieldContext)) {
+            EVENT_MULTICASTER.event(BLOCK_EVENT.VALIDATED, block, fieldContext);
         }
-
-        return (
-            <ThemeContext.Consumer>
-                {({BlockView: BlockView}) => (
-                    <BlockView block={block}
-                               index={block.index!}
-                               blockState={blockState!}
-                               onEvent={onEvent}>
-                        {block.fields.map((field, index) =>
-                            <FieldWrapper key={field.id}
-                                          field={{...field}}
-                                          index={index}
-                                          tabIndex={index + 1}
-                                          forceValidation={forceValidation}/>)}
-                    </BlockView>
-                )}
-            </ThemeContext.Consumer>
-        );
+        setForceValidation(true);
     };
 
-BlockWrapperComponent.defaultProps = {
-    blockState: BLOCK_STATE.DOING,
+    const onEvent = (event: FormEvent, details: any) => {
+        EVENT_MULTICASTER.event(event, block, details);
+        if (event === BLOCK_EVENT.NEXT) {
+            validate();
+        }
+    };
+
+    return (
+        <BlockView block={block}
+                   index={block.index!}
+                   blockState={blockState!}
+                   onEvent={onEvent}>
+            {block.fields.map((field, index) =>
+                <FieldWrapper key={field.id}
+                              field={{...field}}
+                              index={index}
+                              tabIndex={index + 1}
+                              forceValidation={forceValidation}/>)}
+        </BlockView>
+    );
 };
 
-export const BlockWrapper = fieldConnect(BlockWrapperComponent);
+BlockWrapper.defaultProps = {
+    blockState: BLOCK_STATE.DOING,
+};

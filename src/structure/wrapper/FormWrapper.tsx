@@ -3,7 +3,7 @@ import * as React from "react";
 import {BLOCK_EVENT, FORM_EVENT} from "../../definition/event/events";
 import {EVENT_MULTICASTER} from "../../definition/event/EventMulticaster";
 import {FormEvent} from "../../definition/event/Event";
-import {BlockWrapper, BlockWrapperComponent} from "./BlockWrapper";
+import {BlockWrapper} from "./BlockWrapper";
 import {Block, BLOCK_STATE} from "../../definition/model/Block";
 import {Form} from "../../definition/model/Form";
 import {FormView} from "../../definition/view/FormView";
