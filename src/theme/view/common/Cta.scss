@@ -1,0 +1,22 @@
+@import "../../__styles__/color";
+
+.Cta {
+  color: white;
+  font-weight: 500;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+
+  &.primary {
+    background-color: $valid;
+  }
+
+  &.secondary {
+    background-color: $primary-light;
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+}

@@ -1,9 +1,5 @@
 import * as React from "react";
-import FormEngine from "../../src/index";
-import {FieldTypes} from "../../src/definition/FieldTypes";
-import {Field, FieldValue} from "../../src/definition/model/Field";
-import {Block} from "../../src/definition/model/Block";
-import {Form} from "../../src/definition/model/Form";
+import {FormEngine, Block, Form, Field, FieldTypes, FieldValue} from "../../src";
 
 let VALUES = [
     {id: "value1", label: "Value 1"},
