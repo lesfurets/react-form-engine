@@ -71,6 +71,7 @@ export const DateElement: React.FunctionComponent<DateElementProps> =
                    className={`DateField-${type.toLowerCase()}`}
                    type={"text"}
                    inputMode={"decimal"}
+                   style={{textAlign: focus ? "left" : "center"}}
                    name={id}
                    id={id}
                    maxLength={size}

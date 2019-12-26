@@ -70,16 +70,19 @@ export const DateField: FieldComponent<Date> =
 
         let onChange = (key: string, value: number | undefined) => {
             setUnstable({...unstable, [key]: value});
-            switch (key) {
-                case DateInfo.DAY:
-                    setFocus(DateInfo.MONTH);
-                    break;
-                case DateInfo.MONTH:
-                    setFocus(DateInfo.YEAR);
-                    break;
-                case DateInfo.YEAR:
-                    setFocus(undefined);
-                    break;
+            console.log("onChange",key);
+            if(value) {
+                switch (key) {
+                    case DateInfo.DAY:
+                        setFocus(DateInfo.MONTH);
+                        break;
+                    case DateInfo.MONTH:
+                        setFocus(DateInfo.YEAR);
+                        break;
+                    case DateInfo.YEAR:
+                        setFocus(undefined);
+                        break;
+                }
             }
         };
 
@@ -98,7 +101,7 @@ export const DateField: FieldComponent<Date> =
         };
 
         return (
-            <div className="DateField-container">
+            <div className="DateField-container" onClick={() => setFocus(DateInfo.DAY)}>
                 <DateElement tabIndex={tabIndex!}
                              key={DateInfo.DAY}
                              size={2}
