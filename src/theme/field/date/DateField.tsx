@@ -70,7 +70,6 @@ export const DateField: FieldComponent<Date> =
 
         let onChange = (key: string, value: number | undefined) => {
             setUnstable({...unstable, [key]: value});
-            console.log("onChange",key);
             if(value) {
                 switch (key) {
                     case DateInfo.DAY:

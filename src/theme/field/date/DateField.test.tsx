@@ -1,12 +1,12 @@
 import * as React from "react";
-import {mount} from "enzyme";
+import {mount, ReactWrapper} from "enzyme";
 import {emptyCallback, initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
 import {FIELD_EVENT} from "../../../definition/event/events";
 import {Field} from "../../../definition/model/Field";
 import {DateField, DateInfo, formatDayMonth, formatYear} from "./DateField";
 import {act} from "react-dom/test-utils";
-import {DateElement} from "./element/DateElement";
+import {DateElement, DateElementProps} from "./element/DateElement";
 
 initTest();
 
@@ -122,6 +122,120 @@ describe("FormEngine/Field/DateField", () => {
 
     });
 
+    describe("focus", () => {
+        it("Should have no focus by default", () => {
+            // Given
+            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+
+            // Then
+            let dayElement = container.find({type: DateInfo.DAY}) as ReactWrapper<DateElementProps>;
+            let monthElement = container.find({type: DateInfo.MONTH}) as ReactWrapper<DateElementProps>;
+            let yearElement = container.find({type: DateInfo.YEAR}) as ReactWrapper<DateElementProps>;
+            expect(dayElement.props().forceFocus).toBe(false);
+            expect(monthElement.props().forceFocus).toBe(false);
+            expect(yearElement.props().forceFocus).toBe(false);
+        });
+
+        it("Should focus on day on a click on the component", async () => {
+            // Given
+            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+
+            // When
+            act(() => {
+                container.find(".DateField-container").simulate("click");
+            });
+            container.update();
+
+            // Then
+            let dayElement = container.find({type: DateInfo.DAY}) as ReactWrapper<DateElementProps>;
+            let monthElement = container.find({type: DateInfo.MONTH}) as ReactWrapper<DateElementProps>;
+            let yearElement = container.find({type: DateInfo.YEAR}) as ReactWrapper<DateElementProps>;
+
+            expect(dayElement.props().forceFocus).toBe(true);
+            expect(monthElement.props().forceFocus).toBe(false);
+            expect(yearElement.props().forceFocus).toBe(false);
+        });
+
+        it("Should focus on month when submitting day", async () => {
+            // Given
+            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+
+            // When
+            act(() => {
+                container.find(".DateField-day").simulate("change", {target: {value: formatDayMonth(date)}});
+            });
+            container.update();
+
+            // Then
+            let dayElement = container.find({type: DateInfo.DAY}) as ReactWrapper<DateElementProps>;
+            let monthElement = container.find({type: DateInfo.MONTH}) as ReactWrapper<DateElementProps>;
+            let yearElement = container.find({type: DateInfo.YEAR}) as ReactWrapper<DateElementProps>;
+
+            expect(dayElement.props().forceFocus).toBe(false);
+            expect(monthElement.props().forceFocus).toBe(true);
+            expect(yearElement.props().forceFocus).toBe(false);
+        });
+
+        it("Should focus on year when submitting month", async () => {
+            // Given
+            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+
+            // When
+            act(() => {
+                container.find(".DateField-month").simulate("change", {target: {value: formatDayMonth(month)}});
+            });
+            container.update();
+
+            // Then
+            let dayElement = container.find({type: DateInfo.DAY}) as ReactWrapper<DateElementProps>;
+            let monthElement = container.find({type: DateInfo.MONTH}) as ReactWrapper<DateElementProps>;
+            let yearElement = container.find({type: DateInfo.YEAR}) as ReactWrapper<DateElementProps>;
+
+            expect(dayElement.props().forceFocus).toBe(false);
+            expect(monthElement.props().forceFocus).toBe(false);
+            expect(yearElement.props().forceFocus).toBe(true);
+        });
+
+        it("Should focus on month when resetting year", async () => {
+            // Given
+            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+
+            // When
+            act(() => {
+                container.find(".DateField-year").simulate("keydown", {key : 'Backspace'});
+            });
+            container.update();
+
+            // Then
+            let dayElement = container.find({type: DateInfo.DAY}) as ReactWrapper<DateElementProps>;
+            let monthElement = container.find({type: DateInfo.MONTH}) as ReactWrapper<DateElementProps>;
+            let yearElement = container.find({type: DateInfo.YEAR}) as ReactWrapper<DateElementProps>;
+
+            expect(dayElement.props().forceFocus).toBe(false);
+            expect(monthElement.props().forceFocus).toBe(true);
+            expect(yearElement.props().forceFocus).toBe(false);
+        });
+
+        it("Should focus on day when resetting month", async () => {
+            // Given
+            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+
+            // When
+            act(() => {
+                container.find(".DateField-month").simulate("keydown", {key : 'Backspace'});
+            });
+            container.update();
+
+            // Then
+            let dayElement = container.find({type: DateInfo.DAY}) as ReactWrapper<DateElementProps>;
+            let monthElement = container.find({type: DateInfo.MONTH}) as ReactWrapper<DateElementProps>;
+            let yearElement = container.find({type: DateInfo.YEAR}) as ReactWrapper<DateElementProps>;
+
+            expect(dayElement.props().forceFocus).toBe(true);
+            expect(monthElement.props().forceFocus).toBe(false);
+            expect(yearElement.props().forceFocus).toBe(false);
+        });
+    });
     //TODO Test Focus
 
 });

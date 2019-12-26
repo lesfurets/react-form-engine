@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface DateElementProps {
+export interface DateElementProps {
     tabIndex: number;
     type: string;
     id: string;
