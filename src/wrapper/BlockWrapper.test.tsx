@@ -3,8 +3,15 @@ import {shallow} from "enzyme";
 import {FieldWrapper} from "./FieldWrapper";
 import {BlockWrapper} from "./BlockWrapper";
 import {BLOCK_EVENT} from "../definition/event/events";
-import {EVENT_MULTICASTER} from "../definition/event/EventMulticaster";
-import {dummyBlock, fieldError, initTest, mockFormStore, mockThemeContext} from "../_tests_/TestUtils";
+import {EventCallBack} from "../definition/event/EventMulticaster";
+import {
+    dummyBlock,
+    fieldError,
+    initTest,
+    mockEventContext,
+    mockFormStore,
+    mockThemeContext
+} from "../_tests_/TestUtils";
 import {FieldTypes} from "../definition/FieldTypes";
 import {Field} from "../definition/model/Field";
 import {Block} from "../definition/model/Block";
@@ -20,12 +27,14 @@ interface MountingProps {
     wrapperProps?: any,
     BlockView?: BlockView,
     fieldContext?: FieldContext,
+    onEvent?: EventCallBack,
 }
 
 const viewMock = generateMock<BlockViewProps>();
 
 const shallowWrapper = (props: MountingProps) => {
     mockFormStore(props.fieldContext);
+    mockEventContext(props.onEvent);
     mockThemeContext({
         BlockView: props.BlockView || DefaultBlockView,
     });
@@ -52,9 +61,7 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
             let block: Block = {...dummyBlock,};
             block.fields = block.fields.concat(fields);
 
-            EVENT_MULTICASTER.subscribe(onBlockEvent);
-
-            let container = shallowWrapper({block: block, BlockView: viewMock.component});
+            let container = shallowWrapper({block: block, BlockView: viewMock.component, onEvent: onBlockEvent});
 
             viewMock.handleMock(container, (props) => props.onEvent!(BLOCK_EVENT.NEXT, testDetails));
 
@@ -88,8 +95,7 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
             let onEvent = jasmine.createSpy();
 
             // When
-            EVENT_MULTICASTER.subscribe(onEvent);
-            let container = shallowWrapper({block: dummyBlock, BlockView: viewMock.component});
+            let container = shallowWrapper({block: dummyBlock, BlockView: viewMock.component, onEvent: onEvent});
 
             viewMock.handleMock(container, (props) => props.onEvent!(BLOCK_EVENT.NEXT, testDetails));
 

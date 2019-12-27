@@ -1,13 +1,13 @@
 import * as React from "react";
 import {VALID, Validation} from "../definition/validation/Validation";
 import {FIELD_EVENT} from "../definition/event/events";
-import {EVENT_MULTICASTER} from "../definition/event/EventMulticaster";
 import {FormEvent} from "../definition/event/Event";
 import {Field, FIELD_STATE} from "../definition/model/Field";
 import {FieldView} from "../definition/theme/view/FieldView";
 import {FieldContext} from "../redux/FieldContext";
 import {useFieldContext} from "../definition/redux/useFieldContext";
 import {useTheme} from "../definition/theme/useTheme";
+import {useEvent} from "../definition/event/useEvent";
 
 export interface FieldWrapperProps {
     field: Field;
@@ -32,13 +32,14 @@ const getState = (field: Field, fieldContext: FieldContext, forceValidation: boo
 export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> = ({field, index, tabIndex, forceValidation}) => {
     const [fieldContext, setFieldValue] = useFieldContext();
     const {FieldView, fieldInjector} = useTheme();
+    const eventMulticaster = useEvent();
     const [shouldValidate, setShouldValidate] = React.useState(fieldContext[field.id] !== undefined);
 
     const isVisible = field.hasOwnProperty('isVisible') ? field.isVisible!(fieldContext) : true;
     const contextValue: any = fieldContext[field.id];
     const {fieldState, validation} = getState(field, fieldContext, forceValidation, shouldValidate);
 
-    const onViewEvent = (event: FormEvent, value: any) => EVENT_MULTICASTER.event(event, field, value);
+    const onViewEvent = (event: FormEvent, value: any) => eventMulticaster.event(event, field, value);
 
     const onFieldEvent = (event: FormEvent, details?: any) => {
         switch (event) {

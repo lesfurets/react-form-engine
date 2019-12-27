@@ -1,6 +1,5 @@
 import * as React from "react";
 import {BLOCK_EVENT} from "../definition/event/events";
-import {EVENT_MULTICASTER} from "../definition/event/EventMulticaster";
 import {FormEvent} from "../definition/event/Event";
 import {FieldWrapper} from "./FieldWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
@@ -8,6 +7,7 @@ import {BlockView} from "../definition/theme/view/BlockView";
 import {isBlockValid} from "../definition/ModelUtils";
 import {useFieldContext} from "../definition/redux/useFieldContext";
 import {useTheme} from "../definition/theme/useTheme";
+import {useEvent} from "../definition/event/useEvent";
 
 export interface BlockWrapperProps {
     block: Block,
@@ -21,18 +21,19 @@ export interface BlockWrapperState {
 export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block, blockState}) => {
     const [fieldContext] = useFieldContext();
     const {BlockView} = useTheme();
+    const eventMulticaster = useEvent();
 
     const [forceValidation, setForceValidation] = React.useState(false);
 
     const validate = () => {
         if (isBlockValid(block, fieldContext)) {
-            EVENT_MULTICASTER.event(BLOCK_EVENT.VALIDATED, block, fieldContext);
+            eventMulticaster.event(BLOCK_EVENT.VALIDATED, block, fieldContext);
         }
         setForceValidation(true);
     };
 
     const onEvent = (event: FormEvent, details: any) => {
-        EVENT_MULTICASTER.event(event, block, details);
+        eventMulticaster.event(event, block, details);
         if (event === BLOCK_EVENT.NEXT) {
             validate();
         }

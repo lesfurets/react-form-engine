@@ -6,6 +6,7 @@ import {FieldType, FieldTypes} from "../definition/FieldTypes";
 import * as UseFieldContext from "../definition/redux/useFieldContext";
 import * as UseNavigation from "../definition/redux/useNavigation";
 import * as UseTheme from "../definition/theme/useTheme";
+import * as UseEvent from "../definition/event/useEvent";
 import {FieldContext} from "../redux/FieldContext";
 import {ValueSetter} from "../definition/redux/useFieldContext";
 import {ThemeContextInterface} from "../definition/theme/ThemeContext";
@@ -18,6 +19,7 @@ import {Form} from "../definition/model/Form";
 import {FormElement} from "../definition/model/FormElement";
 import {NavigationSetter} from "../definition/redux/useNavigation";
 import {NavigationContext} from "../redux/NavigationContext";
+import {EventCallBack, EventMulticaster} from "../definition/event/EventMulticaster";
 
 export const initTest = () => {
     Enzyme.configure({
@@ -66,6 +68,11 @@ export const mockThemeContext = (theme: Partial<ThemeContextInterface> = {}) => 
         FormView: theme.FormView || DefaultFormView,
         fieldInjector: theme.fieldInjector || DefaultFieldInjector.inject,
     }));
+};
+
+export const mockEventContext = (callback: EventCallBack = emptyCallback) => {
+    const useEventContextSpy = jest.spyOn(UseEvent, 'useEvent');
+    useEventContextSpy.mockImplementation(() => new EventMulticaster(callback));
 };
 
 export const fieldError = new Validation(false, "error-test");

@@ -1,8 +1,15 @@
 import * as React from "react";
 import {VALID} from "../definition/validation/Validation";
 import {FIELD_EVENT} from "../definition/event/events";
-import {EVENT_MULTICASTER} from "../definition/event/EventMulticaster";
-import {dummyField, fieldError, initTest, mockFormStore, mockThemeContext} from "../_tests_/TestUtils";
+import {EventCallBack} from "../definition/event/EventMulticaster";
+import {
+    dummyField,
+    fieldError,
+    initTest,
+    mockEventContext,
+    mockFormStore,
+    mockThemeContext
+} from "../_tests_/TestUtils";
 import {shallow} from "enzyme";
 import {Field, FIELD_STATE} from "../definition/model/Field";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";
@@ -24,6 +31,7 @@ interface MountingProps {
     FieldView?: FieldView,
     fieldContext?: FieldContext,
     setFieldValue?: ValueSetter,
+    onEvent?: EventCallBack,
 }
 
 const fieldMock = generateMock<FieldComponentProps<any, any>>();
@@ -31,6 +39,7 @@ const viewMock = generateMock<FieldViewProps>();
 
 const shallowWrapper = (props: MountingProps) => {
     mockFormStore(props.fieldContext, props.setFieldValue);
+    mockEventContext(props.onEvent);
     mockThemeContext({
         fieldInjector: props.fieldInjector || DefaultFieldInjector.inject,
         FieldView: props.FieldView || DefaultFieldView,
@@ -246,11 +255,11 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             let onEvent = jasmine.createSpy();
 
             // When
-            EVENT_MULTICASTER.subscribe(onEvent);
             let container = shallowWrapper({
                 field: dummyField,
                 forceValidation: true,
-                FieldView: viewMock.component
+                FieldView: viewMock.component,
+                onEvent: onEvent,
             });
 
             viewMock.handleMock(container, (props) => props.onEvent!(FIELD_EVENT.UPDATE_VALUE, testValue));

@@ -19,6 +19,10 @@ class EventSubscriber {
 export class EventMulticaster {
     subscribers: EventSubscriber[]  = [];
 
+    constructor(callback?: EventCallBack) {
+        this.subscribers = callback ? [new EventSubscriber(callback, universalMatcher)] : [];
+    }
+
     subscribe(callback: EventCallBack) {
         this.subscribers.push(new EventSubscriber(callback, universalMatcher));
     }
