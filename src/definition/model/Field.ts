@@ -1,6 +1,4 @@
-import {FieldType, FieldTypes} from "../FieldTypes";
-import {ValidationRule} from "../../dsl/validation/ValidationRule";
-import {VisibilityRule} from "../../dsl/visibility/VisibilityRule";
+import {FieldType} from "../FieldTypes";
 import {Validation} from "../validation/Validation";
 import {FormElement} from "./FormElement";
 import {FieldContext} from "../../redux/FieldContext";
@@ -9,9 +7,6 @@ export class Field implements FormElement {
     id: string;
     type: FieldType;
     label?: string;
-    validationRule?: ValidationRule;
-    visibilityRule?: VisibilityRule;
-    // TODO rename 'isValid' ?
     getValidation?: (state: FieldContext) => Validation;
     isVisible?: (state: FieldContext) => boolean;
 }

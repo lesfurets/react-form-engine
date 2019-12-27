@@ -2,6 +2,7 @@ import {VisibilityEvaluator} from "./visibility/VisibilityEvaluator";
 import {ValidationEvaluator} from "./validation/ValidationEvaluator";
 import {ModelUtils} from "../definition/ModelUtils";
 import {Field} from "../definition/model/Field";
+import {DSLField} from "./DSLField";
 
 export class ModelExtender {
     // TODO replace model :any by FormModel
@@ -12,7 +13,7 @@ export class ModelExtender {
     }
 
     // TODO replace field : any to Field
-    static extendField(field : Field) {
+    static extendField(field : DSLField<Field>) {
         if(field.hasOwnProperty("visibilityRule")) {
             field.isVisible = VisibilityEvaluator.evaluate(field);
         }
