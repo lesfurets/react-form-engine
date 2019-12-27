@@ -9,16 +9,11 @@ export class Field implements FormElement {
     id: string;
     type: FieldType;
     label?: string;
-    placeholder?: string;
-    symbol?: string;
     validationRule?: ValidationRule;
     visibilityRule?: VisibilityRule;
     // TODO rename 'isValid' ?
     getValidation?: (state: FieldContext) => Validation;
     isVisible?: (state: FieldContext) => boolean;
-    values?: FieldValue[];
-    defaultValue?: FieldValue | FieldValue[];
-    [key: string]: any;
 }
 
 export class FieldValue implements FormElement {

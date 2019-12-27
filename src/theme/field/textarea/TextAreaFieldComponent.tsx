@@ -3,9 +3,10 @@ import {InputField, InputFieldProps} from "../common/element/InputField";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
 import {FIELD_EVENT} from "../../../definition/event/events";
 import {useTextField} from "../common/hook/useTextField";
+import {TextField} from "../../../definition/model/fields/TextField";
 
-export const TextAreaField: FieldComponent<string> =
-    ({field, tabIndex, contextValue, onFieldEvent}: InputFieldProps<string>) => {
+export const TextAreaFieldComponent: FieldComponent<string, TextField> =
+    ({field, tabIndex, contextValue, onFieldEvent}) => {
         const [onChange] = useTextField(onFieldEvent);
 
         return (

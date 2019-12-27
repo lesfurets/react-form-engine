@@ -1,39 +1,39 @@
 import * as React from "react";
 import {FieldType, FieldTypes} from "../../definition/FieldTypes";
-import {TextField} from "./text/TextField";
-import {EmailField} from "./email/EmailField";
-import {PasswordField} from "./password/PasswordField";
-import {IntegerField} from "./integer/IntegerField";
-import {DecimalField} from "./decimal/DecimalField";
-import {TextAreaField} from "./textarea/TextAreaField";
-import {SelectField} from "./select/SelectField";
-import {RadioField} from "./radio/RadioField";
-import {CheckboxField} from "./checkbox/CheckboxField";
-import {DateField} from "./date/DateField";
+import {TextFieldComponent} from "./text/TextFieldComponent";
+import {EmailFieldComponent} from "./email/EmailFieldComponent";
+import {PasswordFieldComponent} from "./password/PasswordFieldComponent";
+import {IntegerFieldComponent} from "./integer/IntegerFieldComponent";
+import {DecimalFieldComponent} from "./decimal/DecimalFieldComponent";
+import {TextAreaFieldComponent} from "./textarea/TextAreaFieldComponent";
+import {SelectFieldComponent} from "./select/SelectFieldComponent";
+import {RadioFieldComponent} from "./radio/RadioFieldComponent";
+import {CheckboxFieldComponent} from "./checkbox/CheckboxFieldComponent";
+import {DateFieldComponent} from "./date/DateFieldComponent";
 
 export class DefaultFieldInjector {
     static inject(type: FieldType) {
         switch (type) {
             case FieldTypes.INPUT_TEXT:
-                return TextField;
+                return TextFieldComponent;
             case FieldTypes.INPUT_EMAIL:
-                return EmailField;
+                return EmailFieldComponent;
             case FieldTypes.INPUT_PASSWORD:
-                return PasswordField;
+                return PasswordFieldComponent;
             case FieldTypes.INPUT_INTEGER:
-                return IntegerField;
+                return IntegerFieldComponent;
             case FieldTypes.INPUT_DECIMAL:
-                return DecimalField;
+                return DecimalFieldComponent;
             case FieldTypes.INPUT_TEXT_AREA:
-                return TextAreaField;
+                return TextAreaFieldComponent;
             case FieldTypes.INPUT_SELECT:
-                return SelectField;
+                return SelectFieldComponent;
             case FieldTypes.INPUT_RADIO:
-                return RadioField;
+                return RadioFieldComponent;
             case FieldTypes.INPUT_CHECKBOX:
-                return CheckboxField;
+                return CheckboxFieldComponent;
             case FieldTypes.INPUT_DATE:
-                return DateField;
+                return DateFieldComponent;
             default:
                 return UNKNOWN_FIELD;
         }

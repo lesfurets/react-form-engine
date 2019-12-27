@@ -1,11 +1,12 @@
 import * as React from "react";
 import {mount, ReactWrapper} from "enzyme";
-import {TextAreaField} from "./TextAreaField";
+import {TextAreaFieldComponent} from "./TextAreaFieldComponent";
 import {emptyCallback, initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
 import {FIELD_EVENT} from "../../../definition/event/events";
 import {Field} from "../../../definition/model/Field";
 import {FieldComponentProps} from "../../../definition/theme/field/FieldComponent";
+import {TextField} from "../../../definition/model/fields/TextField";
 
 initTest();
 
@@ -19,17 +20,17 @@ describe("FormEngine/Field/TextAreaField", () => {
     describe("placeholder", () => {
         it("Should have a placeholder", () => {
             let placeholderValue = "placeholder";
-            let container = mount(<TextAreaField field={{...field, placeholder: placeholderValue}}
-                                               contextValue=""
-                                               onFieldEvent={emptyCallback}/>);
+            let container = mount(<TextAreaFieldComponent field={{...field, placeholder: placeholderValue}}
+                                                          contextValue=""
+                                                          onFieldEvent={emptyCallback}/>);
             expect(container.find('textarea').props().placeholder).toBe(placeholderValue)
         });
 
 
         it("Should have empty placeholder", () => {
-            let container = mount(<TextAreaField field={field}
-                                               contextValue=""
-                                               onFieldEvent={emptyCallback}/>);
+            let container = mount(<TextAreaFieldComponent field={field}
+                                                          contextValue=""
+                                                          onFieldEvent={emptyCallback}/>);
             expect(container.find('textarea').props().placeholder).toBe("")
         });
     });
@@ -37,10 +38,10 @@ describe("FormEngine/Field/TextAreaField", () => {
     describe("props", () => {
         it("Should pass props id, name, tabindex to input", () => {
             let tabIndex = 8;
-            let container = mount(<TextAreaField field={field}
-                                               tabIndex={tabIndex}
-                                               contextValue=""
-                                               onFieldEvent={emptyCallback}/>);
+            let container = mount(<TextAreaFieldComponent field={field}
+                                                          tabIndex={tabIndex}
+                                                          contextValue=""
+                                                          onFieldEvent={emptyCallback}/>);
             expect(container.find('textarea').props().id).toBe(field.id);
             expect(container.find('textarea').props().name).toBe(field.id);
             expect(container.find('textarea').props().tabIndex).toBe(tabIndex);
@@ -50,9 +51,9 @@ describe("FormEngine/Field/TextAreaField", () => {
     describe("onChange", () => {
         it("Should update value", () => {
             let onFieldEvent = jasmine.createSpy();
-            let container: ReactWrapper<FieldComponentProps<string>, any, React.Component> = mount(<TextAreaField field={field}
-                                                                                                                  contextValue=""
-                                                                                                                  onFieldEvent={onFieldEvent}/>);
+            let container = mount(<TextAreaFieldComponent field={field}
+                                                                                                                           contextValue=""
+                                                                                                                           onFieldEvent={onFieldEvent}/>);
             let input = container.find('textarea');
             input.simulate('change', {target: {value: testValue}});
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, testValue);
@@ -63,9 +64,9 @@ describe("FormEngine/Field/TextAreaField", () => {
     describe("onBlur", () => {
         it("Should submit value", () => {
             let onFieldEvent = jasmine.createSpy();
-            let container: ReactWrapper<FieldComponentProps<string>, any, React.Component> = mount(<TextAreaField field={field}
-                                                                                                                  contextValue={testValue}
-                                                                                                                  onFieldEvent={onFieldEvent}/>);
+            let container = mount(<TextAreaFieldComponent field={field}
+                                                                                                                           contextValue={testValue}
+                                                                                                                           onFieldEvent={onFieldEvent}/>);
             let input = container.find('textarea');
             input.simulate('blur');
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, testValue);

@@ -1,10 +1,10 @@
 import * as React from "react";
 import {mount} from "enzyme";
-import {PLEASE_SELECT_UNDEFINED, SelectField} from "./SelectField";
+import {PLEASE_SELECT_UNDEFINED, SelectFieldComponent} from "./SelectFieldComponent";
 import {initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
-import {Field} from "../../../definition/model/Field";
 import {FIELD_EVENT} from "../../../definition/event/events";
+import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
 initTest();
 
@@ -14,7 +14,7 @@ describe("FormEngine/Field/SelectField", () => {
         {id:"value2",label:"value2"},
         {id:"value3",label:"value3"},
     ];
-    const field: Field = {
+    const field: ValuesField = {
         id: "fieldId",
         type: FieldTypes.INPUT_SELECT,
         values: fieldValues,
@@ -24,9 +24,9 @@ describe("FormEngine/Field/SelectField", () => {
         it("Select should have no value by default", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<SelectField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
+            let container = mount(<SelectFieldComponent field={field}
+                                                        onFieldEvent={onFieldEvent}
+                                                        contextValue={undefined}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -38,9 +38,9 @@ describe("FormEngine/Field/SelectField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let contextValue = fieldValues[0];
-            let container = mount(<SelectField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={contextValue.id}/>);
+            let container = mount(<SelectFieldComponent field={field}
+                                                        onFieldEvent={onFieldEvent}
+                                                        contextValue={contextValue.id}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -51,9 +51,9 @@ describe("FormEngine/Field/SelectField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let defaultValue = fieldValues[0];
-            let container = mount(<SelectField field={{...field, defaultValue:defaultValue}}
-                                                                               onFieldEvent={onFieldEvent}
-                                                                               contextValue={undefined}/>);
+            let container = mount(<SelectFieldComponent field={{...field, defaultValue:defaultValue}}
+                                                        onFieldEvent={onFieldEvent}
+                                                        contextValue={undefined}/>);
 
             // Then
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, defaultValue.id);
@@ -65,9 +65,9 @@ describe("FormEngine/Field/SelectField", () => {
             let onFieldEvent = jasmine.createSpy();
             let defaultValue = fieldValues[0];
             let contextValue = fieldValues[1];
-            let container = mount(<SelectField field={{...field, defaultValue:defaultValue}}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={contextValue.id}/>);
+            let container = mount(<SelectFieldComponent field={{...field, defaultValue:defaultValue}}
+                                                        onFieldEvent={onFieldEvent}
+                                                        contextValue={contextValue.id}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -77,9 +77,9 @@ describe("FormEngine/Field/SelectField", () => {
         it("Select should have all required values", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<SelectField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
+            let container = mount(<SelectFieldComponent field={field}
+                                                        onFieldEvent={onFieldEvent}
+                                                        contextValue={undefined}/>);
 
             // Then
             expect(container.find("option").length).toBe(4);
@@ -91,9 +91,9 @@ describe("FormEngine/Field/SelectField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let value = fieldValues[0];
-            let container = mount(<SelectField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
+            let container = mount(<SelectFieldComponent field={field}
+                                                        onFieldEvent={onFieldEvent}
+                                                        contextValue={undefined}/>);
             // Then
             let select = container.find('select');
             select.simulate('change', {target: {value: value.id}});
@@ -103,9 +103,9 @@ describe("FormEngine/Field/SelectField", () => {
         it("Should reset value on default", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<SelectField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
+            let container = mount(<SelectFieldComponent field={field}
+                                                        onFieldEvent={onFieldEvent}
+                                                        contextValue={undefined}/>);
             // Then
             let select = container.find('select');
             select.simulate('change', {target: {value: PLEASE_SELECT_UNDEFINED}});

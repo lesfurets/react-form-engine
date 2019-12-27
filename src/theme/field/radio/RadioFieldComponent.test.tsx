@@ -1,10 +1,10 @@
 import * as React from "react";
 import {mount} from "enzyme";
-import {RadioField} from "./RadioField";
+import {RadioFieldComponent} from "./RadioFieldComponent";
 import {initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
-import {Field} from "../../../definition/model/Field";
 import {FIELD_EVENT} from "../../../definition/event/events";
+import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
 initTest();
 
@@ -14,7 +14,7 @@ describe("FormEngine/Field/RadioField", () => {
         {id:"value2",label:"value2"},
         {id:"value3",label:"value3"},
     ];
-    const field: Field = {
+    const field: ValuesField = {
         id: "fieldId",
         type: FieldTypes.INPUT_RADIO,
         values: fieldValues,
@@ -24,9 +24,9 @@ describe("FormEngine/Field/RadioField", () => {
         it("Select should have no value by default", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<RadioField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
+            let container = mount(<RadioFieldComponent field={field}
+                                                       onFieldEvent={onFieldEvent}
+                                                       contextValue={undefined}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -38,9 +38,9 @@ describe("FormEngine/Field/RadioField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let contextValue = fieldValues[0];
-            let container = mount(<RadioField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={contextValue.id}/>);
+            let container = mount(<RadioFieldComponent field={field}
+                                                       onFieldEvent={onFieldEvent}
+                                                       contextValue={contextValue.id}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -51,9 +51,9 @@ describe("FormEngine/Field/RadioField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let defaultValue = fieldValues[0];
-            let container = mount(<RadioField field={{...field, defaultValue:defaultValue}}
-                                                                               onFieldEvent={onFieldEvent}
-                                                                               contextValue={undefined}/>);
+            let container = mount(<RadioFieldComponent field={{...field, defaultValue:defaultValue}}
+                                                       onFieldEvent={onFieldEvent}
+                                                       contextValue={undefined}/>);
 
             // Then
             container.update();
@@ -65,9 +65,9 @@ describe("FormEngine/Field/RadioField", () => {
             let onFieldEvent = jasmine.createSpy();
             let defaultValue = fieldValues[0];
             let contextValue = fieldValues[1];
-            let container = mount(<RadioField field={{...field, defaultValue:defaultValue}}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={contextValue.id}/>);
+            let container = mount(<RadioFieldComponent field={{...field, defaultValue:defaultValue}}
+                                                       onFieldEvent={onFieldEvent}
+                                                       contextValue={contextValue.id}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -77,9 +77,9 @@ describe("FormEngine/Field/RadioField", () => {
         it("Select should have all required values", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<RadioField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
+            let container = mount(<RadioFieldComponent field={field}
+                                                       onFieldEvent={onFieldEvent}
+                                                       contextValue={undefined}/>);
 
             // Then
             expect(container.find("input").length).toBe(3);
@@ -91,9 +91,9 @@ describe("FormEngine/Field/RadioField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let value = fieldValues[0];
-            let container = mount(<RadioField field={field}
-                                              onFieldEvent={onFieldEvent}
-                                              contextValue={undefined}/>);
+            let container = mount(<RadioFieldComponent field={field}
+                                                       onFieldEvent={onFieldEvent}
+                                                       contextValue={undefined}/>);
             // Then
             let label = container.find(`input[value="${value.id}"]`);
             label.simulate('change');

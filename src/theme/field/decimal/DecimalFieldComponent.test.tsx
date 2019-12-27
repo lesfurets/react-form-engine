@@ -1,6 +1,6 @@
 import * as React from "react";
 import {mount} from "enzyme";
-import {DecimalField} from "./DecimalField";
+import {DecimalFieldComponent} from "./DecimalFieldComponent";
 import {emptyCallback, initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
 import {Field} from "../../../definition/model/Field";
@@ -17,26 +17,26 @@ describe("FormEngine/Field/NumericField", () => {
 
     describe("Construction", () => {
         it("Input should have type decimal", () => {
-            let container = mount(<DecimalField field={field}
-                                                onFieldEvent={emptyCallback}
-                                                contextValue={undefined}/>);
+            let container = mount(<DecimalFieldComponent field={field}
+                                                         onFieldEvent={emptyCallback}
+                                                         contextValue={undefined}/>);
             expect(container.find("input").props().inputMode).toBe("decimal");
         });
     });
 
     describe("Symbol", () => {
         it("Input should have no symbol by default", () => {
-            let container = mount(<DecimalField field={field}
-                                                onFieldEvent={emptyCallback}
-                                                contextValue={undefined}/>);
+            let container = mount(<DecimalFieldComponent field={field}
+                                                         onFieldEvent={emptyCallback}
+                                                         contextValue={undefined}/>);
             expect(container.find("TextField-symbol").length).toBe(0);
         });
 
         it("Input should symbol if specified", () => {
             let symbol = "%";
-            let container = mount(<DecimalField field={{...field, symbol: symbol}}
-                                                onFieldEvent={emptyCallback}
-                                                contextValue={undefined}/>);
+            let container = mount(<DecimalFieldComponent field={{...field, symbol: symbol}}
+                                                         onFieldEvent={emptyCallback}
+                                                         contextValue={undefined}/>);
             expect(container.find(".TextField-symbol").length).toBe(1);
             expect(container.find(".TextField-symbol").text()).toEqual(symbol);
         });
@@ -46,9 +46,9 @@ describe("FormEngine/Field/NumericField", () => {
         it("Should accept numbers", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<DecimalField field={field}
-                                                onFieldEvent={onFieldEvent}
-                                                contextValue={undefined}/>);
+            let container = mount(<DecimalFieldComponent field={field}
+                                                         onFieldEvent={onFieldEvent}
+                                                         contextValue={undefined}/>);
             let input = container.find('input');
 
             // When
@@ -61,9 +61,9 @@ describe("FormEngine/Field/NumericField", () => {
         it("Should accept numbers with decimals", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<DecimalField field={field}
-                                                onFieldEvent={onFieldEvent}
-                                                contextValue={undefined}/>);
+            let container = mount(<DecimalFieldComponent field={field}
+                                                         onFieldEvent={onFieldEvent}
+                                                         contextValue={undefined}/>);
             let input = container.find('input');
 
             // When
@@ -76,9 +76,9 @@ describe("FormEngine/Field/NumericField", () => {
         it("Should refuse other characters", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<DecimalField field={field}
-                                                onFieldEvent={onFieldEvent}
-                                                contextValue={undefined}/>);
+            let container = mount(<DecimalFieldComponent field={field}
+                                                         onFieldEvent={onFieldEvent}
+                                                         contextValue={undefined}/>);
             let input = container.find('input');
 
             // When
@@ -90,9 +90,9 @@ describe("FormEngine/Field/NumericField", () => {
 
         it("Should format value", () => {
             // Given
-            let container = mount(<DecimalField field={field}
-                                                onFieldEvent={emptyCallback}
-                                                contextValue={1234.56}/>);
+            let container = mount(<DecimalFieldComponent field={field}
+                                                         onFieldEvent={emptyCallback}
+                                                         contextValue={1234.56}/>);
             let input = container.find('input');
 
             // Then
@@ -102,9 +102,9 @@ describe("FormEngine/Field/NumericField", () => {
         it("Should support unstable state with '.'", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<DecimalField field={field}
-                                                onFieldEvent={onFieldEvent}
-                                                contextValue={undefined}/>);
+            let container = mount(<DecimalFieldComponent field={field}
+                                                         onFieldEvent={onFieldEvent}
+                                                         contextValue={undefined}/>);
 
             // When
             container.find('input').simulate('change', {target: {value: "1234,"}});
@@ -117,9 +117,9 @@ describe("FormEngine/Field/NumericField", () => {
         it("Should support unstable state with '0' in decimal", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<DecimalField field={field}
-                                                onFieldEvent={onFieldEvent}
-                                                contextValue={undefined}/>);
+            let container = mount(<DecimalFieldComponent field={field}
+                                                         onFieldEvent={onFieldEvent}
+                                                         contextValue={undefined}/>);
 
             // When
             container.find('input').simulate('change', {target: {value: "1234,00"}});

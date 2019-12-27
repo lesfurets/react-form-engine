@@ -4,7 +4,7 @@ import {emptyCallback, initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
 import {FIELD_EVENT} from "../../../definition/event/events";
 import {Field} from "../../../definition/model/Field";
-import {DateField, DateInfo, formatDayMonth, formatYear} from "./DateField";
+import {DateFieldComponent, DateInfo, formatDayMonth, formatYear} from "./DateFieldComponent";
 import {act} from "react-dom/test-utils";
 import {DateElement, DateElementProps} from "./element/DateElement";
 
@@ -23,8 +23,8 @@ describe("FormEngine/Field/DateField", () => {
 
     describe("constructor", () => {
         it("Input should have type text", () => {
-            let container = mount(<DateField field={field}
-                                             onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field}
+                                                      onFieldEvent={emptyCallback}/>);
 
             expect(container.find(DateElement).length).toBe(3);
         });
@@ -32,8 +32,8 @@ describe("FormEngine/Field/DateField", () => {
 
     describe("props", () => {
         it("Should use right formater", () => {
-            let container = mount(<DateField field={field}
-                                             onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field}
+                                                      onFieldEvent={emptyCallback}/>);
 
             expect(container.find(DateElement)
                 .findWhere(container => container.key() === DateInfo.DAY)
@@ -47,8 +47,8 @@ describe("FormEngine/Field/DateField", () => {
         });
 
         it("Should have no initial value if contextValue is undefined", () => {
-            let container = mount(<DateField field={field}
-                                             onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field}
+                                                      onFieldEvent={emptyCallback}/>);
 
             expect(container.find('.DateField-day').props().value).toBe("");
             expect(container.find('.DateField-month').props().value).toBe("");
@@ -57,9 +57,9 @@ describe("FormEngine/Field/DateField", () => {
 
         it("Should have initial value if contextValue is defined", () => {
             // When
-            let container = mount(<DateField field={field}
-                                             contextValue={testDate}
-                                             onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field}
+                                                      contextValue={testDate}
+                                                      onFieldEvent={emptyCallback}/>);
 
             // Then
             expect(container.find('.DateField-day').props().value).toBe(formatDayMonth(date));
@@ -72,7 +72,7 @@ describe("FormEngine/Field/DateField", () => {
         it("Should update value", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<DateField field={field} onFieldEvent={onFieldEvent}/>);
+            let container = mount(<DateFieldComponent field={field} onFieldEvent={onFieldEvent}/>);
 
             // When
             act(() => {
@@ -93,7 +93,7 @@ describe("FormEngine/Field/DateField", () => {
         it("Should reset value", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<DateField field={field} onFieldEvent={onFieldEvent} contextValue={testDate}/>);
+            let container = mount(<DateFieldComponent field={field} onFieldEvent={onFieldEvent} contextValue={testDate}/>);
 
             // When
             act(() => {
@@ -125,7 +125,7 @@ describe("FormEngine/Field/DateField", () => {
     describe("focus", () => {
         it("Should have no focus by default", () => {
             // Given
-            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field} onFieldEvent={emptyCallback}/>);
 
             // Then
             let dayElement = container.find({type: DateInfo.DAY}) as ReactWrapper<DateElementProps>;
@@ -138,7 +138,7 @@ describe("FormEngine/Field/DateField", () => {
 
         it("Should focus on day on a click on the component", async () => {
             // Given
-            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field} onFieldEvent={emptyCallback}/>);
 
             // When
             act(() => {
@@ -158,7 +158,7 @@ describe("FormEngine/Field/DateField", () => {
 
         it("Should focus on month when submitting day", async () => {
             // Given
-            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field} onFieldEvent={emptyCallback}/>);
 
             // When
             act(() => {
@@ -178,7 +178,7 @@ describe("FormEngine/Field/DateField", () => {
 
         it("Should focus on year when submitting month", async () => {
             // Given
-            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field} onFieldEvent={emptyCallback}/>);
 
             // When
             act(() => {
@@ -198,7 +198,7 @@ describe("FormEngine/Field/DateField", () => {
 
         it("Should focus on month when resetting year", async () => {
             // Given
-            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field} onFieldEvent={emptyCallback}/>);
 
             // When
             act(() => {
@@ -218,7 +218,7 @@ describe("FormEngine/Field/DateField", () => {
 
         it("Should focus on day when resetting month", async () => {
             // Given
-            let container = mount(<DateField field={field} onFieldEvent={emptyCallback}/>);
+            let container = mount(<DateFieldComponent field={field} onFieldEvent={emptyCallback}/>);
 
             // When
             act(() => {

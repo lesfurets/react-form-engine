@@ -3,11 +3,12 @@ import {InputFieldProps} from "../common/element/InputField";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
 import {FIELD_EVENT} from "../../../definition/event/events";
 import {useValues} from "../common/hook/useValues";
+import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
 export const PLEASE_SELECT_UNDEFINED = "PLEASE_SELECT_UNDEFINED";
 
-export const SelectField: FieldComponent<string> =
-    ({contextValue, onFieldEvent, field}: InputFieldProps<string>) => {
+export const SelectFieldComponent: FieldComponent<string, ValuesField> =
+    ({contextValue, onFieldEvent, field}) => {
         useValues(contextValue, field, onFieldEvent);
 
         let onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

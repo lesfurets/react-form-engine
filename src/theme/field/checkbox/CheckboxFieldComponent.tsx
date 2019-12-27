@@ -1,10 +1,9 @@
 import * as React from "react";
-import {InputField, InputFieldProps} from "../common/element/InputField";
+import {useEffect} from "react";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
 import {FIELD_EVENT} from "../../../definition/event/events";
-import {useEffect} from "react";
-import {FieldValueAction} from "../../../definition/redux/constants";
 import {FieldValue} from "../../../definition/model/Field";
+import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
 const toggle = (contextValue: string[] | undefined, newValue: string) => {
     let currentValues = contextValue || [];
@@ -12,8 +11,8 @@ const toggle = (contextValue: string[] | undefined, newValue: string) => {
         currentValues.filter(value => value !== newValue) : [...currentValues, newValue];
 };
 
-export const CheckboxField: FieldComponent<string[]> =
-    ({contextValue, onFieldEvent, field}: InputFieldProps<string[]>) => {
+export const CheckboxFieldComponent: FieldComponent<string[], ValuesField> =
+    ({contextValue, onFieldEvent, field}) => {
         useEffect(() => {
             if(contextValue === undefined && field.defaultValue) {
                 onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, (field.defaultValue as FieldValue[]).map(value => value.id));

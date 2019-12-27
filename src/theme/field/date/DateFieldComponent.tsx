@@ -1,7 +1,8 @@
 import * as React from "react";
-import {FieldComponent, FieldComponentProps} from "../../../definition/theme/field/FieldComponent";
+import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
 import {FIELD_EVENT} from "../../../definition/event/events";
 import {DateElement} from "./element/DateElement";
+import {Field} from "../../..";
 
 export const DateInfo = {
     DAY: "DAY",
@@ -50,8 +51,8 @@ export function formatYear(value: number) {
     return (2000 + value).toString();
 }
 
-export const DateField: FieldComponent<Date> =
-    ({field, tabIndex, contextValue, onFieldEvent}: FieldComponentProps<Date>) => {
+export const DateFieldComponent: FieldComponent<Date, Field> =
+    ({field, tabIndex, contextValue, onFieldEvent}) => {
         const [focus, setFocus] = React.useState<string | undefined>(undefined);
         const [unstable, setUnstable] = React.useState<UnstableDate>(() => (contextValue ? {
             [DateInfo.DAY]: contextValue.getDate(),

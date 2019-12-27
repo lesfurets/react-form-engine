@@ -2,8 +2,9 @@ import * as React from "react";
 import {FIELD_EVENT} from "../../../../definition/event/events";
 import {FieldComponentProps} from "../../../../definition/theme/field/FieldComponent";
 import {useTextField} from "../hook/useTextField";
+import {TextField} from "../../../../definition/model/fields/TextField";
 
-export interface InputFieldProps<T> extends FieldComponentProps<T>{
+export interface InputFieldProps<T> extends FieldComponentProps<T, TextField>{
     inputType?: string,
     inputMode?: string,
 }

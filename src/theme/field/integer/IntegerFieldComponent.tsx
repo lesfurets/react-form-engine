@@ -4,9 +4,10 @@ import {InputField, InputFieldProps} from "../common/element/InputField";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
 import {FormEvent} from "../../../definition/event/Event";
 import {FIELD_EVENT} from "../../../definition/event/events";
+import {NumericField} from "../../../definition/model/fields/NumericField";
 
-export const IntegerField: FieldComponent<number> =
-    (props: InputFieldProps<number>) => {
+export const IntegerFieldComponent: FieldComponent<number, NumericField> =
+    (props) => {
         const contextValue = props.contextValue ? props.contextValue.toLocaleString("latn") : "";
         const onFieldEvent = (e: FormEvent, details: string) => {
             switch (e) {

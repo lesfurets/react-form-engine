@@ -5,6 +5,7 @@ import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
 import {FormEvent} from "../../../definition/event/Event";
 import {FIELD_EVENT} from "../../../definition/event/events";
 import {useState} from "react";
+import {NumericField} from "../../../definition/model/fields/NumericField";
 
 const UNSTABLE_STATE = /[,]$|[,].*0$/;
 
@@ -17,8 +18,8 @@ const manageNewValue = (event: FormEvent, details: string, setUnstable: (value: 
     }
 };
 
-export const DecimalField: FieldComponent<number> =
-    (props: InputFieldProps<number>) => {
+export const DecimalFieldComponent: FieldComponent<number, NumericField> =
+    (props) => {
         const [unstable, setUnstable] = useState();
 
         const contextValue = props.contextValue ? props.contextValue.toLocaleString("latn") : "";

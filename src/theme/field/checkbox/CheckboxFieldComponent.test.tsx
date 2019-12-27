@@ -1,10 +1,10 @@
 import * as React from "react";
 import {mount} from "enzyme";
-import {CheckboxField} from "./CheckboxField";
+import {CheckboxFieldComponent} from "./CheckboxFieldComponent";
 import {initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
-import {Field} from "../../../definition/model/Field";
 import {FIELD_EVENT} from "../../../definition/event/events";
+import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
 initTest();
 
@@ -14,7 +14,7 @@ describe("FormEngine/Field/CheckboxField", () => {
         {id:"value2",label:"value2"},
         {id:"value3",label:"value3"},
     ];
-    const field: Field = {
+    const field: ValuesField = {
         id: "fieldId",
         type: FieldTypes.INPUT_CHECKBOX,
         values: fieldValues,
@@ -24,9 +24,9 @@ describe("FormEngine/Field/CheckboxField", () => {
         it("Select should have no value by default", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<CheckboxField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
+            let container = mount(<CheckboxFieldComponent field={field}
+                                                          onFieldEvent={onFieldEvent}
+                                                          contextValue={undefined}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -38,9 +38,9 @@ describe("FormEngine/Field/CheckboxField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let contextValue = fieldValues[0];
-            let container = mount(<CheckboxField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={[contextValue.id]}/>);
+            let container = mount(<CheckboxFieldComponent field={field}
+                                                          onFieldEvent={onFieldEvent}
+                                                          contextValue={[contextValue.id]}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -52,9 +52,9 @@ describe("FormEngine/Field/CheckboxField", () => {
             let onFieldEvent = jasmine.createSpy();
             let contextValue1 = fieldValues[0];
             let contextValue2 = fieldValues[1];
-            let container = mount(<CheckboxField field={field}
-                                                 onFieldEvent={onFieldEvent}
-                                                 contextValue={[contextValue1.id, contextValue2.id]}/>);
+            let container = mount(<CheckboxFieldComponent field={field}
+                                                          onFieldEvent={onFieldEvent}
+                                                          contextValue={[contextValue1.id, contextValue2.id]}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -67,9 +67,9 @@ describe("FormEngine/Field/CheckboxField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let defaultValue = [fieldValues[0]];
-            let container = mount(<CheckboxField field={{...field, defaultValue:defaultValue}}
-                                                                               onFieldEvent={onFieldEvent}
-                                                                               contextValue={undefined}/>);
+            let container = mount(<CheckboxFieldComponent field={{...field, defaultValue:defaultValue}}
+                                                          onFieldEvent={onFieldEvent}
+                                                          contextValue={undefined}/>);
 
             // Then
             container.update();
@@ -81,9 +81,9 @@ describe("FormEngine/Field/CheckboxField", () => {
             let onFieldEvent = jasmine.createSpy();
             let defaultValue = fieldValues[0];
             let contextValue = fieldValues[1];
-            let container = mount(<CheckboxField field={{...field, defaultValue:defaultValue}}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={[contextValue.id]}/>);
+            let container = mount(<CheckboxFieldComponent field={{...field, defaultValue:defaultValue}}
+                                                          onFieldEvent={onFieldEvent}
+                                                          contextValue={[contextValue.id]}/>);
 
             // Then
             expect(onFieldEvent).not.toHaveBeenCalled();
@@ -93,9 +93,9 @@ describe("FormEngine/Field/CheckboxField", () => {
         it("Select should have all required values", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
-            let container = mount(<CheckboxField field={field}
-                                               onFieldEvent={onFieldEvent}
-                                               contextValue={undefined}/>);
+            let container = mount(<CheckboxFieldComponent field={field}
+                                                          onFieldEvent={onFieldEvent}
+                                                          contextValue={undefined}/>);
 
             // Then
             expect(container.find("input").length).toBe(3);
@@ -108,9 +108,9 @@ describe("FormEngine/Field/CheckboxField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let value = fieldValues[0];
-            let container = mount(<CheckboxField field={field}
-                                                 onFieldEvent={onFieldEvent}
-                                                 contextValue={undefined}/>);
+            let container = mount(<CheckboxFieldComponent field={field}
+                                                          onFieldEvent={onFieldEvent}
+                                                          contextValue={undefined}/>);
             // Then
             container.find(`input[value="${value.id}"]`).simulate('change');
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, [value.id]);
@@ -121,9 +121,9 @@ describe("FormEngine/Field/CheckboxField", () => {
             let onFieldEvent = jasmine.createSpy();
             let value1 = fieldValues[0];
             let value2 = fieldValues[1];
-            let container = mount(<CheckboxField field={field}
-                                                 onFieldEvent={onFieldEvent}
-                                                 contextValue={[value1.id, value2.id]}/>);
+            let container = mount(<CheckboxFieldComponent field={field}
+                                                          onFieldEvent={onFieldEvent}
+                                                          contextValue={[value1.id, value2.id]}/>);
             // Then
             container.find(`input[value="${value2.id}"]`).simulate('change');
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, [value1.id]);
@@ -133,9 +133,9 @@ describe("FormEngine/Field/CheckboxField", () => {
             // Given
             let onFieldEvent = jasmine.createSpy();
             let value = fieldValues[0];
-            let container = mount(<CheckboxField field={field}
-                                                 onFieldEvent={onFieldEvent}
-                                                 contextValue={[value.id]}/>);
+            let container = mount(<CheckboxFieldComponent field={field}
+                                                          onFieldEvent={onFieldEvent}
+                                                          contextValue={[value.id]}/>);
             // Then
             container.find(`input[value="${value.id}"]`).simulate('change');
             expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.RESET_VALUE);

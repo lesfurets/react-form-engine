@@ -26,7 +26,7 @@ interface MountingProps {
     setFieldValue?: ValueSetter,
 }
 
-const fieldMock = generateMock<FieldComponentProps<any>>();
+const fieldMock = generateMock<FieldComponentProps<any, any>>();
 const viewMock = generateMock<FieldViewProps>();
 
 const shallowWrapper = (props: MountingProps) => {
