@@ -12,7 +12,7 @@ import {StringCheckPredicate} from "../data/leaf/string/StringCheckPredicate";
 import {StringPredicate} from "../data/leaf/string/StringPredicate";
 import {ValuePredicate} from "../data/leaf/value/ValuePredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../definition/FieldContext";
+import {FieldContext} from "../../../redux/FieldContext";
 
 export class ValuePredicateEvaluator {
 

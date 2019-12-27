@@ -7,7 +7,7 @@ import {StringEqualToPredicate} from "../data/leaf/string/StringEqualToPredicate
 import {TruePredicate} from "../data/root/TruePredicate";
 import {FalsePredicate} from "../data/root/FalsePredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../definition/FieldContext";
+import {FieldContext} from "../../../redux/FieldContext";
 
 describe("DSL/Predicate/PredicateEvaluator", () => {
 

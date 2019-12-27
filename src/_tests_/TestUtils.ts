@@ -6,7 +6,7 @@ import {FieldType, FieldTypes} from "../definition/FieldTypes";
 import * as UseFieldContext from "../definition/redux/useFieldContext";
 import * as UseNavigation from "../definition/redux/useNavigation";
 import * as UseTheme from "../definition/theme/useTheme";
-import {FieldContext} from "../definition/FieldContext";
+import {FieldContext} from "../redux/FieldContext";
 import {ValueSetter} from "../definition/redux/useFieldContext";
 import {ThemeContextInterface} from "../definition/theme/ThemeContext";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";
@@ -17,7 +17,7 @@ import {Block} from "../definition/model/Block";
 import {Form} from "../definition/model/Form";
 import {FormElement} from "../definition/model/FormElement";
 import {NavigationSetter} from "../definition/redux/useNavigation";
-import {NavigationContext} from "../definition/NavigationContext";
+import {NavigationContext} from "../redux/NavigationContext";
 
 export const initTest = () => {
     Enzyme.configure({

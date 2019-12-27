@@ -1,7 +1,7 @@
 import {VALID} from "../../definition/validation/Validation";
 import {PredicateEvaluator} from "../predicate/evaluator/PredicateEvaluator";
 import {Field} from "../../definition/model/Field";
-import {FieldContext} from "../../definition/FieldContext";
+import {FieldContext} from "../../redux/FieldContext";
 
 export class ValidationEvaluator {
     static evaluate(field: Field) {

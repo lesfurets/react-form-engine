@@ -7,7 +7,7 @@ import {Block, BLOCK_STATE} from "../definition/model/Block";
 import {Form} from "../definition/model/Form";
 import {FormView} from "../definition/theme/view/FormView";
 import {ThemeContext} from "../definition/theme/ThemeContext";
-import {FieldContext} from "../definition/FieldContext";
+import {FieldContext} from "../redux/FieldContext";
 import {useTheme} from "../definition/theme/useTheme";
 import {useNavigation} from "../definition/redux/useNavigation";
 import {getElementIndex} from "../definition/ModelUtils";

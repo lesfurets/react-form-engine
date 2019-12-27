@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {FieldContext} from "../FieldContext";
+import {FieldContext} from "../../redux/FieldContext";
 import {setFieldValueAction, setNavigationAction} from "./actions";
 import {FormElement} from "../model/FormElement";
 

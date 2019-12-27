@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {FieldContext} from "../FieldContext";
+import {FieldContext} from "../../redux/FieldContext";
 import {setFieldValueAction} from "./actions";
 
 export type ValueSetter = (id: string, value: any) => void;

@@ -3,7 +3,7 @@ import {ValidationRule} from "../../dsl/validation/ValidationRule";
 import {VisibilityRule} from "../../dsl/visibility/VisibilityRule";
 import {Validation} from "../validation/Validation";
 import {FormElement} from "./FormElement";
-import {FieldContext} from "../FieldContext";
+import {FieldContext} from "../../redux/FieldContext";
 
 export class Field implements FormElement {
     id: string;

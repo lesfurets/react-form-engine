@@ -1,7 +1,7 @@
 import {combineReducers, Reducer} from "redux";
 import {FieldValueAction, NavigationAction, SET_FIELD_VALUE, SET_NAVIGATION} from "./constants";
-import {FieldContext} from "../FieldContext";
-import {NavigationContext} from "../NavigationContext";
+import {FieldContext} from "../../redux/FieldContext";
+import {NavigationContext} from "../../redux/NavigationContext";
 
 export interface FieldState {
     fieldContext : FieldContext

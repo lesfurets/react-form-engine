@@ -7,7 +7,7 @@ import {StringStartWithPredicate} from "../data/leaf/string/StringStartWithPredi
 import {StringEndWithPredicate} from "../data/leaf/string/StringEndWithPredicate";
 import {StringRegExpPredicate} from "../data/leaf/string/StringRegExpPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../definition/FieldContext";
+import {FieldContext} from "../../../redux/FieldContext";
 
 export class StringPredicateEvaluator {
 

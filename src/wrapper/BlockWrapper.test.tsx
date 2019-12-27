@@ -9,7 +9,7 @@ import {FieldTypes} from "../definition/FieldTypes";
 import {Field} from "../definition/model/Field";
 import {Block} from "../definition/model/Block";
 import {BlockView, BlockViewProps} from "../definition/theme/view/BlockView";
-import {FieldContext} from "../definition/FieldContext";
+import {FieldContext} from "../redux/FieldContext";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
 import {generateMock} from "../_tests_/MockComponent";
 

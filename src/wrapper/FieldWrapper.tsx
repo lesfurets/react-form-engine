@@ -5,7 +5,7 @@ import {EVENT_MULTICASTER} from "../definition/event/EventMulticaster";
 import {FormEvent} from "../definition/event/Event";
 import {Field, FIELD_STATE} from "../definition/model/Field";
 import {FieldView} from "../definition/theme/view/FieldView";
-import {FieldContext} from "../definition/FieldContext";
+import {FieldContext} from "../redux/FieldContext";
 import {useFieldContext} from "../definition/redux/useFieldContext";
 import {useTheme} from "../definition/theme/useTheme";
 

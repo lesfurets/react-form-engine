@@ -1,6 +1,6 @@
 import {Field} from "./model/Field";
 import {Block} from "./model/Block";
-import {FieldContext} from "./FieldContext";
+import {FieldContext} from "../redux/FieldContext";
 import {VALID} from "./validation/Validation";
 import {FormElement} from "./model/FormElement";
 

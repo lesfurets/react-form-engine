@@ -9,7 +9,7 @@ import {DefaultFieldView} from "../theme/view/DefaultFieldView";
 import {DefaultFieldInjector} from "../theme/field/DefaultFieldInjector";
 import {generateMock} from "../_tests_/MockComponent";
 import {FieldView, FieldViewProps} from "../definition/theme/view/FieldView";
-import {FieldContext} from "../definition/FieldContext";
+import {FieldContext} from "../redux/FieldContext";
 import {FieldInjector} from "../definition/theme/field/FieldInjector";
 import {FieldComponentProps} from "../definition/theme/field/FieldComponent";
 import {ValueSetter} from "../definition/redux/useFieldContext";
