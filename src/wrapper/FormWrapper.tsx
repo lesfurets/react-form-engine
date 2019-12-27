@@ -9,6 +9,8 @@ import {FormView} from "../definition/theme/view/FormView";
 import {ThemeContext} from "../definition/theme/ThemeContext";
 import {FieldContext} from "../definition/FieldContext";
 import {useTheme} from "../definition/theme/useTheme";
+import {useNavigation} from "../definition/redux/useNavigation";
+import {getElementIndex} from "../definition/ModelUtils";
 
 export interface FormWrapperProps {
     form: Form,
@@ -26,7 +28,12 @@ const getBlockState = (index: number, currentIndex: number) => {
 
 export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) => {
     const {FormView} = useTheme();
-    const [currentIndex, setCurrentIndex] = React.useState(0);
+    const [navigationTarget, setNavigationTarget] = useNavigation<Block>();
+    const currentIndex = getElementIndex(form.blocks, navigationTarget);
+
+    React.useEffect(() => {
+        setNavigationTarget(form.blocks[0]);
+    }, []);
 
     const onEvent = (event: FormEvent, details: any) => {
         EVENT_MULTICASTER.event(event, form, details);
@@ -34,22 +41,27 @@ export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) =
 
     React.useEffect(() => {
         const onBlockEvent = (event: FormEvent, block: Block, fieldContext: FieldContext) => {
+            const currentIndex = getElementIndex(form.blocks, block);
             switch (event) {
                 case BLOCK_EVENT.VALIDATED:
                     if(block.index! === form.blocks.length - 1) {
                         EVENT_MULTICASTER.event(FORM_EVENT.DONE, form, fieldContext);
                     } else {
-                        setCurrentIndex(block.index! + 1);
+                        setNavigationTarget(form.blocks[currentIndex + 1]);
                     }
                     break;
                 case BLOCK_EVENT.PREVIOUS:
-                    setCurrentIndex(block.index! - 1);
+                    setNavigationTarget(form.blocks[currentIndex - 1]);
                     break;
             }
         };
         EVENT_MULTICASTER.subscribeForElements(onBlockEvent, form.blocks);
         return () => EVENT_MULTICASTER.unsubscribe(onBlockEvent);
     }, []);
+
+    if(currentIndex === -1) {
+        return null;
+    }
 
     return (
         <FormView onEvent={onEvent}

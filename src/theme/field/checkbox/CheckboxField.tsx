@@ -3,7 +3,7 @@ import {InputField, InputFieldProps} from "../common/element/InputField";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
 import {FIELD_EVENT} from "../../../definition/event/events";
 import {useEffect} from "react";
-import {FieldValueAction} from "../../../definition/store/constants";
+import {FieldValueAction} from "../../../definition/redux/constants";
 import {FieldValue} from "../../../definition/model/Field";
 
 const toggle = (contextValue: string[] | undefined, newValue: string) => {

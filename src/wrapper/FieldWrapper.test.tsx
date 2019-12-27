@@ -12,7 +12,7 @@ import {FieldView, FieldViewProps} from "../definition/theme/view/FieldView";
 import {FieldContext} from "../definition/FieldContext";
 import {FieldInjector} from "../definition/theme/field/FieldInjector";
 import {FieldComponentProps} from "../definition/theme/field/FieldComponent";
-import {ValueSetter} from "../definition/store/useFieldContext";
+import {ValueSetter} from "../definition/redux/useFieldContext";
 import {FieldWrapper} from "./FieldWrapper";
 
 initTest();

@@ -2,6 +2,7 @@ import {Field} from "./model/Field";
 import {Block} from "./model/Block";
 import {FieldContext} from "./FieldContext";
 import {VALID} from "./validation/Validation";
+import {FormElement} from "./model/FormElement";
 
 export class ModelUtils {
     // TODO change model : any to FormModel type
@@ -18,3 +19,7 @@ export const isBlockValid = (block: Block, fieldContext: FieldContext) => {
         .map(validation => validation.isValid)
         .reduce((acc, value) => acc && value, true)
 };
+
+export const getElementIndex: <T extends FormElement>(elements: T[], target: T) => number =
+    <T extends FormElement>(elements: T[], target: T) => target ?
+        elements.findIndex((element) => element.id === target.id) : -1;

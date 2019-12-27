@@ -1,7 +1,7 @@
 import * as React from "react";
 import {createStore} from "redux";
 import {Provider} from 'react-redux'
-import reducer from '../definition/store/reducers';
+import reducer from '../definition/redux/reducers';
 import {DefaultFormView} from "../theme/view/DefaultFormView";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";

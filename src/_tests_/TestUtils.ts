@@ -3,10 +3,11 @@ import * as Adapter from 'enzyme-adapter-react-16'
 import * as Enzyme from 'enzyme'
 import {Field} from "../definition/model/Field";
 import {FieldType, FieldTypes} from "../definition/FieldTypes";
-import * as UseFieldContext from "../definition/store/useFieldContext";
+import * as UseFieldContext from "../definition/redux/useFieldContext";
+import * as UseNavigation from "../definition/redux/useNavigation";
 import * as UseTheme from "../definition/theme/useTheme";
 import {FieldContext} from "../definition/FieldContext";
-import {ValueSetter} from "../definition/store/useFieldContext";
+import {ValueSetter} from "../definition/redux/useFieldContext";
 import {ThemeContextInterface} from "../definition/theme/ThemeContext";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
@@ -14,6 +15,9 @@ import {DefaultFormView} from "../theme/view/DefaultFormView";
 import {DefaultFieldInjector} from "../theme/field/DefaultFieldInjector";
 import {Block} from "../definition/model/Block";
 import {Form} from "../definition/model/Form";
+import {FormElement} from "../definition/model/FormElement";
+import {NavigationSetter} from "../definition/redux/useNavigation";
+import {NavigationContext} from "../definition/NavigationContext";
 
 export const initTest = () => {
     Enzyme.configure({
@@ -47,7 +51,12 @@ export const dummyForm: Form = {
 export const mockFormStore = (fieldContext?: FieldContext, setFieldValue?: ValueSetter) => {
     const useFormStoreSpy = jest.spyOn(UseFieldContext, 'useFieldContext');
     useFormStoreSpy.mockImplementation(() => [fieldContext || {}, setFieldValue || (() => {})]);
-}
+};
+
+export const mockNavigationStore = <T extends FormElement>(navigationTarget?: T, setNavigationTarget?: NavigationSetter<T>) => {
+    const useNavigationStoreSpy = jest.spyOn(UseNavigation, 'useNavigation');
+    useNavigationStoreSpy.mockImplementation(() => [navigationTarget || {} as T, setNavigationTarget || (() => {})]);
+};
 
 export const mockThemeContext = (theme: Partial<ThemeContextInterface> = {}) => {
     const useThemeContextSpy = jest.spyOn(UseTheme, 'useTheme');

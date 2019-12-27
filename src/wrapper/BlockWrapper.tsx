@@ -6,7 +6,7 @@ import {FieldWrapper} from "./FieldWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
 import {BlockView} from "../definition/theme/view/BlockView";
 import {isBlockValid} from "../definition/ModelUtils";
-import {useFieldContext} from "../definition/store/useFieldContext";
+import {useFieldContext} from "../definition/redux/useFieldContext";
 import {useTheme} from "../definition/theme/useTheme";
 
 export interface BlockWrapperProps {
