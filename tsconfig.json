@@ -9,7 +9,8 @@
     "allowJs": true,            // allow a partial TypeScript and JavaScript codebase
     "noImplicitAny": true,
     "lib": ["es6", "dom"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "declaration": true
   },
   "include": [
     "./src/",
