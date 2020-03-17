@@ -24,38 +24,35 @@ describe("FormEngine/Definition/EventMulticaster", () => {
             // Then
             expect(callback).toHaveBeenCalledWith(event, source, details);
         });
+
+        it("Should return unsubscribe when subscribing", () => {
+            // Given
+            const eventMulticaster = new EventMulticaster();
+            const callback = jasmine.createSpy();
+            const unsubscribe = eventMulticaster.subscribe(callback);
+            unsubscribe();
+
+            // When
+            eventMulticaster.event(event, source, details);
+
+            // Then
+            expect(callback).not.toHaveBeenCalledWith();
+        });
     });
 
-    describe("subscribeForElement", () => {
-        it("Should notify if subcribed to id", () => {
+    describe("unsubscribe", () => {
+        it("Should not notify after unsubscribe", () => {
             // Given
             const eventMulticaster = new EventMulticaster();
             const callback = jasmine.createSpy();
-            eventMulticaster.subscribeForElements(callback, [source]);
+            eventMulticaster.subscribe(callback);
+            eventMulticaster.unsubscribe(callback);
 
             // When
             eventMulticaster.event(event, source, details);
 
             // Then
-            // expect(callback).toHaveBeenCalledWith(event, source, details);
-        });
-
-        it("Should notify subscribers", () => {
-            // Given
-            const eventMulticaster = new EventMulticaster();
-            const idTest: FormElement = {id: "idTest"};
-            const callback = jasmine.createSpy();
-            eventMulticaster.subscribeForElements(callback, [idTest]);
-
-            const callbackTemoin = jasmine.createSpy();
-            eventMulticaster.subscribeForElements(callbackTemoin, [idTest, source]);
-
-            // When
-            eventMulticaster.event(event, source, details);
-
-            // Then
-            expect(callback).not.toHaveBeenCalled();
-            expect(callbackTemoin).toHaveBeenCalledWith(event, source, details);
+            expect(callback).not.toHaveBeenCalledWith();
         });
     });
 

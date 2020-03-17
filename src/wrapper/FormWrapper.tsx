@@ -55,8 +55,7 @@ export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) =
                     break;
             }
         };
-        eventMulticaster.subscribeForElements(onBlockEvent, form.blocks);
-        return () => eventMulticaster.unsubscribe(onBlockEvent);
+        return eventMulticaster.subscribe(onBlockEvent);
     }, []);
 
     if(currentIndex === -1) {

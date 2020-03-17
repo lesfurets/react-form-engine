@@ -30,12 +30,7 @@ export const FormEngine: React.FunctionComponent<FormEngineProps> =
         const [store] = React.useState(() => createStore(reducer));
         const [eventMulticaster] = React.useState(() => new EventMulticaster(onEvent!));
 
-        React.useEffect(() => {
-            eventMulticaster.subscribe(onEvent!);
-            return () => {
-                eventMulticaster.unsubscribe(onEvent!);
-            }
-        }, []);
+        React.useEffect(() => eventMulticaster.subscribe(onEvent!), [onEvent]);
         
         return (
             <Provider store={store}>
