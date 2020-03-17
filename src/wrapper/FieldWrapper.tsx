@@ -1,6 +1,6 @@
 import * as React from "react";
 import {VALID, Validation} from "../definition/validation/Validation";
-import {FIELD_EVENT} from "../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../definition/event/events";
 import {FormEvent} from "../definition/event/Event";
 import {Field, FIELD_STATE} from "../definition/model/Field";
 import {FieldView} from "../definition/theme/view/FieldView";
@@ -43,14 +43,14 @@ export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> = ({field,
 
     const onFieldEvent = (event: FormEvent, details?: any) => {
         switch (event) {
-            case FIELD_EVENT.RESET_VALUE:
+            case FieldComponentEvents.RESET_VALUE:
                 setFieldValue(field, undefined);
                 break;
-            case FIELD_EVENT.UPDATE_VALUE:
+            case FieldComponentEvents.UPDATE_VALUE:
                 console.log(event, details);
                 setFieldValue(field, details!);
                 break;
-            case FIELD_EVENT.SUMBIT_VALUE:
+            case FieldComponentEvents.SUMBIT_VALUE:
                 setShouldValidate(true);
                 setFieldValue(field, details!);
                 break;

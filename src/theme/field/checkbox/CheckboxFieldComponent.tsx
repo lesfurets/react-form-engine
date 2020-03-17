@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useEffect} from "react";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 import {FieldValue} from "../../../definition/model/Field";
 import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
@@ -15,7 +15,7 @@ export const CheckboxFieldComponent: FieldComponent<string[], ValuesField> =
     ({contextValue, onFieldEvent, field}) => {
         useEffect(() => {
             if(contextValue === undefined && field.defaultValue) {
-                onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, (field.defaultValue as FieldValue[]).map(value => value.id));
+                onFieldEvent!(FieldComponentEvents.SUMBIT_VALUE, (field.defaultValue as FieldValue[]).map(value => value.id));
             }
         },[]);
 
@@ -26,9 +26,9 @@ export const CheckboxFieldComponent: FieldComponent<string[], ValuesField> =
                     let onChange = () => {
                         let values:string[] = toggle(contextValue, value.id);
                         if(values.length === 0){
-                            onFieldEvent!(FIELD_EVENT.RESET_VALUE);
+                            onFieldEvent!(FieldComponentEvents.RESET_VALUE);
                         } else {
-                            onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, values);
+                            onFieldEvent!(FieldComponentEvents.SUMBIT_VALUE, values);
                         }
                     };
 

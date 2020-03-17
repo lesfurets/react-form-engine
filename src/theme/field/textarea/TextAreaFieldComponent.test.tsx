@@ -3,7 +3,7 @@ import {mount, ReactWrapper} from "enzyme";
 import {TextAreaFieldComponent} from "./TextAreaFieldComponent";
 import {emptyCallback, initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 import {Field} from "../../../definition/model/Field";
 import {FieldComponentProps} from "../../../definition/theme/field/FieldComponent";
 import {TextField} from "../../../definition/model/fields/TextField";
@@ -56,8 +56,8 @@ describe("FormEngine/Field/TextAreaField", () => {
                                                                                                                            onFieldEvent={onFieldEvent}/>);
             let input = container.find('textarea');
             input.simulate('change', {target: {value: testValue}});
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, testValue);
-            expect(onFieldEvent).not.toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, testValue);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.UPDATE_VALUE, testValue);
+            expect(onFieldEvent).not.toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, testValue);
         });
     });
 
@@ -69,7 +69,7 @@ describe("FormEngine/Field/TextAreaField", () => {
                                                                                                                            onFieldEvent={onFieldEvent}/>);
             let input = container.find('textarea');
             input.simulate('blur');
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, testValue);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, testValue);
         });
     });
 

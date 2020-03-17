@@ -3,7 +3,7 @@ import {mount} from "enzyme";
 import {RadioFieldComponent} from "./RadioFieldComponent";
 import {initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
 initTest();
@@ -57,7 +57,7 @@ describe("FormEngine/Field/RadioField", () => {
 
             // Then
             container.update();
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, defaultValue.id);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, defaultValue.id);
         });
 
         it("Select should not have defaultValue if there is a context value", () => {
@@ -97,7 +97,7 @@ describe("FormEngine/Field/RadioField", () => {
             // Then
             let label = container.find(`input[value="${value.id}"]`);
             label.simulate('change');
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, value.id);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, value.id);
         });
     });
 

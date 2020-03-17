@@ -3,7 +3,7 @@ import {mount} from "enzyme";
 import {PLEASE_SELECT_UNDEFINED, SelectFieldComponent} from "./SelectFieldComponent";
 import {initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
 initTest();
@@ -56,7 +56,7 @@ describe("FormEngine/Field/SelectField", () => {
                                                         contextValue={undefined}/>);
 
             // Then
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, defaultValue.id);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, defaultValue.id);
             expect(container.find(`option[value="${PLEASE_SELECT_UNDEFINED}"]`).length).toBe(0);
         });
 
@@ -97,7 +97,7 @@ describe("FormEngine/Field/SelectField", () => {
             // Then
             let select = container.find('select');
             select.simulate('change', {target: {value: value.id}});
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, value.id);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, value.id);
         });
 
         it("Should reset value on default", () => {
@@ -109,7 +109,7 @@ describe("FormEngine/Field/SelectField", () => {
             // Then
             let select = container.find('select');
             select.simulate('change', {target: {value: PLEASE_SELECT_UNDEFINED}});
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.RESET_VALUE);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.RESET_VALUE);
         });
     });
 

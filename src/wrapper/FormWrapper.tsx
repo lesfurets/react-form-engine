@@ -1,5 +1,5 @@
 import * as React from "react";
-import {BLOCK_EVENT, FORM_EVENT} from "../definition/event/events";
+import {BlockEvents, FormEvents} from "../definition/event/events";
 import {FormEvent} from "../definition/event/Event";
 import {BlockWrapper} from "./BlockWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
@@ -40,17 +40,17 @@ export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) =
     };
 
     React.useEffect(() => {
-        const onBlockEvent = (event: FormEvent, block: Block, fieldContext: FormData) => {
+        const onBlockEvent = (event: FormEvent, block: Block) => {
             const currentIndex = getElementIndex(form.blocks, block);
             switch (event) {
-                case BLOCK_EVENT.VALIDATED:
+                case BlockEvents.VALIDATED:
                     if(block.index! === form.blocks.length - 1) {
-                        eventMulticaster.event(FORM_EVENT.DONE, form, fieldContext);
+                        eventMulticaster.event(FormEvents.DONE, form);
                     } else {
                         setNavigationTarget(form.blocks[currentIndex + 1]);
                     }
                     break;
-                case BLOCK_EVENT.PREVIOUS:
+                case BlockEvents.PREVIOUS:
                     setNavigationTarget(form.blocks[currentIndex - 1]);
                     break;
             }

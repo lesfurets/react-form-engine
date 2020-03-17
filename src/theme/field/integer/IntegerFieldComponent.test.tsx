@@ -4,7 +4,7 @@ import {IntegerFieldComponent} from "./IntegerFieldComponent";
 import {emptyCallback, initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
 import {Field} from "../../../definition/model/Field";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 
 initTest();
 
@@ -55,7 +55,7 @@ describe("FormEngine/Field/NumericField", () => {
             input.simulate('change', {target: {value: "1234"}});
 
             // Then
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, 1234);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.UPDATE_VALUE, 1234);
         });
 
         it("Should refuse other characters", () => {
@@ -70,7 +70,7 @@ describe("FormEngine/Field/NumericField", () => {
             input.simulate('change', {target: {value: "1234A"}});
 
             // Then
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, 1234);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.UPDATE_VALUE, 1234);
         });
 
         it("Should format value", () => {

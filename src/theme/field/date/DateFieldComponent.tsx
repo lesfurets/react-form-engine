@@ -1,6 +1,6 @@
 import * as React from "react";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 import {DateElement} from "./element/DateElement";
 import {Field} from "../../..";
 
@@ -63,9 +63,9 @@ export const DateFieldComponent: FieldComponent<Date, Field> =
         React.useEffect(() => {
             let isDate = isRealDate(unstable);
             if (contextValue && !isDate) {
-                onFieldEvent!(FIELD_EVENT.RESET_VALUE)
+                onFieldEvent!(FieldComponentEvents.RESET_VALUE)
             } else if (isDate) {
-                onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, parseDate(unstable));
+                onFieldEvent!(FieldComponentEvents.SUMBIT_VALUE, parseDate(unstable));
             }
         }, [unstable]);
 

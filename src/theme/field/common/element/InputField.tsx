@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FIELD_EVENT} from "../../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../../definition/event/events";
 import {FieldComponentProps} from "../../../../definition/theme/field/FieldComponent";
 import {useTextField} from "../hook/useTextField";
 import {TextField} from "../../../../definition/model/fields/TextField";
@@ -23,7 +23,7 @@ export const InputField = (props: React.PropsWithChildren<InputFieldProps<string
                    tabIndex={tabIndex}
                    value={contextValue || ""}
                    onChange={onChange}
-                   onBlur={() => onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, contextValue)}/>
+                   onBlur={() => onFieldEvent!(FieldComponentEvents.SUMBIT_VALUE, contextValue)}/>
             {children}
         </div>
     );

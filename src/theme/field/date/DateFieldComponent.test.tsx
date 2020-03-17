@@ -2,7 +2,7 @@ import * as React from "react";
 import {mount, ReactWrapper} from "enzyme";
 import {emptyCallback, initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 import {Field} from "../../../definition/model/Field";
 import {DateFieldComponent, DateInfo, formatDayMonth, formatYear} from "./DateFieldComponent";
 import {act} from "react-dom/test-utils";
@@ -86,8 +86,8 @@ describe("FormEngine/Field/DateField", () => {
             });
 
             // Then
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, testDate);
-            expect(onFieldEvent).not.toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, testDate);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, testDate);
+            expect(onFieldEvent).not.toHaveBeenCalledWith(FieldComponentEvents.UPDATE_VALUE, testDate);
         });
 
         it("Should reset value", () => {
@@ -101,7 +101,7 @@ describe("FormEngine/Field/DateField", () => {
             });
 
             // Then
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.RESET_VALUE);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.RESET_VALUE);
         });
     });
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {BLOCK_EVENT} from "../definition/event/events";
+import {BlockEvents} from "../definition/event/events";
 import {FormEvent} from "../definition/event/Event";
 import {FieldWrapper} from "./FieldWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
@@ -27,14 +27,14 @@ export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block,
 
     const validate = () => {
         if (isBlockValid(block, fieldContext)) {
-            eventMulticaster.event(BLOCK_EVENT.VALIDATED, block, fieldContext);
+            eventMulticaster.event(BlockEvents.VALIDATED, block, fieldContext);
         }
         setForceValidation(true);
     };
 
     const onEvent = (event: FormEvent, details: any) => {
         eventMulticaster.event(event, block, details);
-        if (event === BLOCK_EVENT.NEXT) {
+        if (event === BlockEvents.NEXT) {
             validate();
         }
     };

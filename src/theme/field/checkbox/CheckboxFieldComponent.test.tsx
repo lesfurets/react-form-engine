@@ -3,7 +3,7 @@ import {mount} from "enzyme";
 import {CheckboxFieldComponent} from "./CheckboxFieldComponent";
 import {initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
 initTest();
@@ -73,7 +73,7 @@ describe("FormEngine/Field/CheckboxField", () => {
 
             // Then
             container.update();
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, defaultValue.map(value => value.id));
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, defaultValue.map(value => value.id));
         });
 
         it("Select should not have defaultValue if there is a context value", () => {
@@ -113,7 +113,7 @@ describe("FormEngine/Field/CheckboxField", () => {
                                                           contextValue={undefined}/>);
             // Then
             container.find(`input[value="${value.id}"]`).simulate('change');
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, [value.id]);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, [value.id]);
         });
 
         it("Should remove value on second change", () => {
@@ -126,7 +126,7 @@ describe("FormEngine/Field/CheckboxField", () => {
                                                           contextValue={[value1.id, value2.id]}/>);
             // Then
             container.find(`input[value="${value2.id}"]`).simulate('change');
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.SUMBIT_VALUE, [value1.id]);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.SUMBIT_VALUE, [value1.id]);
         });
 
         it("Should reset value on second change", () => {
@@ -138,7 +138,7 @@ describe("FormEngine/Field/CheckboxField", () => {
                                                           contextValue={[value.id]}/>);
             // Then
             container.find(`input[value="${value.id}"]`).simulate('change');
-            expect(onFieldEvent).toHaveBeenCalledWith(FIELD_EVENT.RESET_VALUE);
+            expect(onFieldEvent).toHaveBeenCalledWith(FieldComponentEvents.RESET_VALUE);
         });
     });
 

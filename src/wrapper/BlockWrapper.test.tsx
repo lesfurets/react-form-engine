@@ -2,7 +2,7 @@ import * as React from "react";
 import {shallow} from "enzyme";
 import {FieldWrapper} from "./FieldWrapper";
 import {BlockWrapper} from "./BlockWrapper";
-import {BLOCK_EVENT} from "../definition/event/events";
+import {BlockEvents} from "../definition/event/events";
 import {EventCallBack} from "../definition/event/multicaster/EventMulticaster";
 import {
     dummyBlock,
@@ -63,13 +63,13 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
             let container = shallowWrapper({block: block, BlockView: viewMock.component, onEvent: onBlockEvent});
 
-            viewMock.handleMock(container, (props) => props.onEvent!(BLOCK_EVENT.NEXT, testDetails));
+            viewMock.handleMock(container, (props) => props.onEvent!(BlockEvents.NEXT, testDetails));
 
-            expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.NEXT, block, testDetails);
+            expect(onBlockEvent).toHaveBeenCalledWith(BlockEvents.NEXT, block, testDetails);
             if (success) {
-                expect(onBlockEvent).toHaveBeenCalledWith(BLOCK_EVENT.VALIDATED, block, {});
+                expect(onBlockEvent).toHaveBeenCalledWith(BlockEvents.VALIDATED, block, {});
             } else {
-                expect(onBlockEvent).not.toHaveBeenCalledWith(BLOCK_EVENT.VALIDATED, block, {});
+                expect(onBlockEvent).not.toHaveBeenCalledWith(BlockEvents.VALIDATED, block, {});
             }
         };
 
@@ -91,13 +91,13 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
         it("Should send events", () => {
             // Given
-            let event = BLOCK_EVENT.NEXT;
+            let event = BlockEvents.NEXT;
             let onEvent = jasmine.createSpy();
 
             // When
             let container = shallowWrapper({block: dummyBlock, BlockView: viewMock.component, onEvent: onEvent});
 
-            viewMock.handleMock(container, (props) => props.onEvent!(BLOCK_EVENT.NEXT, testDetails));
+            viewMock.handleMock(container, (props) => props.onEvent!(BlockEvents.NEXT, testDetails));
 
             // Then
             expect(onEvent).toHaveBeenCalledWith(event, dummyBlock, testDetails);

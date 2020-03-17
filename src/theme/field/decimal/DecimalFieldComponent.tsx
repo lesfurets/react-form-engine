@@ -3,7 +3,7 @@ import * as React from "react";
 import {InputField, InputFieldProps} from "../common/element/InputField";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
 import {FormEvent} from "../../../definition/event/Event";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 import {useState} from "react";
 import {NumericField} from "../../../definition/model/fields/NumericField";
 
@@ -25,11 +25,11 @@ export const DecimalFieldComponent: FieldComponent<number, NumericField> =
         const contextValue = props.contextValue ? props.contextValue.toLocaleString("latn") : "";
         const onFieldEvent = (e: FormEvent, details: string) => {
             switch (e) {
-                case FIELD_EVENT.RESET_VALUE:
+                case FieldComponentEvents.RESET_VALUE:
                     setUnstable(undefined);
                     props.onFieldEvent!(e);
                     break;
-                case FIELD_EVENT.UPDATE_VALUE:
+                case FieldComponentEvents.UPDATE_VALUE:
                     if(UNSTABLE_STATE.test(details)) {
                         setUnstable(details.replace('.', ","));
                     } else {

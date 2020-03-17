@@ -1,7 +1,6 @@
 import * as React from "react";
-import {InputFieldProps} from "../common/element/InputField";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents} from "../../../definition/event/events";
 import {useValues} from "../common/hook/useValues";
 import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
@@ -14,9 +13,9 @@ export const SelectFieldComponent: FieldComponent<string, ValuesField> =
         let onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
             let value = event.target.value;
             if (value === PLEASE_SELECT_UNDEFINED) {
-                onFieldEvent!(FIELD_EVENT.RESET_VALUE)
+                onFieldEvent!(FieldComponentEvents.RESET_VALUE)
             } else {
-                onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, value);
+                onFieldEvent!(FieldComponentEvents.SUMBIT_VALUE, value);
             }
         };
 

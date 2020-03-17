@@ -1,7 +1,7 @@
 import * as React from "react";
 import {InputFieldProps} from "../common/element/InputField";
 import {FieldComponent} from "../../../definition/theme/field/FieldComponent";
-import {FIELD_EVENT} from "../../../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
 import {useValues} from "../common/hook/useValues";
 import {ValuesField} from "../../../definition/model/fields/ValuesField";
 
@@ -13,7 +13,7 @@ export const RadioFieldComponent: FieldComponent<string, ValuesField> =
             <div className="RadioField-container">
                 {field.values!.map(value => {
                     let isChecked = value.id === contextValue;
-                    let onChange = () => onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, value.id);
+                    let onChange = () => onFieldEvent!(FieldComponentEvents.SUMBIT_VALUE, value.id);
 
                     return (
                         <label key={value.id}

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {VALID} from "../definition/validation/Validation";
-import {FIELD_EVENT} from "../definition/event/events";
+import {FieldComponentEvents, FieldEvents} from "../definition/event/events";
 import {EventCallBack} from "../definition/event/multicaster/EventMulticaster";
 import {
     dummyField,
@@ -172,7 +172,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                 setFieldValue: setFieldValue,
             });
 
-            viewMock.handleMock(container, (props) => props.onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, testValue));
+            viewMock.handleMock(container, (props) => props.onFieldEvent!(FieldComponentEvents.UPDATE_VALUE, testValue));
 
             // Then
             expect(setFieldValue).toHaveBeenCalledWith(dummyField, testValue);
@@ -191,7 +191,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                 setFieldValue: setFieldValue,
             });
 
-            fieldMock.handleMock(container, (props) => props.onFieldEvent!(FIELD_EVENT.SUMBIT_VALUE, "testValue"));
+            fieldMock.handleMock(container, (props) => props.onFieldEvent!(FieldComponentEvents.SUMBIT_VALUE, "testValue"));
 
             // Then
             viewMock.handleMock(container, (props) => expect(props.fieldState).toBe(FIELD_STATE.VALID));
@@ -262,10 +262,10 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                 onEvent: onEvent,
             });
 
-            viewMock.handleMock(container, (props) => props.onEvent!(FIELD_EVENT.UPDATE_VALUE, testValue));
+            viewMock.handleMock(container, (props) => props.onEvent!(FieldComponentEvents.UPDATE_VALUE, testValue));
 
             // Then
-            expect(onEvent).toHaveBeenCalledWith(FIELD_EVENT.UPDATE_VALUE, dummyField, testValue);
+            expect(onEvent).toHaveBeenCalledWith(FieldComponentEvents.UPDATE_VALUE, dummyField, testValue);
         });
 
     });

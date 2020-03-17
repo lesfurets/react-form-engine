@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {BLOCK_EVENT} from "../../definition/event/events";
+import {BlockEvents} from "../../definition/event/events";
 import {Cta, CTA_TYPE} from "./common/Cta";
 import {BLOCK_STATE} from "../../definition/model/Block";
 import {BlockView} from "../../definition/theme/view/BlockView";
@@ -20,12 +20,12 @@ export const DefaultBlockView : BlockView = ({children, block, index, blockState
                                 null : <Cta type={CTA_TYPE.SECONDARY}
                                             className={"DefaultBlockView-previous"}
                                             fullWidth={true}
-                                            onClick={() => onEvent!(BLOCK_EVENT.PREVIOUS)}>Previous</Cta>}
+                                            onClick={() => onEvent!(BlockEvents.PREVIOUS)}>Previous</Cta>}
                         </div>
                         <div className="app-col-12 app-col-sm-3 app-offset-sm-6">
                             <Cta fullWidth={true}
                                  className={"DefaultBlockView-next"}
-                                 onClick={() => onEvent!(BLOCK_EVENT.NEXT)}>{block!.ctaLabel || "Next"}</Cta>
+                                 onClick={() => onEvent!(BlockEvents.NEXT)}>{block!.ctaLabel || "Next"}</Cta>
                         </div>
                     </div>
                 </div>
