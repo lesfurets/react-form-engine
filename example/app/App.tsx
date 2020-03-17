@@ -109,7 +109,7 @@ const FormModel = {
 } as Form;
 
 export const App = () => {
-    const [formData, setFieldValue] = useFormDataManager({});
+    const {formData, setFieldValue} = useFormDataManager({});
     const onEvent = (event: FormEvent, element: Field, details: any) => {
         console.log(event, element, details);
         if (event === FieldEvents.SET_VALUE) {

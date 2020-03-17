@@ -1,10 +1,10 @@
 import {FormData} from "./FormData";
 import {useState} from "react";
-import {ValueSetter} from "./useFormData";
 import {Field} from "../model/Field";
+import {FormDataManager} from "./FormDataManager";
 
-export const useFormDataManager: (initialData: FormData) => [FormData, ValueSetter] =
+export const useFormDataManager: (initialData: FormData) => FormDataManager =
     (initialData: FormData = {} as FormData) => {
         const [formData, setFormData] = useState<FormData>(initialData);
-        return [formData, (field: Field, value: any) => setFormData({...formData, [field.id]: value})]
+        return {formData, setFieldValue: (field: Field, value: any) => setFormData({...formData, [field.id]: value})}
     };
