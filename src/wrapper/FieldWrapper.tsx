@@ -7,7 +7,7 @@ import {FieldView} from "../definition/theme/view/FieldView";
 import {FormData} from "../redux/FormData";
 import {useFieldContext} from "../definition/redux/useFieldContext";
 import {useTheme} from "../definition/theme/useTheme";
-import {useEvent} from "../definition/event/useEvent";
+import {useEventMulticaster} from "../definition/event/multicaster/useEventMulticaster";
 
 export interface FieldWrapperProps {
     field: Field;
@@ -32,7 +32,7 @@ const getState = (field: Field, fieldContext: FormData, forceValidation: boolean
 export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> = ({field, index, tabIndex, forceValidation}) => {
     const [fieldContext, setFieldValue] = useFieldContext();
     const {FieldView, fieldInjector} = useTheme();
-    const eventMulticaster = useEvent();
+    const eventMulticaster = useEventMulticaster();
     const [shouldValidate, setShouldValidate] = React.useState(fieldContext[field.id] !== undefined);
 
     const isVisible = field.hasOwnProperty('isVisible') ? field.isVisible!(fieldContext) : true;

@@ -6,7 +6,7 @@ import {FieldType, FieldTypes} from "../definition/FieldTypes";
 import * as UseFieldContext from "../definition/redux/useFieldContext";
 import * as UseNavigation from "../definition/redux/useNavigation";
 import * as UseTheme from "../definition/theme/useTheme";
-import * as UseEvent from "../definition/event/useEvent";
+import * as UseEvent from "../definition/event/multicaster/useEventMulticaster";
 import {FormData} from "../redux/FormData";
 import {ValueSetter} from "../definition/redux/useFieldContext";
 import {ThemeContextInterface} from "../definition/theme/ThemeContext";
@@ -19,7 +19,7 @@ import {Form} from "../definition/model/Form";
 import {FormElement} from "../definition/model/FormElement";
 import {NavigationSetter} from "../definition/redux/useNavigation";
 import {NavigationContext} from "../redux/NavigationContext";
-import {EventCallBack, EventMulticaster} from "../definition/event/EventMulticaster";
+import {EventCallBack, EventMulticaster} from "../definition/event/multicaster/EventMulticaster";
 
 export const initTest = () => {
     Enzyme.configure({
@@ -71,7 +71,7 @@ export const mockThemeContext = (theme: Partial<ThemeContextInterface> = {}) => 
 };
 
 export const mockEventContext = (callback: EventCallBack = emptyCallback) => {
-    const useEventContextSpy = jest.spyOn(UseEvent, 'useEvent');
+    const useEventContextSpy = jest.spyOn(UseEvent, 'useEventMulticaster');
     useEventContextSpy.mockImplementation(() => new EventMulticaster(callback));
 };
 

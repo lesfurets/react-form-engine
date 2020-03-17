@@ -9,7 +9,7 @@ import {FormData} from "../redux/FormData";
 import {useTheme} from "../definition/theme/useTheme";
 import {useNavigation} from "../definition/redux/useNavigation";
 import {getElementIndex} from "../definition/ModelUtils";
-import {useEvent} from "../definition/event/useEvent";
+import {useEventMulticaster} from "../definition/event/multicaster/useEventMulticaster";
 
 export interface FormWrapperProps {
     form: Form,
@@ -27,7 +27,7 @@ const getBlockState = (index: number, currentIndex: number) => {
 
 export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) => {
     const {FormView} = useTheme();
-    const eventMulticaster = useEvent();
+    const eventMulticaster = useEventMulticaster();
     const [navigationTarget, setNavigationTarget] = useNavigation<Block>();
     const currentIndex = getElementIndex(form.blocks, navigationTarget);
 

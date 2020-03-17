@@ -1,6 +1,6 @@
 import {EventMulticaster} from "./EventMulticaster";
-import {EventTypes, FormEvent} from "./Event";
-import {FormElement} from "../model/FormElement";
+import {EventTypes, FormEvent} from "../Event";
+import {FormElement} from "../../model/FormElement";
 
 describe("FormEngine/Definition/EventMulticaster", () => {
 

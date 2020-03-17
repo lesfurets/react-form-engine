@@ -7,7 +7,7 @@ import {BlockView} from "../definition/theme/view/BlockView";
 import {isBlockValid} from "../definition/ModelUtils";
 import {useFieldContext} from "../definition/redux/useFieldContext";
 import {useTheme} from "../definition/theme/useTheme";
-import {useEvent} from "../definition/event/useEvent";
+import {useEventMulticaster} from "../definition/event/multicaster/useEventMulticaster";
 
 export interface BlockWrapperProps {
     block: Block,
@@ -21,7 +21,7 @@ export interface BlockWrapperState {
 export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block, blockState}) => {
     const [fieldContext] = useFieldContext();
     const {BlockView} = useTheme();
-    const eventMulticaster = useEvent();
+    const eventMulticaster = useEventMulticaster();
 
     const [forceValidation, setForceValidation] = React.useState(false);
 

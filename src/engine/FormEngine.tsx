@@ -5,7 +5,7 @@ import reducer from '../definition/redux/reducers';
 import {DefaultFormView} from "../theme/view/DefaultFormView";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";
-import {EventCallBack, EventMulticaster} from "../definition/event/EventMulticaster";
+import {EventCallBack, EventMulticaster} from "../definition/event/multicaster/EventMulticaster";
 import {FormWrapper} from "../wrapper/FormWrapper";
 import {Form} from "../definition/model/Form";
 import {FieldView} from "../definition/theme/view/FieldView";
@@ -14,7 +14,7 @@ import {FormView} from "../definition/theme/view/FormView";
 import {ThemeContext} from "../definition/theme/ThemeContext";
 import {FieldInjector} from "../definition/theme/field/FieldInjector";
 import {DefaultFieldInjector} from "../theme/field/DefaultFieldInjector";
-import {EventContext} from "../definition/event/EventContext";
+import {EventMulticasterContext} from "../definition/event/multicaster/EventMulticasterContext";
 import {FormDataContext} from "../redux/FormDataContext";
 
 export interface FormEngineProps {
@@ -37,11 +37,11 @@ export const FormEngine: React.FunctionComponent<FormEngineProps> =
         return (
             <Provider store={store}>
                 <FormDataContext.Provider value={formData}>
-                    <EventContext.Provider value={eventMulticaster}>
+                    <EventMulticasterContext.Provider value={eventMulticaster}>
                         <ThemeContext.Provider value={{FormView:FormView!, BlockView:BlockView!, FieldView:FieldView!, fieldInjector:fieldInjector!}}>
                             <FormWrapper form={form}/>
                         </ThemeContext.Provider>
-                    </EventContext.Provider>
+                    </EventMulticasterContext.Provider>
                 </FormDataContext.Provider>
             </Provider>
         );
