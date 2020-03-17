@@ -175,7 +175,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             viewMock.handleMock(container, (props) => props.onFieldEvent!(FIELD_EVENT.UPDATE_VALUE, testValue));
 
             // Then
-            expect(setFieldValue).toHaveBeenCalledWith(dummyField.id, testValue);
+            expect(setFieldValue).toHaveBeenCalledWith(dummyField, testValue);
         });
 
         it("Should force validation if value is submitted", () => {

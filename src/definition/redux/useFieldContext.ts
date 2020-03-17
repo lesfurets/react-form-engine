@@ -1,14 +1,15 @@
-import {useDispatch, useSelector} from "react-redux";
 import {FormData} from "../../redux/FormData";
-import {setFieldValueAction} from "./actions";
+import {useContext} from "react";
+import {FormDataContext} from "../../redux/FormDataContext";
+import {EventContext} from "../event/EventContext";
+import {FIELD_EVENT} from "../event/events";
+import {Field} from "../..";
 
-export type ValueSetter = (id: string, value: any) => void;
+export type ValueSetter = (id: Field, value: any) => void;
 
 export const useFieldContext: () => [FormData, ValueSetter] = () => {
-    const fieldContext: FormData = useSelector((state:FormData) => state.fieldContext);
-    const dispatch = useDispatch();
+    const fieldContext = useContext(FormDataContext);
+    const eventMulticaster = useContext(EventContext)
 
-    const setFieldValue = (id: string, value: string) => dispatch(setFieldValueAction(id, value));
-
-    return [fieldContext, setFieldValue];
+    return [fieldContext, (id: Field, value: any) => eventMulticaster.event(FIELD_EVENT.SET_VALUE, id, value)];
 };

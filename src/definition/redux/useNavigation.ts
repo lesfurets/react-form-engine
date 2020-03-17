@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {FormData} from "../../redux/FormData";
-import {setFieldValueAction, setNavigationAction} from "./actions";
+import {setNavigationAction} from "./actions";
 import {FormElement} from "../model/FormElement";
 
 export type NavigationSetter<T extends FormElement> = (formElement: T) => void;

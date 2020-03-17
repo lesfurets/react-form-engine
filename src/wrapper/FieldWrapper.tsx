@@ -44,15 +44,15 @@ export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> = ({field,
     const onFieldEvent = (event: FormEvent, details?: any) => {
         switch (event) {
             case FIELD_EVENT.RESET_VALUE:
-                setFieldValue(field.id, undefined);
+                setFieldValue(field, undefined);
                 break;
             case FIELD_EVENT.UPDATE_VALUE:
                 console.log(event, details);
-                setFieldValue(field.id, details!);
+                setFieldValue(field, details!);
                 break;
             case FIELD_EVENT.SUMBIT_VALUE:
                 setShouldValidate(true);
-                setFieldValue(field.id, details!);
+                setFieldValue(field, details!);
                 break;
         }
         onViewEvent(event, details!);
