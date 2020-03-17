@@ -9,7 +9,7 @@ import {StringEndWithPredicate} from "../data/leaf/string/StringEndWithPredicate
 import {StringStartWithPredicate} from "../data/leaf/string/StringStartWithPredicate";
 import {StringRegExpPredicate} from "../data/leaf/string/StringRegExpPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../redux/FieldContext";
+import {FormData} from "../../../redux/FormData";
 import {NumberEqualToPredicate} from "../data/leaf/number/NumberEqualToPredicate";
 import {NumberCheckPredicate} from "../data/leaf/number/NumberCheckPredicate";
 import {NumberGreaterEqualThanPredicate} from "../data/leaf/number/NumberGreaterEqualThanPredicate";
@@ -32,7 +32,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be false if field has different value", () => {
             // Given
-            const context: FieldContext = {[field.id]: 15};
+            const context: FormData = {[field.id]: 15};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -40,7 +40,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be true if field has expected value", () => {
             // Given
-            const context: FieldContext = {[field.id]: value};
+            const context: FormData = {[field.id]: value};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -70,7 +70,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be false if value is lower", () => {
             // Given
-            const context: FieldContext = {[field.id]: value-1};
+            const context: FormData = {[field.id]: value-1};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -78,7 +78,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be true if value is equal", () => {
             // Given
-            const context: FieldContext = {[field.id]: value};
+            const context: FormData = {[field.id]: value};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -86,7 +86,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be true if value is greater", () => {
             // Given
-            const context: FieldContext = {[field.id]: value+1};
+            const context: FormData = {[field.id]: value+1};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -100,7 +100,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be false if value is lower", () => {
             // Given
-            const context: FieldContext = {[field.id]: value-1};
+            const context: FormData = {[field.id]: value-1};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -108,7 +108,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be false if value is equal", () => {
             // Given
-            const context: FieldContext = {[field.id]: value};
+            const context: FormData = {[field.id]: value};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -116,7 +116,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be true if value is greater", () => {
             // Given
-            const context: FieldContext = {[field.id]: value+1};
+            const context: FormData = {[field.id]: value+1};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -130,7 +130,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be true if value is lower", () => {
             // Given
-            const context: FieldContext = {[field.id]: value-1};
+            const context: FormData = {[field.id]: value-1};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -138,7 +138,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be true if value is equal", () => {
             // Given
-            const context: FieldContext = {[field.id]: value};
+            const context: FormData = {[field.id]: value};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -146,7 +146,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be false if value is greater", () => {
             // Given
-            const context: FieldContext = {[field.id]: value+1};
+            const context: FormData = {[field.id]: value+1};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -160,7 +160,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be true if value is lower", () => {
             // Given
-            const context: FieldContext = {[field.id]: value-1};
+            const context: FormData = {[field.id]: value-1};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -168,7 +168,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be false if value is equal", () => {
             // Given
-            const context: FieldContext = {[field.id]: value};
+            const context: FormData = {[field.id]: value};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -176,7 +176,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be false if value is greater", () => {
             // Given
-            const context: FieldContext = {[field.id]: value+1};
+            const context: FormData = {[field.id]: value+1};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -191,7 +191,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be false if value is lower than min bound", () => {
             // Given
-            const context: FieldContext = {[field.id]: min-1};
+            const context: FormData = {[field.id]: min-1};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -199,7 +199,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be true if value is between bounds", () => {
             // Given
-            const context: FieldContext = {[field.id]: 15};
+            const context: FormData = {[field.id]: 15};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -207,7 +207,7 @@ describe("DSL/Predicate/NumberPredicateEvaluator", () => {
 
         it("Should be false if value is greater than max bound", () => {
             // Given
-            const context: FieldContext = {[field.id]: max+1};
+            const context: FormData = {[field.id]: max+1};
 
             // Then
             expect(predicateFunction(context)).toBe(false);

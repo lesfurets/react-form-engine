@@ -16,7 +16,7 @@ import {DefaultFieldView} from "../theme/view/DefaultFieldView";
 import {DefaultFieldInjector} from "../theme/field/DefaultFieldInjector";
 import {generateMock} from "../_tests_/MockComponent";
 import {FieldView, FieldViewProps} from "../definition/theme/view/FieldView";
-import {FieldContext} from "../redux/FieldContext";
+import {FormData} from "../redux/FormData";
 import {FieldInjector} from "../definition/theme/field/FieldInjector";
 import {FieldComponentProps} from "../definition/theme/field/FieldComponent";
 import {ValueSetter} from "../definition/redux/useFieldContext";
@@ -29,7 +29,7 @@ interface MountingProps {
     forceValidation?: boolean,
     fieldInjector?: FieldInjector,
     FieldView?: FieldView,
-    fieldContext?: FieldContext,
+    fieldContext?: FormData,
     setFieldValue?: ValueSetter,
     onEvent?: EventCallBack,
 }

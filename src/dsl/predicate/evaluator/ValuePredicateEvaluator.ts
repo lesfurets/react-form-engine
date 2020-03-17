@@ -12,17 +12,17 @@ import {StringCheckPredicate} from "../data/leaf/string/StringCheckPredicate";
 import {StringPredicate} from "../data/leaf/string/StringPredicate";
 import {ValuePredicate} from "../data/leaf/value/ValuePredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../redux/FieldContext";
+import {FormData} from "../../../redux/FormData";
 
 export class ValuePredicateEvaluator {
 
-    static build(field: Field, predicate: ValuePredicate):(context: FieldContext) => boolean {
+    static build(field: Field, predicate: ValuePredicate):(context: FormData) => boolean {
         if(predicate instanceof ValueDefinedPredicate) {
-            return (context: FieldContext) => ValueUtils.isDefined(context[field.id]);
+            return (context: FormData) => ValueUtils.isDefined(context[field.id]);
         }
 
         if(predicate instanceof ValueEqualToFieldPredicate) {
-            return (context: FieldContext) => context[field.id] === context[predicate.field.id];
+            return (context: FormData) => context[field.id] === context[predicate.field.id];
         }
 
         return () => true;

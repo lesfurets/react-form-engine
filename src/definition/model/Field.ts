@@ -1,14 +1,14 @@
 import {FieldType} from "../FieldTypes";
 import {Validation} from "../validation/Validation";
 import {FormElement} from "./FormElement";
-import {FieldContext} from "../../redux/FieldContext";
+import {FormData} from "../../redux/FormData";
 
 export class Field implements FormElement {
     id: string;
     type: FieldType;
     label?: string;
-    getValidation?: (state: FieldContext) => Validation;
-    isVisible?: (state: FieldContext) => boolean;
+    getValidation?: (state: FormData) => Validation;
+    isVisible?: (state: FormData) => boolean;
 }
 
 export class FieldValue implements FormElement {

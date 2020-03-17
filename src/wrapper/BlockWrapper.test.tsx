@@ -16,7 +16,7 @@ import {FieldTypes} from "../definition/FieldTypes";
 import {Field} from "../definition/model/Field";
 import {Block} from "../definition/model/Block";
 import {BlockView, BlockViewProps} from "../definition/theme/view/BlockView";
-import {FieldContext} from "../redux/FieldContext";
+import {FormData} from "../redux/FormData";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
 import {generateMock} from "../_tests_/MockComponent";
 
@@ -26,7 +26,7 @@ interface MountingProps {
     block: Block,
     wrapperProps?: any,
     BlockView?: BlockView,
-    fieldContext?: FieldContext,
+    fieldContext?: FormData,
     onEvent?: EventCallBack,
 }
 

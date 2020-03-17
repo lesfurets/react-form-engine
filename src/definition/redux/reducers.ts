@@ -1,13 +1,13 @@
 import {combineReducers, Reducer} from "redux";
 import {FieldValueAction, NavigationAction, SET_FIELD_VALUE, SET_NAVIGATION} from "./constants";
-import {FieldContext} from "../../redux/FieldContext";
+import {FormData} from "../../redux/FormData";
 import {NavigationContext} from "../../redux/NavigationContext";
 
 export interface FieldState {
-    fieldContext : FieldContext
+    fieldContext : FormData
 }
 
-const fieldContext : Reducer<FieldContext> = (state: FieldContext = {}, action: FieldValueAction) => {
+const fieldContext : Reducer<FormData> = (state: FormData = {}, action: FieldValueAction) => {
     if (action.type === SET_FIELD_VALUE) {
         return {...state, [action.fieldId]: action.fieldValue};
     } else {

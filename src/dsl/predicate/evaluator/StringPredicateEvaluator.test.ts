@@ -9,7 +9,7 @@ import {StringEndWithPredicate} from "../data/leaf/string/StringEndWithPredicate
 import {StringStartWithPredicate} from "../data/leaf/string/StringStartWithPredicate";
 import {StringRegExpPredicate} from "../data/leaf/string/StringRegExpPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../redux/FieldContext";
+import {FormData} from "../../../redux/FormData";
 
 describe("DSL/Predicate/StringPredicateEvaluator", () => {
 
@@ -25,7 +25,7 @@ describe("DSL/Predicate/StringPredicateEvaluator", () => {
 
         it("Should be false if field has different value", () => {
             // Given
-            const context: FieldContext = {[field.id]: "value2"};
+            const context: FormData = {[field.id]: "value2"};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -33,7 +33,7 @@ describe("DSL/Predicate/StringPredicateEvaluator", () => {
 
         it("Should be true if field has expected value", () => {
             // Given
-            const context: FieldContext = {[field.id]: value};
+            const context: FormData = {[field.id]: value};
 
             // Then
             expect(predicateFunction(context)).toBe(true);

@@ -4,7 +4,7 @@ import {SelfPredicate} from "../data/root/SelfPredicate";
 import {ValueDefinedPredicate} from "../data/leaf/value/ValueDefinedPredicate";
 import {ValueEqualToFieldPredicate} from "../data/leaf/value/ValueEqualToFieldPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../redux/FieldContext";
+import {FormData} from "../../../redux/FormData";
 
 describe("DSL/Predicate/ValuePredicateEvaluator", () => {
 
@@ -19,7 +19,7 @@ describe("DSL/Predicate/ValuePredicateEvaluator", () => {
 
         it("Should be false if undefined", () => {
             // Given
-            let context: FieldContext = {};
+            let context: FormData = {};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -27,7 +27,7 @@ describe("DSL/Predicate/ValuePredicateEvaluator", () => {
 
         it("Should be false if null", () => {
             // Given
-            const context: FieldContext = {[field.id]: null};
+            const context: FormData = {[field.id]: null};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -35,7 +35,7 @@ describe("DSL/Predicate/ValuePredicateEvaluator", () => {
 
         it("Should be true if defined", () => {
             // Given
-            const context: FieldContext = {[field.id]: "value"};
+            const context: FormData = {[field.id]: "value"};
 
             // Then
             expect(predicateFunction(context)).toBe(true);
@@ -55,7 +55,7 @@ describe("DSL/Predicate/ValuePredicateEvaluator", () => {
 
         it("Should be false if fields have different value", () => {
             // Given
-            const context: FieldContext = {
+            const context: FormData = {
                 [field.id]: "value",
                 [otherField.id]: "value2",
             };
@@ -66,7 +66,7 @@ describe("DSL/Predicate/ValuePredicateEvaluator", () => {
 
         it("Should be true if fields have expected value", () => {
             // Given
-            const context: FieldContext = {
+            const context: FormData = {
                 [field.id]: "value",
                 [otherField.id]: "value",
             };

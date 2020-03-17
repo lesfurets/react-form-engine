@@ -7,7 +7,7 @@ import * as UseFieldContext from "../definition/redux/useFieldContext";
 import * as UseNavigation from "../definition/redux/useNavigation";
 import * as UseTheme from "../definition/theme/useTheme";
 import * as UseEvent from "../definition/event/useEvent";
-import {FieldContext} from "../redux/FieldContext";
+import {FormData} from "../redux/FormData";
 import {ValueSetter} from "../definition/redux/useFieldContext";
 import {ThemeContextInterface} from "../definition/theme/ThemeContext";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";
@@ -50,7 +50,7 @@ export const dummyForm: Form = {
         ],
 };
 
-export const mockFormStore = (fieldContext?: FieldContext, setFieldValue?: ValueSetter) => {
+export const mockFormStore = (fieldContext?: FormData, setFieldValue?: ValueSetter) => {
     const useFormStoreSpy = jest.spyOn(UseFieldContext, 'useFieldContext');
     useFormStoreSpy.mockImplementation(() => [fieldContext || {}, setFieldValue || (() => {})]);
 };

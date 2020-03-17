@@ -7,7 +7,7 @@ import {StringEqualToPredicate} from "../data/leaf/string/StringEqualToPredicate
 import {TruePredicate} from "../data/root/TruePredicate";
 import {FalsePredicate} from "../data/root/FalsePredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../redux/FieldContext";
+import {FormData} from "../../../redux/FormData";
 
 describe("DSL/Predicate/PredicateEvaluator", () => {
 
@@ -32,7 +32,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
                 type: FieldTypes.INPUT_TEXT,
             };
 
-            let context: FieldContext = {
+            let context: FormData = {
                 [field.id]: value,
                 [secondField.id]: value,
                 [thirdField.id]: "otherValue",
@@ -65,7 +65,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
                 type: FieldTypes.INPUT_TEXT,
             };
 
-            let context: FieldContext = {
+            let context: FormData = {
                 [field.id]: value,
                 [secondField.id]: value,
                 [thirdField.id]: "otherValue",
@@ -89,7 +89,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should return false if inner predicate is true", () => {
             // Given
-            let context: FieldContext = {[field.id]: value};
+            let context: FormData = {[field.id]: value};
 
             // Then
             expect(predicateFunction(context)).toBe(false);
@@ -97,7 +97,7 @@ describe("DSL/Predicate/PredicateEvaluator", () => {
 
         it("Should return true if inner predicate is false", () => {
             // Given
-            let context: FieldContext = {[field.id]: "value2"};
+            let context: FormData = {[field.id]: "value2"};
 
             // Then
             expect(predicateFunction(context)).toBe(true);

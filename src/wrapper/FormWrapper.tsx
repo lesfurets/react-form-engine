@@ -5,7 +5,7 @@ import {BlockWrapper} from "./BlockWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
 import {Form} from "../definition/model/Form";
 import {FormView} from "../definition/theme/view/FormView";
-import {FieldContext} from "../redux/FieldContext";
+import {FormData} from "../redux/FormData";
 import {useTheme} from "../definition/theme/useTheme";
 import {useNavigation} from "../definition/redux/useNavigation";
 import {getElementIndex} from "../definition/ModelUtils";
@@ -40,7 +40,7 @@ export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) =
     };
 
     React.useEffect(() => {
-        const onBlockEvent = (event: FormEvent, block: Block, fieldContext: FieldContext) => {
+        const onBlockEvent = (event: FormEvent, block: Block, fieldContext: FormData) => {
             const currentIndex = getElementIndex(form.blocks, block);
             switch (event) {
                 case BLOCK_EVENT.VALIDATED:

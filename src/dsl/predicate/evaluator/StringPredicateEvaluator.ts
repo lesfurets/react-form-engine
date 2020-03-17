@@ -7,26 +7,26 @@ import {StringStartWithPredicate} from "../data/leaf/string/StringStartWithPredi
 import {StringEndWithPredicate} from "../data/leaf/string/StringEndWithPredicate";
 import {StringRegExpPredicate} from "../data/leaf/string/StringRegExpPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../redux/FieldContext";
+import {FormData} from "../../../redux/FormData";
 
 export class StringPredicateEvaluator {
 
-    static build(field: Field, predicate: StringPredicate):(context: FieldContext) => boolean {
+    static build(field: Field, predicate: StringPredicate):(context: FormData) => boolean {
         switch(predicate.constructor) {
             case StringEqualToPredicate:
-                return (context: FieldContext) => context[field.id] === (<StringEqualToPredicate>predicate).value;
+                return (context: FormData) => context[field.id] === (<StringEqualToPredicate>predicate).value;
             case StringCheckPredicate:
-                return (context: FieldContext) => (<StringCheckPredicate>predicate).test(<string>context[field.id]);
+                return (context: FormData) => (<StringCheckPredicate>predicate).test(<string>context[field.id]);
             case StringEmptyPredicate:
-                return (context: FieldContext) => (<string>context[field.id]).length === 0;
+                return (context: FormData) => (<string>context[field.id]).length === 0;
             case StringContainPredicate:
-                return (context: FieldContext) => (<string>context[field.id]).includes((<StringContainPredicate>predicate).value);
+                return (context: FormData) => (<string>context[field.id]).includes((<StringContainPredicate>predicate).value);
             case StringStartWithPredicate:
-                return (context: FieldContext) => (<string>context[field.id]).startsWith((<StringStartWithPredicate>predicate).value);
+                return (context: FormData) => (<string>context[field.id]).startsWith((<StringStartWithPredicate>predicate).value);
             case StringEndWithPredicate:
-                return (context: FieldContext) => (<string>context[field.id]).endsWith((<StringEndWithPredicate>predicate).value);
+                return (context: FormData) => (<string>context[field.id]).endsWith((<StringEndWithPredicate>predicate).value);
             case StringRegExpPredicate:
-                return (context: FieldContext) => (<StringRegExpPredicate>predicate).regExp.test(<string>context[field.id]);
+                return (context: FormData) => (<StringRegExpPredicate>predicate).regExp.test(<string>context[field.id]);
             default:
                 return () => true;
         }

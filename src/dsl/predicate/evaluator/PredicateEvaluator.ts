@@ -10,13 +10,13 @@ import {ValuePredicate} from "../data/leaf/value/ValuePredicate";
 import {ValuePredicateEvaluator} from "./ValuePredicateEvaluator";
 import {ValueUtils} from "../../../definition/ValueUtils";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../redux/FieldContext";
+import {FormData} from "../../../redux/FormData";
 import {NumberPredicate} from "../data/leaf/number/NumberPredicate";
 import {NumberPredicateEvaluator} from "./NumberPredicateEvaluator";
 
 export class PredicateEvaluator {
 
-    static build(field: Field, predicate: Predicate):(context: FieldContext) => boolean {
+    static build(field: Field, predicate: Predicate):(context: FormData) => boolean {
 
         if(predicate instanceof TruePredicate) {
             return () => true;
@@ -35,7 +35,7 @@ export class PredicateEvaluator {
         }
 
         if(predicate instanceof ReversedPredicate) {
-            return (context: FieldContext) => !PredicateEvaluator.build(field, predicate.child)(context);
+            return (context: FormData) => !PredicateEvaluator.build(field, predicate.child)(context);
         }
 
         if(predicate instanceof ValuePredicate) {
@@ -43,12 +43,12 @@ export class PredicateEvaluator {
         }
 
         if(predicate instanceof StringPredicate) {
-            return (context: FieldContext) => ValueUtils.isDefined(context[field.id])
+            return (context: FormData) => ValueUtils.isDefined(context[field.id])
                 && StringPredicateEvaluator.build(field, predicate)(context);
         }
 
         if(predicate instanceof NumberPredicate) {
-            return (context: FieldContext) => ValueUtils.isDefined(context[field.id])
+            return (context: FormData) => ValueUtils.isDefined(context[field.id])
                 && NumberPredicateEvaluator.build(field, predicate)(context);
         }
 

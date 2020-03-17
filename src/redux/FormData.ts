@@ -1,3 +1,3 @@
-export type FieldContext = {
+export type FormData = {
     [fieldId: string]: any | null
 }

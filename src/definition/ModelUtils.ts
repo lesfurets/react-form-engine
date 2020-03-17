@@ -1,6 +1,6 @@
 import {Field} from "./model/Field";
 import {Block} from "./model/Block";
-import {FieldContext} from "../redux/FieldContext";
+import {FormData} from "../redux/FormData";
 import {VALID} from "./validation/Validation";
 import {FormElement} from "./model/FormElement";
 
@@ -12,7 +12,7 @@ export class ModelUtils {
     }
 }
 
-export const isBlockValid = (block: Block, fieldContext: FieldContext) => {
+export const isBlockValid = (block: Block, fieldContext: FormData) => {
     return block.fields
         .filter(field => field.isVisible === undefined || field.isVisible(fieldContext))
         .map(field => field.getValidation === undefined ? VALID : field.getValidation(fieldContext))

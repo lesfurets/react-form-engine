@@ -1,6 +1,6 @@
 import {StringPredicate} from "../data/leaf/string/StringPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FieldContext} from "../../../redux/FieldContext";
+import {FormData} from "../../../redux/FormData";
 import {NumberBetweenPredicate} from "../data/leaf/number/NumberBetweenPredicate";
 import {NumberCheckPredicate} from "../data/leaf/number/NumberCheckPredicate";
 import {NumberEqualToPredicate} from "../data/leaf/number/NumberEqualToPredicate";
@@ -11,23 +11,23 @@ import {NumberLowerThanPredicate} from "../data/leaf/number/NumberLowerThanPredi
 
 export class NumberPredicateEvaluator {
 
-    static build(field: Field, predicate: StringPredicate):(context: FieldContext) => boolean {
+    static build(field: Field, predicate: StringPredicate):(context: FormData) => boolean {
         switch(predicate.constructor) {
             case NumberBetweenPredicate:
-                return (context: FieldContext) => context[field.id]! >= (<NumberBetweenPredicate>predicate).min
+                return (context: FormData) => context[field.id]! >= (<NumberBetweenPredicate>predicate).min
                     && context[field.id]! <= (<NumberBetweenPredicate>predicate).max;
             case NumberCheckPredicate:
-                return (context: FieldContext) => (<NumberCheckPredicate>predicate).test(<number>context[field.id]);
+                return (context: FormData) => (<NumberCheckPredicate>predicate).test(<number>context[field.id]);
             case NumberEqualToPredicate:
-                return (context: FieldContext) => context[field.id]! === (<NumberEqualToPredicate>predicate).value;
+                return (context: FormData) => context[field.id]! === (<NumberEqualToPredicate>predicate).value;
             case NumberGreaterEqualThanPredicate:
-                return (context: FieldContext) => context[field.id]! >= (<NumberGreaterEqualThanPredicate>predicate).value;
+                return (context: FormData) => context[field.id]! >= (<NumberGreaterEqualThanPredicate>predicate).value;
             case NumberGreaterThanPredicate:
-                return (context: FieldContext) => context[field.id]! > (<NumberGreaterThanPredicate>predicate).value;
+                return (context: FormData) => context[field.id]! > (<NumberGreaterThanPredicate>predicate).value;
             case NumberLowerEqualThanPredicate:
-                return (context: FieldContext) => context[field.id]! <= (<NumberLowerEqualThanPredicate>predicate).value;
+                return (context: FormData) => context[field.id]! <= (<NumberLowerEqualThanPredicate>predicate).value;
             case NumberLowerThanPredicate:
-                return (context: FieldContext) => context[field.id]! < (<NumberLowerThanPredicate>predicate).value;
+                return (context: FormData) => context[field.id]! < (<NumberLowerThanPredicate>predicate).value;
             default:
                 return () => true;
         }

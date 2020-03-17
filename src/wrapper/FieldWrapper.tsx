@@ -4,7 +4,7 @@ import {FIELD_EVENT} from "../definition/event/events";
 import {FormEvent} from "../definition/event/Event";
 import {Field, FIELD_STATE} from "../definition/model/Field";
 import {FieldView} from "../definition/theme/view/FieldView";
-import {FieldContext} from "../redux/FieldContext";
+import {FormData} from "../redux/FormData";
 import {useFieldContext} from "../definition/redux/useFieldContext";
 import {useTheme} from "../definition/theme/useTheme";
 import {useEvent} from "../definition/event/useEvent";
@@ -23,7 +23,7 @@ const getFieldState = (validation: Validation, forceValidation: boolean, shouldV
     return validation.isValid ? FIELD_STATE.VALID : FIELD_STATE.ERROR;
 };
 
-const getState = (field: Field, fieldContext: FieldContext, forceValidation: boolean, shouldValidate: boolean) => {
+const getState = (field: Field, fieldContext: FormData, forceValidation: boolean, shouldValidate: boolean) => {
     let validation = field.getValidation === undefined ? VALID : field.getValidation(fieldContext);
     let fieldState = getFieldState(validation, forceValidation, shouldValidate);
     return {fieldState, validation};
