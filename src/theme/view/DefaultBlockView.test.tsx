@@ -1,7 +1,7 @@
 import * as React from "react";
 import {mount, shallow} from "enzyme";
 import {DefaultBlockView} from "./DefaultBlockView";
-import {BlockEvents} from "../../definition/event/events";
+import {BlockEvents, BlockViewEvents} from "../../definition/event/events";
 import {initTest} from "../../_tests_/TestUtils";
 import {FieldTypes} from "../../definition/FieldTypes";
 import {BLOCK_STATE} from "../../definition/model/Block";
@@ -59,7 +59,7 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
             container.find(".DefaultBlockView-next").simulate("click");
 
-            expect(onEvent).toHaveBeenCalledWith(BlockEvents.NEXT);
+            expect(onEvent).toHaveBeenCalledWith(BlockViewEvents.REQUEST_NEXT);
         });
 
         it("Should call event when clicking previous", () => {
@@ -68,7 +68,7 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
             container.find(".DefaultBlockView-previous").simulate("click");
 
-            expect(onEvent).toHaveBeenCalledWith(BlockEvents.PREVIOUS);
+            expect(onEvent).toHaveBeenCalledWith(BlockViewEvents.REQUEST_PREVIOUS);
         });
     });
 

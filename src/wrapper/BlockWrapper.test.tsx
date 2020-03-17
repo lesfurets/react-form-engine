@@ -2,7 +2,7 @@ import * as React from "react";
 import {shallow} from "enzyme";
 import {FieldWrapper} from "./FieldWrapper";
 import {BlockWrapper} from "./BlockWrapper";
-import {BlockEvents} from "../definition/event/events";
+import {BlockEvents, BlockViewEvents} from "../definition/event/events";
 import {EventCallBack} from "../definition/event/multicaster/EventMulticaster";
 import {
     dummyBlock,
@@ -63,9 +63,9 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
             let container = shallowWrapper({block: block, BlockView: viewMock.component, onEvent: onBlockEvent});
 
-            viewMock.handleMock(container, (props) => props.onEvent!(BlockEvents.NEXT, testDetails));
+            viewMock.handleMock(container, (props) => props.onEvent!(BlockViewEvents.REQUEST_NEXT, testDetails));
 
-            expect(onBlockEvent).toHaveBeenCalledWith(BlockEvents.NEXT, block, testDetails);
+            expect(onBlockEvent).toHaveBeenCalledWith(BlockViewEvents.REQUEST_NEXT, block, testDetails);
             if (success) {
                 expect(onBlockEvent).toHaveBeenCalledWith(BlockEvents.VALIDATED, block, {});
             } else {
@@ -91,13 +91,13 @@ describe("FormEngine/Wrapper/BlockWrapper", () => {
 
         it("Should send events", () => {
             // Given
-            let event = BlockEvents.NEXT;
+            let event = BlockViewEvents.REQUEST_NEXT;
             let onEvent = jasmine.createSpy();
 
             // When
             let container = shallowWrapper({block: dummyBlock, BlockView: viewMock.component, onEvent: onEvent});
 
-            viewMock.handleMock(container, (props) => props.onEvent!(BlockEvents.NEXT, testDetails));
+            viewMock.handleMock(container, (props) => props.onEvent!(BlockViewEvents.REQUEST_NEXT, testDetails));
 
             // Then
             expect(onEvent).toHaveBeenCalledWith(event, dummyBlock, testDetails);

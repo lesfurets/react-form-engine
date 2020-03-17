@@ -41,7 +41,7 @@ export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> = ({field,
 
     const onViewEvent = (event: FormEvent, value: any) => eventMulticaster.event(event, field, value);
 
-    const onFieldEvent = (event: FormEvent, details?: any) => {
+    const onFieldComponentEvent = (event: FormEvent, details?: any) => {
         switch (event) {
             case FieldComponentEvents.RESET_VALUE:
                 setFieldValue(field, undefined);
@@ -69,7 +69,7 @@ export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> = ({field,
                    fieldState={fieldState}>
             <Field field={field}
                    tabIndex={tabIndex}
-                   onFieldEvent={onFieldEvent}
+                   onFieldEvent={onFieldComponentEvent}
                    contextValue={contextValue ? contextValue : undefined}/>
         </FieldView>
     );

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {BlockEvents} from "../definition/event/events";
+import {BlockEvents, BlockViewEvents} from "../definition/event/events";
 import {FormEvent} from "../definition/event/Event";
 import {FieldWrapper} from "./FieldWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
@@ -32,10 +32,15 @@ export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block,
         setForceValidation(true);
     };
 
-    const onEvent = (event: FormEvent, details: any) => {
+    const onViewEvent = (event: FormEvent, details: any) => {
         eventMulticaster.event(event, block, details);
-        if (event === BlockEvents.NEXT) {
-            validate();
+        switch (event) {
+            case BlockViewEvents.REQUEST_NEXT:
+                validate();
+                break;
+            case BlockViewEvents.REQUEST_PREVIOUS:
+                eventMulticaster.event(BlockEvents.PREVIOUS, block, details);
+                break;
         }
     };
 
@@ -43,10 +48,10 @@ export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block,
         <BlockView block={block}
                    index={block.index!}
                    blockState={blockState!}
-                   onEvent={onEvent}>
+                   onEvent={onViewEvent}>
             {block.fields.map((field, index) =>
                 <FieldWrapper key={field.id}
-                              field={{...field}}
+                              field={field}
                               index={index}
                               tabIndex={index + 1}
                               forceValidation={forceValidation}/>)}
