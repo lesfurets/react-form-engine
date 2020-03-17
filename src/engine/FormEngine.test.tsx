@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import {shallow} from "enzyme";
-import {Provider} from "react-redux";
 import {FormEngine} from "./FormEngine";
 import {FormWrapper} from "../wrapper/FormWrapper";
 import {dummyForm, emptyCallback, initTest} from "../_tests_/TestUtils";
@@ -25,7 +24,6 @@ describe("FormEngine/Entry", () => {
                                                 BlockView={TestBlockView}
                                                 FieldView={TestFieldView}/>);
             expect(container.find(FormWrapper).length).toBe(1);
-            expect(container.find(Provider).length).toBe(1);
         });
     });
 

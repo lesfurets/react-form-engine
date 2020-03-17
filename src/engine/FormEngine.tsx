@@ -1,7 +1,4 @@
 import * as React from "react";
-import {createStore} from "redux";
-import {Provider} from 'react-redux'
-import reducer from '../definition/redux/reducers';
 import {DefaultFormView} from "../theme/view/DefaultFormView";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";
@@ -17,6 +14,8 @@ import {DefaultFieldInjector} from "../theme/field/DefaultFieldInjector";
 import {EventServiceContext} from "../definition/event/service/EventServiceContext";
 import {FormDataContext} from "../definition/data/FormDataContext";
 import {FormData} from "../definition/data/FormData";
+import {useNavigationManager} from "../definition/navigation/useNavigationManager";
+import {NavigationContext} from "../definition/navigation/NavigationContext";
 
 export interface FormEngineProps {
     form: Form,
@@ -30,21 +29,21 @@ export interface FormEngineProps {
 
 export const FormEngine: React.FunctionComponent<FormEngineProps> =
     ({form, formData = {} as FormData, onEvent, FormView, BlockView, FieldView, fieldInjector}) => {
-        const [store] = React.useState(() => createStore(reducer));
+        const navigationManager = useNavigationManager(form.blocks[0]);
         const [eventMulticaster] = React.useState(() => new EventService(onEvent!));
 
         React.useEffect(() => eventMulticaster.subscribe(onEvent!), [onEvent]);
         
         return (
-            <Provider store={store}>
-                <FormDataContext.Provider value={formData}>
+            <FormDataContext.Provider value={formData}>
+                <NavigationContext.Provider value={navigationManager}>
                     <EventServiceContext.Provider value={eventMulticaster}>
                         <ThemeContext.Provider value={{FormView:FormView!, BlockView:BlockView!, FieldView:FieldView!, fieldInjector:fieldInjector!}}>
                             <FormWrapper form={form}/>
                         </ThemeContext.Provider>
                     </EventServiceContext.Provider>
-                </FormDataContext.Provider>
-            </Provider>
+                </NavigationContext.Provider>
+            </FormDataContext.Provider>
         );
     };
 

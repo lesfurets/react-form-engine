@@ -6,7 +6,7 @@ import {Block, BLOCK_STATE} from "../definition/model/Block";
 import {Form} from "../definition/model/Form";
 import {FormView} from "../definition/theme/view/FormView";
 import {useTheme} from "../definition/theme/useTheme";
-import {useNavigation} from "../definition/redux/useNavigation";
+import {useNavigation} from "../definition/navigation/useNavigation";
 import {getElementIndex} from "../definition/ModelUtils";
 import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
 
@@ -27,12 +27,8 @@ const getBlockState = (index: number, currentIndex: number) => {
 export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) => {
     const {FormView} = useTheme();
     const eventMulticaster = useEventMulticaster();
-    const [navigationTarget, setNavigationTarget] = useNavigation<Block>();
-    const currentIndex = getElementIndex(form.blocks, navigationTarget);
-
-    React.useEffect(() => {
-        setNavigationTarget(form.blocks[0]);
-    }, []);
+    const {currentStep, setCurrentStep} = useNavigation<Block>();
+    const currentIndex = getElementIndex(form.blocks, currentStep);
 
     const onEvent = (event: FormEvent, details: any) => {
         eventMulticaster.event(event, form, details);
@@ -46,11 +42,11 @@ export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) =
                     if(block.index! === form.blocks.length - 1) {
                         eventMulticaster.event(FormEvents.DONE, form);
                     } else {
-                        setNavigationTarget(form.blocks[currentIndex + 1]);
+                        setCurrentStep(form.blocks[currentIndex + 1]);
                     }
                     break;
                 case BlockEvents.PREVIOUS:
-                    setNavigationTarget(form.blocks[currentIndex - 1]);
+                    setCurrentStep(form.blocks[currentIndex - 1]);
                     break;
             }
         };

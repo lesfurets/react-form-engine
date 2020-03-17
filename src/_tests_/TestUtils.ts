@@ -4,7 +4,7 @@ import * as Enzyme from 'enzyme'
 import {Field} from "../definition/model/Field";
 import {FieldType, FieldTypes} from "../definition/FieldTypes";
 import * as UseFieldContext from "../definition/data/useFormData";
-import * as UseNavigation from "../definition/redux/useNavigation";
+import * as UseNavigation from "../definition/navigation/useNavigation";
 import * as UseTheme from "../definition/theme/useTheme";
 import * as UseEvent from "../definition/event/service/useEventMulticaster";
 import {FormData} from "../definition/data/FormData";
@@ -17,8 +17,7 @@ import {DefaultFieldInjector} from "../theme/field/DefaultFieldInjector";
 import {Block} from "../definition/model/Block";
 import {Form} from "../definition/model/Form";
 import {FormElement} from "../definition/model/FormElement";
-import {NavigationSetter} from "../definition/redux/useNavigation";
-import {NavigationContext} from "../redux/NavigationContext";
+import {NavigationSetter} from "../definition/navigation/useNavigation";
 import {EventCallBack, EventService} from "../definition/event/service/EventService";
 
 export const initTest = () => {
@@ -57,7 +56,7 @@ export const mockFormStore = (fieldContext?: FormData, setFieldValue?: ValueSett
 
 export const mockNavigationStore = <T extends FormElement>(navigationTarget?: T, setNavigationTarget?: NavigationSetter<T>) => {
     const useNavigationStoreSpy = jest.spyOn(UseNavigation, 'useNavigation');
-    useNavigationStoreSpy.mockImplementation(() => [navigationTarget || {} as T, setNavigationTarget || (() => {})]);
+    useNavigationStoreSpy.mockImplementation(() => ({currentStep:navigationTarget || {} as T, setCurrentStep:setNavigationTarget || (() => {})}));
 };
 
 export const mockThemeContext = (theme: Partial<ThemeContextInterface> = {}) => {
