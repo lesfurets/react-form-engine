@@ -16,6 +16,7 @@ import {FormDataContext} from "../definition/data/FormDataContext";
 import {FormData} from "../definition/data/FormData";
 import {useNavigationManager} from "../definition/navigation/useNavigationManager";
 import {NavigationContext} from "../definition/navigation/NavigationContext";
+import {FormElement} from "..";
 
 export interface FormEngineProps {
     form: Form,
@@ -25,11 +26,12 @@ export interface FormEngineProps {
     onEvent?: EventCallBack
     fieldInjector?: FieldInjector,
     formData?: FormData,
+    initialStep?: FormElement,
 }
 
 export const FormEngine: React.FunctionComponent<FormEngineProps> =
-    ({form, formData = {} as FormData, onEvent, FormView, BlockView, FieldView, fieldInjector}) => {
-        const navigationManager = useNavigationManager(form.blocks[0]);
+    ({form, formData = {} as FormData,initialStep = form.blocks[0], onEvent, FormView, BlockView, FieldView, fieldInjector}) => {
+        const navigationManager = useNavigationManager(initialStep);
         const [eventMulticaster] = React.useState(() => new EventService(onEvent!));
 
         React.useEffect(() => eventMulticaster.subscribe(onEvent!), [onEvent]);
