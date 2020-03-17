@@ -9,7 +9,7 @@ import {FormData} from "../redux/FormData";
 import {useTheme} from "../definition/theme/useTheme";
 import {useNavigation} from "../definition/redux/useNavigation";
 import {getElementIndex} from "../definition/ModelUtils";
-import {useEventMulticaster} from "../definition/event/multicaster/useEventMulticaster";
+import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
 
 export interface FormWrapperProps {
     form: Form,

@@ -3,7 +3,7 @@ import {shallow} from "enzyme";
 import {FieldWrapper} from "./FieldWrapper";
 import {BlockWrapper} from "./BlockWrapper";
 import {BlockEvents, BlockViewEvents} from "../definition/event/events";
-import {EventCallBack} from "../definition/event/multicaster/EventMulticaster";
+import {EventCallBack} from "../definition/event/service/EventService";
 import {
     dummyBlock,
     fieldError,

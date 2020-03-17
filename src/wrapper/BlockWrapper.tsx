@@ -7,7 +7,7 @@ import {BlockView} from "../definition/theme/view/BlockView";
 import {isBlockValid} from "../definition/ModelUtils";
 import {useFieldContext} from "../definition/redux/useFieldContext";
 import {useTheme} from "../definition/theme/useTheme";
-import {useEventMulticaster} from "../definition/event/multicaster/useEventMulticaster";
+import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
 
 export interface BlockWrapperProps {
     block: Block,

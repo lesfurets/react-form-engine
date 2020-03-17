@@ -1,7 +1,7 @@
 import * as React from "react";
 import {VALID} from "../definition/validation/Validation";
 import {FieldComponentEvents, FieldEvents} from "../definition/event/events";
-import {EventCallBack} from "../definition/event/multicaster/EventMulticaster";
+import {EventCallBack} from "../definition/event/service/EventService";
 import {
     dummyField,
     fieldError,

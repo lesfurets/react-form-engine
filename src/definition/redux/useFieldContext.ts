@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {FormDataContext} from "../../redux/FormDataContext";
 import {FieldEvents} from "../event/events";
 import {Field} from "../..";
-import {useEventMulticaster} from "../event/multicaster/useEventMulticaster";
+import {useEventMulticaster} from "../event/service/useEventMulticaster";
 
 export type ValueSetter = (id: Field, value: any) => void;
 

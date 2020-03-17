@@ -3,7 +3,7 @@ import {FormElement} from "../../model/FormElement";
 
 export type EventCallBack = (event: FormEvent, source: FormElement, details: any) => void;
 
-export class EventMulticaster {
+export class EventService {
     subscribers: EventCallBack[]  = [];
 
     constructor(callback?: EventCallBack) {

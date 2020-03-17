@@ -1,4 +1,4 @@
-import {EventMulticaster} from "./EventMulticaster";
+import {EventService} from "./EventService";
 import {EventTypes, FormEvent} from "../Event";
 import {FormElement} from "../../model/FormElement";
 
@@ -14,7 +14,7 @@ describe("FormEngine/Definition/EventMulticaster", () => {
     describe("subscribe", () => {
         it("Should notify subscribers", () => {
             // Given
-            const eventMulticaster = new EventMulticaster();
+            const eventMulticaster = new EventService();
             const callback = jasmine.createSpy();
             eventMulticaster.subscribe(callback);
 
@@ -27,7 +27,7 @@ describe("FormEngine/Definition/EventMulticaster", () => {
 
         it("Should return unsubscribe when subscribing", () => {
             // Given
-            const eventMulticaster = new EventMulticaster();
+            const eventMulticaster = new EventService();
             const callback = jasmine.createSpy();
             const unsubscribe = eventMulticaster.subscribe(callback);
             unsubscribe();
@@ -43,7 +43,7 @@ describe("FormEngine/Definition/EventMulticaster", () => {
     describe("unsubscribe", () => {
         it("Should not notify after unsubscribe", () => {
             // Given
-            const eventMulticaster = new EventMulticaster();
+            const eventMulticaster = new EventService();
             const callback = jasmine.createSpy();
             eventMulticaster.subscribe(callback);
             eventMulticaster.unsubscribe(callback);

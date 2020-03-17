@@ -7,7 +7,7 @@ import {FieldView} from "../definition/theme/view/FieldView";
 import {FormData} from "../redux/FormData";
 import {useFieldContext} from "../definition/redux/useFieldContext";
 import {useTheme} from "../definition/theme/useTheme";
-import {useEventMulticaster} from "../definition/event/multicaster/useEventMulticaster";
+import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
 
 export interface FieldWrapperProps {
     field: Field;
