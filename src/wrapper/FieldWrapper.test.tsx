@@ -16,10 +16,10 @@ import {DefaultFieldView} from "../theme/view/DefaultFieldView";
 import {DefaultFieldInjector} from "../theme/field/DefaultFieldInjector";
 import {generateMock} from "../_tests_/MockComponent";
 import {FieldView, FieldViewProps} from "../definition/theme/view/FieldView";
-import {FormData} from "../redux/FormData";
+import {FormData} from "../definition/data/FormData";
 import {FieldInjector} from "../definition/theme/field/FieldInjector";
 import {FieldComponentProps} from "../definition/theme/field/FieldComponent";
-import {ValueSetter} from "../definition/redux/useFieldContext";
+import {ValueSetter} from "../definition/data/useFormData";
 import {FieldWrapper} from "./FieldWrapper";
 
 initTest();

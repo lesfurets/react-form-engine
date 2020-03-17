@@ -1,6 +1,6 @@
 import {StringPredicate} from "../data/leaf/string/StringPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FormData} from "../../../redux/FormData";
+import {FormData} from "../../../definition/data/FormData";
 import {NumberBetweenPredicate} from "../data/leaf/number/NumberBetweenPredicate";
 import {NumberCheckPredicate} from "../data/leaf/number/NumberCheckPredicate";
 import {NumberEqualToPredicate} from "../data/leaf/number/NumberEqualToPredicate";

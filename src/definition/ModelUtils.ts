@@ -1,6 +1,6 @@
 import {Field} from "./model/Field";
 import {Block} from "./model/Block";
-import {FormData} from "../redux/FormData";
+import {FormData} from "./data/FormData";
 import {VALID} from "./validation/Validation";
 import {FormElement} from "./model/FormElement";
 

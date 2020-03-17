@@ -1,6 +1,6 @@
 import {combineReducers, Reducer} from "redux";
 import {NavigationAction, SET_NAVIGATION} from "./constants";
-import {FormData} from "../../redux/FormData";
+import {FormData} from "../data/FormData";
 import {NavigationContext} from "../../redux/NavigationContext";
 
 export interface FieldState {

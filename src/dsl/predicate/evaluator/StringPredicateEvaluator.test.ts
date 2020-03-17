@@ -9,7 +9,7 @@ import {StringEndWithPredicate} from "../data/leaf/string/StringEndWithPredicate
 import {StringStartWithPredicate} from "../data/leaf/string/StringStartWithPredicate";
 import {StringRegExpPredicate} from "../data/leaf/string/StringRegExpPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FormData} from "../../../redux/FormData";
+import {FormData} from "../../../definition/data/FormData";
 
 describe("DSL/Predicate/StringPredicateEvaluator", () => {
 

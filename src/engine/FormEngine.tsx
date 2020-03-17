@@ -15,7 +15,8 @@ import {ThemeContext} from "../definition/theme/ThemeContext";
 import {FieldInjector} from "../definition/theme/field/FieldInjector";
 import {DefaultFieldInjector} from "../theme/field/DefaultFieldInjector";
 import {EventServiceContext} from "../definition/event/service/EventServiceContext";
-import {FormDataContext} from "../redux/FormDataContext";
+import {FormDataContext} from "../definition/data/FormDataContext";
+import {FormData} from "../definition/data/FormData";
 
 export interface FormEngineProps {
     form: Form,

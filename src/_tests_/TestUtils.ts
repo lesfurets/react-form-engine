@@ -3,12 +3,12 @@ import * as Adapter from 'enzyme-adapter-react-16'
 import * as Enzyme from 'enzyme'
 import {Field} from "../definition/model/Field";
 import {FieldType, FieldTypes} from "../definition/FieldTypes";
-import * as UseFieldContext from "../definition/redux/useFieldContext";
+import * as UseFieldContext from "../definition/data/useFormData";
 import * as UseNavigation from "../definition/redux/useNavigation";
 import * as UseTheme from "../definition/theme/useTheme";
 import * as UseEvent from "../definition/event/service/useEventMulticaster";
-import {FormData} from "../redux/FormData";
-import {ValueSetter} from "../definition/redux/useFieldContext";
+import {FormData} from "../definition/data/FormData";
+import {ValueSetter} from "../definition/data/useFormData";
 import {ThemeContextInterface} from "../definition/theme/ThemeContext";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
@@ -51,7 +51,7 @@ export const dummyForm: Form = {
 };
 
 export const mockFormStore = (fieldContext?: FormData, setFieldValue?: ValueSetter) => {
-    const useFormStoreSpy = jest.spyOn(UseFieldContext, 'useFieldContext');
+    const useFormStoreSpy = jest.spyOn(UseFieldContext, 'useFormData');
     useFormStoreSpy.mockImplementation(() => [fieldContext || {}, setFieldValue || (() => {})]);
 };
 

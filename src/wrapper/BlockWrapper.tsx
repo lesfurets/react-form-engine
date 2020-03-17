@@ -5,7 +5,7 @@ import {FieldWrapper} from "./FieldWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
 import {BlockView} from "../definition/theme/view/BlockView";
 import {isBlockValid} from "../definition/ModelUtils";
-import {useFieldContext} from "../definition/redux/useFieldContext";
+import {useFormData} from "../definition/data/useFormData";
 import {useTheme} from "../definition/theme/useTheme";
 import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
 
@@ -19,7 +19,7 @@ export interface BlockWrapperState {
 }
 
 export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block, blockState}) => {
-    const [fieldContext] = useFieldContext();
+    const [fieldContext] = useFormData();
     const {BlockView} = useTheme();
     const eventMulticaster = useEventMulticaster();
 

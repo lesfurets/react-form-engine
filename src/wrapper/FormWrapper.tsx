@@ -5,7 +5,6 @@ import {BlockWrapper} from "./BlockWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
 import {Form} from "../definition/model/Form";
 import {FormView} from "../definition/theme/view/FormView";
-import {FormData} from "../redux/FormData";
 import {useTheme} from "../definition/theme/useTheme";
 import {useNavigation} from "../definition/redux/useNavigation";
 import {getElementIndex} from "../definition/ModelUtils";

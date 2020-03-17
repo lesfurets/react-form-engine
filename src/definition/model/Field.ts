@@ -1,7 +1,7 @@
 import {FieldType} from "../FieldTypes";
 import {Validation} from "../validation/Validation";
 import {FormElement} from "./FormElement";
-import {FormData} from "../../redux/FormData";
+import {FormData} from "../data/FormData";
 
 export class Field implements FormElement {
     id: string;

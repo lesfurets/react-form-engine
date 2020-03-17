@@ -16,7 +16,7 @@ import {FieldTypes} from "../definition/FieldTypes";
 import {Field} from "../definition/model/Field";
 import {Block} from "../definition/model/Block";
 import {BlockView, BlockViewProps} from "../definition/theme/view/BlockView";
-import {FormData} from "../redux/FormData";
+import {FormData} from "../definition/data/FormData";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
 import {generateMock} from "../_tests_/MockComponent";
 

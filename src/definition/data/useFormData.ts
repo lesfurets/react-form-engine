@@ -1,13 +1,13 @@
-import {FormData} from "../../redux/FormData";
+import {FormData} from "./FormData";
 import {useContext} from "react";
-import {FormDataContext} from "../../redux/FormDataContext";
+import {FormDataContext} from "./FormDataContext";
 import {FieldEvents} from "../event/events";
-import {Field} from "../..";
+import {Field} from "../../index";
 import {useEventMulticaster} from "../event/service/useEventMulticaster";
 
 export type ValueSetter = (id: Field, value: any) => void;
 
-export const useFieldContext: () => [FormData, ValueSetter] = () => {
+export const useFormData: () => [FormData, ValueSetter] = () => {
     const fieldContext = useContext(FormDataContext);
     const eventMulticaster = useEventMulticaster();
 

@@ -10,7 +10,7 @@ import {ValuePredicate} from "../data/leaf/value/ValuePredicate";
 import {ValuePredicateEvaluator} from "./ValuePredicateEvaluator";
 import {ValueUtils} from "../../../definition/ValueUtils";
 import {Field} from "../../../definition/model/Field";
-import {FormData} from "../../../redux/FormData";
+import {FormData} from "../../../definition/data/FormData";
 import {NumberPredicate} from "../data/leaf/number/NumberPredicate";
 import {NumberPredicateEvaluator} from "./NumberPredicateEvaluator";
 

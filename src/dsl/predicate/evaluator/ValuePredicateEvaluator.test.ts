@@ -4,7 +4,7 @@ import {SelfPredicate} from "../data/root/SelfPredicate";
 import {ValueDefinedPredicate} from "../data/leaf/value/ValueDefinedPredicate";
 import {ValueEqualToFieldPredicate} from "../data/leaf/value/ValueEqualToFieldPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FormData} from "../../../redux/FormData";
+import {FormData} from "../../../definition/data/FormData";
 
 describe("DSL/Predicate/ValuePredicateEvaluator", () => {
 

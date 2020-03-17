@@ -9,7 +9,7 @@ import {StringEndWithPredicate} from "../data/leaf/string/StringEndWithPredicate
 import {StringStartWithPredicate} from "../data/leaf/string/StringStartWithPredicate";
 import {StringRegExpPredicate} from "../data/leaf/string/StringRegExpPredicate";
 import {Field} from "../../../definition/model/Field";
-import {FormData} from "../../../redux/FormData";
+import {FormData} from "../../../definition/data/FormData";
 import {NumberEqualToPredicate} from "../data/leaf/number/NumberEqualToPredicate";
 import {NumberCheckPredicate} from "../data/leaf/number/NumberCheckPredicate";
 import {NumberGreaterEqualThanPredicate} from "../data/leaf/number/NumberGreaterEqualThanPredicate";

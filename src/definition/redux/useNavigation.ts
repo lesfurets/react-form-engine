@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {FormData} from "../../redux/FormData";
+import {FormData} from "../data/FormData";
 import {setNavigationAction} from "./actions";
 import {FormElement} from "../model/FormElement";
 

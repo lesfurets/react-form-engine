@@ -4,8 +4,8 @@ import {FieldComponentEvents, FieldEvents} from "../definition/event/events";
 import {FormEvent} from "../definition/event/Event";
 import {Field, FIELD_STATE} from "../definition/model/Field";
 import {FieldView} from "../definition/theme/view/FieldView";
-import {FormData} from "../redux/FormData";
-import {useFieldContext} from "../definition/redux/useFieldContext";
+import {FormData} from "../definition/data/FormData";
+import {useFormData} from "../definition/data/useFormData";
 import {useTheme} from "../definition/theme/useTheme";
 import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
 
@@ -30,7 +30,7 @@ const getState = (field: Field, fieldContext: FormData, forceValidation: boolean
 };
 
 export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> = ({field, index, tabIndex, forceValidation}) => {
-    const [fieldContext, setFieldValue] = useFieldContext();
+    const [fieldContext, setFieldValue] = useFormData();
     const {FieldView, fieldInjector} = useTheme();
     const eventMulticaster = useEventMulticaster();
     const [shouldValidate, setShouldValidate] = React.useState(fieldContext[field.id] !== undefined);
@@ -47,7 +47,6 @@ export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> = ({field,
                 setFieldValue(field, undefined);
                 break;
             case FieldComponentEvents.UPDATE_VALUE:
-                console.log(event, details);
                 setFieldValue(field, details!);
                 break;
             case FieldComponentEvents.SUMBIT_VALUE:

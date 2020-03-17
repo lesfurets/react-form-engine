@@ -1,6 +1,6 @@
 import {VALID, Validation} from "./Validation";
 import {Field} from "../model/Field";
-import {FormData} from "../../redux/FormData";
+import {FormData} from "../data/FormData";
 
 export class ValidationUtils {
 
