@@ -21,14 +21,14 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
     describe("Navigation", () => {
         it("Should just display next button for first block", () => {
-            mockUseBlock({...blockTest, index: 0 });
+            mockUseBlock({...blockTest });
             let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
             expect(container.find(".DefaultBlockView-next").length).toBe(1);
             expect(container.find(".DefaultBlockView-previous").length).toBe(0);
         });
 
         it("Should display next and orevious buttons for other blocks", () => {
-            mockUseBlock({...blockTest, index: 1});
+            mockUseBlock(blockTest);
             let container = shallow(<DefaultBlockView index={1} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-next").length).toBe(1);
@@ -36,7 +36,7 @@ describe("FormEngine/View/DefaultBlockView", () => {
         });
 
         it("Should display next and previous buttons for other blocks", () => {
-            mockUseBlock({...blockTest, index: 1});
+            mockUseBlock(blockTest);
             let container = shallow(<DefaultBlockView index={1} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-next").length).toBe(1);
@@ -44,7 +44,7 @@ describe("FormEngine/View/DefaultBlockView", () => {
         });
 
         it("Should display label 'next' by default in next button", () => {
-            mockUseBlock({...blockTest, index: 0});
+            mockUseBlock(blockTest);
             let container = mount(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-next").first().text()).toBe("Next");
@@ -52,7 +52,7 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
         it("Should display model ctaLabel in next button", () => {
             let ctaLabel = "ctaLabel";
-            mockUseBlock({...blockTest, index: 0, ctaLabel: ctaLabel});
+            mockUseBlock({...blockTest, ctaLabel: ctaLabel});
             let container = mount(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-next").first().text()).toBe(ctaLabel);
@@ -60,7 +60,7 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
         it("Should call validation when clicking next", () => {
             let onEvent = jasmine.createSpy();
-            mockUseBlock({...blockTest, index: 1});
+            mockUseBlock(blockTest);
             let container = shallow(<DefaultBlockView onEvent={onEvent} index={1} blockState={BLOCK_STATE.DOING}/>);
 
             container.find(".DefaultBlockView-next").simulate("click");
@@ -70,7 +70,7 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
         it("Should call event when clicking previous", () => {
             let onEvent = jasmine.createSpy();
-            mockUseBlock({...blockTest, index: 1});
+            mockUseBlock(blockTest);
             let container = shallow(<DefaultBlockView onEvent={onEvent} index={1} blockState={BLOCK_STATE.DOING}/>);
 
             container.find(".DefaultBlockView-previous").simulate("click");
@@ -81,28 +81,28 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
     describe("State", () => {
         it("Should display content by default", () => {
-            mockUseBlock({...blockTest, index: 0});
+            mockUseBlock(blockTest);
             let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-content").length).toBe(1);
         });
 
         it("Should display content if state is DOING", () => {
-            mockUseBlock({...blockTest, index: 0});
+            mockUseBlock(blockTest);
             let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-content").length).toBe(1);
         });
 
         it("Should not display content if state is DONE", () => {
-            mockUseBlock({...blockTest, index: 0});
+            mockUseBlock(blockTest);
             let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.DONE}/>);
 
             expect(container.find(".DefaultBlockView-content").length).toBe(0);
         });
 
         it("Should not display content if state is TODO", () => {
-            mockUseBlock({...blockTest, index: 0});
+            mockUseBlock(blockTest);
             let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.TODO}/>);
 
             expect(container.find(".DefaultBlockView-content").length).toBe(0);

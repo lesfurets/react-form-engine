@@ -40,7 +40,7 @@ export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) =
             const currentIndex = getElementIndex(form.blocks, block);
             switch (event) {
                 case BlockEvents.VALIDATED:
-                    if(block.index! === form.blocks.length - 1) {
+                    if(getElementIndex(form.blocks,block) === form.blocks.length - 1) {
                         eventMulticaster.event(FormEvents.DONE, form);
                     } else {
                         setCurrentStep(form.blocks[currentIndex + 1]);
@@ -63,7 +63,8 @@ export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) =
             <FormView onEvent={onEvent}>
                 {form.blocks.map((block, index) =>
                     <BlockWrapper key={block.id}
-                                  block={{...block, index: index}}
+                                  index={index}
+                                  block={block}
                                   blockState={getBlockState(index, currentIndex)}/>)}
             </FormView>
         </FormContext.Provider>

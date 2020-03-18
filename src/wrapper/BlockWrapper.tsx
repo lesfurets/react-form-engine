@@ -11,6 +11,7 @@ import {useEventMulticaster} from "../definition/event/service/useEventMulticast
 import {BlockContext} from "../definition/model/BlockContext";
 
 export interface BlockWrapperProps {
+    index: number,
     block: Block,
     blockState?: BLOCK_STATE,
 }
@@ -19,7 +20,7 @@ export interface BlockWrapperState {
     forceValidation: boolean
 }
 
-export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block, blockState}) => {
+export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({index, block, blockState}) => {
     const [fieldContext] = useFormData();
     const {BlockView} = useTheme();
     const eventMulticaster = useEventMulticaster();
@@ -47,7 +48,7 @@ export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block,
 
     return (
         <BlockContext.Provider value={block}>
-            <BlockView index={block.index!}
+            <BlockView index={index}
                        blockState={blockState!}
                        onEvent={onViewEvent}>
                 {block.fields.map((field, index) =>

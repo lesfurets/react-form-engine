@@ -13,7 +13,6 @@ describe("FormEngine/ModelUtils", () => {
             let block: Block = {
                 id: "block-test",
                 label: "block-label",
-                index: 0,
                 fields: [
                     {id: 'testChild0', type: FieldTypes.INPUT_TEXT, getValidation: () => VALID}
                 ]

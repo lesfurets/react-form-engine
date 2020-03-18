@@ -36,7 +36,6 @@ export const dummyField: Field = {id: "test-field-id", type: TestType};
 export const dummyBlock: Block = {
     id: "block-test",
     label: "block-label",
-    index: 0,
     fields: [
         {id: 'testChild1', type: FieldTypes.INPUT_TEXT},
         {id: 'testChild2', type: FieldTypes.INPUT_TEXT},
@@ -47,8 +46,8 @@ export const dummyForm: Form = {
     id: "form",
     blocks:
         [
-            {id: "block1", label: "block1", index: 0, fields: [{id: 'testChild1', type: FieldTypes.INPUT_TEXT}]},
-            {id: "block2", label: "block2", index: 1, fields: [{id: 'testChild2', type: FieldTypes.INPUT_TEXT}]}
+            {id: "block1", label: "block1", fields: [{id: 'testChild1', type: FieldTypes.INPUT_TEXT}]},
+            {id: "block2", label: "block2", fields: [{id: 'testChild2', type: FieldTypes.INPUT_TEXT}]}
         ],
 };
 
