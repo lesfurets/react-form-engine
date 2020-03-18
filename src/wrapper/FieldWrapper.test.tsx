@@ -168,7 +168,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
             const container = shallowWrapper({
                 field: dummyField,
                 forceValidation: true,
-                fieldInjector: () => viewMock.component,
+                fieldInjector: () => fieldMock.component,
                 setFieldValue: setFieldValue,
             });
 

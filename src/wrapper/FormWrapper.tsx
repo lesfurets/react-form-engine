@@ -9,6 +9,7 @@ import {useTheme} from "../definition/theme/useTheme";
 import {useNavigation} from "../definition/navigation/useNavigation";
 import {getElementIndex} from "../definition/ModelUtils";
 import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
+import { FormContext } from "../definition/model/FormContext";
 
 export interface FormWrapperProps {
     form: Form,
@@ -58,12 +59,13 @@ export const FormWrapper: React.FunctionComponent<FormWrapperProps> = ({form}) =
     }
 
     return (
-        <FormView onEvent={onEvent}
-                  form={form}>
-            {form.blocks.map((block, index) =>
-                <BlockWrapper key={block.id}
-                              block={{...block, index: index}}
-                              blockState={getBlockState(index, currentIndex)}/>)}
-        </FormView>
+        <FormContext.Provider value={form}>
+            <FormView onEvent={onEvent}>
+                {form.blocks.map((block, index) =>
+                    <BlockWrapper key={block.id}
+                                  block={{...block, index: index}}
+                                  blockState={getBlockState(index, currentIndex)}/>)}
+            </FormView>
+        </FormContext.Provider>
     );
 };

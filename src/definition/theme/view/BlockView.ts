@@ -4,8 +4,6 @@ import {Block, BLOCK_STATE} from "../../model/Block";
 import {FormEvent} from "../../event/Event";
 
 export interface BlockViewProps {
-    block: Block
-    children?: ReactNode
     index: number
     blockState: BLOCK_STATE
     onEvent?: (e: FormEvent, details?: any) => void

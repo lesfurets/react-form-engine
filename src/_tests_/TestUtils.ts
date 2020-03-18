@@ -7,6 +7,9 @@ import * as UseFieldContext from "../definition/data/useFormData";
 import * as UseNavigation from "../definition/navigation/useNavigation";
 import * as UseTheme from "../definition/theme/useTheme";
 import * as UseEvent from "../definition/event/service/useEventMulticaster";
+import * as UseField from "../definition/model/useField";
+import * as UseBlock from "../definition/model/useBlock";
+import * as UseForm from "../definition/model/useForm";
 import {FormData} from "../definition/data/FormData";
 import {ValueSetter} from "../definition/data/useFormData";
 import {ThemeContextInterface} from "../definition/theme/ThemeContext";
@@ -72,6 +75,21 @@ export const mockThemeContext = (theme: Partial<ThemeContextInterface> = {}) => 
 export const mockEventContext = (callback: EventCallBack = emptyCallback) => {
     const useEventContextSpy = jest.spyOn(UseEvent, 'useEventMulticaster');
     useEventContextSpy.mockImplementation(() => new EventService(callback));
+};
+
+export const mockUseField = (field: Field) => {
+    const useFieldSpy = jest.spyOn(UseField, 'useField');
+    useFieldSpy.mockImplementation(() => field);
+};
+
+export const mockUseBlock = (block: Block) => {
+    const useBlockSpy = jest.spyOn(UseBlock, 'useBlock');
+    useBlockSpy.mockImplementation(() => block);
+};
+
+export const mockUseForm = (form: Form) => {
+    const useFormSpy = jest.spyOn(UseForm, 'useForm');
+    useFormSpy.mockImplementation(() => form);
 };
 
 export const fieldError = new Validation(false, "error-test");

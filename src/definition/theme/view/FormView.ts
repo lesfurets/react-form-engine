@@ -4,8 +4,6 @@ import {Form} from "../../model/Form";
 import {FormEvent} from "../../event/Event";
 
 export interface FormViewProps {
-    children?: ReactNode
-    form: Form
     onEvent?: (e: FormEvent, details?: any) => void
 }
 

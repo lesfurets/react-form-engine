@@ -1,6 +1,6 @@
 import * as React from "react";
 import {VALID, Validation} from "../definition/validation/Validation";
-import {FieldComponentEvents, FieldEvents} from "../definition/event/events";
+import {FieldComponentEvents} from "../definition/event/events";
 import {FormEvent} from "../definition/event/Event";
 import {Field, FIELD_STATE} from "../definition/model/Field";
 import {FieldView} from "../definition/theme/view/FieldView";
@@ -8,6 +8,7 @@ import {FormData} from "../definition/data/FormData";
 import {useFormData} from "../definition/data/useFormData";
 import {useTheme} from "../definition/theme/useTheme";
 import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
+import {FieldContext} from "../definition/model/FieldContext";
 
 export interface FieldWrapperProps {
     field: Field;
@@ -60,17 +61,18 @@ export const FieldWrapper: React.FunctionComponent<FieldWrapperProps> = ({field,
     let Field = fieldInjector!(field.type);
 
     return (
-        <FieldView field={field}
-                   index={index}
-                   isVisible={isVisible}
-                   onEvent={onViewEvent}
-                   errorMessage={validation.message}
-                   fieldState={fieldState}>
-            <Field field={field}
-                   tabIndex={tabIndex}
-                   onFieldEvent={onFieldComponentEvent}
-                   contextValue={contextValue ? contextValue : undefined}/>
-        </FieldView>
+        <FieldContext.Provider value={field}>
+            <FieldView index={index}
+                       isVisible={isVisible}
+                       onEvent={onViewEvent}
+                       errorMessage={validation.message}
+                       fieldState={fieldState}>
+                <Field field={field}
+                       tabIndex={tabIndex}
+                       onFieldEvent={onFieldComponentEvent}
+                       contextValue={contextValue ? contextValue : undefined}/>
+            </FieldView>
+        </FieldContext.Provider>
     );
 };
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import {mount, shallow} from "enzyme";
 import {DefaultBlockView} from "./DefaultBlockView";
 import {BlockEvents, BlockViewEvents} from "../../definition/event/events";
-import {initTest} from "../../_tests_/TestUtils";
+import {initTest, mockUseBlock} from "../../_tests_/TestUtils";
 import {FieldTypes} from "../../definition/FieldTypes";
 import {BLOCK_STATE} from "../../definition/model/Block";
 
@@ -21,41 +21,47 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
     describe("Navigation", () => {
         it("Should just display next button for first block", () => {
-            let container = shallow(<DefaultBlockView block={{...blockTest, index: 0 }} index={0} blockState={BLOCK_STATE.DOING}/>);
+            mockUseBlock({...blockTest, index: 0 });
+            let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
             expect(container.find(".DefaultBlockView-next").length).toBe(1);
             expect(container.find(".DefaultBlockView-previous").length).toBe(0);
         });
 
         it("Should display next and orevious buttons for other blocks", () => {
-            let container = shallow(<DefaultBlockView block={{...blockTest, index: 1}} index={1} blockState={BLOCK_STATE.DOING}/>);
+            mockUseBlock({...blockTest, index: 1});
+            let container = shallow(<DefaultBlockView index={1} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-next").length).toBe(1);
             expect(container.find(".DefaultBlockView-previous").length).toBe(1);
         });
 
         it("Should display next and previous buttons for other blocks", () => {
-            let container = shallow(<DefaultBlockView block={{...blockTest, index: 1}} index={1} blockState={BLOCK_STATE.DOING}/>);
+            mockUseBlock({...blockTest, index: 1});
+            let container = shallow(<DefaultBlockView index={1} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-next").length).toBe(1);
             expect(container.find(".DefaultBlockView-previous").length).toBe(1);
         });
 
         it("Should display label 'next' by default in next button", () => {
-            let container = mount(<DefaultBlockView block={{...blockTest, index: 0}} index={0} blockState={BLOCK_STATE.DOING}/>);
+            mockUseBlock({...blockTest, index: 0});
+            let container = mount(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-next").first().text()).toBe("Next");
         });
 
         it("Should display model ctaLabel in next button", () => {
             let ctaLabel = "ctaLabel";
-            let container = mount(<DefaultBlockView block={{...blockTest, index: 0, ctaLabel: ctaLabel}} index={0} blockState={BLOCK_STATE.DOING}/>);
+            mockUseBlock({...blockTest, index: 0, ctaLabel: ctaLabel});
+            let container = mount(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-next").first().text()).toBe(ctaLabel);
         });
 
         it("Should call validation when clicking next", () => {
             let onEvent = jasmine.createSpy();
-            let container = shallow(<DefaultBlockView block={{...blockTest, index: 1}} onEvent={onEvent} index={1} blockState={BLOCK_STATE.DOING}/>);
+            mockUseBlock({...blockTest, index: 1});
+            let container = shallow(<DefaultBlockView onEvent={onEvent} index={1} blockState={BLOCK_STATE.DOING}/>);
 
             container.find(".DefaultBlockView-next").simulate("click");
 
@@ -64,7 +70,8 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
         it("Should call event when clicking previous", () => {
             let onEvent = jasmine.createSpy();
-            let container = shallow(<DefaultBlockView block={{...blockTest, index: 1}} onEvent={onEvent} index={1} blockState={BLOCK_STATE.DOING}/>);
+            mockUseBlock({...blockTest, index: 1});
+            let container = shallow(<DefaultBlockView onEvent={onEvent} index={1} blockState={BLOCK_STATE.DOING}/>);
 
             container.find(".DefaultBlockView-previous").simulate("click");
 
@@ -74,25 +81,29 @@ describe("FormEngine/View/DefaultBlockView", () => {
 
     describe("State", () => {
         it("Should display content by default", () => {
-            let container = shallow(<DefaultBlockView block={{...blockTest, index: 0}} index={0} blockState={BLOCK_STATE.DOING}/>);
+            mockUseBlock({...blockTest, index: 0});
+            let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-content").length).toBe(1);
         });
 
         it("Should display content if state is DOING", () => {
-            let container = shallow(<DefaultBlockView block={{...blockTest, index: 0}} index={0} blockState={BLOCK_STATE.DOING}/>);
+            mockUseBlock({...blockTest, index: 0});
+            let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.DOING}/>);
 
             expect(container.find(".DefaultBlockView-content").length).toBe(1);
         });
 
         it("Should not display content if state is DONE", () => {
-            let container = shallow(<DefaultBlockView block={{...blockTest, index: 0}} index={0} blockState={BLOCK_STATE.DONE}/>);
+            mockUseBlock({...blockTest, index: 0});
+            let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.DONE}/>);
 
             expect(container.find(".DefaultBlockView-content").length).toBe(0);
         });
 
         it("Should not display content if state is TODO", () => {
-            let container = shallow(<DefaultBlockView block={{...blockTest, index: 0}} index={0} blockState={BLOCK_STATE.TODO}/>);
+            mockUseBlock({...blockTest, index: 0});
+            let container = shallow(<DefaultBlockView index={0} blockState={BLOCK_STATE.TODO}/>);
 
             expect(container.find(".DefaultBlockView-content").length).toBe(0);
         });

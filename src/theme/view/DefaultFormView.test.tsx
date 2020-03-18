@@ -20,7 +20,7 @@ describe("FormEngine/View/DefaultFormView", () => {
     describe("Content", () => {
 
         it("Should display content", () => {
-            let container = shallow(<DefaultFormView form={formModel}/>);
+            let container = shallow(<DefaultFormView />);
 
             expect(container.find(".DefaultFormView").length).toBe(1);
         });

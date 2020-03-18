@@ -1,17 +1,17 @@
 import * as React from "react";
 import {
+    Form,
     Block,
     Field,
+    ValuesField,
+    NumericField,
     FieldEvents,
     FieldTypes,
     FieldValue,
-    Form,
     FormEngine,
     FormEvent,
     useFormDataManager
 } from "../../src";
-import {ValuesField} from "../../src/definition/model/fields/ValuesField";
-import {NumericField} from "../../src/definition/model/fields/NumericField";
 
 let VALUES = [
     {id: "value1", label: "Value 1"},

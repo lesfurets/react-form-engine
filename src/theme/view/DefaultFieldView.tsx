@@ -4,9 +4,11 @@ import {FIELD_STATE} from "../../definition/model/Field";
 import {FieldView} from "../../definition/theme/view/FieldView";
 
 import "./DefaultFieldView.scss";
+import {useField} from "../../definition/model/useField";
 
-export const DefaultFieldView : FieldView = ({field, fieldState, errorMessage ,children, isVisible = true}) => {
-    let hasLabel = field.label != null;
+export const DefaultFieldView : FieldView = ({fieldState, errorMessage ,children, isVisible = true}) => {
+    const field = useField();
+    const hasLabel = field.label != null;
     return isVisible ? (
         <div className={`DefaultFieldView ${fieldState} ${field.id} ${field.type}`}>
             {hasLabel ? <div className="DefaultFieldView-label">{field.label}</div> : null}

@@ -5,22 +5,22 @@ import {FormEngine} from "./FormEngine";
 import {FormWrapper} from "../wrapper/FormWrapper";
 import {dummyForm, emptyCallback, initTest} from "../_tests_/TestUtils";
 import {Form} from "../definition/model/Form";
-import {FieldViewProps} from "../definition/theme/view/FieldView";
-import {BlockViewProps} from "../definition/theme/view/BlockView";
-import {FormViewProps} from "../definition/theme/view/FormView";
+import {FieldView} from "../definition/theme/view/FieldView";
+import {BlockView} from "../definition/theme/view/BlockView";
+import {FormView} from "../definition/theme/view/FormView";
 
 initTest();
 
 describe("FormEngine/Entry", () => {
-    let TestBlockView = (p: BlockViewProps) => (<div>{p.children}</div>);
-    let TestFieldView = (p: FieldViewProps) => (<div>{p.children}</div>);
-    let FormView = (p: FormViewProps) => (<div>{p.children}</div>);
+    let TestBlockView: BlockView = ({children}) => (<div>{children}</div>);
+    let TestFieldView: FieldView = ({children}) => (<div>{children}</div>);
+    let TestFormView: FormView = ({children}) => (<div>{children}</div>);
 
     describe("Form", () => {
         it("Should render Form", () => {
             let container = shallow(<FormEngine form={dummyForm}
                                                 onEvent={emptyCallback}
-                                                FormView={FormView}
+                                                FormView={TestFormView}
                                                 BlockView={TestBlockView}
                                                 FieldView={TestFieldView}/>);
             expect(container.find(FormWrapper).length).toBe(1);

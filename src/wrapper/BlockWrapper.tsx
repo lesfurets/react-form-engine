@@ -8,6 +8,7 @@ import {isBlockValid} from "../definition/ModelUtils";
 import {useFormData} from "../definition/data/useFormData";
 import {useTheme} from "../definition/theme/useTheme";
 import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
+import {BlockContext} from "../definition/model/BlockContext";
 
 export interface BlockWrapperProps {
     block: Block,
@@ -45,17 +46,18 @@ export const BlockWrapper: React.FunctionComponent<BlockWrapperProps> = ({block,
     };
 
     return (
-        <BlockView block={block}
-                   index={block.index!}
-                   blockState={blockState!}
-                   onEvent={onViewEvent}>
-            {block.fields.map((field, index) =>
-                <FieldWrapper key={field.id}
-                              field={field}
-                              index={index}
-                              tabIndex={index + 1}
-                              forceValidation={forceValidation}/>)}
-        </BlockView>
+        <BlockContext.Provider value={block}>
+            <BlockView index={block.index!}
+                       blockState={blockState!}
+                       onEvent={onViewEvent}>
+                {block.fields.map((field, index) =>
+                    <FieldWrapper key={field.id}
+                                  field={field}
+                                  index={index}
+                                  tabIndex={index + 1}
+                                  forceValidation={forceValidation}/>)}
+            </BlockView>
+        </BlockContext.Provider>
     );
 };
 

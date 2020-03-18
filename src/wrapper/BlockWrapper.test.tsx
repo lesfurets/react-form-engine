@@ -39,7 +39,7 @@ const shallowWrapper = (props: MountingProps) => {
         BlockView: props.BlockView || DefaultBlockView,
     });
 
-    return shallow(<BlockWrapper block={props.block}/>);
+    return shallow(<BlockWrapper index={0} block={props.block}/>);
 };
 
 let testDetails = "test";
