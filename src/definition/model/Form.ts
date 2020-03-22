@@ -5,5 +5,4 @@ export class Form implements FormElement {
     id: string;
     label?: string;
     blocks: Block[];
-    [key: string]: any;
 }

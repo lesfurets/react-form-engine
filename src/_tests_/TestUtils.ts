@@ -3,16 +3,16 @@ import * as Adapter from 'enzyme-adapter-react-16'
 import * as Enzyme from 'enzyme'
 import {Field} from "../definition/model/Field";
 import {FieldType, FieldTypes} from "../definition/FieldTypes";
-import * as UseFieldContext from "../definition/data/useFormData";
+import * as UseFieldContext from "../definition/data/access/useFormData";
 import * as UseNavigation from "../definition/navigation/useNavigation";
-import * as UseTheme from "../definition/theme/useTheme";
-import * as UseEvent from "../definition/event/service/useEventMulticaster";
-import * as UseField from "../definition/model/useField";
-import * as UseBlock from "../definition/model/useBlock";
-import * as UseForm from "../definition/model/useForm";
+import * as UseTheme from "../definition/theme/access/useTheme";
+import * as UseEvent from "../definition/event/service/access/useEventMulticaster";
+import * as UseField from "../definition/model/access/useField";
+import * as UseBlock from "../definition/model/access/useBlock";
+import * as UseForm from "../definition/model/access/useForm";
 import {FormData} from "../definition/data/FormData";
-import {ValueSetter} from "../definition/data/useFormData";
-import {ThemeContextInterface} from "../definition/theme/ThemeContext";
+import {ValueSetter} from "../definition/data/access/useFormData";
+import {ThemeContextInterface} from "../definition/theme/access/ThemeContext";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
 import {DefaultFormView} from "../theme/view/DefaultFormView";

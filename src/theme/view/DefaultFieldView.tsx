@@ -4,7 +4,7 @@ import {FIELD_STATE} from "../../definition/model/Field";
 import {FieldView} from "../../definition/theme/view/FieldView";
 
 import "./DefaultFieldView.scss";
-import {useField} from "../../definition/model/useField";
+import {useField} from "../../definition/model/access/useField";
 
 export const DefaultFieldView : FieldView = ({fieldState, errorMessage ,children, isVisible = true}) => {
     const field = useField();

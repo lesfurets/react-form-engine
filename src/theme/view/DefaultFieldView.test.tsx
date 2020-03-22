@@ -4,7 +4,7 @@ import {DefaultFieldView} from "./DefaultFieldView";
 import {FieldTypes} from "../../definition/FieldTypes";
 import {initTest, mockUseField} from "../../_tests_/TestUtils";
 import {FIELD_STATE} from "../../definition/model/Field";
-import {useField} from "../../definition/model/useField";
+import {useField} from "../../definition/model/access/useField";
 
 initTest();
 

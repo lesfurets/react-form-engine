@@ -19,7 +19,7 @@ import {FieldView, FieldViewProps} from "../definition/theme/view/FieldView";
 import {FormData} from "../definition/data/FormData";
 import {FieldInjector} from "../definition/theme/field/FieldInjector";
 import {FieldComponentProps} from "../definition/theme/field/FieldComponent";
-import {ValueSetter} from "../definition/data/useFormData";
+import {ValueSetter} from "../definition/data/access/useFormData";
 import {FieldWrapper} from "./FieldWrapper";
 
 initTest();
@@ -172,7 +172,7 @@ describe("FormEngine/Wrapper/FieldWrapper", () => {
                 setFieldValue: setFieldValue,
             });
 
-            viewMock.handleMock(container, (props) => props.onFieldEvent!(FieldComponentEvents.UPDATE_VALUE, testValue));
+            fieldMock.handleMock(container, (props) => props.onFieldEvent!(FieldComponentEvents.UPDATE_VALUE, testValue));
 
             // Then
             expect(setFieldValue).toHaveBeenCalledWith(dummyField, testValue);

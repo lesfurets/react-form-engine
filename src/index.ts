@@ -21,4 +21,4 @@ export {BlockEvents} from "./definition/event/events";
 export {BlockViewEvents} from "./definition/event/events";
 export {FormEvents} from "./definition/event/events";
 
-export {useFormDataManager} from "./definition/data/useFormDataManager";
+export {useFormDataManager} from "./definition/data/access/useFormDataManager";

@@ -5,10 +5,10 @@ import {FieldWrapper} from "./FieldWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
 import {BlockView} from "../definition/theme/view/BlockView";
 import {isBlockValid} from "../definition/ModelUtils";
-import {useFormData} from "../definition/data/useFormData";
-import {useTheme} from "../definition/theme/useTheme";
-import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
-import {BlockContext} from "../definition/model/BlockContext";
+import {useFormData} from "../definition/data/access/useFormData";
+import {useTheme} from "../definition/theme/access/useTheme";
+import {useEventMulticaster} from "../definition/event/service/access/useEventMulticaster";
+import {BlockContext} from "../definition/model/access/BlockContext";
 
 export interface BlockWrapperProps {
     index: number,

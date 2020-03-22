@@ -4,7 +4,7 @@ import {BlockViewEvents} from "../../definition/event/events";
 import {Cta, CTA_TYPE} from "./common/Cta";
 import {BLOCK_STATE} from "../../definition/model/Block";
 import {BlockView} from "../../definition/theme/view/BlockView";
-import {useBlock} from "../../definition/model/useBlock";
+import {useBlock} from "../../definition/model/access/useBlock";
 
 import "./DefaultBlockView.scss"
 

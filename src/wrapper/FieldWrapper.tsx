@@ -5,10 +5,10 @@ import {FormEvent} from "../definition/event/Event";
 import {Field, FIELD_STATE} from "../definition/model/Field";
 import {FieldView} from "../definition/theme/view/FieldView";
 import {FormData} from "../definition/data/FormData";
-import {useFormData} from "../definition/data/useFormData";
-import {useTheme} from "../definition/theme/useTheme";
-import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
-import {FieldContext} from "../definition/model/FieldContext";
+import {useFormData} from "../definition/data/access/useFormData";
+import {useTheme} from "../definition/theme/access/useTheme";
+import {useEventMulticaster} from "../definition/event/service/access/useEventMulticaster";
+import {FieldContext} from "../definition/model/access/FieldContext";
 
 export interface FieldWrapperProps {
     field: Field;

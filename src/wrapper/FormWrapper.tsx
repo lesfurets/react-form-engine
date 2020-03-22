@@ -5,11 +5,11 @@ import {BlockWrapper} from "./BlockWrapper";
 import {Block, BLOCK_STATE} from "../definition/model/Block";
 import {Form} from "../definition/model/Form";
 import {FormView} from "../definition/theme/view/FormView";
-import {useTheme} from "../definition/theme/useTheme";
+import {useTheme} from "../definition/theme/access/useTheme";
 import {useNavigation} from "../definition/navigation/useNavigation";
 import {getElementIndex} from "../definition/ModelUtils";
-import {useEventMulticaster} from "../definition/event/service/useEventMulticaster";
-import { FormContext } from "../definition/model/FormContext";
+import {useEventMulticaster} from "../definition/event/service/access/useEventMulticaster";
+import { FormContext } from "../definition/model/access/FormContext";
 
 export interface FormWrapperProps {
     form: Form,
