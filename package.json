@@ -54,7 +54,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "3.0.5",
     "node-sass": "4.12.0",
-    "npm": "6.9.0",
+    "npm": "6.13.4",
     "postcss-loader": "2.1.6",
     "postcss-safe-parser": "3.0.1",
     "sass-loader": "7.0.1",
