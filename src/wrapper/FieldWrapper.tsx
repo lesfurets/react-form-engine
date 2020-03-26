@@ -11,7 +11,7 @@ import {useEventMulticaster} from "../definition/event/service/access/useEventMu
 import {FieldContext} from "../definition/model/access/FieldContext";
 
 export interface FieldWrapperProps {
-    field: Field;
+    field: Field<any>;
     index: number;
     tabIndex: number;
     forceValidation: boolean;
@@ -24,8 +24,8 @@ const getFieldState = (validation: Validation, forceValidation: boolean, shouldV
     return validation.isValid ? FIELD_STATE.VALID : FIELD_STATE.ERROR;
 };
 
-const getState = (field: Field, fieldContext: FormData, forceValidation: boolean, shouldValidate: boolean) => {
-    let validation = field.getValidation === undefined ? VALID : field.getValidation(fieldContext);
+const getState = (field: Field<any>, fieldContext: FormData, forceValidation: boolean, shouldValidate: boolean) => {
+    let validation = field.getValidation === undefined ? VALID : field.getValidation(fieldContext[field.id], fieldContext);
     let fieldState = getFieldState(validation, forceValidation, shouldValidate);
     return {fieldState, validation};
 };

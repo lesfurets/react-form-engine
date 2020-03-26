@@ -5,7 +5,7 @@ export class Block implements FormElement {
     id: string;
     label: string;
     ctaLabel?: string;
-    fields: Field[];
+    fields: Field<any>[];
     [key: string]: any;
 }
 

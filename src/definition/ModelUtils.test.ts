@@ -9,7 +9,7 @@ describe("FormEngine/ModelUtils", () => {
 
     describe("isBlockValid", () => {
 
-        let checkBlockValidation = (success: boolean, fields: Field[]) => {
+        let checkBlockValidation = (success: boolean, fields: Field<any>[]) => {
             let block: Block = {
                 id: "block-test",
                 label: "block-label",

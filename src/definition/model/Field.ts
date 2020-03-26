@@ -3,11 +3,11 @@ import {Validation} from "../validation/Validation";
 import {FormElement} from "./FormElement";
 import {FormData} from "../data/FormData";
 
-export class Field implements FormElement {
+export class Field<T extends any> implements FormElement {
     id: string;
     type: FieldType;
     label?: string;
-    getValidation?: (state: FormData) => Validation;
+    getValidation?: (value: T, state: FormData) => Validation;
     isVisible?: (state: FormData) => boolean;
 }
 

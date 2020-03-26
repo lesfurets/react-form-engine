@@ -25,7 +25,7 @@ import {FieldWrapper} from "./FieldWrapper";
 initTest();
 
 interface MountingProps {
-    field: Field,
+    field: Field<any>,
     forceValidation?: boolean,
     fieldInjector?: FieldInjector,
     FieldView?: FieldView,

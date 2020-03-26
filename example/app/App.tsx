@@ -10,8 +10,9 @@ import {
     FieldValue,
     FormEngine,
     FormEvent,
-    useFormDataManager
+    useFormDataManager, TextField
 } from "../../src";
+import {DateField} from "../../src/definition/model/fields/DateField";
 
 let VALUES = [
     {id: "value1", label: "Value 1"},
@@ -21,22 +22,22 @@ let VALUES = [
 ] as FieldValue[];
 
 
-const FIELD_TEXT: Field = {
+const FIELD_TEXT: TextField = {
     id: "TEXT",
     type: FieldTypes.INPUT_TEXT,
     label: "Enter a text",
 };
-const FIELD_EMAIL: Field = {
+const FIELD_EMAIL: TextField = {
     id: "EMAIL",
     type: FieldTypes.INPUT_EMAIL,
     label: "Email",
 };
-const FIELD_PASSWORD: Field = {
+const FIELD_PASSWORD: TextField = {
     id: "PASSWORD",
     type: FieldTypes.INPUT_PASSWORD,
     label: "Enter your password",
 };
-const FIELD_NUMBER: Field = {
+const FIELD_NUMBER: NumericField = {
     id: "NUMBER",
     type: FieldTypes.INPUT_INTEGER,
     label: "Enter a number",
@@ -47,7 +48,7 @@ const FIELD_AMOUNT: NumericField = {
     label: "Enter an amount",
     symbol: "€"
 };
-const FIELD_TEXT_AREA: Field = {
+const FIELD_TEXT_AREA: TextField = {
     id: "TEXT_AREA",
     type: FieldTypes.INPUT_TEXT_AREA,
     label: "Enter a paragraph",
@@ -70,7 +71,7 @@ const FIELD_CHECKBOX: ValuesField = {
     label: "Select a radio",
     values: VALUES
 };
-const FIELD_DATE: Field = {
+const FIELD_DATE: DateField = {
     id: "DATE",
     type: FieldTypes.INPUT_DATE,
     label: "Enter a date"
@@ -110,7 +111,7 @@ const FormModel = {
 
 export const App = () => {
     const {formData, setFieldValue} = useFormDataManager({});
-    const onEvent = (event: FormEvent, element: Field, details: any) => {
+    const onEvent = (event: FormEvent, element: Field<any>, details: any) => {
         console.log(event, element, details);
         if (event === FieldEvents.SET_VALUE) {
             setFieldValue(element, details)

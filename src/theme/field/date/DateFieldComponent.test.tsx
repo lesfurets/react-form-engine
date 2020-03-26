@@ -2,16 +2,16 @@ import * as React from "react";
 import {mount, ReactWrapper} from "enzyme";
 import {emptyCallback, initTest} from "../../../_tests_/TestUtils";
 import {FieldTypes} from "../../../definition/FieldTypes";
-import {FieldComponentEvents, FieldEvents} from "../../../definition/event/events";
-import {Field} from "../../../definition/model/Field";
+import {FieldComponentEvents} from "../../../definition/event/events";
 import {DateFieldComponent, DateInfo, formatDayMonth, formatYear} from "./DateFieldComponent";
 import {act} from "react-dom/test-utils";
 import {DateElement, DateElementProps} from "./element/DateElement";
+import {DateField} from "../../../definition/model/fields/DateField";
 
 initTest();
 
 describe("FormEngine/Field/DateField", () => {
-    const field: Field = {
+    const field: DateField = {
         id: "fieldId",
         type: FieldTypes.INPUT_DATE,
     };

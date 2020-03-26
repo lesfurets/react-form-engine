@@ -6,7 +6,7 @@ import {FormElement} from "./model/FormElement";
 
 export class ModelUtils {
     // TODO change model : any to FormModel type
-    static getFieldList(model : any):Field[] {
+    static getFieldList(model : any):Field<any>[] {
         // TODO change block : any to Block type
         return model.blocks.reduce((flat : [], block : any) => flat.concat(block.fields), []);
     }
@@ -15,7 +15,7 @@ export class ModelUtils {
 export const isBlockValid = (block: Block, fieldContext: FormData) => {
     return block.fields
         .filter(field => field.isVisible === undefined || field.isVisible(fieldContext))
-        .map(field => field.getValidation === undefined ? VALID : field.getValidation(fieldContext))
+        .map(field => field.getValidation === undefined ? VALID : field.getValidation(fieldContext[field.id],fieldContext))
         .map(validation => validation.isValid)
         .reduce((acc, value) => acc && value, true)
 };
