@@ -2,7 +2,7 @@ import * as React from "react";
 import {DefaultFormView} from "../theme/view/DefaultFormView";
 import {DefaultBlockView} from "../theme/view/DefaultBlockView";
 import {DefaultFieldView} from "../theme/view/DefaultFieldView";
-import {EventCallBack, EventService} from "../definition/event/service/EventService";
+import {EventCallBack} from "../definition/event/service/EventService";
 import {FormWrapper} from "../wrapper/FormWrapper";
 import {Form} from "../definition/model/Form";
 import {FieldView} from "../definition/theme/view/FieldView";
@@ -11,12 +11,11 @@ import {FormView} from "../definition/theme/view/FormView";
 import {ThemeContext} from "../definition/theme/access/ThemeContext";
 import {FieldInjector} from "../definition/theme/field/FieldInjector";
 import {DefaultFieldInjector} from "../theme/field/DefaultFieldInjector";
-import {EventServiceContext} from "../definition/event/service/access/EventServiceContext";
 import {FormDataContext} from "../definition/data/access/FormDataContext";
 import {FormData} from "../definition/data/FormData";
-import {useNavigationManager} from "../definition/navigation/useNavigationManager";
-import {NavigationContext} from "../definition/navigation/NavigationContext";
 import {FormElement} from "..";
+import {NavigationManagerContainer} from "../navigation/NavigationManagerContainer";
+import {EventManagerContainer} from "../event/EventManagerContainer";
 
 export interface FormEngineProps {
     form: Form,
@@ -30,24 +29,23 @@ export interface FormEngineProps {
 }
 
 export const FormEngine: React.FunctionComponent<FormEngineProps> =
-    ({form, formData = {} as FormData,initialStep = form.blocks[0], onEvent, FormView, BlockView, FieldView, fieldInjector}) => {
-        const navigationManager = useNavigationManager(initialStep);
-        const [eventMulticaster] = React.useState(() => new EventService(onEvent!));
-
-        React.useEffect(() => eventMulticaster.subscribe(onEvent!), [onEvent]);
-        
-        return (
+    ({form, formData = {} as FormData, initialStep = form.blocks[0], onEvent, FormView, BlockView, FieldView, fieldInjector}) =>
+        (
             <FormDataContext.Provider value={formData}>
-                <NavigationContext.Provider value={navigationManager}>
-                    <EventServiceContext.Provider value={eventMulticaster}>
-                        <ThemeContext.Provider value={{FormView:FormView!, BlockView:BlockView!, FieldView:FieldView!, fieldInjector:fieldInjector!}}>
+                <NavigationManagerContainer initialStep={initialStep}>
+                    <EventManagerContainer onEvent={onEvent!}>
+                        <ThemeContext.Provider value={{
+                            FormView: FormView!,
+                            BlockView: BlockView!,
+                            FieldView: FieldView!,
+                            fieldInjector: fieldInjector!
+                        }}>
                             <FormWrapper form={form}/>
                         </ThemeContext.Provider>
-                    </EventServiceContext.Provider>
-                </NavigationContext.Provider>
+                    </EventManagerContainer>
+                </NavigationManagerContainer>
             </FormDataContext.Provider>
         );
-    };
 
 FormEngine.defaultProps = {
     fieldInjector: DefaultFieldInjector.inject,

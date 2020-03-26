@@ -5,10 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "karma start karma.conf.js",
-    "start:project": "webpack-dev-server",
-    "build:project": "webpack -p",
-    "test:project": "jest --ci --reporters=default --reporters=jest-junit",
+    "build": "webpack -p",
+    "test": "jest --ci --reporters=default --reporters=jest-junit",
     "start:example": "webpack-dev-server --config ./example/webpack.config.js --content-base example/ --mode development",
     "build:example": "webpack -p --config ./example/webpack.config.js",
     "deploy:example": "webpack --mode production --config ./example/webpack.config.js && git commit -a -m Packaging && git push origin HEAD:gh-pages --force  && git reset HEAD~1 --hard"
